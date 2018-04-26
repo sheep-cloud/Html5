@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03_对象访问相关问题</title>
+</head>
+<body>
+<!--
+    问题：什么时候必须使用['属性名']的方式？
+        1. 属性名包含特殊字符： - 空格
+        2. 属性名不确定
+-->
+<script type="text/javascript">
+    let p = {}
+    // 1. 给p对象添加一个属性：content-type：text/json
+    // p.context-type = 'text/json' // 不能用
+    p['context-type'] = 'text/json'
+    console.log(p['context-type'])
+
+    // 2. 变量名不确定
+    let propName = 'myAge'
+    let value = 18
+    p.propName = value
+    // console.log(p); // 不能用
+    p[propName] = value
+    console.log(p)
+</script>
+</body>
+</html>
