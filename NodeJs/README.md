@@ -2,7 +2,7 @@
 ## 1、module.exports 向外部暴露属性或方法
 ### 1、exports
 通过exports只能通过.的方式来向外暴露内部变量，exports.xxx = xxx
-```
+```javascript
 exports.name = 'Rose'
 exports.age = 18
 exports.sayName = function () {
@@ -11,7 +11,7 @@ exports.sayName = function () {
 ```
 ### 2、module.exports
 通过module.exports既可以通过.的形式，也可以直接赋值（更强大）
-```
+```javascript
 module.exports = {
   name: 'Jack',
   age: 28,
@@ -31,7 +31,7 @@ module.exports = {
     - 由用户自己创建的模块
     - 文件模块的标识就是文件的路径（绝对路径，相对路径）
       相对路径使用.或..开头
-```
+```javascript
 let md = require('./02.module')
 let math = require('./04.math')
 let fs = require('fs')
@@ -47,7 +47,7 @@ console.log(fs)
 - 包描述文件用于表达非代码相关的信息，它是一个JSON格式的文件
 - package.json位于包的跟目录下，是包的重要组成部分
 - package.json中的字段：
-```
+```html
 name、description、version、keywords、main、author
 maintainers、contributors、bugs、
 licenses、repositories、dependencies、
@@ -56,7 +56,7 @@ directories、implements、scripts、author、
 bin、main、devDependencies。
 ```
 - 安装package.json
-```
+```html
 npm init    初始化，创建package.json（name不允许大写字母）
 ```
 
@@ -86,7 +86,7 @@ NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署�
 
 ### 4、淘宝 NPM 镜像
 #### 1、安装全局cnpm命令行工具
-```
+```html
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
