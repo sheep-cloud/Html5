@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app ng-init="username='kobe'">
+
+<!--
+    1、数据绑定：         数据从一个地方A转移（传递）到另一个地方B，而这个操作由框架来完成
+
+    2、双向数据绑定：     数据可以从View（视图层）流向Model（模型），也可以从Model流向view
+        * 视图（View）：  也就是我们的页面（主要是Angular指令和表达式）
+        * 模型（Model）： 作用域对象（当前为$rootScope），它可以包含一些属性和方法
+        * 当改变View中的数据，Model对象的对应属性也会随之改变： ng-model指令
+        * 当Model域对象的属性发生改变时，页面对应数据随之更新： {{}}表达式
+        * ng-model是双向数据绑定，而{{}}是单向数据绑定
+
+    3、ng-init 用来初始化当前域变量
+-->
+<label>
+    <input type="text" ng-model="username">
+</label>
+<p>姓名1：{{username}}</p>
+<label>
+    <input type="text" ng-model="username">
+</label>
+<p>姓名2：{{username}}</p>
+<script src="https://cdn.bootcss.com/angular.js/1.2.29/angular.js"></script>
+
+</body>
+</html>
