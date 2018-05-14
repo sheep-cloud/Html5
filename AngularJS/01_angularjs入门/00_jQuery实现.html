@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+    单页面应用（SPA）： single page application
+    特点：
+        1、将所有的货多功能哦局限于一个页面。
+        2、当页面中有补分数据发生了变化不会去刷新整个页面，而是局部刷新。
+        3、利用的ajax技术，路由。
+-->
+<label>
+    <input type="text">
+</label>
+<p>您输入的内容是：<span></span></p>
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {// cocument.ready 文档加载完毕 window.onload：整个页面加载完毕，包括图片。。。
+        $('input').keyup(function () {
+            let value = $(this).val()
+            $('span').html(value)
+        })
+    })
+</script>
+</body>
+</html>

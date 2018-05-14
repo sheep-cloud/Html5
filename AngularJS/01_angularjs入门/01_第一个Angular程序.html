@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="">
+
+<!--
+    ng-app（指令）：告诉angular核心它管理当前标签所包含的整个区域，并且会自动创建$rootScope根作用域对象
+    ng-model：将当前输入框的值域谁关联（）
+-->
+
+<label>
+    <input type="text" ng-model="username">
+</label>
+<p>您输入的内容是：<span>{{username}}</span></p>
+<script src="https://cdn.bootcss.com/angular.js/1.2.29/angular.js"></script>
+
+</body>
+</html>
