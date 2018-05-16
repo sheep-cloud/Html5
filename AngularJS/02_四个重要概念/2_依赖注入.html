@@ -39,21 +39,21 @@
 </script>
 
 <script type="text/javascript">
-    let arr = [1, 2, 3, 4, 5]
-    let newArr1 = []
+    var arr = [1, 2, 3, 4, 5];
+    var newArr1 = [];
 
     // 命令式
-    for (let i = 0; i < arr.length; i++) {
-        let value = arr[i] + 10
+    for (var i = 0; i < arr.length; i++) {
+        var value = arr[i] + 10;
         newArr1.push(value)
     }
-    console.log(newArr1)
+    console.log(newArr1);
 
     // 声明式
-    let newArr2 = arr.map(function (item, index) {
+    var newArr2 = arr.map(function (item, index) {
         // console.log(item, index)
         return item + 10
-    })
+    });
     console.log(newArr2)
 </script>
 </body>

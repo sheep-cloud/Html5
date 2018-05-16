@@ -24,27 +24,27 @@
 <script type="text/javascript">
     // console.log(angular)
 
-/*
-    // 创建模块队形
-    let myModule = angular.module('myApp', [])
-    // 生成作用域对象
-    myModule.controller('MyController', function ($scope) {
-        $scope.empName = 'kobe'
-    })
+    /*
+        // 创建模块队形
+        var myModule = angular.module('myApp', [])
+        // 生成作用域对象
+        myModule.controller('MyController', function ($scope) {
+            $scope.empName = 'kobe'
+        })
 
-    myModule.controller('MyController2', function ($scope) {
-        $scope.empName = 'wade'
-    })
-*/
+        myModule.controller('MyController2', function ($scope) {
+            $scope.empName = 'wade'
+        })
+    */
 
     // 优化 链式调用
     angular.module('myApp', [])
-        .controller('MyController', function ($scope) {// 返回值是？模块对象
-            $scope.empName = 'kobe'
-        })
-        .controller('MyController2', function ($scope) {
-            $scope.empName = 'wade'
-        })
+            .controller('MyController', function ($scope) {// 返回值是？模块对象
+                $scope.empName = 'kobe'
+            })
+            .controller('MyController2', function ($scope) {
+                $scope.empName = 'wade'
+            })
 </script>
 </body>
 </html>

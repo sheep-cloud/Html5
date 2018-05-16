@@ -32,11 +32,11 @@
 <script src="https://cdn.bootcss.com/angular.js/1.2.29/angular.js"></script>
 <script type="text/javascript">
     function MyController($scope) {// 形参必须是$scope
-        console.log(this instanceof MyController)
+        console.log(this instanceof MyController);
 
-        console.log($scope)
-        $scope.firstName = 'kobe'
-        $scope.lastName = 'bryant'
+        console.log($scope);
+        $scope.firstName = 'kobe';
+        $scope.lastName = 'bryant';
         $scope.getName = function () {
             return $scope.firstName + this.lastName
         }
