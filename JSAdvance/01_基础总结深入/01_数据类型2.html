@@ -25,35 +25,35 @@
     // 实例： 实例对象
     // 类型： 类型对象
     function Person(name, age) {    // 构造函数 类型
-        this.name = name
-        this.age = age
+        this.name = name;
+        this.age = age;
     }
 
-    let p = new Person('tom', 12) // 根据类型创建的实例对象
-    console.log(p)
-    console.log(new Person('jack', 12))
+    var p = new Person('tom', 12); // 根据类型创建的实例对象
+    console.log(p);
+    console.log(new Person('jack', 12));
 
     // 1. undefined与null的区别？
-    let a
-    console.log(a) // undefined
-    a = null
-    console.log(a) // null
+    var a;
+    console.log(a); // undefined
+    a = null;
+    console.log(a); // null
 
-    let b = null // 初始赋值为null，表明将要赋值为对象
-    console.log(b)
+    var b = null; // 初始赋值为null，表明将要赋值为对象
+    console.log(b);
     // 确定对象，赋值
-    b = ['colg', 12]
-    console.log(b)
+    b = ['colg', 12];
+    console.log(b);
     // 最后
-    b = null // 让b指向的对象成为垃圾对象（被垃圾回收器回收）
+    b = null; // 让b指向的对象成为垃圾对象（被垃圾回收器回收）
     // b = 2
-    console.log(b)
+    console.log(b);
 
-    let c = function () {
+    var c = function () {
 
-    }
+    };
 
-    console.log(typeof c) // function
+    console.log(typeof c); // function
 
 </script>
 </body>

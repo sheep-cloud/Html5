@@ -39,29 +39,29 @@
         }
     }
 
-    showInfo(17)
-    showInfo(20)
-    showInfo(65)
+    showInfo(17);
+    showInfo(20);
+    showInfo(65);
 
     function fn1() { // 函数声明
         console.log('fn1()')
     }
 
-    let fn2 = function () { // 表达式
+    var fn2 = function () { // 表达式
         console.log('fn2()')
-    }
+    };
 
-    fn1()
-    fn2()
+    fn1();
+    fn2();
 
-    let obj = {}
+    var obj = {};
 
     function test2() {
         this.xxx = 'colg'
     }
 
     // obj.test2()  不能直接调用，根本就没有
-    test2.call(obj) // obj.test2()     // 可以让一个函数成为指定任意对象的方法进行调用
+    test2.call(obj); // obj.test2()     // 可以让一个函数成为指定任意对象的方法进行调用
     console.log(obj.xxx)
 </script>
 </body>

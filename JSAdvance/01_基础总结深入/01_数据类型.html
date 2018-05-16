@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--suppress JSValidateTypes -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,43 +30,43 @@
 <script type="text/javascript">
     // 1. 基本
     // typeof 返回数据类型的字符串表达
-    let a
-    console.log(a, typeof a === 'undefined', a === undefined) // undefined 'undefined' true
-    console.log(undefined === 'undefined')
+    var a;
+    console.log(a, typeof a === 'undefined', a === undefined); // undefined 'undefined' true
+    console.log(undefined === 'undefined');
 
-    a = 4
-    console.log(typeof a === 'number')
-    a = 'colg'
-    console.log(typeof a === 'string')
-    a = true
-    console.log(typeof a === 'boolean')
-    a = null
-    console.log(typeof a === 'object')
+    a = 4;
+    console.log(typeof a === 'number');
+    a = 'colg';
+    console.log(typeof a === 'string');
+    a = true;
+    console.log(typeof a === 'boolean');
+    a = null;
+    console.log(typeof a === 'object');
 
-    console.log('---------------------------')
+    console.log('---------------------------');
 
     // 2. 对象
-    let b1 = {
+    var b1 = {
         b2: [1, 'abc', console.log],
         b3: function () {
-            console.log('b3')
+            console.log('b3');
             return function () {
                 return 'Jack'
             }
         }
-    }
+    };
 
-    console.log(b1 instanceof Object, b1 instanceof Array) // true false
-    console.log(b1.b2 instanceof Array, b1.b2 instanceof Object) // true true
-    console.log(b1.b3 instanceof Function, b1.b3 instanceof Object) // true true
+    console.log(b1 instanceof Object, b1 instanceof Array); // true false
+    console.log(b1.b2 instanceof Array, b1.b2 instanceof Object); // true true
+    console.log(b1.b3 instanceof Function, b1.b3 instanceof Object); // true true
 
-    console.log(typeof b1.b2, '----------') // object
+    console.log(typeof b1.b2, '----------'); // object
 
-    console.log(typeof b1.b3 === 'function') // true
+    console.log(typeof b1.b3 === 'function'); // true
 
-    console.log(typeof b1.b2[2] === 'function') // true
-    b1.b2[2](4)
-    console.log(b1.b3()())
+    console.log(typeof b1.b2[2] === 'function'); // true
+    b1.b2[2](4);
+    console.log(b1.b3()());
 
 </script>
 </body>

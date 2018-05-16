@@ -17,9 +17,9 @@
   3. 构造函数/原型/实体对象的关系2（图解）
 -->
 <script type="text/javascript">
-    console.log(Object)
-    console.log(Object.toString())
-    console.log(Object.prototype.__proto__)
+    console.log(Object);
+    console.log(Object.toString());
+    console.log(Object.prototype.__proto__);
 
     function Fn() {
         this.test1 = function () {
@@ -29,15 +29,15 @@
 
     Fn.prototype.test2 = function () {
         console.log('test2()')
-    }
+    };
 
-    let fn = new Fn()
-    console.log(fn.__proto__)
-    fn.test1()
-    fn.test2()
-    console.log(fn.toString())
-    console.log(fn.test3)
-    fn.test3()
+    var fn = new Fn();
+    console.log(fn.__proto__);
+    fn.test1();
+    fn.test2();
+    console.log(fn.toString());
+    console.log(fn.test3);
+    fn.test3();
 
     /*
       1. 函数的显式原型指向的对象：默认是空Object实例对象（但Object不满足）

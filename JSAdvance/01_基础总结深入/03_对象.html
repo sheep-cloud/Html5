@@ -20,7 +20,7 @@
         * ['属性名']：编码麻烦，能通用
 -->
 <script type="text/javascript">
-    let p = {
+    var p = {
         name: 'Tom',
         age: 12,
         setName: function (name) {
@@ -29,11 +29,11 @@
         setAge: function (age) {
             this.age = age
         }
-    }
+    };
 
-    p.setName('Bob')
-    p['setAge'](23)
-    console.log(p.name, p['age'])
+    p.setName('Bob');
+    p['setAge'](23);
+    console.log(p.name, p['age']);
 </script>
 </body>
 </html>

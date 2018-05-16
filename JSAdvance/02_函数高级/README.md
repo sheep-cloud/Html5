@@ -29,11 +29,11 @@
   * 函数 : 调用函数时产生, 函数执行完时死亡
 * 包含哪些属性:
   * 全局 : 
-    * 用let定义的全局变量  ==>undefined
+    * 用var定义的全局变量  ==>undefined
     * 使用function声明的函数   ===>function
     * this   ===>window
   * 函数
-    * 用let定义的局部变量  ==>undefined
+    * 用var定义的局部变量  ==>undefined
     * 使用function声明的函数   ===>function
     * this   ===> 调用函数的对象, 如果没有指定就是window 
     * 形参变量   ===>对应实参值
@@ -73,14 +73,14 @@
 * 写一个闭包程序
   ```
   function fn1() {
-    let a = 2;
+    var a = 2;
     function fn2() {
       a++;
       console.log(a);
     }
     return fn2;
   }
-  let f = fn1();
+  var f = fn1();
   f();
   f();
   ```

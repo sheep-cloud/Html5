@@ -48,7 +48,7 @@
 * 可以让js在分线程执行
 * Worker
   ```
-  let worker = new Worker('worker.js');
+  var worker = new Worker('worker.js');
   worker.onMessage = function(event){event.data} : 用来接收另一个线程发送过来的数据的回调
   worker.postMessage(data1) : 向另一个线程发送数据
   ```

@@ -11,26 +11,26 @@
         * 2个引用变量指向同一个对象，让其中一个引用变量指向另一个对象，另一个引用变量依然指向前一个对象
 -->
 <script type="text/javascript">
-    let obj1 = {name: 'Tom'}
-    console.log(obj1)
-    let obj2 = obj1
-    console.log(obj2)
+    var obj1 = {name: 'Tom'};
+    console.log(obj1);
+    var obj2 = obj1;
+    console.log(obj2);
 
-    obj1.name = 'Jack'
-    console.log(obj2.name) // 'Jack'
+    obj1.name = 'Jack';
+    console.log(obj2.name); // 'Jack'
 
-    let a = {age: 12}
-    let b = a
-    a = {name: 'BOB', age: 13}
-    b.age = 14
-    console.log(b.age, a.name, a.age)
+    var a = {age: 12};
+    var b = a;
+    a = {name: 'BOB', age: 13};
+    b.age = 14;
+    console.log(b.age, a.name, a.age);
 
     function fn2(obj) {
-        obj = {age: 15}
+        obj = {age: 15};
     }
 
-    fn2(a)
-    console.log(a.age)
+    fn2(a);
+    console.log(a.age);
 </script>
 </body>
 </html>

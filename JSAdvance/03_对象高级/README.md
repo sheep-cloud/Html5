@@ -1,13 +1,13 @@
 ## 对象的创建模式
 * Object构造函数模式
   ```
-  let obj = {};
+  var obj = {};
   obj.name = 'Tom'
   obj.setName = function(name){this.name=name}
   ```
 * 对象字面量模式
   ```
-  let obj = {
+  var obj = {
     name : 'Tom',
     setName : function(name){this.name = name}
   }
@@ -39,7 +39,7 @@
   function Child(){}
   Child.prototype = new Parent(); // 子类型的原型指向父类型实例
   Child.prototype.constructor = Child
-  let child = new Child(); //有test()
+  var child = new Child(); //有test()
   ```
 * 借用构造函数 : 得到属性
   ```
@@ -48,7 +48,7 @@
   function Child(xxx,yyy){
       Parent.call(this, xxx);//借用构造函数   this.Parent(xxx)
   }
-  let child = new Child('a', 'b');  //child.xxx为'a', 但child没有test()
+  var child = new Child('a', 'b');  //child.xxx为'a', 但child没有test()
   ```
 * 组合
   ```
@@ -58,7 +58,7 @@
       Parent.call(this, xxx);//借用构造函数   this.Parent(xxx)
   }
   Child.prototype = new Parent(); //得到test()
-  let child = new Child(); //child.xxx为'a', 也有test()
+  var child = new Child(); //child.xxx为'a', 也有test()
   ```
 * new一个对象背后做了些什么?
   * 创建一个空对象

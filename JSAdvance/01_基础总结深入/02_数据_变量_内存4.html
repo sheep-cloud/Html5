@@ -11,21 +11,21 @@
         * 理解2：可能是值传递，也可能是引用传递（地址值）
 -->
 <script type="text/javascript">
-    let a = 3
+    var a = 3;
 
     function fn(a) {
-        a = a + 1
+        a = a + 1;
     }
 
-    fn(a)
-    console.log(a) // 3
+    fn(a);
+    console.log(a); // 3
 
     function fn2(obj) {
         console.log(obj.name)
     }
 
-    let obj = {name: 'Tom'}
-    fn2(obj) // 地址值传递
+    var obj = {name: 'Tom'};
+    fn2(obj); // 地址值传递
 </script>
 </body>
 </html>

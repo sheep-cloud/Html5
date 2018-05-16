@@ -15,15 +15,15 @@
 -->
 <script type="text/javascript">
     (function () { // 匿名函数自调用
-        let a = 3
+        var a = 3;
         console.log(a + 3)
-    })()
+    })();
 
-    let a = 4
+    var a = 4;
     console.log(a)
 
     ;(function () {
-        let a = 1
+        var a = 1;
 
         function test() {
             console.log(++a)
@@ -33,16 +33,16 @@
             console.log('test2()')
         }
 
-        test2()
+        test2();
 
         window.$ = function () { // 向外暴露一个全局函数
             return {
                 test: test
             }
         }
-    })()
+    })();
 
-    $().test() // 1. $是一个函数 2. $执行后返回的是一个对象
+    $().test(); // 1. $是一个函数 2. $执行后返回的是一个对象
 </script>
 </body>
 </html>

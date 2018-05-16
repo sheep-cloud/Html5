@@ -16,15 +16,15 @@
             * 对象：成为垃圾对象==> 垃圾回收器回收
 -->
 <script type="text/javascript">
-    let a = 3
-    let obj
-    obj = undefined
+    var a = 3;
+    var obj;
+    obj = undefined;
 
     function fn() {
-        let b = {}
+        var b = {}
     }
 
-    fn() // b是自动释放，b所指向的对象是在后面的某个时刻由垃圾回收器回收释放
+    fn(); // b是自动释放，b所指向的对象是在后面的某个时刻由垃圾回收器回收释放
 </script>
 </body>
 </html>

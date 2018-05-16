@@ -15,22 +15,22 @@
 <script type="text/javascript">
 
     // 每个函数都有一个prototype属性，它默认指向一个Object空对象（即称为：原型对象）
-    console.log(Date.prototype)
-    console.log(Date.prototype, typeof Date.prototype)
+    console.log(Date.prototype);
+    console.log(Date.prototype, typeof Date.prototype);
 
     function Fun() {
 
     }
 
-    console.log(Fun.prototype, typeof Fun.prototype) // 默认是一个Object空对象（没有我们的属性）
-    console.log(Date.prototype.constructor === Date) // true
-    console.log(Fun.prototype.constructor === Fun) // true
+    console.log(Fun.prototype, typeof Fun.prototype); // 默认是一个Object空对象（没有我们的属性）
+    console.log(Date.prototype.constructor === Date); // true
+    console.log(Fun.prototype.constructor === Fun); // true
 
     // 给原型对象添加属性（一般是方法）===> 实例对象可以访问
     Fun.prototype.test = function () {
         console.log('test()')
-    }
-    let fun = new Fun()
+    };
+    var fun = new Fun();
     fun.test()
 
 </script>
