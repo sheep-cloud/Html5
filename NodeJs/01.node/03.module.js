@@ -17,11 +17,11 @@
           相对路径使用.或..开头
  */
 
-let md = require('./02.module')
-let math = require('./04.math')
-let fs = require('fs')
+var md = require('./02.module');
+var math = require('./04.math');
+var fs = require('fs');
 
-console.log(md)
-console.log(math.add(123, 456))
-console.log(math.mul(123, 456))
-console.log(fs)
+console.log(md);
+console.log(math.add(123, 456));
+console.log(math.mul(123, 456));
+console.log(fs);

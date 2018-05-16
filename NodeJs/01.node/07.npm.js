@@ -7,7 +7,7 @@
     如果有则直接使用，如果没有则再去上一级目录寻找，直到找到为止
     直到找到磁盘的根目录，如果依然没有，则报错
  */
-let math = require('math')
-let express = require('express')
+var math = require('math');
+var express = require('express');
 
-console.log(math.add(1, 2))
+console.log(math.add(1, 2));

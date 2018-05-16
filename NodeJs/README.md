@@ -32,9 +32,9 @@ module.exports = {
     - 文件模块的标识就是文件的路径（绝对路径，相对路径）
       相对路径使用.或..开头
 ```javascript
-let md = require('./02.module')
-let math = require('./04.math')
-let fs = require('fs')
+var md = require('./02.module')
+var math = require('./04.math')
+var fs = require('fs')
 
 console.log(md)
 console.log(math.add(123, 456))

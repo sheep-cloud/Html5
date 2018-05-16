@@ -1,5 +1,5 @@
-let a = 10
-b = 20  // 全局变量
+var a = 10;
+b = 20;  // 全局变量
 
 /*
   在node中有一个全局对象 global，它的作用和网页中window类型
@@ -29,8 +29,8 @@ b = 20  // 全局变量
       - 当前模块所在文件夹的的完整目录
  */
 
-console.log(global.a)
-console.log(global.b)
+console.log(global.a);
+console.log(global.b);
 
 /*
   arguments.callee
@@ -42,4 +42,4 @@ console.log(global.b)
 // console.log(exports)
 // console.log(module.exports)
 
-console.log(__dirname)
+console.log(__dirname);
