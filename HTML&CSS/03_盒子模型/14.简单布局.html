@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>14.简单布局</title>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    /*设置头部div*/
+    .header {
+        /*设置一个宽度*/
+        width: 1000px;
+        /*设置一个高度*/
+        height: 150px;
+        /*设置一个背景颜色*/
+        background-color: yellowgreen;
+        /*设置居中*/
+        margin: 0 auto;
+    }
+
+    /*设置content*/
+    .content {
+        /*设置一个宽度*/
+        width: 1000px;
+        /*设置一个高度*/
+        height: 400px;
+        /*设置一个背景颜色*/
+        /*background-color: orange;*/
+        /*居中*/
+        margin: 10px auto;
+    }
+
+    /*设置content中小div的样式*/
+    .left {
+        width: 200px;
+        height: 100%;
+        background-color: skyblue;
+        float: left;
+    }
+
+    .center {
+        width: 580px;
+        height: 100%;
+        background-color: yellow;
+        float: left;
+        /*设置水平外边距*/
+        margin: auto 10px;
+    }
+
+    .right {
+        width: 200px;
+        height: 100%;
+        background-color: pink;
+        float: left;
+    }
+
+    /*设置footer*/
+    .footer {
+        /*设置一个宽度*/
+        width: 1000px;
+        /*设置一个高度*/
+        height: 150px;
+        /*设置一个背景颜色*/
+        background-color: grey;
+        /*居中*/
+        margin: 10px auto;
+    }
+</style>
+</head>
+<body>
+    <!--头部div-->
+    <div class="header"></div>
+    <!--主题内容div-->
+    <div class="content">
+        <!--左侧div-->
+        <div class="left"></div>
+        <!--中间div-->
+        <div class="center"></div>
+        <!--右侧div-->
+        <div class="right"></div>
+    </div>
+    <!--底部信息div-->
+    <div class="footer"></div>
+</body>
+</html>

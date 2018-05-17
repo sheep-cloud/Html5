@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>06.伪元素选择器</title>
+</head>
+<style type="text/css">
+    /*
+        使用伪元素来表示元素中的一些特殊的位置
+     */
+
+    /*
+        为p中第一个字符来设置一个特殊的样式
+     */
+    p:first-letter {
+        color: red;
+        font-size: 20px;
+    }
+
+    p:first-line {
+        background-color: yellow;
+    }
+
+    /*
+        :before 表示元素最前边的补分
+            一般before都需要结合content这个样式一起使用。
+            通过content可以向before或after的位置添加一些内容
+     */
+    p:before {
+        content: '我会出现在整个段落的最前边';
+        color: yellowgreen;
+    }
+    p:after {
+        content: '我会出现在这个段落的最后边';
+        color: orange;
+    }
+</style>
+<body>
+    <p>我是一个段落</p>
+</body>
+</html>
