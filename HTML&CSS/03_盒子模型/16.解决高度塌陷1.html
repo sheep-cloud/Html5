@@ -7,8 +7,8 @@
     .box1 {
         border: 10px red solid;
         /*
-            根据W3C的标准，在页面中元素都有一个隐含的属性叫做Block Formatting Context
-                简称BFC，改属性可以设置打开或者关闭，默认是关闭的。
+            根据W3C的标准，在页面中元素都有一个隐含的属性叫做Block Formatting Context（块级格式化上下文）
+                简称BFC，该属性可以设置打开或者关闭，默认是关闭的。
 
             当开启元素的BFC以，元素将会具有如下的特征：
                 1、父元素的垂直外边距不会和子元素重叠
@@ -24,7 +24,13 @@
                 4、将元素的overflow设置为一个非visible的值
 
             推荐方式：将overflow设置为hidden是副作用最小的开启BFC的方式
+
+            在IE6中没有BFC，但是具有另一个隐含属性叫做hasLayout
+            zoom表示放大的意思，后边跟着一个数值，写几就讲元素放大几倍。
+            zoom：1 表示不放大元素，但是通过该样式可以开启hasLayout
+            zoom这个样式，只在IE中支持，其他浏览器都不支持
         */
+        zoom: 1;
         overflow: hidden;
     }
 
