@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>24.元素的层级</title>
+<style type="text/css">
+    .box1 {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: relative;
+        z-index: 1;
+    }
+
+    .box2 {
+        width: 200px;
+        height: 200px;
+        background-color: yellow;
+
+        /*开启绝对定位*/
+        position: absolute;
+        /*设置偏移量*/
+        top: 100px;
+        left: 100px;
+
+        /*
+            如果定位元素的层级是一样的，则下边的元素会盖住上边的
+            通过z-index属性可以用来设置元素的层级
+            可以为z-index指定一个正整数作为值，该值将会作为当前元素的层级
+                层级越高，越优先显示
+
+            对于没有开启定位的元素不能使用z-index
+        */
+        z-index: 2;
+    }
+
+    .box3 {
+        width: 200px;
+        height: 200px;
+        background-color: yellowgreen;
+        position: relative;
+        z-index: 3;
+    }
+
+    .box4 {
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+        /*开启相对定位*/
+        position: relative;
+        /*
+            父元素的层级再高，也不会盖住子元素
+        */
+        z-index: 20;
+    }
+
+    .box5 {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+        /*开启绝对定位*/
+        position: absolute;
+        z-index: 10;
+    }
+</style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4">
+        <div class="box5"></div>
+    </div>
+</body>
+</html>
