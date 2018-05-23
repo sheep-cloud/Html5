@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>常规用法</title>
+<link rel="stylesheet" href="../../node_modules/layui-src/src/css/layui.css">
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>常规用法</legend>
+    </fieldset>
+
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">中文版</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">国际版</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" id="test1-1" placeholder="yyyy-MM-dd">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="text" class="layui-input" id="test" placeholder="yyyy-MM-dd">
+
+
+    <script src="../../node_modules/layui-src/src/layui.js" charset="utf-8"></script>
+    <!--独立版本-->
+    <!--<script src="../../node_modules/layui-laydate/dist/laydate.js" charset="utf-8"></script>-->
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            // 常规用法
+            laydate.render({
+                elem: '#test1'
+            });
+
+            // 国际版
+            laydate.render({
+                elem: '#test1-1',
+                lang: 'en'
+            });
+
+            laydate.render({
+                elem: '#test',
+                range: true
+                , change: function (value, date, endDate) {
+                    console.log(value); //得到日期生成的值，如：2017-08-18
+                    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+                }
+            });
+        });
+
+
+    </script>
+</body>
+</html>

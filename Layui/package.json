@@ -1,0 +1,16 @@
+{
+  "name": "layui",
+  "version": "1.0.0",
+  "description": "layui 入门指南",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "colg",
+  "license": "ISC",
+  "dependencies": {
+    "layui-laydate": "^5.0.9",
+    "layui-layer": "^1.0.9",
+    "layui-src": "^2.2.5"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>居中弹出</title>
+<link rel="stylesheet" href="../../node_modules/layui-src/src/css/layui.css">
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title site-demo-button" style="margin-top: 30px;">
+        <legend>特殊例子</legend>
+    </fieldset>
+
+    <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>
+    </div>
+
+
+    <script src="../../node_modules/layui-src/src/layui.js" charset="utf-8"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        layui.use('layer', function () {
+            var $ = layui.jquery;
+            var layer = layui.layer;
+
+            $('.layui-btn').click(function () {
+                layer.alert('居中弹出');
+            });
+        });
+    </script>
+</body>
+</html>
