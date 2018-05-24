@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>白条出资</title>
+<style type="text/css">
+    /*出资*/
+    .investment {
+        /*border: 1px red solid;*/
+        width: 980px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    .report {
+        margin: 0 auto;
+    }
+
+    /*出借*/
+    .lending {
+        border: 1px #d1d1d1 solid;
+        width: 440px;
+        height: 80%;
+        float: left;
+        padding: 20px;
+    }
+
+    /*收益*/
+    .income {
+        border: 1px #d1d1d1 solid;
+        width: 440px;
+        height: 80%;
+        margin-left: 10px;
+        float: right;
+        padding: 20px;
+    }
+
+    /*报表*/
+    .report {
+        border: 1px red solid;
+        width: 980px;
+        height: 300px;
+        margin-top: 20px;
+    }
+
+    .lending-quota {
+        font-size: 14px;
+        color: #5c5c5c;
+    }
+
+    .money-max {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .lending .money-max {
+        color: #66b5ff;
+    }
+
+    .income .money-max {
+        color: #ff7319;
+    }
+
+    a {
+        text-decoration-line: none;
+        color: #FFF;
+    }
+
+    /*文字边框*/
+    .quota-warp {
+        font-size: 12px;
+        padding: 5px;
+        border-radius: 2px;
+        color: #FFF;
+    }
+
+    /*文字边框颜色*/
+    .lending .quota-warp {
+        background-color: #09F;
+    }
+
+    .income .quota-warp {
+        background-color: #ff8e23;
+    }
+
+    .money {
+        font-weight: bold;
+    }
+
+    .income .money {
+        color: #ff8e23;
+    }
+</style>
+</head>
+<body>
+    <!--出资-->
+    <div class="investment">
+        <!--出借-->
+        <div class="lending">
+            <div class="lending-quota">
+                出借额度（元）
+            </div>
+            <div style="margin-top: 10px;">
+                <span class="money-max">10,000</span>
+                <span class="quota-warp" style="margin-left: 45px;"><a href="#">调整额度</a></span>
+                <span class="lending-quota">不再参与</span>
+            </div>
+            <div class="lending-quota" style="margin-top: 20px;">
+                可出借额度（元）
+            </div>
+            <div style="margin-top: 10px;">
+                <span class="money">6,000</span>
+                <span class="quota-warp" style="margin-left: 100px;"><a href="#">充值</a></span>
+            </div>
+        </div>
+        <!--收益-->
+        <div class="income">
+            <div class="lending-quota">
+                昨日收益（积分）
+            </div>
+            <div style="margin-top: 10px;">
+                <span class="money-max">100</span>
+            </div>
+            <div style="margin-top: 20px;">
+                <span class="quota-warp">已出借金额（元）</span>
+                <span class="quota-warp" style="margin-left: 50px;">累计收益（积分）</span>
+            </div>
+            <div style="margin-top: 10px;">
+                <span class="money">6,000</span>
+                <span class="money" style="margin-left: 110px;">1,000</span>
+            </div>
+        </div>
+    </div>
+    <!--报表-->
+    <div class="report"></div>
+</body>
+</html>
