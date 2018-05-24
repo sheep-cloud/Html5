@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03.背景</title>
+<style type="text/css">
+    .box1 {
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+
+
+        /*
+            设置一个背景颜色
+            设置一个背景图片
+            背景图片不会重复，有多大就显示多大
+        */
+        background: #bfa url(img/3.png) no-repeat;
+        /*
+            背景图片是默认贴着元素的左上角显示
+            通过background-position可以调整背景图片在元素中的位置
+            可选值：
+                该属性可以使用top right left bottom center中的两个值，来指定一个图片的位置
+                top left：       左上
+                bottom left：    左下
+                top right：      右上
+                bottom right：   右下
+                center：         居中，如果只给出一个值，第二个值默认为center
+                top：            上中
+                这种方式，一共有九个位置，九宫格。
+
+                也可以直接指定两个偏移量：
+                    第一个值是水平偏移量，
+                        - 如果指定的是一个正值，则图片会向右移动指定的像素
+                        - 如果指定的是一个负只，则图片会向反方向移动指定的像素
+                    第二个值是垂直偏移量
+        */
+        background-position: -80px -40px;
+    }
+
+    body {
+        background-image: url(img/3.png);
+        background-repeat: no-repeat;
+        height: 5000px;
+
+        /*
+            background-attachment：用来设置背景图片是否随页面一起滚动
+                可选值：
+                    scroll： 默认值，背景图片随着窗口滚动
+                    fixed：  背景图片规定在某一位置，不随页面滚动
+        */
+
+        background-attachment: fixed;
+    }
+</style>
+</head>
+<body>
+    <div class="box1"></div>
+</body>
+</html>
