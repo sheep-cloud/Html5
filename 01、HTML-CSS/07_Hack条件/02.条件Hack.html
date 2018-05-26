@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02.条件Hack</title>
+<link rel="stylesheet" href="css/style.css">
+<!--单独设置样式，解决兼容性-->
+<!--[if IE 8]>
+<link rel="stylesheet" href="css/style-ie8.css">
+<![endif]-->
+</head>
+<body>
+    <!--
+        有一些情况，有一些特殊的代码我们只需要在某些特殊的浏览器中执行，
+            而在其他的浏览器中不需要执行，这时就可以使用CSS Hack来解决该问题
+        CSS Hack实际上值得是一个特殊的代码，这段代码只在某些浏览器中可以识别，
+            而其他浏览器不能识别，通过这种方式，来为一些浏览器设置特殊的代码。
+    -->
+
+    <!--
+        条件Hack，条件hack支队IE浏览器有效，其他的浏览器都会讲它识别为注释
+            IE10及以上的浏览器已经不支持这种方式
+    -->
+
+    <!--以下内容只会出现在IE6中-->
+    <!--[if IE 6]>
+    <p>为了您和家人的健康，请远离IE6！！</p>
+    <![endif]-->
+
+    <!--[if lt IE9]>
+    <p>该标签会在IE9一下的浏览器中显示！</p>
+    <![endif]-->
+</body>
+</html>
