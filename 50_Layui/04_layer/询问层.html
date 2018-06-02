@@ -3,23 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>询问层</title>
-<script src="../node_modules/jquery/dist/jquery.js" charset="UTF-8"></script>
-<script src="../node_modules/layui-layer/dist/layer.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../layui-v2.3.0/layui/layui.js"></script>
 </head>
 <body>
 
     <script>
-        //询问框
-        layer.confirm('您是如何看待前端开发？', {
-            btn: ['重要', '奇葩']
-        }, function () {
-            layer.msg('的确很重要', {
-                icon: 1
-            });
-        }, function () {
-            layer.msg('也可以这样', {
-                time: 2000, // 2s后自动关闭
-                btn: ['明白了', '知道了']
+        layui.use('layer', function () {
+            var layer = layui.layer,
+                $ = layui.jquery;
+
+            //询问框
+            layer.confirm('您是如何看待前端开发？', {
+                btn: ['重要', '奇葩']
+            }, function () {
+                layer.msg('的确很重要', {
+                    icon: 1
+                });
+            }, function () {
+                layer.msg('也可以这样', {
+                    time: 2000, // 2s后自动关闭
+                    btn: ['明白了', '知道了']
+                });
             });
         });
     </script>

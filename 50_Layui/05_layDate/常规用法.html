@@ -3,28 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <title>常规用法</title>
-<script src="../node_modules/layui-laydate/dist/laydate.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../layui-v2.3.0/layui/layui.js"></script>
 <script>
-    // 常规用法
-    laydate.render({
-        elem: '#test1'
-    });
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
 
-    // 国际版
-    laydate.render({
-        elem: '#test1-1',
-        lang: 'en'
-    });
+        // 常规用法
+        laydate.render({
+            elem: '#test1'
+        });
 
-    laydate.render({
-        elem: '#test',
-        range: true
-        , change: function (value, date, endDate) {
-            console.log(value); //得到日期生成的值，如：2017-08-18
-            console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-            console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
-        }
-    });
+        // 国际版
+        laydate.render({
+            elem: '#test1-1',
+            lang: 'en'
+        });
+
+        laydate.render({
+            elem: '#test',
+            range: true,
+            change: function (value, date, endDate) {
+                console.log(value); //得到日期生成的值，如：2017-08-18
+                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+            }
+        });
+    })
 </script>
 </head>
 <body>

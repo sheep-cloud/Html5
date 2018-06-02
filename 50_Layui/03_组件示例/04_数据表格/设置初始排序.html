@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>设置初始排序</title>
-<link rel="stylesheet" href="../../node_modules/layui-src/src/css/layui.css">
+<link rel="stylesheet" href="../../layui-v2.3.0/layui/css/layui.css">
 </head>
 <body>
-    <table class="layui-table" lay-data="{height: 313, url:'../../JSON/user.json', initSort: {field:'wealth', type:'desc'}}" lay-filter="demoEvent">
+    <table class="layui-table" lay-data="{height: 313, url:'../../json/table/user.json', initSort: {field:'wealth', type:'desc'}}" lay-filter="demoEvent">
         <thead>
-        <tr>
-            <th lay-data="{field:'id', width:80}">ID</th>
-            <th lay-data="{field:'username', width:80}">用户名</th>
-            <th lay-data="{field:'score', width:80, sort: true}">评分</th>
-            <th lay-data="{field:'wealth', sort: true, minWidth: 150}">财富</th>
-        </tr>
+            <tr>
+                <th lay-data="{field:'id', width:80}">ID</th>
+                <th lay-data="{field:'username', width:80}">用户名</th>
+                <th lay-data="{field:'score', width:80, sort: true}">评分</th>
+                <th lay-data="{field:'wealth', sort: true, minWidth: 150}">财富</th>
+            </tr>
         </thead>
     </table>
 
 
-    <script src="../../node_modules/layui-src/src/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../layui-v2.3.0/layui/layui.js"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
         layui.use('table', function () {

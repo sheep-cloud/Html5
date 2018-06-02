@@ -3,29 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>普通信息框</title>
-<script src="../node_modules/jquery/dist/jquery.js" charset="UTF-8"></script>
-<script src="../node_modules/layui-layer/dist/layer.js" charset="UTF-8"></script>
-<script>
-    $(function () {
-        $('#btn').click(function () {
-            // layer.alert(content, options, yes) - 普通信息框
-
-            //eg1
-            // layer.alert('只想简单的提示');
-            //eg2
-            // layer.alert('加了个图标', {icon: 1}); //这时如果你也还想执行yes回调，可以放在第三个参数中。
-            //eg3
-            layer.alert('有了回调', {icon: 1}, function (index) {
-                //do something
-                layer.close(index);
-            });
-
-        });
-    });
-</script>
 </head>
 <body>
-
     <input type="button" id="btn" value="问你个问题">
+
+    <script type="text/javascript" src="../layui-v2.3.0/layui/layui.js"></script>
+    <script>
+        layui.use(['layer'], function () {
+            var layer = layui.layer
+                , $ = layui.jquery;
+
+            $('#btn').click(function () {
+                // layer.alert(content, options, yes) - 普通信息框
+
+                //eg1
+                // layer.alert('只想简单的提示');
+                //eg2
+                // layer.alert('加了个图标', {icon: 1}); //这时如果你也还想执行yes回调，可以放在第三个参数中。
+                //eg3
+                layer.alert('有了回调', {icon: 1}, function (index) {
+                    //do something
+                    layer.close(index);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
