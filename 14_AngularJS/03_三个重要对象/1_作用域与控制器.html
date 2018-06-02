@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>Title</title>
 </head>
 <body ng-app ng-init="age=12">
 
-<!--
-    1、作用域对象：
-        * 一个js实例对象，ng-app指令默认会创建一个根作用域对象（$rootScope）
-        * 它的属性和方法与页面中的指令或表达式是关联的
+    <!--
+        1、作用域对象：
+            * 一个js实例对象，ng-app指令默认会创建一个根作用域对象（$rootScope）
+            * 它的属性和方法与页面中的指令或表达式是关联的
 
-    2、控制器对象：
-        * 用来控制AngularJS应用数据的 实例对象
-        * ng-controller：    指定控制器构造函数，Angular会自动new此函数创建控制器对象
-        * 同时Angular还有创建一个新的作用域对象$scope，它是$rootScope的子对象
-        * 在控制器函数中声明$scope形参，Angular会自动将$scope对象传入
--->
+        2、控制器对象：
+            * 用来控制AngularJS应用数据的 实例对象
+            * ng-controller：    指定控制器构造函数，Angular会自动new此函数创建控制器对象
+            * 同时Angular还有创建一个新的作用域对象$scope，它是$rootScope的子对象
+            * 在控制器函数中声明$scope形参，Angular会自动将$scope对象传入
+    -->
 
-<div ng-controller="MyController">
-    <label>
-        <input type="text" placeholder="姓" ng-model="firstName">
-    </label>
-    <label>
-        <input type="text" placeholder="名" ng-model="lastName">
-    </label>
+    <div ng-controller="MyController">
+        <label>
+            <input type="text" placeholder="姓" ng-model="firstName">
+        </label>
+        <label>
+            <input type="text" placeholder="名" ng-model="lastName">
+        </label>
 
-    <p>姓名1：{{firstName + '-' + lastName}}</p>
-    <p>姓名2：{{getName()}}</p>
-</div>
-<script src="https://cdn.bootcss.com/angular.js/1.2.29/angular.js"></script>
-<script type="text/javascript">
-    function MyController($scope) {// 形参必须是$scope
-        console.log(this instanceof MyController);
+        <p>姓名1：{{firstName + '-' + lastName}}</p>
+        <p>姓名2：{{getName()}}</p>
+    </div>
+    <script type="text/javascript" src="../js/Angular.js"></script>
+    <script type="text/javascript">
+        function MyController($scope) {// 形参必须是$scope
+            console.log(this instanceof MyController);
 
-        console.log($scope);
-        $scope.firstName = 'kobe';
-        $scope.lastName = 'bryant';
-        $scope.getName = function () {
-            return $scope.firstName + this.lastName
+            console.log($scope);
+            $scope.firstName = 'kobe';
+            $scope.lastName = 'bryant';
+            $scope.getName = function () {
+                return $scope.firstName + this.lastName
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
