@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02.过渡&动画animationend</title>
+<style type="text/css">
+    p {
+        display: inline-block;
+    }
+    .bounce-enter-active {
+        animation: bounce-in 1s;
+    }
+    .bounce-leave-active {
+        animation: bounce-in 1s reverse;
+    }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div id="example-2">
+        <button @click="show = !show">Toggle show</button>
+        <transition name="bounce">
+            <p v-if="show">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris facilisis enim libero, at lacinia diam fermentum id.
+                Pellentesque habitant morbi tristique senectus et netus.
+            </p>
+        </transition>
+    </div>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '#example-2',
+            data: {
+                show: true
+            }
+        })
+    </script>
+</body>
+</html>
