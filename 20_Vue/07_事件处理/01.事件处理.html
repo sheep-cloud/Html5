@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01.事件处理</title>
+</head>
+<body>
+    <!--
+        1. 绑定监听
+        2. 事件修饰符
+    -->
+
+    <div id="demo">
+        <h2>1. 绑定监听</h2>
+        <button @click="test1">test1</button>
+        <button @click="test2('colg')">test2</button>
+        <button @click="test3">test3</button>
+        <button @click="test4(123, $event)">test4</button>
+
+        <h2>2. 事件修饰符</h2>
+        <div style="width: 200px; height: 200px; background: red" @click="test5">
+            <div style="width: 100px; height: 100px; background: blue" @click.stop="test6"></div>
+        </div>
+
+        <a href="http://www.baidu.com" @click.prevent="test7">去百度</a>
+
+        <h2>3. 按键修饰符</h2>
+        <input type="text" @keyup.enter="test8">
+
+    </div>
+
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '#demo',
+            data: {
+                test1() {
+                    alert('test1')
+                },
+                test2(msg) {
+                    alert(msg)
+                },
+                test3(event) { // 没有指定参数，自动传递event
+                    console.log(event)
+                    alert(event.target.innerHTML)
+                },
+                test4(number, event) {
+                    console.log(event)
+                    alert(number + '---' + event.target.innerHTML)
+                },
+
+                test5() {
+                    alert('out')
+                },
+                test6(event) { // 事件冒泡
+                    // event.stopPropagation()
+                    alert('inner')
+                },
+
+                test7(event) { // 事件默认行为
+                    // event.preventDefault()
+                    alert('点击了')
+                },
+
+                test8(event) {
+                    // 回车
+                    /*
+                    if (event.keyCode == 13) {
+                        alert(event.target.value)
+                    }
+                    */
+                    alert(event.target.value)
+                }
+            },
+
+        })
+    </script>
+</body>
+</html>
