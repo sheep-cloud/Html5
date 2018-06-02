@@ -83,6 +83,55 @@
 
 ## 2、Vue的组件化编码
 
+### 2.1. 使用vue-cli创建模版项目
+
+#### 2.1.1. 说明
+
+- vue-cli是vue官方提供的脚手架工具
+- github：https://github.com/vuejs/vue-cli
+- 作用：从https://github.com/vuejs-templates下载模版项目
+- 文档：https://github.com/vuejs/vue-docs-zh-cn/tree/master/vue-cli
+
+#### 2.1.2. 创建vue项目
+
+```shell
+cd D:\workspace-all\atguigu\Html5\20_Vue
+
+npm install -g vue-cli
+vue init webpack vue-demo					(项目名必须小写)
+cd vue-demo\
+npm install
+npm run dev								   (在内存中进行打包)
+
+访问：http://localhost:8080/
+```
+
+
+
+#### 2.1.3. 模版项目的结构
+
+#### 2.1.4. 效果
+
+### 2.2. 项目的打包与发布
+
+### 2.3. eslint
+
+### 2.4. 组件定义与使用
+
+### 2.5. 组件间通信
+
+### 2.6. 组件间通信1：props
+
+### 2.7. 组件间通信2：vue自定义事件
+
+### 2.8. 组件间通信3：消息订阅与发布（PubSubJS库）
+
+### 2.9. 组件间通信4：slot
+
+### 2.10. demo1：comment manage
+
+### 2.11. demo2：todo list
+
 ## 3、Vue-ajax
 
 ## 4、Vue UI组件库
