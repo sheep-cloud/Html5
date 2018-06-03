@@ -42,7 +42,7 @@
         // 4. 添加实例方法
         Vue.prototype.$myMethod = function (methodOptions) {
             // 逻辑...
-            console.log("Vue 实例对象的方法 $myMethod()")
+            console.log('Vue 实例对象的方法 $myMethod()')
         }
     }
 
