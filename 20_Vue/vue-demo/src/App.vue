@@ -47,7 +47,7 @@
         this.repoUrl = mostRepo.html_url
         this.repoName = mostRepo.name
       }).catch(error => {
-        alert('请求失败')
+        alert('请求失败', error)
       })
     }
   }
