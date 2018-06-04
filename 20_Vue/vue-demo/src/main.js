@@ -1,12 +1,14 @@
+// 引入组件
 import Vue from 'vue'
 import App from './App'
-import vueResource from 'vue-resource'
+import router from './router'
 
-// 声明使用插件
-Vue.use(vueResource) // 内部会给vm独享和组件对象添加一个属性：$http
-
-new Vue({
+new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便修改
   el: '#app',
+  // 映射组件标签
   components: {App},
-  template: '<App/>'
+  // 指定需要渲染到页面的模版
+  template: '<App/>',
+  // 配置路由器
+  router
 })

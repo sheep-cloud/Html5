@@ -517,9 +517,349 @@ npm install axios --save
 
 ### 3.5. demo3：github users
 
+```javascript
+    mounted() {
+      // 是否再次发ajax请求，不是，而是在点击之后
+      // 订阅搜索的消息
+      PubSub.subscribe('search', (msg, searchName) => {
+        // 说明需要发ajax请求进行搜索
+        const url = `http://api.github.com/search/users?q=${searchName}`
+        // 更新状态（请求中）
+        this.firstView = false
+        this.loading = true
+        this.users = null
+        this.errorMsg = ''
+
+        // 发ajax请求
+        axios.get(url).then(response => {
+          const result = response.data
+          const users = result.items.map(item => ({
+            url: item.html_url,
+            avatar_url: item.avatar_url,
+            name: item.login
+          }))
+          console.log(users)
+          // 成功，更新状态（成功）
+          this.loading = false
+          this.users = users
+        }).catch(error => {
+            // 失败，更新状态（失败）
+            this.loading = false
+            this.errorMsg = url + ': ' + error.response.statusText
+          }
+        )
+      })
+```
+
 ## 4、Vue UI组件库
 
+### 4.1. 使用mint-ui
+
+#### 4.1.1. 介绍
+
+- 主页：http://mint-ui.github.io/#!/zh-cn
+- 说明：饿了么开源的基于 Vue.js 的移动端组件库 
+
+#### 4.1.2. 下载
+
+```shell
+1. npm 安装
+npm install mint-ui --save
+
+2. 借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+npm install babel-plugin-component --save-dev
+
+3. 修改 .babelrc 实现按需打包
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      }
+    }],
+    "stage-2"
+  ],
+  "plugins": ["transform-vue-jsx", "transform-runtime", ["component", [
+    {
+      "libraryName": "mint-ui",
+      "style": true
+    }
+  ]]]
+}
+```
+
+#### 4.1.3. mint-ui 组件分类
+
+- 标签组件
+- 非标签组件
+
+#### 4.1.4. 使用 mint-ui 的组件
+
+- index.html
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
+<!-- 移动端 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+<link rel="stylesheet" href="./static/css/bootstrap.css">
+<title>vue-demo</title>
+<!-- 处理移动端事件延迟 -->
+<script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+<script>
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function () {
+      FastClick.attach(document.body)
+    }, false)
+  }
+  if (!window.Promise) {
+    document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"' + '>' + '<' + '/' + 'script>')
+  }
+</script>
+</head>
+<body>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+</html>
+```
+
+- main.js
+
+```javascript
+import Vue from 'vue'
+import App from './App'
+// 引入指定组件
+import {Button, Swipe} from 'mint-ui'
+
+// 注册成标签（全局）
+Vue.component(Button.name, Button)
+Vue.component(Swipe.name, Swipe)
+
+new Vue({
+  el: '#app',
+  // 映射组件标签
+  components: {App},
+  // 指定需要渲染到页面的模版
+  template: '<App/>'
+})
+```
+
+- App.vue
+
+```vue
+<template>
+  <!-- click.native 原生的事件监听-->
+  <mt-button type="primary" @click.native="handleClick">确定</mt-button>
+</template>
+
+<script>
+  // 引入 消息提示 组件
+  import {Toast} from 'mint-ui'
+
+  export default {
+    methods: {
+      handleClick() {
+        Toast('提示信息')
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  button {
+    width: 100%;
+  }
+</style>
+
+```
+
+### 4.2. 使用element-ui
+
+#### 4.2.1. 介绍
+
+- 主页：http://element-cn.eleme.io/#/zh-CN
+- 说明：饿了么开源的一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库 
+
 ## 5、Vue-router
+
+### 5.1. 理解
+
+#### 5.1.1. 说明
+
+- 官方提供的用来实现SPA的vue插件（单页应用）
+- Github：https://github.com/vuejs/vue-router
+- 文档：https://router.vuejs.org/zh/
+- 下载
+
+```shell
+npm install vue-router --save
+```
+
+#### 5.1.2. 相关API说明
+
+- VueRouter()：	用于创建路由器的构建函数
+
+```javascript
+// 默认暴露
+export default new VueRouter({
+  // 多个配置项
+})
+```
+
+
+
+- 路由配置
+
+```javascript
+export default new VueRouter({
+  // 多个配置项
+  routes: [
+    // 一般路由
+    {path: '/about', component: About},
+    {path: '/home', component: Home},
+    // 自动跳转路由
+    {path: '/', redirect: '/about'}
+  ]
+})
+```
+
+- 注册路由器
+
+```javascript
+// 引入组件
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+
+new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便修改
+  el: '#app',
+  // 映射组件标签
+  components: {App},
+  // 指定需要渲染到页面的模版
+  template: '<App/>',
+  // 配置路由器
+  router
+})
+```
+
+- 使用路由组件标签
+
+```vue
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!-- 使用 router-link 组件来导航. -->
+          <!-- 通过传入 `to` 属性指定链接. -->
+          <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+          <router-link to="/about" class="list-group-item">About</router-link>
+          <router-link to="/home" class="list-group-item">Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="pan1">
+          <div class="pan1-body">
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </div>
+```
+
+### 5.2. 基本路由
+
+#### 5.2.1. 效果
+
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1frznsfaamtj30jx0683yc.jpg)
+
+#### 5.2.2. 路由组件
+
+- About.vue
+- Home.vue
+
+#### 5.2.3. 应用组件：App.vue
+
+```vue
+          <!-- 使用 router-link 组件来导航. -->
+          <!-- 通过传入 `to` 属性指定链接. -->
+          <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+          <router-link to="/about" class="list-group-item">About</router-link>
+          <router-link to="/home" class="list-group-item">Home</router-link>
+          
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+```
+
+#### 5.2.4. 路由器模块：src/router/index.js
+
+```javascript
+/*
+* 路由器模块
+* */
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+// 引入路由组件
+import About from '../views/About'
+import Home from '../views/Home'
+
+// 声明使用插件
+Vue.use(VueRouter)
+
+// 默认暴露
+export default new VueRouter({
+  // 多个配置项
+  routes: [
+    // 一般路由
+    {path: '/about', component: About},
+    {path: '/home', component: Home},
+    // 自动跳转路由
+    {path: '/', redirect: '/about'}
+  ]
+})
+
+```
+
+#### 5.2.5. 注册路由器：main.js
+
+```javascript
+// 引入组件
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+
+new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便修改
+  el: '#app',
+  // 映射组件标签
+  components: {App},
+  // 指定需要渲染到页面的模版
+  template: '<App/>',
+  // 配置路由器
+  router
+})
+```
+
+#### 5.2.6. 总结：编写使用路由的3步
+
+- 定义路由组件
+- 注册路由
+- 使用路由
+
+### 5.3. 嵌套路由
+
+### 5.4. 向路由组件传递数据
+
+### 5.5. 缓存路由组件对象
+
+### 5.6. 编程式路由导航
 
 ## 6、Vuex
 

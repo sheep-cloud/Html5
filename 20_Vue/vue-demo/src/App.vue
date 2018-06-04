@@ -1,58 +1,50 @@
 <template>
   <div>
-    <div v-if="!repoUrl">loading</div>
-    <div v-else>most star repo is <a :href="repoUrl">{{repoName}}</a></div>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>Router Basic - 01</h2></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!--
+          <a href="#/about" class="list-group-item router-link-exact-active activeClass">About</a>
+          <a href="#/home" class="list-group-item">Home</a>
+          -->
+          <!-- 使用 router-link 组件来导航. -->
+          <!-- 通过传入 `to` 属性指定链接. -->
+          <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+          <router-link to="/about" class="list-group-item">About</router-link>
+          <router-link to="/home" class="list-group-item">Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="pan1">
+          <div class="pan1-body">
+            <!--
+            <div>
+              <h2>about组件</h2>
+              <p>接收外部数据：colg</p>
+              <input type="text">
+            </div>
+            -->
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  // 引入组件
-  import axios from 'axios'
-
-  export default {
-    data() {
-      return {
-        repoUrl: '',
-        repoName: ''
-      }
-    },
-    mounted() {
-      const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
-
-      /*
-      // 使用vue-resource 发ajax请求获取数据
-      this.$http.get(url).then(
-        // 成功响应
-        response => {
-          // 成功
-          const result = response.data
-          // 得到最受欢迎的repo
-          const mostRepo = result.items[0]
-          this.repoUrl = mostRepo.html_url
-          this.repoName = mostRepo.name
-        },
-        // 失败响应
-        response => {
-          alert('请求失败')
-        }
-      )
-      */
-
-      // 使用axios发送ajax请求
-      axios.get(url).then(response => {
-        // 成功
-        const result = response.data
-        // 得到最受欢迎的repo
-        const mostRepo = result.items[0]
-        this.repoUrl = mostRepo.html_url
-        this.repoName = mostRepo.name
-      }).catch(error => {
-        alert('请求失败', error)
-      })
-    }
-  }
+  export default {}
 </script>
 
 <style scoped>
-
+  .router-link-active {
+    color: red !important;
+  }
 </style>
