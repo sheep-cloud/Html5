@@ -1,8 +1,11 @@
 <template>
   <ul>
     <li v-for="message in messages" :key="message.id">
-      <a href="???">{{message.title}}</a>
+      <!--<a :href="message.content" target="_blank">{{message.title}}</a>-->
+      <router-link :to="`/home/message/detail/${message.id}`">{{message.title}}</router-link>
     </li>
+    <hr>
+    <router-view></router-view>
   </ul>
 </template>
 
@@ -21,10 +24,11 @@
       // 使用axios发送ajax请求
       axios.get(url).then(response => {
         const result = response.data
+        console.log(result)
         this.messages = result.items.map(item => ({
           id: item.id,
           title: item.login,
-          content: item.avatar_url
+          content: item.html_url
         }))
       }).catch(error => {
         alert(url + ': ' + error.response.statusText)

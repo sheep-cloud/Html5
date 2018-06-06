@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="(news, index) in newArr" :key="index">{{news}}</li>
+    <li v-for="(news, index) in newsArr" :key="index">{{news}}</li>
   </ul>
 </template>
 
@@ -8,7 +8,7 @@
   export default {
     data() {
       return {
-        newArr: ['news01', 'news02', 'news03', 'news04', 'news05']
+        newsArr: ['news01', 'news02', 'news03', 'news04', 'news05']
       }
     }
   }

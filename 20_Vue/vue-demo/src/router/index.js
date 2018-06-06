@@ -10,6 +10,7 @@ import About from '../views/About'
 import Home from '../views/Home'
 import News from '../views/News'
 import Message from '../views/Message'
+import MessageDetail from '../views/MessageDetail'
 
 // 声明使用插件
 Vue.use(VueRouter)
@@ -34,9 +35,16 @@ export default new VueRouter({
         },
         {
           path: 'message', // 简化路径
-          component: Message
+          component: Message,
+          children: [
+            {
+              path: 'detail/:id',
+              component: MessageDetail
+            }
+          ]
         },
         {
+          // 自动跳转路由
           path: '',
           redirect: '/home/news'
         }

@@ -110,14 +110,14 @@ npm run dev								   (在内存中进行打包)
 
 ```shell
 |-- build : webpack 相关的配置文件夹(基本不需要修改)
-	|-- dev-server.js : 通过 express 启动后台服务器
+  |-- dev-server.js : 通过 express 启动后台服务器
 |-- config: webpack 相关的配置文件夹(基本不需要修改)
-	|-- index.js: 指定的后台服务的端口号和静态资源文件夹
+  |-- index.js: 指定的后台服务的端口号和静态资源文件夹
 |-- node_modules
 |-- src : 源码文件夹
-	|-- components: vue 组件及其相关资源文件夹
-	|-- App.vue: 应用根主组件
-	|-- main.js: 应用入口 js
+  |-- components: vue 组件及其相关资源文件夹
+  |-- App.vue: 应用根主组件
+  |-- main.js: 应用入口 js
 |-- static: 静态资源文件夹
 |-- .babelrc: babel 的配置文件
 |-- .eslintignore: eslint 检查忽略的配置
@@ -854,6 +854,56 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 - 使用路由
 
 ### 5.3. 嵌套路由
+
+#### 5.3.1. 效果
+
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fs1x11ix46j30jv0d0mx5.jpg)
+
+#### 5.3.2. 子路由组件
+
+- News.vue
+- Message.vue
+
+#### 5.3.3. 配置嵌套路由：router.js
+
+```javascript
+{
+      path: '/home',
+      component: Home,
+      children: [
+        {
+          // path最左侧的斜杠永远代表根路径
+          path: '/home/news', // 完整路径
+          component: News
+        },
+        {
+          path: 'message', // 简化路径
+          component: Message
+        },
+        {
+          // 自动跳转路由
+          path: '',
+          redirect: '/home/news'
+        }
+      ]
+    }
+```
+
+#### 5.3.4. 路由链接：Home.vue
+
+```vue
+    <div>
+      <ul class="nav nav-tabs">
+        <li>
+          <router-link to="/home/news">News</router-link>
+          <router-link to="/home/message">Message</router-link>
+        </li>
+      </ul>
+      <div>
+        <router-view></router-view>
+      </div>
+    </div>
+```
 
 ### 5.4. 向路由组件传递数据
 

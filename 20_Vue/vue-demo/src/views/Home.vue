@@ -10,6 +10,7 @@
       </ul>
       <div>
         <router-view></router-view>
+        <hr>
       </div>
     </div>
   </div>
