@@ -205,7 +205,7 @@ serve dist
 
 - .eslintrc.js：全局规则配置文件
 
-```javascript
+```vuejs
   // add your custom rules here
   rules: {
     // allow async-await
@@ -318,7 +318,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 - 方式二：指定名称和类型
 
-```vue
+```vuejs
     props: { // 指定属性名和属性值的类型
       comment: Object,
       deleteComment: Function,
@@ -328,7 +328,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 - 方式三：指定名称/类型/必要性/默认值
 
-```vue
+```vuejs
     props: {
       addComment: { // 指定了属性名/属性值的类型/必要性
         type: Function,
@@ -376,7 +376,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 #### 2.7.2. 触发事件
 
-```javascript
+```vuejs
         // 触发自定义事件：addTodo
         this.$emit('addTodo', todo)
 ```
@@ -396,7 +396,7 @@ npm install pubsub-js --save
 
 #### 2.8.2. 订阅消息
 
-```javascript
+```vuejs
       // 订阅消息
       PubSub.subscribe('deleteTodo', (msg, index) => {
         this.deleteTodo(index)
@@ -730,7 +730,7 @@ export default new VueRouter({
 
 - 注册路由器
 
-```javascript
+```vuejs
 // 引入组件
 import Vue from 'vue'
 import App from './App'
@@ -830,7 +830,7 @@ export default new VueRouter({
 
 #### 5.2.5. 注册路由器：main.js
 
-```javascript
+```vuejs
 // 引入组件
 import Vue from 'vue'
 import App from './App'
@@ -866,7 +866,7 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 
 #### 5.3.3. 配置嵌套路由：router.js
 
-```javascript
+```vuejs
 {
       path: '/home',
       component: Home,
