@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>06_强制类型转换-Number</title>
+<script type="text/javascript">
+    /*
+        将其他数据类型转换为 Number
+            方式一：
+                使用Number()函数
+                    - 字符串 --> 数字
+                        1. 如果是纯数字的字符串，则直接将其转换为数字
+                        2. 如果字符串中有非数字的内容，则转换为NaN
+                        3. 如果字符串是一个空白或null，则转换为0
+                    - 布尔值 --> 数字
+                        true  --> 1
+                        false --> 0
+                    - Null --> 数字
+                        null --> 0
+                    - undefined --> 数字
+                        undefined --> NaN
+
+            方式二：
+                - 这种方式专门用来对付字符串
+                - parseInt()    将一个字符串转换为整数（前缀）
+                - parseFloat()  将一个字符串转换为浮点数（前缀）
+                    对于非字符串类型使用，会先将其专程String，然后再操作
+     */
+
+    let a = '123'
+    console.log(a)
+    console.log(typeof a)
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 调用 Number() 函数，转换为Numbe类型
+    a = Number(a)
+    console.log(a)
+    console.log(typeof a)
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 调用parseInt()，可以将一个字符串中的有效的整数内容取出来，然后转换为Number
+    a = '123px'
+    a = parseInt(a)
+    console.log(a)
+    console.log(typeof a)
+</script>
+</head>
+<body>
+    
+</body>
+</html>
