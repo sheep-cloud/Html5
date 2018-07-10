@@ -8,8 +8,11 @@
   export default {
     data() {
       return {
-        newsArr: ['news01', 'news02', 'news03', 'news04', 'news05']
+        newsArr: []
       }
+    },
+    mounted() {
+      this.newsArr = ['news01', 'news02', 'news03', 'news04', 'news05']
     }
   }
 </script>

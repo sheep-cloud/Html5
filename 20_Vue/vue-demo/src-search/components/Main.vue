@@ -5,7 +5,7 @@
     <h2 v-if="errorMsg">{{errorMsg}}</h2>
     <div class="card" v-for="(user, index) in users" :key="index">
       <a :href="user.url" target="_blank">
-        <img :src="user.avatar_url" style='width: 100px'/>
+        <img :src="user.avatar_url" style="width: 253px; height: 255px; border-radius: 5px;"/>
       </a>
       <p class="card-text">{{user.name}}</p>
     </div>
@@ -70,9 +70,8 @@
     border: 1px solid #efefef;
     text-align: center;
   }
-  .card > img {
-    margin-bottom: .75rem;
-    border-radius: 100px;
+  .card img {
+    margin-bottom: 10px;
   }
   .card-text {
     font-size: 85%;

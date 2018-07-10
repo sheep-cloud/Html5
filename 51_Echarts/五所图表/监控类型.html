@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>监控类型</title>
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 450px; height: 265px;"></div>
+
+    <script type="text/javascript">
+        // 图表数据
+        const title = '监控类型'
+        const keys = ['健康 （1级）', '亚健康（2级）', '故障 （3级）']
+        const colors = ['#06DAD4', '#FBD061', '#F82C56']
+        const keyValues = []
+        keys.forEach(function (v) {
+            keyValues.push({name: v, value: Math.floor(Math.random() * (10000 - 100 + 1) + 100)})
+        })
+        console.log(keyValues)
+
+        // 基于准备好的dom，初始化echarts实例
+        const myChart = echarts.init(document.getElementById('main'))
+
+        // 指定图表的配置项和数据
+        const option = {
+            // 标题组件
+            title: {
+                text: title,
+                padding: [20, 0, 0, 25],
+                textStyle: {
+                    color: '#FFF',
+                    fontSize: 14
+                }
+            },
+            // 工具栏组件
+            tooltip: {
+                trigger: 'item',
+                // 字符串模版，饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+                formatter: '{b} : {c} ({d}%)'
+            },
+            // 图例组件
+            legend: {
+                orient: 'vertical',
+                left: 'right',
+                align: 'left',
+                itemWidth: 12,
+                itemHeight: 12,
+                data: keys,
+                padding: [75, 45, 0, 0],
+                textStyle: {
+                    color: '#FFF'
+                }
+            },
+            // 数据列表
+            series: [
+                {
+                    name: title,
+                    type: 'pie',
+                    data: keyValues,
+                    radius: ['1%', '60%'],
+                    center: ['35%', '50%'],
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#143054',
+                            borderWidth: 2,
+                            // 文本标签
+                            label: {
+                                show: true,
+                                formatter: '{d}%'
+                            }
+                        }
+                    }
+                }
+            ],
+            // 调色盘颜色列表
+            color: colors,
+            // 背景色
+            backgroundColor: '#143054'
+        }
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option)
+    </script>
+</body>

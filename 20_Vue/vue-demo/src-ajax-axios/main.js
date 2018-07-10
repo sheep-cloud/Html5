@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App'
-import 'element-ui/lib/theme-chalk/index.css'
-import ElementUI from 'element-ui'
+import axios from 'axios'
 
-Vue.use(ElementUI)
+// 设置 Vue 原型属性
+Vue.prototype.$http = axios
 
 new Vue({
   el: '#app',

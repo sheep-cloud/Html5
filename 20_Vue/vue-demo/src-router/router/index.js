@@ -34,10 +34,14 @@ export default new VueRouter({
           component: News
         },
         {
-          path: 'message', // 简化路径
+          // path: '/home/message',
+          // 简化路径
+          path: 'message',
           component: Message,
           children: [
             {
+              // 映射路由 占位
+              // path: '/home/message/detail/:id',
               path: 'detail/:id',
               component: MessageDetail
             }

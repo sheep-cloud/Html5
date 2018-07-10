@@ -14,29 +14,33 @@
         4. 显示数据：{{xxx}}
         5. 理解vue的mvvm实现
     -->
-    <div id="app">  <!--view-->
+    <!--view 视图，模版页面-->
+    <div id="app">
         <input type="text" v-model="username">
         <p>Hello {{username}}</p>
     </div>
 
     <script type="text/javascript" src="../js/vue.js"></script>
     <script type="text/javascript">
-        // 创建vue实例
-        const vm = new Vue({    // 配置对象
-            el: '#app',         // element: 选择器
-            data: {             // 数据（model）
-                username: 'Jack'
+        // viewModel 创建vue实例
+        // 配置对象
+        const vm = new Vue({
+            // element: 选择器
+            el: '#app',
+            // model 模型，数据对象（data）
+            data: {
+                username: 'Jack' + new Date().toLocaleString()
             }
         })
         vm.name = 'Rose'
-        console.log(vm.name);
+        console.log(vm.name)
     </script>
 
-<!--
-    MVVM:
-        model:      模型，数据对象（data）
-        view:       视图，模版页面
-        viewModel： 视图模型（vue的实例）
--->
+    <!--
+        MVVM:
+            model:      模型，数据对象（data）
+            view:       视图，模版页面
+            viewModel： 视图模型（vue的实例）
+    -->
 </body>
 </html>

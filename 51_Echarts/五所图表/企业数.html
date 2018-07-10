@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>企业数</title>
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 490px; height: 280px;"></div>
+
+    <script type="text/javascript">
+        // 图表数据
+        const title = '企业数'
+        const keys = ['电机', '工业机器人', '其他']
+        const colors = ['#0768FB', '#16EAED', '#50D7FF']
+        const values = []
+        keys.forEach(function () {
+            values.push(Math.floor(Math.random() * (2000 - 100 + 1) + 100))
+        })
+        console.log(values)
+
+        // 基于准备好的dom，初始化echarts实例
+        const myChart = echarts.init(document.getElementById('main'))
+
+        // 指定图表的配置项和数据
+        const option = {
+            // 标题
+            title: {
+                text: title,
+                padding: [20, 0, 0, 25],
+                textStyle: {
+                    color: '#FFF',
+                    fontSize: 14
+                }
+            },
+            // x轴
+            xAxis: {
+                data: keys,
+                // 文字颜色
+                axisLabel: {
+                    color: '#FFF',
+                    padding: [15, 0, 0, 0]
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#FFF'
+                    }
+                }
+            },
+            // y轴
+            yAxis: {
+                // 文字颜色
+                axisLabel: {
+                    color: '#FFF'
+                }
+            },
+            // 数据
+            series: [
+                {
+                    type: 'bar',
+                    data: values,
+                    barWidth: 60,
+                    itemStyle: {
+                        // 修改柱状颜色
+                        normal: {
+                            color: function (v) {
+                                return colors[v.dataIndex]
+                            },
+                            // 文本标签
+                            label: {
+                                show: true,
+                                position: 'top',
+                                distance: -15,
+                                color: '#FFF'
+                            }
+                        }
+                    }
+                }
+            ],
+            // 背景色
+            backgroundColor: '#143054'
+        }
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option)
+    </script>
+</body>
+</html>

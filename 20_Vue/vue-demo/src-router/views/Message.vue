@@ -1,12 +1,14 @@
 <template>
-  <ul>
-    <li v-for="message in messages" :key="message.id">
-      <!--<a :href="message.content" target="_blank">{{message.title}}</a>-->
-      <router-link :to="`/home/message/detail/${message.id}`">{{message.title}}</router-link>
-    </li>
+  <div>
+    <ul>
+      <li v-for="message in messages" :key="message.id">
+        <!--<a :href="message.content" target="_blank">{{message.title}}</a>-->
+        <router-link :to="`/home/message/detail/${message.id}`">{{message.title}}</router-link>
+      </li>
+    </ul>
     <hr>
     <router-view></router-view>
-  </ul>
+  </div>
 </template>
 
 <script>

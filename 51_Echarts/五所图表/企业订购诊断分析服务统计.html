@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>企业订购诊断分析服务统计</title>
+<script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.js"></script>
+<style type="text/css">
+    #wrap {
+        background: url("../img/背景3_五所领导.png") no-repeat;
+        width: 489px;
+        height: 279px;
+        padding: 30px 30px 30px 30px;
+    }
+    #main {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="main"></div>
+    </div>
+
+    <script type="text/javascript">
+        // 图表数据
+        const title = '企业订购诊断分析服务统计'
+        const keys = ['故障诊断', '健康评估', '寿命预测', '维修决策']
+        const colors = ['#F82C56', '#00EF93', '#694AFE', '#F57009']
+        const values = []
+        keys.forEach(function () {
+            values.push(Math.floor(Math.random() * (2000 - 100 + 1) + 100))
+        })
+        console.log(values)
+
+        // 基于准备好的dom，初始化echarts实例
+        const myChart = echarts.init(document.getElementById('main'))
+
+        // 指定图表的配置项和数据
+        const option = {
+            // 标题
+            title: {
+                text: title,
+                padding: [10, 0, 0, 0],
+                textStyle: {
+                    color: '#FFF',
+                    fontSize: 16
+                }
+            },
+            // x轴
+            xAxis: {
+                data: keys,
+                // 文字颜色
+                axisLabel: {
+                    color: '#FFF',
+                    padding: [15, 0, 0, 0]
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#FFF'
+                    }
+                }
+            },
+            // y轴
+            yAxis: {
+                // 文字颜色
+                axisLabel: {
+                    color: '#FFF'
+                }
+            },
+            // 数据
+            series: [
+                {
+                    type: 'bar',
+                    data: values,
+                    barWidth: 60,
+                    itemStyle: {
+                        // 修改柱状颜色
+                        normal: {
+                            color: function (v) {
+                                return colors[v.dataIndex]
+                            },
+                            // 文本标签
+                            label: {
+                                show: true,
+                                position: 'top',
+                                distance: -15,
+                                color: '#FFF'
+                            }
+                        }
+                    }
+                }
+            ],
+            // 背景色
+            backgroundColor: '#143054'
+        }
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option)
+    </script>
+</body>
+</html>
