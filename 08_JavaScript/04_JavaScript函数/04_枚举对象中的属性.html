@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_枚举对象中的属性</title>
+<script type="text/javascript">
+    let obj = {
+        name: '孙悟空',
+        gender: '男',
+        address: '花果山'
+    }
+    console.log(obj)
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 枚举对象中的属性
+    for (let n in obj) {
+        console.log(n, obj[n])
+    }
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    console.log(Object.keys(obj))
+    console.log(Object.values(obj))
+</script>
+</head>
+<body>
+
+</body>
+</html>
