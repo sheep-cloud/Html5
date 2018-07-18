@@ -11,13 +11,33 @@
     <script type="text/javascript">
         // 图表数据
         const title = '设备数'
-        const keys = ['电机', '工业机器人', '其他']
         const colors = ['#0768FB', '#16EAED', '#50D7FF']
-        const values = []
-        keys.forEach(function () {
-            values.push(Math.floor(Math.random() * (2000 - 100 + 1) + 100))
-        })
-        console.log(values)
+        const keyValues = [
+            {
+                'industryName': '电机',
+                'deviceCount': '200'
+            },
+            {
+                'industryName': '工业机器人',
+                'deviceCount': '1200'
+            },
+            {
+                'industryName': '其他',
+                'deviceCount': '800'
+            }
+        ]
+
+        let valueName = []
+        let valueCount = []
+        console.log('----------------------------------------------------------------------------------------------------')
+        for (let i = 0, length = keyValues.length; i < length; i++) {
+            let keyValue = Object.values(keyValues[i])
+            valueName.push(keyValue[0])
+            valueCount.push(keyValue[1])
+        }
+        console.log(valueName)
+        console.log(valueCount)
+
 
         // 基于准备好的dom，初始化echarts实例
         const myChart = echarts.init(document.getElementById('main'))
@@ -35,8 +55,8 @@
             },
             // x轴
             xAxis: {
-                data: keys,
                 // 文字颜色
+                data: valueName
                 axisLabel: {
                     color: '#FFF',
                     padding: [15, 0, 0, 0]
@@ -58,7 +78,7 @@
             series: [
                 {
                     type: 'bar',
-                    data: values,
+                    data: valueCount,
                     barWidth: 60,
                     itemStyle: {
                         // 修改柱状颜色

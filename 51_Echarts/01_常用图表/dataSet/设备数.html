@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>设备数</title>
+<script type="text/javascript" src="../../js/echarts.js"></script>
+<script type="text/javascript" src="js/EchartsUtil.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 490px; height: 280px;"></div>
+
+    <script type="text/javascript">
+        // 图表数据
+        const title = '设备数'
+        const colors = ['#0768FB', '#16EAED', '#50D7FF']
+        const keyValues = [
+            {
+                'industryName': '电机',
+                'deviceCount': 200
+            },
+            {
+                'industryName': '工业机器人',
+                'deviceCount': 1200
+            },
+            {
+                'industryName': '其他',
+                'deviceCount': 800
+            }
+        ]
+        let titlePadding = [20, 0, 0, 25]
+        let xPadding = [15, 0, 0, 0]
+        let backgroundColor = '#143054'
+
+        createBar('main', title, keyValues, titlePadding, xPadding, colors, backgroundColor)
+    </script>
+</body>
+</html>

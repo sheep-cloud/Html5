@@ -1,0 +1,104 @@
+{
+  "code": 0,
+  "msg": "success",
+  "total": 11,
+  "data": [
+    {
+      "account": "admin",
+      "logId": "6d4753195b7a4e5c94b70929f08440df",
+      "operationTime": "2018-07-11 14:58:28",
+      "operationUrl": "/manage/sys/role/setRoleMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "8c69bec7a1de4ce5a1b4bdbad334bab2",
+      "operationTime": "2018-07-11 14:58:08",
+      "operationUrl": "/manage/sys/menu/addMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "ddeeda0b33ff4a808e566d028d81b5e0",
+      "operationTime": "2018-07-11 10:11:02",
+      "operationUrl": "/manage/sys/menu/setMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "11263abf7bf8403cae1cc0faaff52442",
+      "operationTime": "2018-07-11 10:01:52",
+      "operationUrl": "/manage/sys/role/setRoleMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "288f10ba1e77426d88b3a8508381efb4",
+      "operationTime": "2018-07-11 10:01:36",
+      "operationUrl": "/manage/sys/menu/addMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "17f2c6effbcf43c0a85a1968a5ceea99",
+      "operationTime": "2018-07-11 10:00:54",
+      "operationUrl": "/manage/sys/menu/addMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "27385ef95f1d4188b5df79ef1e12c378",
+      "operationTime": "2018-07-11 10:00:43",
+      "operationUrl": "/manage/sys/menu/addMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "cd25c61023024d4a9b3766322007b694",
+      "operation": "修改菜单",
+      "operationTime": "2018-07-11 10:00:36",
+      "operationUrl": "/manage/sys/menu/setMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "0d0702fcbb544d3ca296e46839d9e0cc",
+      "operationTime": "2018-07-11 10:00:23",
+      "operationUrl": "/manage/sys/menu/setMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "6f70d0aa2cfe4223b25817c5585ed39d",
+      "operationTime": "2018-07-11 09:59:32",
+      "operationUrl": "/manage/sys/menu/setMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "6f70d0aa2cfe4223b25817c5585ed39d",
+      "operationTime": "2018-07-11 09:59:32",
+      "operationUrl": "/manage/sys/menu/setMenu",
+      "result": 0,
+      "userName": "管理员"
+    },
+    {
+      "account": "admin",
+      "logId": "6f70d0aa2cfe4223b25817c5585ed39d",
+      "operationTime": "2018-07-11 09:59:32",
+      "operationUrl": "/manage/sys/menu/setMenu",
+      "result": 0,
+      "userName": "管理员"
+    }
+  ]
+}

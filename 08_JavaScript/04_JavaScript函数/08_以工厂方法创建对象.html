@@ -41,7 +41,10 @@
             name: name,
             age: age,
             sayName: function () {
-                console.log(this.name)
+                alert(this.name)
+            },
+            query() {
+                alert(this.age)
             }
         }
     }
@@ -52,6 +55,8 @@
     console.log(obj4)
     console.log(obj5)
     console.log(obj6)
+    obj6.sayName()
+    obj6.query()
 </script>
 </head>
 <body>

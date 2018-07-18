@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1.3.1_封装数据</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let myObject = (function () {
+            // 私有（private）变量
+            let _name = 'sven'
+            return {
+                // 公开（public）变量
+                age: 18,
+                // 公开（public）方法
+                getName: function () {
+                    return _name
+                }
+            }
+        })()
+
+        console.log(myObject)
+        console.log(myObject._name) // undefined
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        console.log(myObject.getName()) // sven
+        console.log(myObject.age) // 18
+    </script>
+</body>
+</html>

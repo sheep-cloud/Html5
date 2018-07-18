@@ -4,113 +4,75 @@
 <meta charset="UTF-8">
 <title>企业订购诊断分析服务统计</title>
 <script type="text/javascript" src="../../js/echarts.js"></script>
+<script type="text/javascript" src="js/EchartsUtil.js"></script>
 <style type="text/css">
-    #wrap {
-        background: url("../../img/背景3_五所领导.png") no-repeat;
-        width: 489px;
-        height: 279px;
-        padding: 30px 30px 30px 30px;
+    .enterprise {
+        padding: 20px;
+        background: #0B1F3D;
     }
-    #main {
-        width: 100%;
-        height: 100%;
+
+    .echarts {
+        margin-bottom: 15px;
+        height: 279px;
+    }
+    .echarts .title {
+        font-family: 'HiraginoSansGB-W6', sans-serif;
+        font-size: 16px;
+        color: #FFF;
+        letter-spacing: 0;
+        position: relative;
+        top: 30px;
+        left: 40px;
+        z-index: 1;
+    }
+    .echarts .title img {
+        margin-top: -3px;
+    }
+    .echarts .title .number {
+        font-family: 'HiraginoSansGB-W3', sans-serif;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.80);
+        letter-spacing: 0;
+    }
+    .echarts .p {
+        width: 65%;
+        height: 90%;
+        margin: 0 0 0 40px;
     }
 </style>
 </head>
 <body>
-    <div id="wrap">
-        <div id="main"></div>
+    <div class="enterprise">
+        <div class="echarts">
+            <div class="title"><img src="js/ic_histogram.png" alt="">企业订购诊断分析服务统计</div>
+            <div id="main" class="p"></div>
+        </div>
     </div>
 
     <script type="text/javascript">
         // 图表数据
-        const title = '企业订购诊断分析服务统计'
-        const keyvalues = [
+        let keyValues = [
             {
-                packageName: '故障诊断',
-                serviceCount: '2000'
+                'serviceCount': 720,
+                'packageName': '故障诊断'
             },
             {
-                packageName: '健康评估',
-                serviceCount: '1000'
+                'serviceCount': 120,
+                'packageName': '健康评估'
             },
             {
-                packageName: '寿命预测',
-                serviceCount: '1000'
+                'serviceCount': 990,
+                'packageName': '寿命预测'
             },
             {
-                packageName: '维修决策',
-                serviceCount: '1000'
+                'serviceCount': 1900,
+                'packageName': '维修决策'
             }
         ]
-        const colors = ['#F82C56', '#00EF93', '#694AFE', '#F57009']
-        // 基于准备好的dom，初始化echarts实例
-        const myChart = echarts.init(document.getElementById('main'))
+        let colors = ['#F82C56', '#00EF93', '#694AFE', '#F57009']
 
-        // 指定图表的配置项和数据
-        const option = {
-            // 标题
-            title: {
-                text: title,
-                padding: [10, 0, 0, 0],
-                textStyle: {
-                    color: '#FFF',
-                    fontSize: 16
-                }
-            },
-            // x轴
-            xAxis: {
-                type: 'category',
-                // 文字颜色
-                axisLabel: {
-                    color: '#FFF',
-                    padding: [15, 0, 0, 0]
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#FFF'
-                    }
-                }
-            },
-            // y轴
-            yAxis: {
-                // 文字颜色
-                axisLabel: {
-                    color: '#FFF'
-                }
-            },
-            // 数据
-            series: [
-                {
-                    type: 'bar',
-                    barWidth: 60,
-                    itemStyle: {
-                        // 修改柱状颜色
-                        normal: {
-                            color: function (v) {
-                                return colors[v.dataIndex]
-                            },
-                            // 文本标签
-                            label: {
-                                show: true,
-                                position: 'top',
-                                distance: -15,
-                                color: '#FFF'
-                            }
-                        }
-                    }
-                }
-            ],
-            dataset: {
-                dimensions: Object.keys(keyvalues[0]),
-                source: keyvalues
-            },
-            // 背景色
-            backgroundColor: '#143054'
-        }
+        createBar('main', keyValues, colors)
 
-        // 使用刚指定的配置项和数据显示图表
-        myChart.setOption(option)
     </script>
 </body>
 </html>

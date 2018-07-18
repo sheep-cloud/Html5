@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>堆叠柱状图</title>
+<script type="text/javascript" src="../js/echarts.js"></script>
+</head>
+<body>
+    <div id="alarm-statistics" style="width: 800px; height: 580px; background:#194268;"></div>
+
+    <script type="text/javascript">
+        let title = '一周内故障与报警数统计'
+        let colors = ['#00FEFE', '#27B2F0', '#016FAB']
+        let myChart = echarts.init(document.getElementById('alarm-statistics'))
+
+        myChart.setOption({
+
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['正常', '报警', '故障'],
+                left: '70%',
+                itemWidth: 16,
+                itemHeight: 16,
+                textStyle: {
+                    fontFamily: 'PingFangSC-Medium',
+                    fontSize: 12,
+                    color: 'rgba(255, 255, 255, 0.70)',
+                    letterSpacing: 0
+                }
+            },
+            xAxis:
+                {
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    // x轴刻度标签
+                    axisLabel: {
+                        padding: [5, 0, 0, 0],
+                        fontFamily: 'PingFangSC-Medium',
+                        fontSize: 12,
+                        color: 'rgba(255, 255, 255, 0.71)',
+                        letterSpacing: 0
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(144,215,255,0.38)'
+                        }
+                    }
+                },
+            yAxis:
+                {
+                    // y轴刻度标签
+                    axisLabel: {
+                        fontFamily: 'PingFangSC-Medium',
+                        fontSize: 12,
+                        color: 'rgba(255, 255, 255, 0.70)',
+                        letterSpacing: 0,
+                        textAlign: 'right'
+                    },
+                    // 分割线
+                    splitLine: {
+                        lineStyle: {
+                            type: 'solid',
+                            color: 'rgba(144,215,255,0.38)'
+                        }
+                    },
+                    // 最小间隔
+                    // minInterval: 500
+                    // 分隔段数
+                    splitNumber: 4
+                },
+            series: [
+                {
+                    name: '正常',
+                    type: 'bar',
+                    stack: title,
+                    data: [120, 132, 101, 134, 90, 230, 0],
+                    barMaxWidth: 60,
+                    barMinHeight: 20
+                },
+                {
+                    name: '报警',
+                    type: 'bar',
+                    stack: title,
+                    data: [220, 182, 191, 234, 290, 330, 310]
+
+                },
+                {
+                    name: '故障',
+                    type: 'bar',
+                    stack: title,
+                    data: [150, 232, 201, 154, 190, 330, 410]
+                }
+            ],
+            // 调色盘颜色列表
+            color: colors,
+            // 背景色
+            backgroundColor: '#143054'
+        })
+    </script>
+</body>
+</html>

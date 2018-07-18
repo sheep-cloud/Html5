@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_JS模版</title>
+</head>
+<body>
+    <pre>
+    cons
+    console.log($PARAM$)
+
+
+    con1
+    console.log('----------------------------------------------------------------------------------------------------')
+
+
+    scr1
+    <script type="text/javascript">
+        $END$
+    </script>
+
+
+    scr2
+    <script type="text/javascript" src="$END$"></script>
+
+
+    todo
+    // TODO colg [$END$]
+
+
+    get
+    this.$http.get($END$).then(response => {
+    let result = response.body
+    }, response => console.log(response))
+
+
+    post
+    this.$http.post($END$, {}).then(response => {
+    let result = response.body
+    }, response => console.log(response))
+
+
+    conf
+    this.$confirm('此操作将永久删除该信息，是否继续？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+    }).then(() => {
+    this.$http.post($END$, {}).then(response => {
+    let result = response.body
+    if (result.code === 0) {
+    this.showToast('删除成功', 0, 1500)
+    } else {
+    this.showToast(result.msg, 0, 1500)
+    }
+    // 重新加载
+    this.loadTable(this)
+    }, response => console.log(response))
+    })
+    </pre>
+</body>
+</html>

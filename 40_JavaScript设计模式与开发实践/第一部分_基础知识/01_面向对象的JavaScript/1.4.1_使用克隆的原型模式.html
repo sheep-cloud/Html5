@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1.4.1_使用克隆的原型模式</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let Plane = function (blood, attackLevel, defenseLevel) {
+            this.blood = blood
+            this.attackLevel = attackLevel
+            this.defenseLevel = defenseLevel
+        }
+
+        let plane = new Plane(500, 10, 7)
+
+        console.log(plane)
+        console.log(plane.blood, plane.attackLevel, plane.defenseLevel)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 克隆原型
+        let clonePlane = Object.create(plane)
+        console.log(clonePlane)
+        console.log(clonePlane.blood, clonePlane.attackLevel, clonePlane.defenseLevel)
+        console.log(clonePlane.__proto__)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 在不支持Object.create()方法的浏览器中，则可以使用以下代码
+        Object.create = Object.create || function (obj) {
+            let F = function () {
+            }
+            F.prototype = obj
+            return new F()
+        }
+
+
+        let clonePlane2 = Object.create(plane)
+        console.log(clonePlane2)
+        console.log(clonePlane2.blood, clonePlane2.attackLevel, clonePlane2.defenseLevel)
+        console.log(clonePlane2.__proto__)
+    </script>
+</body>
+</html>

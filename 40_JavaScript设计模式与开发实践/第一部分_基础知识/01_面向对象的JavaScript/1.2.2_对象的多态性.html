@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1.2.2_对象的多态性</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let makeSound = function (animal) {
+            animal.sound()
+        }
+
+        // 把可变的部分各自封装起来
+        let Duck = function () {}
+        Duck.prototype.sound = function () {
+            console.log('嘎嘎嘎')
+        }
+
+        let Chicken = function () {}
+        Chicken.prototype.sound = function () {
+            console.log('咯咯咯')
+        }
+
+        makeSound(new Duck())
+        makeSound(new Chicken())
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 狗
+        let Dog = function () {}
+        Dog.prototype.sound = function () {
+            console.log('汪汪汪')
+        }
+        makeSound(new Dog())
+    </script>
+</body>
+</html>
