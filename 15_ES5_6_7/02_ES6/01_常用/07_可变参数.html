@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>07_可变参数</title>
+</head>
+<body>
+    <!--
+        用途：
+            1. rest（可变）参数
+                用来取代arguments，但比arguments灵活，只能是最后部分形参参数
+
+            2. 扩展运算符
+                let arr1 = [1, 3, 5]
+                let arr2 = [2, ...arr, 6]
+                arr2.pusht(...arr)
+    -->
+    <script type="text/javascript">
+        function foo(a, b) {
+            console.log(arguments)
+            // arguments.callee() // 调用函数本身
+            /*            arguments.forEach(function (item, index) {
+                            console.log(item, index)
+                        })*/
+        }
+
+        foo(2, 65)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        function foo2(...values) {
+            console.log(arguments)
+            console.log(values)
+            values.forEach(function (item, index) {
+                console.log(item, index)
+            })
+        }
+
+        foo2(2, 65)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 扩展运算符
+        let arr = [1, 6]
+        let arr1 = [2, 3, 4, 5]
+        arr = [1, ...arr1, 6]
+        console.log(arr)
+    </script>
+</body>
+</html>
