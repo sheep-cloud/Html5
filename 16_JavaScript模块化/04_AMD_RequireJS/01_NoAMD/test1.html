@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>test1</title>
+</head>
+<body>
+    <div>
+        <h1>Modular Demo 1: 未使用AMD(require.js)</h1>
+    </div>
+
+    <script type="text/javascript" src="js/dataService.js"></script>
+    <script type="text/javascript" src="js/alerter.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript">
+        console.log(dataService.getName())
+        console.log('----------------------------------------------------------------------------------------------------')
+        alerter.showMsg()
+    </script>
+</body>
+</html>

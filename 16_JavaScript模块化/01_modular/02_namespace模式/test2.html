@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>test2</title>
+<script type="text/javascript" src="module1.js"></script>
+<script type="text/javascript" src="module2.js"></script>
+<script type="text/javascript">
+    myModule.foo()
+    myModule.bar()
+
+    myModule2.foo()
+    myModule2.bar()
+
+    // 能直接修改模块内部的数据
+    myModule.data = 'hello-test'
+    myModule.foo()
+
+    /*
+        namespace模式：简单对象封装
+        作用：减少了全局变量
+        问题：不安全
+     */
+</script>
+</head>
+<body>
+
+</body>
+</html>
