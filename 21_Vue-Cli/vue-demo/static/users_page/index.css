@@ -1,0 +1,17 @@
+.card {
+  float: left;
+  padding: .75rem;
+  margin: 20px 21px 0 21px;
+  border: 1px solid #efefef;
+  border-radius: 10px;
+  text-align: center;
+}
+.card > img {
+  margin-bottom: .75rem;
+  border-radius: 100px;
+}
+.card-text {
+  margin-top: 10px;
+  font-size: 85%;
+  text-align: right;
+}

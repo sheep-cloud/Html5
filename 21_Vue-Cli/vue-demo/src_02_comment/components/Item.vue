@@ -4,7 +4,7 @@
       <button class="btn btn-sm btn-danger" @click="deleteItem">删除</button>
 
     </div>
-    <p class="user"><span>{{comment.username}}</span><span> 说：</span></p>
+    <p class="user"><span class="glyphicon glyphicon-info-sign">{{comment.username}}</span><span> 说：</span></p>
     <p class="pull-right small">{{comment.createTime}}</p>
     <p class="centence">{{comment.content}}</p>
 

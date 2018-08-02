@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vue Todo</title>
+
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="root">
+    <div class="todo-container">
+      <div class="todo-wrap">
+        <div class="todo-header">
+          <input type="text" placeholder="请输入你的任务名称，按回车键确认"/>
+        </div>
+        <ul class="todo-main">
+          <li>
+            <label>
+              <input type="checkbox"/>
+              <span>xxxxx</span>
+            </label>
+            <button class="btn btn-danger" style="display:block">删除</button>
+            <span class="pull-right small text-gray" style="margin-right: 15px;">2018-08-02 11:44:42</span>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox"/>
+              <span>yyyy</span>
+            </label>
+            <button class="btn btn-danger" style="display:none">删除</button>
+            <span class="pull-right small text-gray" style="margin-right: 15px;">2018-08-02 11:50:48</span>
+          </li>
+        </ul>
+        <div class="todo-footer">
+          <label>
+            <input type="checkbox"/>
+          </label>
+          <span>已完成 0</span> / 全部 2
+          <button class="btn btn-danger">清除已完成任务</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

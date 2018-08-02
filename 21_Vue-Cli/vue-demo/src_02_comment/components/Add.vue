@@ -31,8 +31,7 @@
     data() {
       return {
         username: '',
-        content: '',
-        createTime: ''
+        content: ''
       }
     },
     methods: {
@@ -58,8 +57,8 @@
         addComment(comment)
 
         // 4. 清除输入
-        username = ''
-        content = ''
+        this.username = ''
+        this.content = ''
       }
     }
   }

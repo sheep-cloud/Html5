@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import App from './App'
 
-// 引入 vue-layer(弹层），moment（日期处理） 组件
 import layer from 'vue-layer'
-import moment from 'moment'
+import axios from 'axios'
 
 Vue.prototype.layer = layer(Vue)
-Vue.prototype.moment = moment()
+Vue.prototype.axios = axios
 
 new Vue({
   el: '#app',

@@ -11,9 +11,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "moment": "^2.22.2",
+    "pubsub-js": "^1.6.0",
     "vue": "^2.5.2",
-    "vue-layer": "^0.9.9"
+    "vue-layer": "^0.9.9",
+    "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
