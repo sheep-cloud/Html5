@@ -31,7 +31,8 @@
     data() {
       return {
         username: '',
-        content: ''
+        content: '',
+        createTime: ''
       }
     },
     methods: {

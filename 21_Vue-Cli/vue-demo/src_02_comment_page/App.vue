@@ -34,7 +34,7 @@
           {username: 'Rose', content: 'Vue So Easy', createTime: '2018-08-02 04:34:11'},
           {username: 'Tom', content: 'Vue So So', createTime: '2018-08-02 04:34:11'},
           {username: 'ClearLove', content: 'Vue 都不会，不如回家去养猪！', createTime: '2018-08-02 04:34:11'},
-          {username: 'Faker', content: 'Vue is supper carry!', createTime: '2018-08-02 04:34:11'}
+          {username: 'Faker', content: 'Vue Is Supper Carry !', createTime: '2018-08-02 04:34:11'}
         ]
       }
     },
