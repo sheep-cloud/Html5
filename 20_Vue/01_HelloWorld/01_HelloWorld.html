@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>helloworld</title>
+<title>01_HelloWorld</title>
 </head>
 <body>
     <!--
@@ -16,12 +16,14 @@
     -->
     <!--view 视图，模版页面-->
     <div id="app">
-        <input type="text" v-model="username">
+        <label>
+            <input type="text" v-model="username">
+        </label>
         <p>Hello {{username}}</p>
     </div>
 
-    <script type="text/javascript" src="../js/vue.js"></script>
-    <script type="text/javascript">
+    <script src="../js/vue.js"></script>
+    <script>
         // viewModel 创建vue实例
         // 配置对象
         const vm = new Vue({

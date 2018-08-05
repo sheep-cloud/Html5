@@ -24,55 +24,65 @@
             beforeDestroy()：        做收尾工作，如：清除定时器
     -->
 
-    <div id="demo">
-        <button @click="destroyVm">destroy vm</button>
-        <p v-show="isShow">colg</p>
+    <div class="container">
+        <div id="demo" class="jumbotron">
+            <button @click="destroyVm" class="btn btn-danger">destroy vm 销毁vm实例</button>
+            <h2 v-show="isShow" class="page-header">colg</h2>
+        </div>
     </div>
 
-    <script type="text/javascript" src="../js/vue.js"></script>
-    <script type="text/javascript">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <script src="../js/vue.js"></script>
+    <script>
         new Vue({
             el: '#demo',
             data: {
                 isShow: true
             },
-
             // 1. 初始化阶段
-            beforeCreated() { // 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+            beforeCreated() {
+                // 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
                 console.log('beforeCreated()')
-
             },
-            created() { // 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。挂载阶段还未开始
+            created() {
+                // 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。挂载阶段还未开始
                 console.log('created()')
             },
-            beforeMount() { // 在挂载开始之前被调用：相关的 render 函数首次被调用。
+            beforeMount() {
+                // 在挂载开始之前被调用：相关的 render 函数首次被调用。
                 console.log('beforeCreated()')
             },
-            mounted() { // 初始化显示之后立即调用（1次）
+            mounted() {
+                // 初始化显示之后立即调用（1次）
                 console.log('mounted()')
                 this.intervalId = setInterval(() => {
                     // 更新数据
+                    // 箭头函数的 this 是外部函数的this
                     this.isShow = !this.isShow
-                }, 1000)
+                }, 10000)
             },
 
             // 2. 更新阶段
-            beforeUpdate() { // 数据更新时调用，发生在虚拟 DOM 打补丁之前。
+            beforeUpdate() {
+                // 数据更新时调用，发生在虚拟 DOM 打补丁之前。
                 console.log('----------------------------------------------------------------------------------------------------')
                 console.log('beforeUpdate()')
             },
-            updated() { // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+            updated() {
+                // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
                 console.log('updated()')
             },
 
             // 3. 死亡阶段
-            beforeDestroy() { // 实例销毁之前调用（1次）。
+            beforeDestroy() {
+                // 实例销毁之前调用（1次）。
                 console.log('----------------------------------------------------------------------------------------------------')
                 console.log('beforeDestroy()')
                 // 清除定时器
                 clearInterval(this.intervalId)
             },
-            destroyed() { // Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+            destroyed() {
+                // Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
                 console.log('destroyed()')
             },
             methods: {

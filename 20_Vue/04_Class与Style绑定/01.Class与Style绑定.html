@@ -19,7 +19,7 @@
     <!--
         1. 理解
             在应用界面中，某个（些）元素的样式是变化的
-            class/sytle班定就是专门用来实现动态样式效果的技术
+            class/sytle绑定就是专门用来实现动态样式效果的技术
         2. class绑定： :class='xxx'
             xxx 是字符串
             xxx 是对象
@@ -40,8 +40,8 @@
         <p :style="{color: activeColor, fontSize: fontSize + 'px'}">:style="{color: activeColor, fontSize: fontSize + 'px'}"</p>
     </div>
 
-    <script type="text/javascript" src="../js/vue.js"></script>
-    <script type="text/javascript">
+    <script src="../js/vue.js"></script>
+    <script>
         new Vue({
             el: '#demo',
             data: {

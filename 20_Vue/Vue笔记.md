@@ -57,8 +57,8 @@
         <p>Hello {{username}}</p>
     </div>
 
-    <script type="text/javascript" src="../js/vue.js"></script>
-    <script type="text/javascript">
+    <script src="../js/vue.js"></script>
+    <script>
         // 创建vue实例
         const vm = new Vue({    // 配置对象
             el: '#app',         // element: 选择器
@@ -264,25 +264,38 @@ serve dist
 
 ```vue
 <template>
-  <!-- 3. 使用组件标签-->
-  <List/>
+  <div>
+    <img class="logo" src="./assets/logo.png" alt="logo">
+    <!--3. 使用组件标签-->
+    <HelloWolrd/>
+  </div>
 </template>
 
 <script>
-  // 1. 引入组件
-  import List from 'list'
+
+  // 1. 引入HelloWorld组件
+  import HelloWolrd from './components/HelloWorld'
 
   export default {
-    // 2. 映射成标签
-    components: {List}
+    // 2. 映射组件标签
+    components: {
+      HelloWolrd
+    }
   }
 </script>
+
+<style scoped>
+  .logo {
+    width: 200px;
+    height: 200px;
+  }
+</style>
 ```
 
 #### 2.4.3. 关于标签名与标签属性名书写问题
 
 - 写法一：一模一样
-- 写法二：答谢便小写，并用-连接
+- 写法二：大写变小写，并用-连接
 
 ### 2.5. 组件间通信
 
@@ -384,7 +397,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 #### 2.7.3. 注意
 
 - 此方式只用于子组件向父组件发送消息（数据）
-- 问题：隔代组件或者星弟组件间通信此种方式不合适
+- 问题：隔代组件或者兄弟组件间通信此种方式不合适
 
 ### 2.8. 组件间通信3：消息订阅与发布（pubsub-js库）
 
@@ -396,23 +409,30 @@ npm install pubsub-js --save
 
 #### 2.8.2. 订阅消息
 
-```vuejs
-      // 订阅消息
+```javascript
+import PubSub from 'pubsub-js'
+
+    mounted() {
+      // 绑定事件监听    订阅消息
       PubSub.subscribe('deleteTodo', (msg, index) => {
+        // 箭头函数 没有自己的this，取外部函数的this
         this.deleteTodo(index)
       })
+    },
 ```
 
 #### 2.8.3. 发布消息
 
 ```javascript
-        const {todo, index} = this
-        if (window.confirm(`确认删除${todo.title}吗？`)) {
-          // deleteTodo(index)
-
-          // 发布消息
+      // 删除
+      deleteItem() {
+        let {layer, todo, index} = this
+        layer.confirm(`确认删除${todo.title}吗？`, function () {
+          layer.close(this.id)
+          // 触发事件        发布消息
           PubSub.publish('deleteTodo', index)
-        }
+        })
+      }
 ```
 
 #### 2.8.4. 注意
