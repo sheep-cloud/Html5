@@ -76,5 +76,5 @@
     ```
 * 页面使用引入:
   ```html
-  <script type="text/javascript" src="./js/dist/build.js"></script>
+  <script src="./js/dist/build.js"></script>
   ```

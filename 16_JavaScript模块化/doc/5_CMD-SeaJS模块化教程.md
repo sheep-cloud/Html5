@@ -86,8 +86,8 @@
     4. 如何使用模块:
       seajs.use()
   -->
-  <script type="text/javascript" src="js/libs/sea.js"></script>
-  <script type="text/javascript">
+  <script src="js/libs/sea.js"></script>
+  <script>
     seajs.use('./js/modules/main')
   </script>
   ```
