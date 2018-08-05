@@ -28,7 +28,7 @@
                 4. map容器
                 5. String
     -->
-    <script type="text/javascript">
+    <script>
         // 模拟一个指针对象（遍历器对象）
         function myIterator() {
             // 记录指针的位置
@@ -38,9 +38,9 @@
                 next: function () {
                     return {
                         value: arr[nextIndex++],
-                        done: nextIndex > arr.length,
+                        done: nextIndex > arr.length
                     }
-                },
+                }
             }
         }
 
@@ -71,7 +71,7 @@
 
         let obj = {
             username: 'jack',
-            age: 39,
+            age: 39
         }
         for (let i of obj) {
             console.log(i) // obj is not iterable
