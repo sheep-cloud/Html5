@@ -3,60 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <title>请发表对Vue的评论</title>
-<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <div id="app">
     <div>
-      <header class="site-header jumbotron">
+      <header class="jumbotron">
         <div class="container">
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
               <h1>请发表对Vue的评论</h1>
             </div>
           </div>
         </div>
       </header>
       <div class="container">
-        <div class="col-md-4">
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label>用户名</label>
-              <input type="text" class="form-control" placeholder="用户名">
-            </div>
-            <div class="form-group">
-              <label>评论内容</label>
-              <textarea class="form-control" rows="6" placeholder="评论内容"></textarea>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-primary pull-right">提交</button>
+        <div class="row">
+          <div class="col-md-4">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" id="username" placeholder="用户名">
               </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-8">
-          <h3 class="reply">评论回复：</h3>
-          <h2 style="display: none">暂无评论，点击左侧添加评论！！！</h2>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <div class="pull-right">
-                <button class="btn btn-sm btn-danger">删除</button>
+              <div class="form-group">
+                <label for="content">评论内容</label>
+                <textarea class="form-control" rows="6" id="content" placeholder="评论内容"></textarea>
               </div>
-              <p class="user"><span class="glyphicon glyphicon-info-sign">xxx</span><span> 说：</span></p>
-              <p class="pull-right small">2018-08-02 04:34:11</p>
-              <p class="centence">Vue不错!</p>
-            </li>
-            <li class="list-group-item">
-              <div class="pull-right">
-                <button class="btn btn-sm btn-danger">删除</button>
+              <div class="form-group">
+                <div class="col-md-2 col-md-offset-10">
+                  <button type="button" class="btn btn-primary">提交</button>
+                </div>
               </div>
-              <p class="user"><span class="glyphicon glyphicon-info-sign">yyy</span><span> 说：</span></p>
-              <p class="pull-right small">2018-08-02 04:34:11</p>
-              <p class="centence">Vue有点难!</p>
-            </li>
-          </ul>
+            </form>
+          </div>
+          <div class="col-md-8">
+            <h3 class="reply">评论回复：</h3>
+            <h2 class="hidden">暂无评论，点击左侧添加评论！！！</h2>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row">
+                  <p class="user col-md-10"><i class="glyphicon glyphicon-info-sign"></i> xxx说：</p>
+                  <button class="btn btn-danger col-md-1">删除</button>
+                </div>
+                <div class="row">
+                  <p class="centence col-md-8 col-md-offset-1">Vue不错!</p>
+                  <p class="small text-muted col-md-3 text-right">2018-08-02 04:34:11</p>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <p class="user col-md-10"><i class="glyphicon glyphicon-info-sign"></i> xxx说：</p>
+                  <button class="btn btn-danger col-md-1">删除</button>
+                </div>
+                <div class="row">
+                  <p class="centence col-md-8 col-md-offset-1">Vue不错!</p>
+                  <p class="small text-muted col-md-3 text-right">2018-08-02 04:34:11</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

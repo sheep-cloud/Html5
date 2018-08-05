@@ -6,10 +6,10 @@
     <div class="row">
       <div class="card" v-for="(user, index) in users" :key="index">
         <a :href="user.html_url" target="_blank">
-          <img :src="user.avatar_url" style="width: 230px"/>
+          <img :src="user.avatar_url" class="img-rounded" style="width: 230px"/>
         </a>
-        <p class="card-text"><span class="glyphicon glyphicon-star" style="color: #728c98;"></span>：{{user.score}}</p>
-        <p class="card-text"><span class="glyphicon glyphicon-user" style="color: #728c98;"></span>：{{user.login}}</p>
+        <p class="card-text"><i class="glyphicon glyphicon-star"></i>：{{user.score}}</p>
+        <p class="card-text"><i class="glyphicon glyphicon-user"></i>：{{user.login}}</p>
       </div>
     </div>
   </div>
@@ -68,14 +68,10 @@
     border-radius: 10px;
     text-align: center;
   }
-  .card > img {
-    margin-bottom: .75rem;
-    border-radius: 100px;
-  }
   .card-text {
     margin-top: 10px;
     font-size: 85%;
     text-align: right;
-    font-weight: bold;
   }
+
 </style>

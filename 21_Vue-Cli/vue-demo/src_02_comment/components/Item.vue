@@ -1,13 +1,13 @@
 <template>
   <li class="list-group-item">
-    <div class="pull-right">
-      <button class="btn btn-sm btn-danger" @click="deleteItem">删除</button>
-
+    <div class="row">
+      <p class="col-md-10 col-xs-8 lead"><i class="glyphicon glyphicon-info-sign"></i> {{comment.username}}说：</p>
+      <button class="col-md-1 col-xs-2 btn btn-sm btn-danger" @click="deleteItem">删除</button>
     </div>
-    <p class="user"><span class="glyphicon glyphicon-info-sign">{{comment.username}}</span><span> 说：</span></p>
-    <p class="pull-right small">{{comment.createTime}}</p>
-    <p class="centence">{{comment.content}}</p>
-
+    <div class="row">
+      <p class="col-md-9 col-xs-6 text-info">{{comment.content}}</p>
+      <p class="col-md-3 col-xs-6 small text-muted text-right">{{comment.createTime}}</p>
+    </div>
   </li>
 </template>
 
@@ -38,11 +38,5 @@
   li {
     transition: .5s;
     overflow: hidden;
-  }
-  .list-group-item .centence {
-    padding: 0 50px;
-  }
-  .user {
-    font-size: 22px;
   }
 </style>

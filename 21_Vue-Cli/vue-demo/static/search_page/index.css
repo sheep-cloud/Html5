@@ -6,10 +6,6 @@
   border-radius: 10px;
   text-align: center;
 }
-.card > img {
-  margin-bottom: .75rem;
-  border-radius: 100px;
-}
 .card-text {
   margin-top: 10px;
   font-size: 85%;

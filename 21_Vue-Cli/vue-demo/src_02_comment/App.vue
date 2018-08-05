@@ -3,17 +3,19 @@
     <header class="site-header jumbotron">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-md-12 col-xs-12">
             <h1>请发表对Vue的评论</h1>
           </div>
         </div>
       </div>
     </header>
     <div class="container">
-      <!-- :comments 传递数据 -->
-      <Add :addComment="addComment"/>
-      <!--:addComment 传递方法 :deleteComment 逐层传递到 Item-->
-      <List :comments="comments" :deleteComment="deleteComment"/>
+      <div class="row">
+        <!-- :comments 传递数据 -->
+        <Add :addComment="addComment"/>
+        <!--:addComment 传递方法 :deleteComment 逐层传递到 Item-->
+        <List :comments="comments" :deleteComment="deleteComment"/>
+      </div>
     </div>
   </div>
 </template>

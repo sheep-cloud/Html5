@@ -5,9 +5,9 @@ li {
   transition: .5s;
   overflow: hidden;
 }
-.list-group-item .centence {
+/*.list-group-item .centence {
   padding: 0 50px;
-}
+}*/
 .user {
   font-size: 22px;
 }

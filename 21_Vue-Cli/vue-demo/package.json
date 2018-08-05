@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^3.3.7",
     "moment": "^2.22.2",
     "pubsub-js": "^1.6.0",
     "vue": "^2.5.2",

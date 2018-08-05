@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8">
+  <div class="col-md-8 col-xs-12">
     <h3 class="reply">评论回复：</h3>
     <h2 v-show="comments.length === 0">暂无评论，点击左侧添加评论！！！</h2>
     <ul class="list-group">

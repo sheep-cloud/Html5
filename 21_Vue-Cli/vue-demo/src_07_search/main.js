@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
-import './assets/css/bootstrap.css'
+import '/bootstrap/dist/css/bootstrap.css'
 
 import layer from 'vue-layer'
 import axios from 'axios'
