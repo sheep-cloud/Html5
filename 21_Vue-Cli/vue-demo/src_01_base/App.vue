@@ -1,13 +1,12 @@
 <template>
   <div>
-    <img class="logo" src="./assets/logo.png" alt="logo">
+    <img src="./assets/img/logo.png" alt="logo">
     <!--3. 使用组件标签-->
     <HelloWolrd/>
   </div>
 </template>
 
 <script>
-
   // 1. 引入HelloWorld组件
   import HelloWolrd from './components/HelloWorld'
 
@@ -20,8 +19,5 @@
 </script>
 
 <style scoped>
-  .logo {
-    width: 200px;
-    height: 200px;
-  }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="msg">{{msg}}</p>
+    <h2 class="msg">{{msg}}</h2>
   </div>
 </template>
 
@@ -17,6 +17,5 @@
 <style scoped>
   .msg {
     color: red;
-    font-size: 30px;
   }
 </style>

@@ -6,8 +6,6 @@ import App from './App'
 
 new Vue({
   el: '#app',
-  components: {
-    App
-  },
+  components: {App},
   template: '<App/>'
 })
