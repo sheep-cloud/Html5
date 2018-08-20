@@ -1,4 +1,4 @@
-var hello = require('./helloModule');
+let hello = require('./helloModule')
 
 /*
   exports 和 module.exports
@@ -9,6 +9,6 @@ var hello = require('./helloModule');
         module.exports = {xxx: xxxxx}
  */
 
-console.log(hello.name);
-console.log(hello.age);
-hello.sayName();
+console.log(hello.name)
+console.log(hello.age)
+hello.sayName()

@@ -5,7 +5,11 @@
 <title>1.4.1_使用克隆的原型模式</title>
 </head>
 <body>
-    <script type="text/javascript">
+    <!--
+        原型模式的实现关键，是语言本身是否提供了clone方法。
+            ECMAScript5 提供了Object.create方法，可以用来克隆对象
+    -->
+    <script>
         let Plane = function (blood, attackLevel, defenseLevel) {
             this.blood = blood
             this.attackLevel = attackLevel

@@ -57,7 +57,7 @@
         <p>Hello {{username}}</p>
     </div>
 
-    <script src="../js/vue.js"></script>
+    <script type="text/javascript" src="../../00_dist/vue-2.5.17/vue.js"></script>
     <script>
         // 创建vue实例
         const vm = new Vue({    // 配置对象
@@ -731,8 +731,6 @@ export default new VueRouter({
 })
 ```
 
-
-
 - 路由配置
 
 ```javascript
@@ -750,7 +748,7 @@ export default new VueRouter({
 
 - 注册路由器
 
-```vuejs
+```javascript
 // 引入组件
 import Vue from 'vue'
 import App from './App'
@@ -796,7 +794,7 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 
 #### 5.2.1. 效果
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1frznsfaamtj30jx0683yc.jpg)
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1ftzd5t28vaj30l404w3yc.jpg)
 
 #### 5.2.2. 路由组件
 
@@ -806,57 +804,97 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 #### 5.2.3. 应用组件：App.vue
 
 ```vue
+<!-- 字符串 -->
+<router-link to="home">Home</router-link>
+<!-- 渲染结果 -->
+<a href="home">Home</a>    
+
+	<div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
           <!-- 使用 router-link 组件来导航. -->
           <!-- 通过传入 `to` 属性指定链接. -->
           <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
           <router-link to="/about" class="list-group-item">About</router-link>
           <router-link to="/home" class="list-group-item">Home</router-link>
-          
+          <!--
+          <a href="#/about" class="list-group-item router-link-exact-active active">About</a>
+          <a href="#/home" class="list-group-item">Home</a>
+          -->
+        </div>
+      </div>
+      <div class="col-xs-8">
+        <div class="panel">
+          <div class="panel-body">
             <!-- 路由出口 -->
             <!-- 路由匹配到的组件将渲染在这里 -->
             <router-view></router-view>
+            <!--
+            <div class="col-md-5">
+              <h2>About组件</h2>
+              <label>接收外部数据：</label>
+              <input type="text" class="form-control" placeholder="内容">
+            </div>
+            -->
+          </div>
+        </div>
+      </div>
+    </div>
 ```
 
 #### 5.2.4. 路由器模块：src/router/index.js
 
 ```javascript
 /*
-* 路由器模块
-* */
-
+  路由器模块
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 引入路由组件
 import About from '../views/About'
 import Home from '../views/Home'
+import News from '../views/News'
+import Message from '../views/Message'
 
 // 声明使用插件
 Vue.use(VueRouter)
 
-// 默认暴露
 export default new VueRouter({
-  // 多个配置项
+  // n个路由
   routes: [
-    // 一般路由
     {path: '/about', component: About},
-    {path: '/home', component: Home},
+    {
+      path: '/home', component: Home,
+      children: [
+        // path 最左侧的/永远代表根路径
+        {path: '/home/news', component: News},
+        // 简化写法
+        {path: 'message', component: Message},
+        {path: '', redirect: '/home/news'},
+      ]
+    },
     // 自动跳转路由
     {path: '/', redirect: '/about'}
-  ]
+  ],
+  // 当前路由的 class router-link-active 修改 为 active
+  linkActiveClass: 'active'
 })
 
 ```
 
 #### 5.2.5. 注册路由器：main.js
 
-```vuejs
-// 引入组件
+```javascript
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 
-new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便修改
+// 引入路由器
+import router from './router'
+import 'bootstrap/dist/css/bootstrap.css'
+
+new Vue({
+  // 配置对象的属性名都是一些固定的名称，不能随便修改
   el: '#app',
   // 映射组件标签
   components: {App},
@@ -886,51 +924,177 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 
 #### 5.3.3. 配置嵌套路由：router.js
 
-```vuejs
-{
-      path: '/home',
-      component: Home,
+```javascript
+/*
+  路由器模块
+ */
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+// 引入路由组件
+import About from '../views/About'
+import Home from '../views/Home'
+import News from '../views/News'
+import Message from '../views/Message'
+
+// 声明使用插件
+Vue.use(VueRouter)
+
+export default new VueRouter({
+  // n个路由
+  routes: [
+    {path: '/about', component: About},
+    {
+      path: '/home', component: Home,
       children: [
-        {
-          // path最左侧的斜杠永远代表根路径
-          path: '/home/news', // 完整路径
-          component: News
-        },
-        {
-          path: 'message', // 简化路径
-          component: Message
-        },
-        {
-          // 自动跳转路由
-          path: '',
-          redirect: '/home/news'
-        }
+        // path 最左侧的/永远代表根路径
+        {path: '/home/news', component: News},
+        // 简化写法
+        {path: 'message', component: Message},
+        {path: '', redirect: '/home/news'},
       ]
-    }
+    },
+    // 自动跳转路由
+    {path: '/', redirect: '/about'}
+  ],
+  // 当前路由的 class router-link-active 修改 为 active
+  linkActiveClass: 'active'
+})
+
 ```
 
 #### 5.3.4. 路由链接：Home.vue
 
 ```vue
-    <div>
+<template>
+  <div>
+    <div class="col-md-5">
+      <h2>Home 组件</h2>
       <ul class="nav nav-tabs">
-        <li>
-          <router-link to="/home/news">News</router-link>
-          <router-link to="/home/message">Message</router-link>
-        </li>
+        <router-link to="/home/news" tag="li">
+          <a href="">News</a>
+        </router-link>
+        <router-link to="/home/message" tag="li">
+          <a href="">message</a>
+        </router-link>
       </ul>
       <div>
         <router-view></router-view>
       </div>
     </div>
+  </div>
+</template>
 ```
 
 ### 5.4. 向路由组件传递数据
 
+```vue
+            <keep-alive>
+              <!--路由传递数据-->
+              <router-view msg="渐进式 JavaScript 框架"></router-view>
+            </keep-alive>
+```
+
 ### 5.5. 缓存路由组件对象
 
+```vue
+            <keep-alive>
+              <!--路由传递数据-->
+              <router-view msg="渐进式 JavaScript 框架"></router-view>
+            </keep-alive>
+```
+
 ### 5.6. 编程式路由导航
+
+```javascript
+// 这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
+this.$router.push(`url`)
+// 跟 router.push 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
+this.$router.replace(`url`)
+```
+
+### 5.7. Vue路由传参的三种基本方式
+
+#### 5.7.1. restfull风格
+
+- 路由配置
+
+```javascript
+{path: '/home/message/detail/:id', component: MessageDetail}
+```
+
+- 传递参数
+
+```javascript
+this.$router.push(`/home/message/detail/12345`)
+```
+
+- url：  `http://xxx/id=12345`
+- 接收参数
+
+```javascript
+this.$route.params.id
+```
+
+#### 5.7.2. 显示传参
+
+- 路由配置
+
+```javascript
+{path: '/home/message/detail', component: MessageDetail}
+```
+
+- 传递参数
+
+```javascript
+        this.$router.push(
+          {
+            path: `/home/message/detail`,
+            query: {id: 12345}
+          }
+        )
+```
+
+- url： `http://xxx?id=12345`
+- 接收参数
+
+```javascript
+this.$route.query.id
+```
+
+#### 5.7.3. 隐式传参
+
+- 路由配置（必须配置name）
+
+```javascript
+{path: '/home/message/detail', name: 'detail', component: MessageDetail}
+```
+
+- 传递参数
+
+```javascript
+        this.$router.push(
+          {
+            name: 'detail',
+            params: {id: 12345}
+          }
+        )
+```
+
+- url：`http://xxx` 参数隐式传递
+- 接收参数
+
+```javascript
+this.$route.params.id
+```
 
 ## 6、Vuex
 
 ## 7、Vue源码分析
+
+### 7.1. 说明
+
+- 分析vue作为一个MVVM框架的基本实现原理
+- 不直接看vue.js的源码
+- 剖析github上某基友仿vue实现的mvvm库
+- 剖析vue实现原理，自己动手实现*mvvm* https://github.com/DMQ/mvvm

@@ -17,17 +17,20 @@
 
         buffer中的一个元素，占用内存中的一个字节
  */
-var str = 'Hello Node.js';
-var str2 = '哈喽 Node.js';
+let str = 'Hello Node.js'
+let str2 = '哈喽 Node.js'
 
 // 将一个字符串保存到buffer中
-var buf = Buffer.from(str);
-var buf2 = Buffer.from(str2);
+let buf = Buffer.from(str)
+let buf2 = Buffer.from(str2)
 
-console.log(buf);
-console.log(str.length, buf.length);
-console.log(str2.length, buf2.length);
+console.log(buf)
+console.log(buf2)
+console.log('----------------------------------------------------------------------------------------------------')
+
+console.log(str.length, buf.length)
+console.log(str2.length, buf2.length)
 
 // 创建一个指定大小的buffer
-var buf3 = new Buffer(10); // 10个字节的buffer
-console.log(buf3.length);
+let buf3 = new Buffer(10) // 10个字节的buffer
+console.log(buf3.length)

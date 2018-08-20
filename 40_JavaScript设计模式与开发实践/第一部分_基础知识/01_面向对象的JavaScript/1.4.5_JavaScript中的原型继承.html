@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>1.4.5_JavaScript中的原型继承</title>
+</head>
+<body>
+    <!--
+        1. 所有的数据都是对象
+        2. 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它
+        3. 对象会记住它的原型
+        4. 如果对象无法响应某个请求，它会把这个请求委托给它自己的原型
+    -->
+    <script>
+        // 在JavaScript中没有类的概念，Person并不是类，而是函数构造器
+        // JavaScript的函数既可以作为普通函数被调用，也可以作为构造器被调用
+        function Person(name) {
+            this.name = name
+        }
+
+        Person.prototype.getName = function () {
+            return this.name
+        }
+
+        let a = new Person('sven')
+        console.log(a)
+        console.log(a.name) // sven
+        console.log(a.getName())    // sven
+        console.log(Object.getPrototypeOf(a) === Person.prototype)  // true
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        let obj = {
+            name: 'sven'
+        }
+
+        let B = function () {
+        }
+        B.prototype = obj
+
+        let b = new B()
+        console.log(b.name) // sven
+    </script>
+</body>
+</html>

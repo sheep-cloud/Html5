@@ -5,7 +5,7 @@
 <title>1.2.1_多态</title>
 </head>
 <body>
-    <script type="text/javascript">
+    <script>
         let makeSound = function (animal) {
             if (animal instanceof Duck) {
                 console.log('嘎嘎嘎')
@@ -14,9 +14,11 @@
             }
         }
 
-        let Duck = function () {}
+        let Duck = function () {
+        }
 
-        let Chicken = function () {}
+        let Chicken = function () {
+        }
 
         makeSound(new Duck())
         makeSound(new Chicken())

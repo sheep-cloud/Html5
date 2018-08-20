@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+    <script>
+        let data = [
+            {
+                "acquisitionTime": "2017-02-21 10:09:37.160",
+                "currentsU": "2.55",
+                "currentsV": "3.41",
+                "currentsW": "3.46",
+                "dataId": "c6ea178a958e4eca816049b97990716c",
+                "date": "170221",
+                "deviceId": "3700eaa440fb46f2ac051edfd105e1bd",
+                "faultCode": "F-01-02",
+                "frequencyU": "50.73",
+                "frequencyV": "49.05",
+                "frequencyW": "50.07",
+                "frontBearingTemperature": "67.42",
+                "fultTime": "2017-02-21 10:09:37",
+                "motorSpeed": "1433.90",
+                "seconds": "0.16",
+                "slipRate": "0.04",
+                "statorWindingTemperature": "51.22",
+                "time": "100937",
+                "voltageU": "194.89",
+                "voltageV": "239.80",
+                "voltageW": "235.50",
+                "zdldHdg": "0.11",
+                "zdldHdgcm": "1.30",
+                "zdldHdgdd": "0.40",
+                "zdldQdgdd": "0.35",
+                "zdldQzcjx": "0.47"
+            },
+            {
+                "acquisitionTime": "2017-02-21 10:09:37.160",
+                "currentsU": "2.56",
+                "currentsV": "3.41",
+                "currentsW": "3.46",
+                "dataId": "c6ea178a958e4eca816049b97990716c",
+                "date": "170221",
+                "deviceId": "3700eaa440fb46f2ac051edfd105e1bd",
+                "faultCode": "F-01-02",
+                "frequencyU": "50.73",
+                "frequencyV": "49.05",
+                "frequencyW": "50.07",
+                "frontBearingTemperature": "67.42",
+                "fultTime": "2017-02-21 10:09:37",
+                "motorSpeed": "1433.90",
+                "seconds": "0.16",
+                "slipRate": "0.04",
+                "statorWindingTemperature": "51.22",
+                "time": "100937",
+                "voltageU": "194.89",
+                "voltageV": "239.80",
+                "voltageW": "235.50",
+                "zdldHdg": "0.11",
+                "zdldHdgcm": "1.30",
+                "zdldHdgdd": "0.40",
+                "zdldQdgdd": "0.35",
+                "zdldQzcjx": "0.47"
+            }
+        ]
+
+
+        let arr = data.map(item => ({
+            '设备id': item.deviceId,
+            '数据案例id': item.dataId,
+            '数据采集时间': item.acquisitionTime,
+            '日期': item.date,
+            '时分秒': item.time,
+            '毫秒': item.seconds,
+            'U相电压有效值': item.voltageU,
+            'V相电压有效值': item.voltageV,
+            'W相电压有效值': item.voltageW,
+            'U相电流有效值': item.currentsU,
+            'V相电流有效值': item.currentsV,
+            'W相电流有效值': item.currentsW,
+            'U相频率': item.frequencyU,
+            'V相频率': item.frequencyV,
+            'W相频率': item.frequencyW,
+            '振动烈度（前轴承径向）': item.zdldQzcjx,
+            '振动烈度（前端盖顶端）': item.zdldQdgdd,
+            '振动烈度（后端盖）': item.zdldHdg,
+            '振动烈度（后端盖顶端）': item.zdldHdgdd,
+            '振动烈度（后端盖侧面）': item.zdldHdgcm,
+            '定子绕组温度': item.statorWindingTemperature,
+            '前轴承温度': item.frontBearingTemperature,
+            '电机转速': item.motorSpeed,
+            '转差率': item.slipRate,
+            '故障代码': item.faultCode
+        }))
+
+        console.log(arr)
+
+        console.log('----------------------------------------------------------------------------------------------------')
+        let acquisitionTime = 'acquisitionTime'
+        let key = 'currentsU'
+        let arr2 = data.map(item => ({
+            [acquisitionTime]: item[acquisitionTime],
+            [key]: item[key]
+        }))
+        console.log(arr2)
+    </script>
+</body>
+</html>

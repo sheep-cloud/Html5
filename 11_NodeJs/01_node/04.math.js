@@ -4,10 +4,6 @@
       add(a, b);  // 求两个数的和
       mul(a, b);  // 求两个数的积
  */
+exports.add = (a, b) => a + b
 
-exports.add = function (a, b) {
-    return a + b
-};
-exports.mul = function (a, b) {
-    return a * b
-};
+exports.mul = (a, b) => a * b
