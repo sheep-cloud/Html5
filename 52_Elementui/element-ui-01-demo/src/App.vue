@@ -24,7 +24,7 @@
     <!--<Pagination_01/>-->
 
     <!--典型表单-->
-    <Form_01/>
+    <!--<Form_01/>-->
 
     <!--Select 基础用法-->
     <!--<Select_01/>-->
@@ -35,6 +35,12 @@
     <!--<Upload_01/>-->
     <!--手动上传-->
     <!--<Upload_02/>-->
+
+    <!--Tree 树形控件-->
+    <!--<Tree_01/>-->
+
+    <!--Cascader 级联选择器-->
+    <Cascader_01/>
 
     <!--高德地图-->
     <!--<Map_01/>-->
@@ -71,6 +77,12 @@
   import Upload_01 from './components/Upload/upload_01'
   import Upload_02 from './components/Upload/upload_02'
 
+  // Tree 树形控件
+  import Tree_01 from './components/Tree/Tree_01'
+
+  // Cascader 级联选择器
+  import Cascader_01 from './components/Cascader/Cascader_01'
+
   // 高的地图
   import Map_01 from './components/Map/map_01'
 
@@ -97,6 +109,10 @@
 
       Upload_01,
       Upload_02,
+
+      Tree_01,
+
+      Cascader_01,
 
       Map_01
     }
