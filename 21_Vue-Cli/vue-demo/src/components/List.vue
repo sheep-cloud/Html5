@@ -10,6 +10,7 @@
 
 <script>
   import Item from './Item'
+  import './../assets/css/style.css'
 
   export default {
     components: {Item},

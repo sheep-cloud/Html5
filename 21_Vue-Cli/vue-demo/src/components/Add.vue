@@ -19,7 +19,6 @@
 </template>
 
 <script>
-
   export default {
     props: {
       addComment: {
@@ -41,6 +40,10 @@
         // 1. 检查输入的合法性
         if (!username) {
           layer.alert('请输入用户名')
+          return
+        }
+        if (this.ValidUtil.isNotAccount(username)) {
+          layer.alert('请输入合法的用户名：3-16位任意字符')
           return
         }
         if (!content) {

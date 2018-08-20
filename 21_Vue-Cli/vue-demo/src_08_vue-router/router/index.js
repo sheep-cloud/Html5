@@ -29,17 +29,15 @@ let routes = [
         path: 'message', component: Message,
         children: [
           // 动态路径参数 以冒号开头
-          {path: '/home/message/detail/:id', component: MessageDetail},
+          {path: '/home/message/detail/:id', component: MessageDetail}
         ]
       }
     ]
   }
 ]
 
-let vueRouter = new VueRouter({
+export default new VueRouter({
   routes,
   // 当前路由的 class router-link-active 修改 为 active
   linkActiveClass: 'active'
 })
-
-export default vueRouter

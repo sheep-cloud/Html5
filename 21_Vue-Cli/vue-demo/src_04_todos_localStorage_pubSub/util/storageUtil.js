@@ -1,8 +1,8 @@
 /**
-  localStorage 存储数据的工具模块
-    1. 函数
-    2. 对象
-    需要向外暴露了1个功能（函数）还是多个功能（对象）
+ localStorage 存储数据的工具模块
+ 1. 函数
+ 2. 对象
+ 需要向外暴露了1个功能（函数）还是多个功能（对象）
  */
 
 /**
@@ -29,5 +29,6 @@ let readTodos = () => {
 }
 
 export default {
-  saveTodos, readTodos
+  saveTodos,
+  readTodos
 }
