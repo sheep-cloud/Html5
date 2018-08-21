@@ -14,5 +14,5 @@ console.log(math)
 console.log('----------------------------------------------------------------------------------------------------')
 
 let nums = [10, 20, 30]
-let result2 = math.sum(nums)
-console.log(result2)
+let result = math.sum(nums)
+console.log(result)

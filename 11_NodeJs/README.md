@@ -2,9 +2,19 @@
 
 ## 1.Node.js简介
 
-- Node.js是一个能够在服务器端运行JavaScript的开放源代码，跨平台JavaScript运行环境。
+- Node的简介
+  - Node.js是一个能够在服务器端运行JavaScript的开放源代码、化平台的JavaScript运行环境
+  - Node.js主要用于编写像Web服务器一样的网络应用，这和PHP、Python是类似的
+  - Node.js允许通过js和一系列模块来编写服务器端应用和网络相关的应用
+  - 核心模块包括文件系统I/O、网络（HTTP、TCP、UDP、DNS、TLS/SSL等）、二进制数据流、加密算法、数据流等等。Node模块的API形式简单，降低了编程的复杂度
+- Node的用途
+  - Web服务API，比如REST
+  - 实时多人游戏
+  - 后端的Web服务，例如跨域、服务器端的请求
+  - 基于Web的应用
+  - 多客户端的通信，如即时通信
 
-## 2. module.exports 向外部暴露属性或方法
+## 2. exports 模块定义
 
 ### 2.1. exports
 
@@ -37,34 +47,46 @@ module.exports = {
 }
 ```
 
-## 3. require() 引入其他模块
+## 3. require() 模块引用
 
-我们使用require()引入外部模块时，使用的就是模块标识，我们可以通过模块标识来找到指定的模块
-- 模块分成两大类
-  1. 核心模块
-    - 由node引擎提供的模块
-    - 核心模块的表示就是，模块的名字
-  2. 文件模块
-    - 由用户自己创建的模块
-    - 文件模块的标识就是文件的路径（绝对路径，相对路径）
-      相对路径使用.或..开头
+- 在规范中，定义了require()方法，这个方法接收模块标识，以此将一个模块引入到当前运行环境中
+- 模块引用的示例代码
+
 ```javascript
-let md = require('./02.module')
-let math = require('./04.math')
-let fs = require('fs')
-
-console.log(md)
-console.log(math.add(10, 20))
-console.log(math.mul(10, 20))
-console.log(fs)
+let math = require('math')
 ```
+
+### 3.1 模块分成三类
+
+- 内建模块
+  - 底层由C++编写的内建模块
+
+- 核心模块
+
+  - 由node引擎提供的核心模块
+  - 核心模块的标识就是，模块的名字
+
+  ```javascript
+  let fs = require('fs')
+  let math = require('math')
+  ```
+
+- 文件模块
+
+  - 由用户自己创建的模块
+  - 文件模块的标识就是，文件的路径（绝对路径，相对路径）相对路径使用.或..开头
+
+  ```javascript
+  let md = require('./02.module')
+  let math = require('./04.math')
+  ```
 
 ## 4. package 包
 
 ### 4.1. package.json 包描述文件
 
 - 包描述文件用于表达非代码相关的信息，它是一个JSON格式的文件
-- package.json位于包的跟目录下，是包的重要组成部分
+- package.json位于包的根目录下，是包的重要组成部分
 - package.json中的字段：
 ```properties
 name、description、version、keywords、main、author、
@@ -158,22 +180,13 @@ npm install npm@<version> -g
 
 ### 5.4. 淘宝 NPM 镜像
 
-#### 5.4.1. 安装全局cnpm命令行工具
+#### 5.4.1. 安装全局cnpm
 
 ```properties
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
-#### 5.4.2. 使用方法：
+#### 5.4.2. 使用方法
 
-1. npm 默认；
-2. cnpm 淘宝镜像，使用cnpm会生成@version的文件，和官方的文件
-
-## 6. 文件系统
-
-#### 6.1. Buffer（缓冲区）
-
-- 从结构上看Buffer非常像一个数组，它的元素为16进制的两位数
-- 实际上一个元素就表示内存中的一个字节
-- 实际上Buffer中的内存不是通过JavaScript分配的，而是在底层通过C++申请的
-- 也就是可以直接通过Buffer来创建内存中的空间
+- npm 默认
+- cnpm 淘宝镜像，使用cnpm会生成@version的文件，和官方的文件
