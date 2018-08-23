@@ -1,6 +1,6 @@
-# Vue
+Vue
 
-## 1、Vue核心
+## 1. Vue核心
 
 ### 1.1.Vue的基本认识
 
@@ -12,7 +12,7 @@
 ####  1.1.1.Vue的特点
 
 - 遵循MVVM模式
-- 编码简介，体积小，运行效率高，适合移动/pc端开发
+- 编码简洁，体积小，运行效率高，适合移动/pc端开发
 - 它本身只关注UI，可以轻松引入vue插件或第三方库开发项目
 
 #### 1.1.3.与其他前端JS框架的关联
@@ -81,7 +81,7 @@
 
 ### 1.3.模版语法
 
-## 2、Vue的组件化编码
+## 2. Vue的组件化编码
 
 ### 2.1. 使用vue-cli创建模版项目
 
@@ -94,38 +94,42 @@
 
 #### 2.1.2. 创建vue项目
 
-```shell
+```properties
 cd D:\workspace-all\atguigu\Html5\20_Vue
 
 npm install -g vue-cli
+
 vue init webpack vue-demo					(项目名必须小写)
+
 cd vue-demo\
+
 npm install
-npm run dev								   (在内存中进行打包)
+
+npm run dev								    (在内存中进行打包)
 
 访问：http://localhost:8080/
 ```
 
 #### 2.1.3. 模版项目的结构
 
-```shell
-|-- build : webpack 相关的配置文件夹(基本不需要修改)
-  |-- dev-server.js : 通过 express 启动后台服务器
-|-- config: webpack 相关的配置文件夹(基本不需要修改)
-  |-- index.js: 指定的后台服务的端口号和静态资源文件夹
+```properties
+|-- build : 			webpack 相关的配置文件夹(基本不需要修改)
+  |-- dev-server.js : 	通过 express 启动后台服务器
+|-- config: 			webpack 相关的配置文件夹(基本不需要修改)
+  |-- index.js: 		指定的后台服务的端口号和静态资源文件夹
 |-- node_modules
-|-- src : 源码文件夹
-  |-- components: vue 组件及其相关资源文件夹
-  |-- App.vue: 应用根主组件
-  |-- main.js: 应用入口 js
-|-- static: 静态资源文件夹
-|-- .babelrc: babel 的配置文件
-|-- .eslintignore: eslint 检查忽略的配置
-|-- .eslintrc.js: eslint 检查的配置
-|-- .gitignore: git 版本管制忽略的配置
-|-- index.html: 主页面文件
-|-- package.json: 应用包配置文件
-|-- README.md: 应用描述说明的 readme 文件
+|-- src : 				源码文件夹
+  |-- components: 		vue 组件及其相关资源文件夹
+  |-- App.vue: 			应用根主组件
+  |-- main.js: 			应用入口 js
+|-- static: 			静态资源文件夹
+|-- .babelrc: 			babel 的配置文件
+|-- .eslintignore: 		eslint 检查忽略的配置
+|-- .eslintrc.js: 		eslint 检查的配置
+|-- .gitignore: 		git 版本管制忽略的配置
+|-- index.html: 		主页面文件
+|-- package.json: 		应用包配置文件
+|-- README.md: 			应用描述说明的 readme 文件
 ```
 
 #### 2.1.4. 效果
@@ -136,13 +140,13 @@ npm run dev								   (在内存中进行打包)
 
 #### 2.2.1. 打包
 
-```shell
+```properties
 npm run build
 ```
 
 #### 2.2.2. 发布1：使用静态服务器工具包
 
-```shell
+```properties
 npm install -g serve
 serve dist
 
@@ -153,7 +157,7 @@ serve dist
 
 #### 2.2.3. 发布2：使用动态web服务器（tomcat）
 
-```shell
+```properties
 1. 修改配置：webpack.prod.conf.js		Line 25
   output: {
     path: config.build.assetsRoot,
@@ -166,8 +170,7 @@ serve dist
  npm run build
  3. 修改dist文件夹为项目名称：vue-demo
  4. 将vue-demo拷贝到运行的tomcat的webapps目录下
- 5. 访问：
- http://localhost:8080/vue-demo
+ 5. 访问：http://localhost:8080/vue-demo
 ```
 
 ### 2.3. ESLint
@@ -205,7 +208,7 @@ serve dist
 
 - .eslintrc.js：全局规则配置文件
 
-```vuejs
+```javascript
   // add your custom rules here
   rules: {
     // allow async-await
@@ -229,7 +232,7 @@ serve dist
 
 ```vue
 <template>
-	页面模版
+  <!--页面模版-->
 </template>
 ```
 
@@ -252,7 +255,7 @@ serve dist
 
 ```vue
 <style scoped>
-  样式定义
+  /*样式定义*/
 </style>
 ```
 
@@ -325,13 +328,13 @@ serve dist
 - 在组件内声明所有的props
 - 方式一：只指定名称
 
-```vue
+```properties
 props: ['comments', 'deleteComment'], // 只指定属性名
 ```
 
 - 方式二：指定名称和类型
 
-```vuejs
+```properties
     props: { // 指定属性名和属性值的类型
       comment: Object,
       deleteComment: Function,
@@ -341,7 +344,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 - 方式三：指定名称/类型/必要性/默认值
 
-```vuejs
+```properties
     props: {
       addComment: { // 指定了属性名/属性值的类型/必要性
         type: Function,
@@ -389,7 +392,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 #### 2.7.2. 触发事件
 
-```vuejs
+```vue
         // 触发自定义事件：addTodo
         this.$emit('addTodo', todo)
 ```
@@ -403,7 +406,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 #### 2.8.1. 安装
 
-```shell
+```properties
 npm install pubsub-js --save
 ```
 
@@ -451,7 +454,7 @@ import PubSub from 'pubsub-js'
 
 ### 2.11. demo2：todo list
 
-## 3、Vue-ajax
+## 3. Vue-ajax
 
 ### 3.1. vue项目中常用的2个ajax库
 
@@ -468,7 +471,7 @@ import PubSub from 'pubsub-js'
 - Github：https://github.com/pagekit/vue-resource
 - 下载：
 
-```shell
+```properties
 npm install vue-resource --save
 ```
 
@@ -482,22 +485,22 @@ import vueResource from 'vue-resource'
 Vue.use(vueResource) // 内部会给vm独享和组件对象添加一个属性：$http
 
 // 通过vue组件对象发送ajax请求
-      const url = `https://api.github.com/search/repositories?q=vue-source&sort=stars`
-      this.$http.get(url).then(
-        // 成功响应
-        response => {
-          // 成功
-          const result = response.data
-          // 得到最受欢迎的repo
-          const mostRepo = result.items[0]
-          this.repoUrl = mostRepo.html_url
-          this.repoName = mostRepo.name
-        },
-        // 失败响应
-        response => {
-          alert('请求失败')
-        }
-      )
+const url = `https://api.github.com/search/repositories?q=vue-source&sort=stars`
+this.$http.get(url).then(
+    // 成功响应
+    response => {
+        // 成功
+        const result = response.data
+        // 得到最受欢迎的repo
+        const mostRepo = result.items[0]
+        this.repoUrl = mostRepo.html_url
+        this.repoName = mostRepo.name
+    },
+    // 失败响应
+    response => {
+        alert('请求失败')
+    }
+)
 ```
 
 
@@ -517,17 +520,17 @@ npm install axios --save
   // 引入组件
   import axios from 'axios'
 
-      // 使用axios发送ajax请求
-      axios.get(url).then(response => {
-        // 成功
-        const result = response.data
-        // 得到最受欢迎的repo
-        const mostRepo = result.items[0]
-        this.repoUrl = mostRepo.html_url
-        this.repoName = mostRepo.name
-      }).catch(error => {
-        alert('请求失败')
-      })
+// 使用axios发送ajax请求
+axios.get(url).then(response => {
+    // 成功
+    const result = response.data
+    // 得到最受欢迎的repo
+    const mostRepo = result.items[0]
+    this.repoUrl = mostRepo.html_url
+    this.repoName = mostRepo.name
+}).catch(error => {
+    alert('请求失败')
+})
 ```
 
 ### 3.4. 测试接口
@@ -571,7 +574,7 @@ npm install axios --save
       })
 ```
 
-## 4、Vue UI组件库
+## 4. Vue UI组件库
 
 ### 4.1. 使用mint-ui
 
@@ -582,7 +585,7 @@ npm install axios --save
 
 #### 4.1.2. 下载
 
-```shell
+```properties
 1. npm 安装
 npm install mint-ui --save
 
@@ -703,20 +706,20 @@ new Vue({
 #### 4.2.1. 介绍
 
 - 主页：http://element-cn.eleme.io/#/zh-CN
-- 说明：饿了么开源的一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库 
+- 说明：饿了么开源的一套为开发者. 设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库 
 
-## 5、Vue-router
+## 5. Vue-router
 
 ### 5.1. 理解
 
 #### 5.1.1. 说明
 
-- 官方提供的用来实现SPA的vue插件（单页应用）
+- 官方提供的用来实现SPA（单页应用）的vue插件
 - Github：https://github.com/vuejs/vue-router
 - 文档：https://router.vuejs.org/zh/
 - 下载
 
-```shell
+```properties
 npm install vue-router --save
 ```
 
@@ -1036,7 +1039,7 @@ this.$router.push(`/home/message/detail/12345`)
 this.$route.params.id
 ```
 
-#### 5.7.2. 显示传参
+#### 5.7.2. 显式传参
 
 - 路由配置
 
@@ -1064,7 +1067,7 @@ this.$route.query.id
 
 #### 5.7.3. 隐式传参
 
-- 路由配置（必须配置name）
+- **路由配置（必须配置name）**
 
 ```javascript
 {path: '/home/message/detail', name: 'detail', component: MessageDetail}
@@ -1088,9 +1091,9 @@ this.$route.query.id
 this.$route.params.id
 ```
 
-## 6、Vuex
+## 6. Vuex
 
-## 7、Vue源码分析
+## 7. Vue源码分析
 
 ### 7.1. 说明
 
