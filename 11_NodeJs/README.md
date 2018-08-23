@@ -1,6 +1,6 @@
-# Node.js使用
+# Node.js
 
-## 1.Node.js简介
+## 1. Node.js简介
 
 - Node的简介
   - Node.js是一个能够在服务器端运行JavaScript的开放源代码、化平台的JavaScript运行环境
@@ -59,6 +59,7 @@ let math = require('math')
 ### 3.1 模块分成三类
 
 - 内建模块
+
   - 底层由C++编写的内建模块
 
 - 核心模块
@@ -190,3 +191,44 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 - npm 默认
 - cnpm 淘宝镜像，使用cnpm会生成@version的文件，和官方的文件
+
+## 6. File_System
+
+### 6.1. Buffer（缓冲区）
+
+```javascript
+/*
+    Buffer（缓冲区）
+        - Buffer的结构和数组很想，操作的方法也和数组类似
+        - 数组中不能存储二进制的文件，而Buffer就是专门用来存储二进制的数据
+        - 使用Buffer不需要引入模块，直接使用即可
+        - 在Buffer中存储的都是二进制数据，但是在显示时是以16进制的形式显示
+        - Buffer中的一个元素，占用内存中的一个字节
+
+        Buffer.form(str)        将一个字符串转换成Buffer
+        Buffer.alloc(size)      创建一个指定大小的Buffer
+        Buffer.alloUnsafe(size) 创建一个指定大小的Buffer，但是可能包含敏感数据
+        buf.toString()          将缓冲区中的数据转换为字符串
+ */
+```
+
+### 6.2. File_System(文件系统)
+
+#### 6.2.1. 流式文件读取
+
+```javascript
+/*
+    流式文件读取也适用于一些比较大的文件，可以分多次将文件读取到内存中
+ */
+
+const fs = require('fs')
+
+// 创建一个可读流
+let rs = fs.createReadStream('基础_fs模块的其他方法.avi')
+
+// 创建一个可写流
+let ws = fs.createWriteStream('20.尚硅谷_node基础_fs模块的其他方法.avi')
+
+// 将可读流中的内容，直接输出到可写流中
+rs.pipe(ws)
+```
