@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>1.4.5_JavaScript中的原型继承</title>
+<link rel="icon" href="../../../00_dist/bootstrap-3.3.7/icon/favicon.ico">
 </head>
 <body>
     <!--
@@ -22,11 +23,11 @@
             return this.name
         }
 
-        let a = new Person('sven')
-        console.log(a)
-        console.log(a.name) // sven
-        console.log(a.getName()) // sven
-        console.log(Object.getPrototypeOf(a) === Person.prototype)  // true
+        let person = new Person('sven')
+        console.log(person)
+        console.log(person.name) // sven
+        console.log(person.getName()) // sven
+        console.log(Object.getPrototypeOf(person) === Person.prototype)  // true
         console.log('----------------------------------------------------------------------------------------------------')
 
         let obj = {
