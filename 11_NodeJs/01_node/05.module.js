@@ -22,10 +22,8 @@ b = 20      // 全局变量
       - exports就是module的属性
       - 既可以使用exports导出，也可以使用module.exports导出
     __dirname
-      - D:\Workspace\webStorm\colg\11_NodeJs\01_node
       - 当前模块所在文件夹的的完整目录
     __filename
-      - D:\Workspace\webStorm\colg\11_NodeJs\01_node\05.module.js
       - 当前模块的完整路径
  */
 
