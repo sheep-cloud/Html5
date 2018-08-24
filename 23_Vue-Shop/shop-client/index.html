@@ -2,12 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-<!-- 移动端 -->
+<!--移动端-->
 <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <title>shop-client</title>
 <link rel="icon" href="./static/icon/favicon.ico">
-<!-- 处理移动端事件延迟 -->
-<script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+<!--引入reset样式-->
+<link rel="stylesheet" href="./static/css/reset-css-4.0.1/reset.min.css">
+<!--处理移动端点击响应延时300ms的问题-->
+<script src="./static/js/fastclick-1.0.6/fastclick.min.js"></script>
 <script>
   if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function () {
@@ -15,7 +17,7 @@
     }, false)
   }
   if (!window.Promise) {
-    document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"' + '>' + '<' + '/' + 'script>')
+    document.writeln('<script src="./static/js/es6-promise-min-2.0.1/es6-promise.min.js"' + '>' + '<' + '/' + 'script>')
   }
 </script>
 </head>

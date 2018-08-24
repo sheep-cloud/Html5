@@ -172,12 +172,17 @@ src
 
 #### 2.7.4. 引入reset样式
 
-https://www.npmjs.com/package/reset-css
-
 ```properties
 npm install --save reset-css
 
-main.js: import 'reset-css'
+npm remove --save reset-css
+```
+
+- 单页面引入（index.html），作为静态资源引入
+
+```html
+<!--引入reset样式-->
+<link rel="stylesheet" href="./static/css/reset-css-4.0.1/reset.min.css">
 ```
 
 #### 2.7.5. 移动端
@@ -185,15 +190,25 @@ main.js: import 'reset-css'
 ##### 2.7.5.1. viewport
 
 ```html
-<!-- 移动端 -->
+<!--移动端-->
 <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 ```
 
-##### 2.7.5.2. 解决点击响应延时0.3s的问题
+##### 2.7.5.2. 处理移动端点击响应延时300ms的问题
+
+```properties
+npm install fastclick --save
+npm install es6-promise-min --save
+
+npm remove fastclick --save
+npm remove es6-promise-min --save
+```
+
+- index.html
 
 ```html
-<!-- 处理移动端事件延迟 -->
-<script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+<!--处理移动端点击响应延时300ms的问题-->
+<script src="./static/js/fastclick-1.0.6/fastclick.min.js"></script>
 <script>
   if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function () {
@@ -201,7 +216,7 @@ main.js: import 'reset-css'
     }, false)
   }
   if (!window.Promise) {
-    document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"' + '>' + '<' + '/' + 'script>')
+    document.writeln('<script src="./static/js/es6-promise-min-2.0.1/es6-promise.min.js"' + '>' + '<' + '/' + 'script>')
   }
 </script>
 ```
@@ -296,7 +311,7 @@ new Vue({
 </body>
 ```
 
-#### 2.8.3. 运行，请求不同路由路径
+#### 2.8.3. 请求不同路由路径
 
 ```properties
 http://localhost:8080/#/msite

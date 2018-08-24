@@ -50,3 +50,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/*显示省略号*/
+.ellipsis{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
