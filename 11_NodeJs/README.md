@@ -3,8 +3,8 @@
 ## 1. Node.js简介
 
 - Node的简介
-  - Node.js是一个能够在服务器端运行JavaScript的开放源代码、化平台的JavaScript运行环境
-  - Node.js主要用于编写像Web服务器一样的网络应用，这和PHP、Python是类似的
+  - Node.js是一个能够在服务器端运行JavaScript的开放源代码、平台化的JavaScript运行环境
+  - Node.js主要用于编写像Web服务器一样的网络应用，和PHP、Python是类似的
   - Node.js允许通过js和一系列模块来编写服务器端应用和网络相关的应用
   - 核心模块包括文件系统I/O、网络（HTTP、TCP、UDP、DNS、TLS/SSL等）、二进制数据流、加密算法、数据流等等。Node模块的API形式简单，降低了编程的复杂度
 - Node的用途
@@ -19,7 +19,7 @@
 ### 2.1. exports
 
 通过exports只能通过.的方式来向外暴露内部变量，`exports.xxx = xxx`
-```javascript
+```js
 exports.name = 'Rose'
 exports.age = 18
 exports.sayName = function () {
@@ -29,7 +29,7 @@ exports.sayName = function () {
 ### 2.2. module.exports
 
 通过module.exports既可以通过.的形式，也可以直接赋值（更强大）
-```javascript
+```js
 // 通过.的方式	module.exports.xxx = xxx
 module.exports.name = 'Rose'
 module.exports.age = 18
@@ -52,7 +52,7 @@ module.exports = {
 - 在规范中，定义了require()方法，这个方法接收模块标识，以此将一个模块引入到当前运行环境中
 - 模块引用的示例代码
 
-```javascript
+```js
 let math = require('math')
 ```
 
@@ -67,7 +67,7 @@ let math = require('math')
   - 由node引擎提供的核心模块
   - 核心模块的标识就是，模块的名字
 
-  ```javascript
+  ```js
   let fs = require('fs')
   let math = require('math')
   ```
@@ -77,7 +77,7 @@ let math = require('math')
   - 由用户自己创建的模块
   - 文件模块的标识就是，文件的路径（绝对路径，相对路径）相对路径使用.或..开头
 
-  ```javascript
+  ```js
   let md = require('./02.module')
   let math = require('./04.math')
   ```
@@ -89,7 +89,7 @@ let math = require('math')
 - 包描述文件用于表达非代码相关的信息，它是一个JSON格式的文件
 - package.json位于包的根目录下，是包的重要组成部分
 - package.json中的字段：
-```properties
+```ini
 name、description、version、keywords、main、author、
 maintainers、contributors、bugs、
 licenses、repositories、dependencies、
@@ -98,7 +98,7 @@ directories、implements、scripts、author、
 bin、main、devDependencies。
 ```
 - 安装package.json
-```properties
+```ini
 npm init    初始化，创建package.json（name不允许大写字母）
 ```
 
@@ -121,61 +121,61 @@ NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署�
 ### 5.3. NPM 的命令
 
 - 查看npm的版本
-```properties
+```ini
 npm -v
 ```
 
 - 查看npm所有模块的版本
-```properties
+```ini
 npm version
 ```
 
 - 搜索包
-```properties
+```ini
 npm search <package>
 ```
 
 - 安装包
-```properties
+```ini
 npm install <package>
 npm i <package>			// 简写
 ```
 
 - 安装包并添加到依赖（常用）
-```properties
+```ini
 npm install <package> --save
 npm i <package> -S		// 简写
 ```
 
 - 删除包
-```properties
+```ini
 npm remove <package>
 npm r <package>			// 简写
 ```
 
 - 删除包并删除依赖
-```properties
+```ini
 npm remove <package> --save
 npm r <package> -S		// 简写
 ```
 
 - 下载当前项目所依赖的包（根据package.json）
-```properties
+```ini
 npm install
 ```
 
 - 全局安装包（一般都是一些工具）
-```properties
+```ini
 npm install <package> -g
 ```
 
 - 全局卸载包
-```properties
+```ini
 npm uninstall -g <package>
 ```
 
 - 修改npm版本
-```properties
+```ini
 npm install npm@<version> -g
 ```
 
@@ -183,7 +183,7 @@ npm install npm@<version> -g
 
 #### 5.4.1. 安装全局cnpm
 
-```properties
+```ini
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ```
 
@@ -192,11 +192,11 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 - npm 默认
 - cnpm 淘宝镜像，使用cnpm会生成@version的文件，和官方的文件
 
-## 6. File_System
+## 6. File_System 文件系统
 
 ### 6.1. Buffer（缓冲区）
 
-```javascript
+```js
 /*
     Buffer（缓冲区）
         - Buffer的结构和数组很想，操作的方法也和数组类似
@@ -216,7 +216,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 #### 6.2.1. 流式文件读取
 
-```javascript
+```js
 /*
     流式文件读取也适用于一些比较大的文件，可以分多次将文件读取到内存中
  */
