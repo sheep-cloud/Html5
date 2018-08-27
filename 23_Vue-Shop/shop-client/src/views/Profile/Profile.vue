@@ -1,5 +1,5 @@
 <template>
-  <div>Profile vue template</div>
+  <div>Profile</div>
 </template>
 
 <script>

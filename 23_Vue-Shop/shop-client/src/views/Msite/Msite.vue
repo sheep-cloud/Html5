@@ -1,5 +1,5 @@
 <template>
-  <div>Msite vue template</div>
+  <div>Msite</div>
 </template>
 
 <script>

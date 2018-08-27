@@ -1,5 +1,5 @@
 <template>
-  <div>Search vue template</div>
+  <div>Search</div>
 </template>
 
 <script>

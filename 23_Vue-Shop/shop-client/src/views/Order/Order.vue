@@ -1,5 +1,5 @@
 <template>
-  <div>Order vue template</div>
+  <div>Order</div>
 </template>
 
 <script>

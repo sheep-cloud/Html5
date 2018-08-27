@@ -3,9 +3,14 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// 首页
 import Msite from '../views/Msite/Msite'
+// 搜索
 import Search from '../views/Search/Search'
+// 订单
 import Order from '../views/Order/Order'
+// 个人
 import Profile from '../views/Profile/Profile'
 
 // 声明使用插件

@@ -1,5 +1,5 @@
 <template>
-  <div>FooterGuide vue template</div>
+  <div>FooterGuide</div>
 </template>
 
 <script>

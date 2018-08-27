@@ -148,7 +148,7 @@ src
 
 ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fuk62eq7izj30qa0j80te.jpg)
 
-#### 2.7.2. 分析应用的整体vue组件结构
+#### 2.7.2. 整体vue组件结构
 
 ```properties
 src
@@ -168,7 +168,21 @@ src
 	|-- main.js							应用入口.js
 ```
 
-#### 2.7.3. 各个vue组件的基本代码
+#### 2.7.3. vue组件的基本代码
+
+```vue
+<template>
+  <div>FooterGuide</div>
+</template>
+
+<script>
+  export default {}
+</script>
+
+<style scoped>
+
+</style>
+```
 
 #### 2.7.4. 引入reset样式
 
@@ -194,7 +208,7 @@ npm remove --save reset-css
 <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 ```
 
-##### 2.7.5.2. 处理移动端点击响应延时300ms的问题
+##### 2.7.5.2. 处理响应延时
 
 ```properties
 npm install fastclick --save
@@ -239,9 +253,14 @@ npm install vue-router --save
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// 首页
 import Msite from '../views/Msite/Msite'
+// 搜索
 import Search from '../views/Search/Search'
+// 订单
 import Order from '../views/Order/Order'
+// 个人
 import Profile from '../views/Profile/Profile'
 
 // 声明使用插件
@@ -267,8 +286,6 @@ export default new VueRouter({
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
-import 'reset-css'
 
 Vue.config.productionTip = false
 
@@ -317,6 +334,7 @@ new Vue({
 http://localhost:8080/#/msite
 http://localhost:8080/#/search
 http://localhost:8080/#/order
+http://localhost:8080/#/profile
 ```
 
 ### 2.9. FooterGuide组件
