@@ -1,0 +1,13 @@
+body {
+    background: gray;
+}
+#box1 {
+    background: url("../img/bg.png");
+    width: 200px;
+    height: 200px;
+}
+#box2 {
+    background: url("../img/logo.png") no-repeat;
+    width: 200px;
+    height: 200px;
+}
