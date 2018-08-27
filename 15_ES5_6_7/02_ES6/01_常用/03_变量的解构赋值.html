@@ -22,17 +22,20 @@
         console.log(username, age)
         console.log('----------------------------------------------------------------------------------------------------')
 
+        // 对象的解构赋值
         let obj1 = {username1: 'jack', age1: 39}
         let {username1, age1} = obj1
         console.log(username1, age1)
         console.log('----------------------------------------------------------------------------------------------------')
 
+        // 数组的解构赋值
         let arr = [1, 3, 5, 'abc', true]
         // let[索引]
         let [, xxx, b, c] = arr
         console.log(xxx, b, c)
         console.log('----------------------------------------------------------------------------------------------------')
 
+        // 给多个形参赋值
         function foo({username, age}) { // {username, age} = obj
             console.log(username, age)
         }

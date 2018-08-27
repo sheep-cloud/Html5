@@ -55,11 +55,12 @@
 
         // 函数体的情况
         // 1、函数体只有一条语句或者是表达式的时候，{}可以省略---->会自动会返回语句执行的结果或者是表达式的结果
-        let fun4 = (x, y) => x + y
-        console.log(fun4(24, 36))
-        fun4 = (x, y) => {
+        let fun4 = (x, y) => {
             return x + y
         }
+        console.log(fun4(24, 36))
+
+        fun4 = (x, y) => x + y
         console.log(fun4(24, 36))
         console.log('----------------------------------------------------------------------------------------------------')
 
@@ -94,7 +95,7 @@
                 btn3.onclick = function () {
                     console.log(this)
                 }
-            },
+            }
         }
         obj.getName()
 
@@ -105,7 +106,7 @@
                 btn4.onclick = () => {
                     console.log(this) // obj
                 }
-            },
+            }
         }
         obj2.getName()
 

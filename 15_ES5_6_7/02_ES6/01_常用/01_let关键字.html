@@ -32,7 +32,7 @@
 
         let btns = document.getElementsByTagName('button')
         /*
-         for (var i = 0; i < btns.length; i++) {
+         for (let i = 0, length = btns.length; i < length; i++) {
                     var btn = btns[i]
                     ;(function (i) {
                         btn.onclick = function () {
@@ -42,7 +42,7 @@
                 }
         */
 
-        for (let i = 0; i < btns.length; i++) {
+        for (let i = 0, length = btns.length; i < length; i++) {
             let btn = btns[i]
             btn.onclick = function () {
                 alert(i)
