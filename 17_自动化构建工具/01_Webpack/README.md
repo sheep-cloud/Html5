@@ -11,9 +11,9 @@
 ### 1.2. 理解Loader
 
 - webpack本身只能加载JS/JSON模块，如果要加载其他类型的文件（模块），就需要使用对应的loader进行转换/加载
-- Loader本身也是运行在node.js环境中的javascript模块
+- Loader本身也是运行在node.js环境中的js模块
 - 它本身是一个函数，接受源文件作为参数，返回转换的结果
-- loader一般以xxx-loader的方式命名，xxx代表了这个Loader要做的转换功能，比如json-loader
+- loader一般以xxx-loader的方式命名，xxx代表了这个Loader要做的转换功能，比如css-loader
 
 ### 1.3. 配置文件（默认）
 
@@ -123,7 +123,7 @@ document.writeln(require('./content'))
 - 安装样式的loader
 
 ```ini
-
+npm install css-loader style-loader --save-dev
 ```
 
 - 创建样式文件：src/css/style.css
@@ -276,20 +276,24 @@ body {
 }
 #box1 {
     background: url("../img/bg.png");
-    width: 200px;
-    height: 200px;
+    background-size: contain;
+    width: 320px;
+    height: 320px;
 }
 #box2 {
     background: url("../img/logo.png");
-    width: 200px;
-    height: 200px;
+    width: 48px;
+    height: 48px;
 }
 ```
 
-- 在页面引用样式或图片
+- 在页面引用样式或图片：index.html
 
 ```html
-
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
 ```
 
 - 编译js，查看页面效果
@@ -298,7 +302,7 @@ body {
 webpack-dev-server
 ```
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fuogn6tsycj307p0f63z0.jpg)
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fup7e78osrj309s0dmn17.jpg)
 
 #### 3.1.12. 配置npm script命令
 
