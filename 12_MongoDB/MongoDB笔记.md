@@ -21,7 +21,7 @@
   - `D:\Sybase\MongoDB`目录下创建 `data`目录，在`data`目录下创建`db`、`log`目录
   - 在`D:\Sybase\MongoDB\Server\3.2`目录下添加一个配置文件
 
-  ```properties
+  ```ini
   systemLog:
       destination: file
       path: D:\Sybase\MongoDB\data\log\mongod.log
@@ -31,13 +31,13 @@
 
 - 启动MongoDB
 
-  ```properties
+  ```ini
   mongod --dbpath D:\Sybase\MongoDB\data\db --port 27017
   ```
 
 - 连接MongoDB
 
-  ```properties
+  ```ini
   输入 mongo 连接mongodb ，出现 > 
   ```
 
@@ -45,13 +45,13 @@
 
   - https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#manually-create-a-windows-service-for-mongodb-community-edition
 
-    ```properties
+    ```ini
     sc.exe create MongoDB binPath= "\"D:\Sybase\MongoDB\Server\3.2\bin\mongod.exe\" --service --config=\"D:\Sybase\MongoDB\Server\3.2\mongod.cfg\"" DisplayName= "MongoDB" start= "auto"
     ```
 
   - 服务命令
 
-    ```properties
+    ```ini
     net start MongoDB		启动
     net stop MongoDB		停止
     sc.exe delete MongoDB	删除服务
@@ -61,7 +61,7 @@
 
 - 进入 `D:\Sybase\MongoDB\Server\3.2\bin` 目录
 
-```properties
+```ini
 mongoexport -h 127.0.0.1 -d rams -c bu_device_data -o demo.json
 ```
 
@@ -73,7 +73,7 @@ mongoexport -h 127.0.0.1 -d rams -c bu_device_data -o demo.json
 
 #### 3.1.2. 删除文档
 
-```mysql
+```sql
 /*
     db.collection.remove()
         - 删除一个或多个，可以第二个参数传递一个true，则只会删除一个
@@ -163,7 +163,7 @@ db.stus.find();
 
 #### 3.1.4. 查询文档
 
-```mysql
+```sql
 /*
     查询
         db.collection.find()
@@ -197,7 +197,7 @@ db.stus.find({}).count();
 ```
 ### 3.2. 文档之间的关系
 
-```mysql
+```sql
 /**
     文档之间的关系
         一对一（one to one）
@@ -245,7 +245,7 @@ db.students.find();
 ```
 ### 3.3. CRUD案例
 
-```mysql
+```sql
 // 1. 进入my_test数据库
 use my_test;
 
@@ -497,7 +497,7 @@ db.emp.find(
 
 #### 4.2.1. 下载安装Mongoose
 
-```properties
+```ini
 npm i mongoose --save
 ```
 
@@ -509,7 +509,7 @@ const mongoose = require('mongoose')
 
 #### 4.2.3. 连接MongoDB数据库
 
-```properties
+```ini
 mongoose.connect('mongodb://数据库的ip地址:端口号/数据库名', {useNewUrlParser: true})
 - 如果端口号是默认端口号（27017），则可以省略不写
 ```
@@ -518,7 +518,7 @@ mongoose.connect('mongodb://数据库的ip地址:端口号/数据库名', {useNe
 
 - 断开数据库连接（一般不需要调用）
 
-```properties
+```ini
 - MongoDB数据库，一般情况下，只需要连接一次，连接一次以后，除非项目停止，服务器关闭，否则连接一般不会断开
 mongoose.disconnect()
 ```
