@@ -2,6 +2,6 @@ exports.foo = function () {
     console.log('module3 foo()')
 }
 
-exports.bar = function () {
+exports.bar = () => {
     console.log('module3 bar()')
 }
