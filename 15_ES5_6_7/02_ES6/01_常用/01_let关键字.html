@@ -25,30 +25,25 @@
                 使用let取代var是趋势
     -->
     <script>
-        // console.log(username)
         let username = 'jack'
-        // let username = 'rose'
         console.log(username)
 
         let btns = document.getElementsByTagName('button')
-        /*
-         for (let i = 0, length = btns.length; i < length; i++) {
-                    var btn = btns[i]
-                    ;(function (i) {
-                        btn.onclick = function () {
-                            alert(i)
-                        }
-                    })(i)
+        for (let i = 0, len = btns.length; i < len; i++) {
+            /*
+            var btn = btns[i]
+            ;(function (i) {
+                btn.onclick = function () {
+                    alert(i)
                 }
-        */
+            })(i)
+            */
 
-        for (let i = 0, length = btns.length; i < length; i++) {
             let btn = btns[i]
             btn.onclick = function () {
                 alert(i)
             }
         }
-
     </script>
 </body>
 </html>

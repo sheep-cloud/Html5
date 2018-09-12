@@ -45,10 +45,7 @@
         console.log(bool1)
         console.log('----------------------------------------------------------------------------------------------------')
 
-        let obj = {
-            username: 'jack',
-            age: 39,
-        }
+        let obj = {username: 'jack', age: 39}
         let obj1 = obj
         console.log(obj1)
         obj1.username = 'rose'
@@ -56,13 +53,10 @@
         console.log('----------------------------------------------------------------------------------------------------')
 
         // 拷贝数组/对象，没有生成新的数据而是复制了一份引用
-        let arr = [1, 4, {
-            username: 'jack',
-            age: 39,
-        }]
+        let arr = [1, 4, {username: 'jack', age: 39}]
         let arr2 = arr
         console.log(arr2)
-        arr2[0] = 'abcd'
+        arr2[0] = 'abc'
         console.log(arr)
 
         // TODO: colg [深度克隆]

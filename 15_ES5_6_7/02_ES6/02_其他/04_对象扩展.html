@@ -23,21 +23,14 @@
 
 
         let obj = {}
-        let obj1 = {
-            username: 'jack',
-            age: 39,
-        }
-        let obj2 = {
-            sex: '男',
-        }
+        let obj1 = {username: 'jack', age: 39}
+        let obj2 = {sex: '男'}
         Object.assign(obj, obj1, obj2)
         console.log(obj)
         console.log('----------------------------------------------------------------------------------------------------')
 
         let obj3 = {}
-        let obj4 = {
-            money: 50000000000,
-        }
+        let obj4 = {money: 50000000000}
         obj3.__proto__ = obj4
         console.log(obj3)
         console.log(obj3.money)
