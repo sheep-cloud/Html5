@@ -1,22 +1,23 @@
 {
   "name": "webpack-1",
   "version": "1.0.0",
-  "description": "",
+  "description": "webpack@1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progroess"
+    "start": "webpack-dev-server --progroess",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
     "url": "null"
   },
-  "author": "",
+  "author": "colg",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
-    "style-loader": "^0.22.1",
+    "style-loader": "^0.23.0",
     "url-loader": "^1.1.1",
     "webpack": "^1.15.0"
   }
