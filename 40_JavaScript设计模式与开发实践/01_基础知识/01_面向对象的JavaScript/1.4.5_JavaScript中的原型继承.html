@@ -22,22 +22,22 @@
             return this.name
         }
 
-        let person = new Person('sven')
+        var person = new Person('sven')
         console.log(person)
         console.log(person.name) // sven
         console.log(person.getName()) // sven
         console.log(Object.getPrototypeOf(person) === Person.prototype)  // true
         console.log('----------------------------------------------------------------------------------------------------')
 
-        let obj = {
+        var obj = {
             name: 'sven'
         }
 
-        let B = function () {
+        var B = function () {
         }
         B.prototype = obj
 
-        let b = new B()
+        var b = new B()
         console.log(b.name) // sven
     </script>
 </body>

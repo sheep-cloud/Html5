@@ -6,7 +6,7 @@
 </head>
 <body>
     <script>
-        let makeSound = function (animal) {
+        var makeSound = function (animal) {
             if (animal instanceof Duck) {
                 console.log('嘎嘎嘎')
             } else if (animal instanceof Chicken) {
@@ -14,10 +14,10 @@
             }
         }
 
-        let Duck = function () {
+        var Duck = function () {
         }
 
-        let Chicken = function () {
+        var Chicken = function () {
         }
 
         makeSound(new Duck())

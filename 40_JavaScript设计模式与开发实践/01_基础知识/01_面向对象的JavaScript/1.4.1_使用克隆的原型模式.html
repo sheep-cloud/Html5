@@ -10,20 +10,20 @@
             ECMAScript5 提供了Object.create方法，可以用来克隆对象
     -->
     <script>
-        let Plane = function (blood, attackLevel, defenseLevel) {
+        var Plane = function (blood, attackLevel, defenseLevel) {
             this.blood = blood
             this.attackLevel = attackLevel
             this.defenseLevel = defenseLevel
         }
 
-        let plane = new Plane(500, 10, 7)
+        var plane = new Plane(500, 10, 7)
 
         console.log(plane)
         console.log(plane.blood, plane.attackLevel, plane.defenseLevel)
         console.log('----------------------------------------------------------------------------------------------------')
 
         // 克隆原型
-        let clonePlane = Object.create(plane)
+        var clonePlane = Object.create(plane)
         console.log(clonePlane)
         console.log(clonePlane.blood, clonePlane.attackLevel, clonePlane.defenseLevel)
         console.log(clonePlane.__proto__)
@@ -31,14 +31,14 @@
 
         // 在不支持Object.create()方法的浏览器中，则可以使用以下代码
         Object.create = Object.create || function (obj) {
-            let F = function () {
+            var F = function () {
             }
             F.prototype = obj
             return new F()
         }
 
 
-        let clonePlane2 = Object.create(plane)
+        var clonePlane2 = Object.create(plane)
         console.log(clonePlane2)
         console.log(clonePlane2.blood, clonePlane2.attackLevel, clonePlane2.defenseLevel)
         console.log(clonePlane2.__proto__)
