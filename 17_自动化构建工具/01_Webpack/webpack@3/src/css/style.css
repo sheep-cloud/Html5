@@ -1,0 +1,15 @@
+body {
+    background: gray;
+}
+
+#box1 {
+    background: url("../img/bg.png");
+    background-size: contain;
+    width: 320px;
+    height: 320px;
+}
+#box2 {
+    background: url("../img/logo.png");
+    width: 48px;
+    height: 48px;
+}

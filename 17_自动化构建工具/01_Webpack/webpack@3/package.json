@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --progroess",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -13,6 +15,8 @@
   "author": "colg",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.23.1",
     "webpack": "^3.12.0"
   }
 }
