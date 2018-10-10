@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_jQuery核心对象</title>
+</head>
+<body>
+    <!--
+        1. jQuery对象是一个包含所有匹配的任意多个dom元素的伪数组对象
+        2. 基本行为
+            size/length：包含的dom元素个数
+            [index]/get[index]：得到对应位置的dom元素
+            each()： 遍历包含的所有dom元素
+            index()：得到所在兄弟元素中的下标
+    -->
+
+    <button id="btn1">测试一</button>
+    <button id="btn2">测试二</button>
+    <button id="btn3">测试三</button>
+    <button>测试四</button>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            需求：
+                1. 统计一共有多少个按钮
+                2. 取出第2个button的文本
+                3. 输出所有button标签的文本
+                4. 输出"测试三"按钮是所有按钮中的第几个
+         */
+
+        // 1. 统计一共有多少个按钮
+        var $buttons = $('button')
+        console.log($buttons.size(), $buttons.length)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 2. 取出第2个button的文本
+        console.log($buttons[1].innerHTML, $buttons.get(1).innerHTML)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 3. 输出所有button标签的文本
+        $buttons.each(function (index, domEle) {
+            console.log(index, domEle.innerHTML, this.innerHTML, $(this).html())
+        })
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 4. 输出"测试三"按钮是所有按钮中的第几个
+        console.log($('#btn3').index())
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        /*
+            1. 伪数组
+                Object对象
+                length属性
+                数值下标属性
+                没有数组特别的方法：forEach(), push(), pop(), splice()
+         */
+        console.log($buttons instanceof Array) // false
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 自定义一个伪数组
+        var weiArr = {}
+        weiArr.length = 0
+        weiArr[0] = 'colg'
+        weiArr.length = 1
+        weiArr[1] = 123
+        weiArr.length = 2
+        console.log(weiArr instanceof Array)
+        console.log(weiArr.forEach, $buttons.forEach) // undefined
+    </script>
+</body>
+</html>

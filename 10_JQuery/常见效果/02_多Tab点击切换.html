@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_多Tab点击切换</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    #tab li {
+        float: left;
+        list-style: none;
+        width: 80px;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        text-align: center;
+    }
+    #container {
+        position: relative;
+    }
+    #content1, #content2, #content3 {
+        width: 300px;
+        height: 100px;
+        padding: 30px;
+        position: absolute;
+        top: 40px;
+        left: 0;
+    }
+    #tab1, #content1 {
+        background-color: #ffcc00;
+    }
+    #tab2, #content2 {
+        background-color: #ff00cc;
+    }
+    #tab3, #content3 {
+        background-color: #00ccff;
+    }
+</style>
+</head>
+<body>
+    <h2>多Tab点击切换</h2>
+
+    <ul id="tab">
+        <li id="tab1" value="1">10元套餐</li>
+        <li id="tab2" value="2">30元套餐</li>
+        <li id="tab3" value="3">50元包月</li>
+    </ul>
+
+    <div id="container">
+        <div id="content1">
+            10元套餐详情：<br/>每月套餐内拨打100分钟，超出部分2毛/分钟
+        </div>
+        <div id="content2" style="display: none">
+            30元套餐详情：<br/>每月套餐内拨打300分钟，超出部分1.5毛/分钟
+        </div>
+        <div id="content3" style="display: none">
+            50元包月详情：<br/>每月无限量随心打
+        </div>
+    </div>
+
+    <script src="../../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        // 得到3个div
+        var $contents = $('#container > div')
+
+        // 方法一：
+        /*
+        // 给3个li加监听
+        $('#tab > li').click(function () { // 隐式遍历
+            // 隐藏所有div
+            $contents.css('display', 'none')
+            // 显示对应的内容div
+            // 得到当前li在兄弟元素中的下标
+            var index = $(this).index()
+            // 找到对应的内容div
+            $contents[index].style.display = 'block' // 原生
+            $($contents[index]).css('display', 'block')
+        })
+        */
+
+        // 方法二：
+        var currIndex = 0 // 当前显示的内容div的下标
+        $('#tab > li').click(function () {
+            // 隐藏当前已经显示的内容div
+            $contents[currIndex].style.display = 'none'
+            // 显示对应的内容div
+            var index = $(this).index()
+            $contents[index].style.display = 'block'
+
+            // 更新下标
+            currIndex = index
+        })
+
+    </script>
+</body>
+</html>

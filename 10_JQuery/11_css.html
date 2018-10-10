@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>11_css</title>
+</head>
+<body>
+    <p style="color: blue;">蛮族之王 - 泰达米尔</p>
+    <p style="color: green;">暗裔剑魔 - 亚托克斯</p>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            css()：设置css样式/读取css值
+         */
+
+        /*
+            需求：
+                1. 得到第一个p标签的颜色
+                2. 设置所有p标签的文本颜色为red
+                3. 设置第2个p的字体颜色(yellow), 背景(blue), 宽(330px), 高(30px)
+         */
+
+        // 1. 得到第一个p标签的颜色
+        var $ps = $('p')
+        console.log($ps.first().css('color'))
+
+        // 2. 设置所有p标签的文本颜色为red
+        $ps.css('color', 'red')
+
+        // 3. 设置第2个p的字体颜色(#f01), 背景(blue), 宽(330px), 高(30px)
+        $ps.eq(1).css({
+            color: 'yellow',
+            background: 'blue',
+            width: 300,
+            height: 30
+        })
+    </script>
+</body>
+</html>

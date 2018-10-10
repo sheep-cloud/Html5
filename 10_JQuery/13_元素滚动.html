@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>13_元素滚动</title>
+</head>
+<body style="height: 2000px;">
+    <div style="border: 1px solid black; width: 100px; height: 150px; overflow: auto;">
+        This is some text. This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text. This is some text.
+        This is some text. This is some text. This is some text. This is some text.
+        his is some text.
+    </div>
+    <br>
+    <br>
+    <br>
+    <button id="btn1">得到div scrollTop</button>
+    <button id="btn2">得到页面 scrollTop</button>
+    <button id="btn3">设置div scrollTop</button>
+    <button id="btn4">设置页面 scrollTop</button>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            元素滚动
+                1. scrollTop()：读取/设置滚动条的Y坐标
+                2. $(document.documentElement, document.body).scrollTop()：读取页面滚动条的Y坐标（兼容chrome和IE）
+                3. $('html, body').scrollTop(60)：页面滚动到指定位置（兼容chrome和IE）
+         */
+
+        /*
+            需求：
+                1. 得到div滚动条的坐标
+                2. 得到页面滚动条的坐标
+                3. 让div的滚动条滚动到指定位置
+                4. 让页面的滚动条滚动到指定位置
+         */
+
+        // 1. 得到div滚动条的坐标
+        var $div = $('div')
+        $('#btn1').click(function () {
+            console.log($div.scrollTop())
+        })
+
+        // 2. 得到页面滚动条的坐标
+        $('#btn2').click(function () {
+            console.log($('html, body').scrollTop()) // 兼容chrome和IE
+            console.log($(document.documentElement, document.body).scrollTop()) // 优化
+        })
+
+        // 3. 让div的滚动条滚动到指定位置
+        $('#btn3').click(function () {
+            $div.scrollTop(100)
+        })
+
+        // 4. 让页面的滚动条滚动到指定位置
+        $('#btn4').click(function () {
+            $('html, body').scrollTop(60) // 兼容chrome和IE
+            //$(document.documentElement, document.body).scrollTop(60)
+        })
+    </script>
+</body>
+</html>

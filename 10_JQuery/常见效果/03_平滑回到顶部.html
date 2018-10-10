@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_平滑回到顶部</title>
+<style>
+    #to_top {
+        width: 30px;
+        height: 40px;
+        font: 14px/20px arial;
+        text-align: center;
+        background: #06c;
+        position: fixed;
+        cursor: pointer;
+        color: #fff;
+        left: 1050px;
+        top: 500px;
+    }
+</style>
+</head>
+<body style="height: 2000px;">
+    <div id="to_top">返回顶部</div>
+
+    <script src="../../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        $('#to_top').click(function () {
+            // 瞬间滚到顶部
+            // $('html, body').scrollTop(0)
+
+            // 平滑滚动到顶部
+            // 总距离、总时间、间隔时间
+            var $page = $('html, body')
+            var distance = $page.scrollTop()
+            var time = 500
+            var intervalTime = 5
+            var itemDistance = distance / (time / intervalTime)
+
+            // 使用循环定时器不断滚动
+            var intervalId = setInterval(function () {
+                distance -= itemDistance
+                // 到达顶部，停止定时器
+                if (distance <= 0) {
+                    distance = 0 // 修正，到达顶点
+                    clearInterval(intervalId)
+                }
+
+                // 设置滚动位置
+                $page.scrollTop(distance)
+            }, intervalTime)
+        })
+    </script>
+</body>
+</html>

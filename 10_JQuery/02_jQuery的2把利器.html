@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_jQuery的2把利器</title>
+</head>
+<body>
+    <!--
+        1. jQuery 核心函数
+            简称：jQuery函数（$/jQuery）
+            jQuery库向外直接暴露的就是$/jQuery
+            引入jQuery库后，直接使用$即可
+                当函数用：$(xxx)
+                当对象用：$.xxx()
+        2. jQuery 核心对象
+            简称：jQuery对象
+            得到jQuery对象：执行jQuery函数返回的就是jQuery对象
+            使用jQuery对象：$obj.xxx()
+    -->
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        // 1. jQuery函数：直接可用
+        console.log($)
+        console.log(typeof $)
+        console.log($ === jQuery) // true
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 2. jQuery对象：执行jQuery函数得到它
+        console.log($())
+        console.log($() instanceof Object) // true
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // jQuery函数结构
+        ;(function (window) {
+            var jQuery = function () {
+                return new xxx()
+            }
+
+            window.jQuery = window.$ = jQuery
+        })(window)
+    </script>
+</body>
+</html>

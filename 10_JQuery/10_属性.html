@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10_属性</title>
+</head>
+<body>
+    <div id="div1" class="box" title="one">class为box的div1</div>
+    <div id="div2" class="box" title="two">class为box的div2</div>
+    <div id="div3">div3</div>
+    <span class="box">class为box的span</span>
+    <br/>
+    <ul>
+        <li>AAAAA</li>
+        <li title="hello" class="box2">BBBBB</li>
+        <li class="box">CCCCC</li>
+        <li title="hello">DDDDDD</li>
+        <li title="two"><span>BBBBB</span></li>
+    </ul>
+
+    <input type="text" name="username" value="guiguClass" title=""/>
+    <br>
+    <input type="checkbox" title="">
+    <input type="checkbox" title="">
+    <br>
+    <button>选中</button>
+    <button>不选中</button>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            属性：
+                1. 操作任意属性
+                    attr()：操作属性值为非布尔值的属性
+                    removeAttr()
+                    prop()：专门操作属性值为布尔值的属性
+                2. 操作class属性
+                    addClass()
+                    removeClass()
+                3. 操作HTML代码/文本
+                    html()
+                    val()
+         */
+
+        /*
+            需求：
+                1. 读取第一个div的title属性
+                2. 给所有的div设置name属性(value为colg)
+                3. 移除所有div的title属性
+                4. 给所有的div设置class='colgCss'
+                5. 给所有的div添加class='abc
+                6. 移除所有div为colgCss的class
+                7. 得到最后一个li的标签体文本
+                8. 设置第一个li的标签体为"<h1>mmmmmm</h1>"
+                9. 得到输入框中的value值
+                10. 将输入框的值设置为colg
+                11. 点击'全选'按钮实现全选
+                12. 点击'全不选'按钮实现全不选
+         */
+
+        // 1. 读取第一个div的title属性
+        var $divs = $('div')
+        console.log($('div:first').attr('title'))
+
+        // 2. 给所有的div设置name属性(value为colg)
+        $divs.attr('name', 'colg')
+
+        // 3. 移除所有div的title属性
+        $divs.removeAttr('name')
+
+        // 4. 给所有的div设置class='colgCss'
+        $divs.attr('class', 'colgCss')
+
+        // 5. 给所有的div添加class='abc
+        $divs.addClass('abc')
+
+        // 6. 移除所有div为colgCss的class
+        $divs.removeClass('colgCss')
+
+        // 7. 得到最后一个li的标签体文本
+        console.log($('li:last').html())
+
+        // 8. 设置第一个li的标签体为"<h1>mmmmmm</h1>"
+        $('li:first').html(`<h1>mmmmmm</h1>`)
+
+        // 9. 得到输入框中的value值
+        var $text = $(':text')
+        console.log($text.val())
+
+        // 10. 将输入框的值设置为colg
+        $text.val('colg')
+
+        // 11. 点击'全选'按钮实现全选
+        var $checkboxs = $(':checkbox')
+        $(':button:first').click(function () {
+            $checkboxs.prop('checked', true)
+        })
+
+        // 12. 点击'全不选'按钮实现全不选
+        $(':button:last').click(function () {
+            $checkboxs.prop('checked', false)
+        })
+    </script>
+</body>
+</html>
