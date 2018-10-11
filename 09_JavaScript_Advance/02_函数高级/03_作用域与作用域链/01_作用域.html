@@ -17,7 +17,7 @@
             * 隔离变量，不同作用域下同名变量不会有冲突
     -->
     <script>
-        if (true) {
+        if (1 === 1) {
             // 块作用域，ES6之前没有块作用域
             var c = 3
         }
@@ -26,11 +26,13 @@
 
         // 全局作用域
         var a = 10
+
         function fn(x) {
             // 函数作用域
             var a = 100
             console.log('fn()', a, x)
         }
+
         fn(20)
         console.log(a)
     </script>
