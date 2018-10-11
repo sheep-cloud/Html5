@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>24_自定义动画</title>
+<style>
+    * {
+        margin: 0;
+    }
+    .div1 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 50px;
+        left: 300px;
+        background: red;
+    }
+</style>
+</head>
+<body>
+    <button id="btn1">逐渐扩大</button>
+    <button id="btn2">移动到指定位置</button>
+    <button id="btn3">移动指定距离</button>
+    <button id="btn4">停止动画</button>
+
+    <div class="div1">
+        登峰造极境
+    </div>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            jQuery动画本质：在指定时间内不断改变元素样式值来实现的
+                1. animate()：自定义动画效果的函数
+                2. stop()：停止动画
+         */
+
+        /*
+            需求：
+                1. 逐渐扩大
+                  1.1. 宽/高都扩为200px
+                  1.2. 宽先扩为200px, 高后扩为200px
+                2. 移动到指定位置
+                  2.1. 移动到(500, 100)处
+                  2.2. 移动到(100, 20)处
+                3.移动指定的距离
+                  3.1. 移动距离为(100, 50)
+                  3.2. 移动距离为(-100, -20)
+                4. 停止动画
+         */
+
+        var $div1 = $('.div1')
+        // 1. 逐渐扩大
+        $('#btn1').click(function () {
+            // 1.1. 宽/高都扩为200px
+            /*
+            $div1.animate({
+                width: 200,
+                height: 200
+            }, 'slow')
+            */
+
+            // 1.2. 宽先扩为200px, 高后扩为200px
+            $div1
+                .animate({
+                    width: 200
+                }, 'slow')
+                .animate({
+                    height: 200
+                }, 'fast')
+        })
+
+        // 2. 移动到指定位置
+        $('#btn2').click(function () {
+            // 2.1. 移动到(500, 100)处
+            /*
+            $div1.animate({ // 向右下移动
+                left: 500,
+                top: 100
+            }, 'slow')
+            */
+
+            // 2.2. 移动到(100, 20)处
+            $div1.animate({ // 向左上移动
+                left: 100,
+                top: 20
+            }, 'fast')
+        })
+
+        // 3.移动指定的距离
+        $('#btn3').click(function () {
+            // 3.1. 移动距离为(100, 50)
+            /*
+            $div1.animate({
+                left: '+=100',
+                top: '+=50'
+            }, 'slow')
+            */
+
+            // 3.2. 移动距离为(-100, -20)
+            $div1.animate({
+                left: '-=100',
+                top: '-=20'
+            }, 'slow')
+        })
+
+        // 停止动画
+        $('#btn4').click(function () {
+            $div1.stop()
+        })
+    </script>
+</body>
+</html>

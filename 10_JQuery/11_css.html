@@ -22,14 +22,13 @@
          */
 
         // 1. 得到第一个p标签的颜色
-        var $ps = $('p')
-        console.log($ps.first().css('color'))
+        console.log($('p:first').css('color'))
 
         // 2. 设置所有p标签的文本颜色为red
-        $ps.css('color', 'red')
+        $('p').css('color', 'red')
 
-        // 3. 设置第2个p的字体颜色(#f01), 背景(blue), 宽(330px), 高(30px)
-        $ps.eq(1).css({
+        // 3. 设置第2个p的字体颜色(yellow), 背景(blue), 宽(330px), 高(30px)
+        $('p:eq(1)').css({
             color: 'yellow',
             background: 'blue',
             width: 300,

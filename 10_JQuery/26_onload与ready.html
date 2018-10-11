@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>26_onload与ready</title>
+</head>
+<body>
+    <h1>测试window.onload与$(document).ready()</h1>
+    <img id="logo" src="http://ww1.sinaimg.cn/large/005PjuVtgy1fw4t361xawj30bi05jdfo.jpg"/>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            区别：window.onload与$(document).ready()
+                window.onload
+                    包括页面的图片加载完成后才会回调（晚）
+                    只能有一个监听回调
+                $(document).ready()
+                    等同于：$(function() {})
+                    页面加载完成就回调（早）
+                    可以有多个监听回调
+         */
+
+        /*
+            需求：
+                1. 直接打印img的宽度，观察其值
+                2. 在 $(function(){}) 中 打印 img 的宽度
+                3. 在 window.onload 中打印宽度
+                4. 在 img 加载完成后打印宽度
+         */
+
+        // 1. 直接打印img的宽度，观察其值
+        var $logo = $('#logo')
+        console.log('直接', $logo.width())
+
+        // 2. 在 $(function(){}) 中 打印 img 的宽度
+        $(function () {
+            console.log('ready', $logo.width())
+        })
+
+        $(function () {
+            console.log('ready2', $logo.width())
+        })
+
+        // 3. 在 window.onload 中打印宽度
+        window.onload = function () {
+            console.log('onload', $logo.width())
+        }
+
+        window.onload = function () {
+            console.log('onload2', $logo.width())
+        }
+
+        // 4. 在 img 加载完成后打印宽度
+        $logo.on('load', function () {
+            console.log('img load', $(this).width())
+        })
+    </script>
+</body>
+</html>

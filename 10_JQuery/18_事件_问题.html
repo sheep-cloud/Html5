@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>18_事件_问题</title>
+<style>
+    * {
+        margin: 0;
+    }
+    .div1 {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 50px;
+        left: 10px;
+        background: olive;
+    }
+    .div2 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 50px;
+        background: red;
+    }
+    .div3 {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 50px;
+        left: 230px;
+        background: olive;
+    }
+    .div4 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        top: 50px;
+        background: yellow;
+    }
+    .divText {
+        position: absolute;
+        top: 330px;
+        left: 10px;
+    }
+</style>
+</head>
+<body>
+    <div class="divText">
+        区分鼠标的事件
+    </div>
+
+    <div class="div1">
+        div1.....
+        <div class="div2">div2....</div>
+    </div>
+
+    <div class="div3">
+        div3.....
+        <div class="div4">div4....</div>
+    </div>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            区别mouseover与mouseenter？
+                mouseover：在移入子元素时也会触发，对应mouseout
+                mouseenter：只在移入到当前元素时才触发，对应mouseleave，hover()使用的就是mouseenter、mouseleave
+         */
+
+        $('.div1')
+            .mouseover(function () {
+                console.log('mouseover 鼠标移入')
+            })
+            .mouseout(function () {
+                console.log('mouseout 鼠标移出')
+            })
+
+        $('.div3')
+            .mouseenter(function () {
+                console.log('mouseenter 鼠标移入')
+            })
+            .mouseleave(function () {
+                console.log('mouseleave 鼠标移出')
+            })
+    </script>
+</body>
+</html>

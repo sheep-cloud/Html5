@@ -337,14 +337,13 @@
          */
 
         // 1. 得到第一个p标签的颜色
-        var $ps = $('p')
-        console.log($ps.first().css('color'))
+        console.log($('p:first').css('color'))
 
         // 2. 设置所有p标签的文本颜色为red
-        $ps.css('color', 'red')
+        $('p').css('color', 'red')
 
-        // 3. 设置第2个p的字体颜色(#f01), 背景(blue), 宽(330px), 高(30px)
-        $ps.eq(1).css({
+        // 3. 设置第2个p的字体颜色(yellow), 背景(blue), 宽(330px), 高(30px)
+        $('p:eq(1)').css({
             color: 'yellow',
             background: 'blue',
             width: 300,
@@ -354,7 +353,7 @@
 
 #### 4.2.2. 位置
 
-##### 4.2.2.1. 标签位置
+##### 4.2.2.1. 位置坐标
 
 ```js
         /*
@@ -454,11 +453,9 @@
         console.log($div.outerWidth(true), $div.outerHeight(true)) // 160 210
 ```
 
-### 4.3. 文档处理
+### 4.3. 筛选
 
-### 4.4. 筛选
-
-#### 4.4.1. 过滤
+#### 4.3.1. 过滤
 
 ```js
         /*
@@ -497,14 +494,438 @@
         $lis.has('span').css('background', 'palegreen')
 ```
 
+#### 4.3.2. 查找
 
+```js
+        /*
+            在已经匹配出的元素集合中根据选择器查找孩子/父母/兄弟标签
+                1. children()：子标签中找
+                2. find()：后代标签中找
+                3. parent()：父标签
+                4. prevAll()：前面所有的兄弟标签
+                5. nextAll()：后面所有的兄弟标签
+                6. siblings()：前后所有的兄弟标签
+         */
 
-#### 4.4.2. 查找
+        var $ul = $('ul')
+        // 1. ul标签的第2个span子标签
+        // $ul.children('span:eq(1)').css('background', 'red')
+        $ul.children('span').eq(1).css('background', 'red')
 
-### 3.5. 事件
+        // 2. ul标签的第2个span后代标签
+        $ul.find('span').eq(1).css('background', 'yellow')
 
-### 4.6. 效果
+        // 3. ul标签的父标签
+        $ul.parent().css('background', 'palegreen')
+
+        // 4. id为cc的li标签的前面的所有li标签
+        var $li = $('#cc')
+        $li.prevAll('li').css('background', 'purple')
+
+        // 5. id为cc的li标签的所有兄弟li标签
+        $li.siblings('li').css('background', 'grey')
+```
+
+### 4.4. 文档处理
+
+```js
+        /*
+            文档处理
+                1. 添加元素
+                    append(content)：向当前匹配的所有元素内部的最后插入指定内容
+                    prepend(content)：向当前匹配的所有元素内部的最前面插入指定内容
+                    before(content)：将指定内容插入到当前所有匹配元素的前面
+                    after(content)：将指定内容插入到当前所有匹配元素的后面
+                2. 替换元素
+                    replaceWith(content)：用指定内容替换所有匹配的标签
+                3. 删除元素
+                    empty()：删除所有匹配元素的子元素
+                    remove()：删除所有匹配的元素
+         */
+
+        var $ul1 = $('#ul1')
+        // 1. 向id为ul1的ul下添加一个span(最后)
+        // $ul1.append(`<span>append()添加的span</span>`)
+        $(`<span>append()添加的span</span>`).appendTo($ul1)
+
+        // 2. 向id为ul1的ul下添加一个span(最前)
+        // $ul1.prepend(`<span>prepend()添加的span</span>`)
+        $(`<span>prepend()添加的span</span>`).prependTo($ul1)
+
+        // 3. 在id为ul1的ul下的li(title为hello)的前面添加span
+        $ul1.children('li[title=hello]').before(`<span>before()添加的span</span>`)
+
+        // 4. 在id为ul1的ul下的li(title为hello)的后面添加span
+        $ul1.children('li[title=hello]').after(`<span>after()添加的span</span>`)
+
+        var $ul2 = $('#ul2')
+        // 5. 将在id为ul2的ul下的li(title为hello)全部替换为p
+        $ul2.children('li[title=hello]').replaceWith(`<p>replaceWith()替换的p</p>`)
+
+        // 6. 移除id为ul2的ul下的所有li
+        $('#ul2 > li').remove()
+```
+
+### 4.5. 事件
+
+#### 4.5.1. 事件处理
+
+```js
+        /*
+            事件绑定与解绑：
+                1. 事件绑定（2种）
+                    1.1. eventName(function() {})：
+                    	绑定对应事件名的监听，例如：$('#div').click(function() {})
+                    1.2. on(eventName, function() {})：
+                    	通用的绑定事件监听，例如：$('#div').on('click', function() {})
+                    优缺点：
+                        eventName：编码方便，但只能添加一个监听，且有的事件监听不支持
+                        on：编码不方便，可以添加多个监听，且更通用
+                2. 事件解绑
+                    off(eventName)：移除一个或多个事件
+                3. 事件的坐标
+                    event.clientX, event.clientY：相对于窗口的左上角
+                    event.pageX, event.pageY：相对于页面的左上角
+                    event.offsetX, event.offsetY：相对于事件元素左上角
+                4. 事件相关处理
+                    event.stopPropagation()：停止事件冒泡
+                    event.preventDefault()：阻止事件默认行为
+         */
+
+        /*
+            区别mouseover与mouseenter？
+                mouseover：在移入子元素时也会触发，对应mouseout
+                mouseenter：只在移入到当前元素时才触发，对应mouseleave，
+                			hover()使用的就是mouseenter、mouseleave
+         */
+
+        // 1. 给.out绑定点击监听(用两种方法绑定)
+        var $out = $('.out')
+        $out.click(function () {
+            console.log('click out')
+        })
+
+        $out.on('click', function () {
+            console.log('on click out')
+        })
+
+        // 2. 给.inner绑定鼠标移入和移出的事件监听(用3种方法绑定)
+        var $inner = $('.inner')
+        $inner
+            .mouseenter(function () { // 鼠标移入
+                console.log('mouseenter 鼠标移入')
+            })
+            .mouseleave(function () { // 鼠标移出
+                console.log('mouseleave 鼠标移出')
+            })
+
+        $inner
+            .on('mouseenter', function () {
+                console.log('on mouseenter 鼠标移入')
+            })
+            .on('mouseleave', function () {
+                console.log('on mouseleave 鼠标移出')
+            })
+
+        $inner.hover(function () {
+            console.log('hover 鼠标移入')
+        }, function () {
+            console.log('hover 鼠标移出')
+        })
+
+        // 3. 点击btn1解除.inner上的所有事件监听
+        $('#btn1').click(function () {
+            $inner.off()
+        })
+
+        // 4. 点击btn2解除.inner上的mouseenter事件
+        $('#btn2').click(function () {
+            $inner.off('mouseenter')
+        })
+
+        // 5. 点击btn3得到事件坐标
+        $('#btn3').click(function (event) { // 事件对象
+            console.log(event.clientX, event.clientY) // 原点为窗口的左上角
+            console.log(event.pageX, event.pageY) // 原点为页面的左上角
+            console.log(event.offsetX, event.offsetY) // 原点为事件元素的左上角
+            console.log('---------------------------------------------------------------')
+        })
+
+        // 6. 点击.inner区域, 外部点击监听不响应
+        $inner.click(function (event) {
+            console.log('click inner')
+            // 停止事件冒泡
+            event.stopPropagation()
+        })
+
+        // 7. 点击链接, 页面不要跳转
+        $('#test4').click(function (event) {
+            // 阻止事件默认行为
+            event.preventDefault()
+        })
+```
+
+#### 4.5.2. 事件委派
+
+```js
+        /*
+            1. 事件委派（委托/代理）
+                将多个子元素（li）的事件监听委托给父辈元素（ul）处理
+                监听回调是加载了父辈元素上
+                当操作任何一个子元素（li）时，事件会冒泡到父辈元素（ul）
+                父辈元素不会直接处理事件，而是根据event.target得到发生事件的子元素（li），
+                	通过这个子元素调用事件回调函数
+            2. 事件委派的2方
+                委派方：业主 li
+                被委派方：中介 ul
+            3. 使用事件委派的好处
+                添加新的子元素，自动有事件响应处理
+                减少事件监听的数量：n ==> 1
+            4. jQuery的事件委派API
+                设置事件委派：
+                	$(parentSelector).delegate(childrenSelector, eventName, callback) 
+                	// 回调函数中的this是子元素
+                移除事件委派：$(parentSelector).undelegate(eventName)
+         */
+
+        // 1. 点击 li 背景就会变为红色，设置事件委派
+        $('ul').delegate('li', 'click', function () {
+            // console.log(this) // 发生事件的li元素
+            this.style.background = 'red'
+        })
+
+        // 2. 点击 btn 就添加一个 li
+        $('#btn1').click(function () {
+            $('ul').append(`<li>新增的li</li>`)
+        })
+
+        // 3. 删除ul上的事件委派的监听器
+        $('#btn2').click(function () {
+            $('ul').undelegate('click')
+        })
+```
+
+### 4.6. 动画效果
+
+#### 4.6.1. 淡入淡出
+
+```js
+        /*
+            淡入淡出：不断改变元素的透明度（opacity）来实现的
+                1. fadeIn()：带动画的显示
+                2. fadeOut()：带动画隐藏
+                3. fadeToggle()：带动画切换显示/隐藏
+         */
+
+        var $div1 = $('.div1')
+        // 1. 点击btn1，慢慢淡出
+        $('#btn1').click(function () {
+            $div1.fadeIn()
+        })
+
+        // 2. 点击btn2，慢慢淡入
+        $('#btn2').click(function () {
+            $div1.fadeOut()
+        })
+
+        // 3. 点击btn3，淡出/淡入切换，动画结束时提示"动画结束了"
+        $('#btn3').click(function () {
+            $div1.fadeToggle('slow', function () {
+                alert('动画结束了')
+            })
+        })
+```
+
+#### 4.6.2. 滑动
+
+```js
+        /*
+            滑动动画：不断改变元素的高度实现
+                1. slideDown()：带动画的展开
+                2. slideUp()：带动画的收缩
+                3. slideToggle()：带动画的切换展开/收缩
+         */
+
+        var $div1 = $('.div1')
+        // 1. 点击btn1, 向上滑动
+        $('#btn1').click(function () {
+            $div1.slideUp()
+        })
+
+        // 2. 点击btn2, 向下滑动
+        $('#btn2').click(function () {
+            $div1.slideDown()
+        })
+
+        // 3. 点击btn3, 向上/向下切换
+        $('#btn3').click(function () {
+            $div1.slideToggle('slow', function () {
+                alert('动画结束了')
+            })
+        })
+```
+
+#### 4.6.3. 显示与隐藏
+
+```js
+        /*
+            显示与隐藏，默认没有动画，动画（opacity/height/width）
+                1. show()：（不）带动画的显示
+                2. hide()：（不）带动画的隐藏
+                3. toggle()：（不）带动画的切换显示/隐藏
+         */
+
+        var $div1 = $('.div1')
+        // 1. 点击btn1, 立即显示
+        $('#btn1').click(function () {
+            $div1.show()
+        })
+
+        // 2. 点击btn2, 慢慢显示
+        $('#btn2').click(function () {
+            $div1.show('slow')
+        })
+
+        // 3. 点击btn3, 慢慢隐藏
+        $('#btn3').click(function () {
+            $div1.hide('slow')
+        })
+
+        // 4. 点击btn4, 切换显示/隐藏
+        $('#btn4').click(function () {
+            $div1.toggle()
+        })
+```
+
+#### 4.6.4. 自定义动画
+
+```js
+        /*
+            jQuery动画本质：在指定时间内不断改变元素样式值来实现的
+                1. animate()：自定义动画效果的函数
+                2. stop()：停止动画
+         */
+
+        var $div1 = $('.div1')
+        // 1. 逐渐扩大
+        $('#btn1').click(function () {
+            // 1.1. 宽/高都扩为200px
+            /*
+            $div1.animate({
+                width: 200,
+                height: 200
+            }, 'slow')
+            */
+
+            // 1.2. 宽先扩为200px, 高后扩为200px
+            $div1
+                .animate({
+                    width: 200
+                }, 'slow')
+                .animate({
+                    height: 200
+                }, 'fast')
+        })
+
+        // 2. 移动到指定位置
+        $('#btn2').click(function () {
+            // 2.1. 移动到(500, 100)处
+            /*
+            $div1.animate({ // 向右下移动
+                left: 500,
+                top: 100
+            }, 'slow')
+            */
+
+            // 2.2. 移动到(100, 20)处
+            $div1.animate({ // 向左上移动
+                left: 100,
+                top: 20
+            }, 'fast')
+        })
+
+        // 3.移动指定的距离
+        $('#btn3').click(function () {
+            // 3.1. 移动距离为(100, 50)
+            /*
+            $div1.animate({
+                left: '+=100',
+                top: '+=50'
+            }, 'slow')
+            */
+
+            // 3.2. 移动距离为(-100, -20)
+            $div1.animate({
+                left: '-=100',
+                top: '-=20'
+            }, 'slow')
+        })
+
+        // 停止动画
+        $('#btn4').click(function () {
+            $div1.stop()
+        })
+```
 
 ### 4.7. jQuery对象使用特点
 
+- 链式调用
+  - 调用jQuery对象的任何方法后返回的还是当前jQuery对象
+- 读写合一
+  - 读：内部第一个dom元素
+  - 写：内部所有的dom元素
+
 ## 5. jQuery插件
+
+### 5.1. 扩展插件
+
+```js
+        /*
+            扩展插件
+                $.extend(object)：扩展jQuery的工具方法
+                $.fn.extend(object)：扩展jQuery对象的方法
+         */
+
+;(function () {
+    // 1. 给 $ 添加4个工具方法
+    $.extend({
+        // 1.1. min(a, b) : 返回较小的值
+        min: function (a, b) {
+            return a < b ? a : b
+        },
+        // 1.2. max(c, d) : 返回较大的值
+        max: function (a, b) {
+            return a > b ? a : b
+        },
+        // 1.3. leftTrim(str) : 去掉字符串左边的空格
+        leftTrim: function (str) {
+            return str.replace(/^\s+/, '')
+        },
+        // 1.4. rightTrim(str) : 去掉字符串右边的空格
+        rightTrim: function (str) {
+            return str.replace(/\s+$/, '')
+        }
+    })
+
+    // 2. 给jQuery对象 添加3个功能方法
+    $.fn.extend({
+        // 2.1. checkAll() : 全选
+        checkAll: function () {
+            this.prop('checked', true)
+        },
+        // 2.2. unCheckAll() : 全不选
+        unCheckAll: function () {
+            this.prop('checked', false)
+        },
+        // 2.3. reverseCheck() : 反选
+        reverseCheck: function () {
+            // this 是jQuery对象
+            this.each(function () {
+                // this 是dom元素
+                this.checked = !this.checked
+            })
+        }
+    })
+})()
+```
+

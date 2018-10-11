@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>19_事件委派_引入</title>
+</head>
+<body>
+    <ul>
+        <li>11111</li>
+        <li>1111111</li>
+        <li>111111111</li>
+        <li>11111111111</li>
+    </ul>
+
+    <li>22222</li>
+    <br>
+    <button id="btn1">添加新的li</button>
+    <br>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            绑定事件监听的问题：新加的元素没有监听
+         */
+
+        /*
+            需求：
+                1. 点击 li 背景就会变为红色
+                2. 点击 btn 就添加一个 li
+         */
+
+        // 1. 点击 li 背景就会变为红色
+        $('ul > li').click(function () {
+            this.style.background = 'red'
+        })
+
+        // 2. 点击 btn 就添加一个 li
+        $('#btn1').click(function () {
+            $('ul').append(`<li>新增的li</li>`)
+        })
+    </script>
+</body>
+</html>

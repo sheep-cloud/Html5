@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>23_显示与隐藏</title>
+<style>
+    * {
+        margin: 0;
+    }
+    .div1 {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        top: 50px;
+        left: 10px;
+        background: red;
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <button id="btn1">立即显示</button>
+    <button id="btn2">慢慢显示</button>
+    <button id="btn3">慢慢隐藏</button>
+    <button id="btn4">显示隐藏切换</button>
+
+    <div class="div1"></div>
+
+    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+    <script>
+        /*
+            显示与隐藏，默认没有动画，动画（opacity/height/width）
+                1. show()：（不）带动画的显示
+                2. hide()：（不）带动画的隐藏
+                3. toggle()：（不）带动画的切换显示/隐藏
+         */
+
+        /*
+            需求：
+                1. 点击btn1, 立即显示
+                2. 点击btn2, 慢慢显示
+                3. 点击btn3, 慢慢隐藏
+                4. 点击btn4, 切换显示/隐藏
+         */
+
+        var $div1 = $('.div1')
+        // 1. 点击btn1, 立即显示
+        $('#btn1').click(function () {
+            $div1.show()
+        })
+
+        // 2. 点击btn2, 慢慢显示
+        $('#btn2').click(function () {
+            $div1.show('slow')
+        })
+
+        // 3. 点击btn3, 慢慢隐藏
+        $('#btn3').click(function () {
+            $div1.hide('slow')
+        })
+
+        // 4. 点击btn4, 切换显示/隐藏
+        $('#btn4').click(function () {
+            $div1.toggle()
+        })
+    </script>
+</body>
+</html>
