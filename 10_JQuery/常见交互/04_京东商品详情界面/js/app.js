@@ -23,6 +23,24 @@ $(function () {
     hoverSubMenu()
     search()
     share()
+    address()
+
+    /**
+     * 5. 鼠标移入移出切换地址的显示隐藏
+     */
+    function address() {
+        $('#store_select')
+            .hover(function () {
+                $(this).children(':gt(0)').show()
+            }, function () {
+                $(this).children(':gt(0)').hide()
+            })
+            .children(':last')
+            .click(function () {
+                // this 已改变
+                $(this).parent().children(':gt(0)').hide()
+            })
+    }
 
     /**
      * 4. 点击显示或者隐藏更多的分享图标
