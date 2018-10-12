@@ -20,9 +20,12 @@
  */
 $(function () {
     showHide()
+    hoverSubMenu()
 
-    // 1. 鼠标移入显示,移出隐藏
-    // 目标: 手机京东, 客户服务, 网站导航, 我的京东, 去购物车结算, 全部商品
+    /**
+     * 1. 鼠标移入显示，移出隐藏
+     *  目标: 手机京东, 客户服务, 网站导航, 我的京东, 去购物车结算, 全部商品
+     */
     function showHide() {
         $('[name="show_hide"]').hover(function () {
             // 显示
@@ -32,6 +35,17 @@ $(function () {
             // 隐藏
             var id = this.id + '_items'
             $('#' + id).hide()
+        })
+    }
+
+    /**
+     * 2. 鼠标移动切换二级导航菜单的切换显示和隐藏
+     */
+    function hoverSubMenu() {
+        $('#category_items > div').hover(function () {
+            $(this).children(':last').show()
+        }, function () {
+            $(this).children(':last').hide()
         })
     }
 })
