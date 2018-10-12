@@ -24,6 +24,23 @@ $(function () {
     search()
     share()
     address()
+    tabs()
+
+    /**
+     * 6. 点击切换地址tab
+     */
+    function tabs() {
+        var $lis = $('#store_tabs > li')
+        var currIndex = 0
+        $lis.click(function () {
+            $lis[currIndex].removeAttribute('class')
+            var index = $(this).index()
+            $lis[index].className = 'hover'
+
+            // 更新下标
+            currIndex = index
+        })
+    }
 
     /**
      * 5. 鼠标移入移出切换地址的显示隐藏
