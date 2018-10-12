@@ -24,8 +24,30 @@ $(function () {
     search()
     share()
     address()
-    tabs()
+    addressTabs()
     minicart()
+    productTabs()
+
+    /**
+     * 8. 点击切换产品选项 (商品详情等显示出来)
+     */
+    function productTabs() {
+        var $lis = $('#product_detail > ul > li')
+        var $contents = $('#product_detail > div:gt(0)')
+        var currIndex = 0
+        $lis.click(function () {
+            $lis[currIndex].className = ''
+            this.className = 'current'
+            // 隐藏当前已显示内容的contents
+            $($contents[currIndex]).hide()
+            // 显示当前对应的content
+            var index = $(this).index()
+            $contents.eq(index).show()
+
+            // 更新下标
+            currIndex = index
+        })
+    }
 
     /**
      * 7. 鼠标移入移出切换显示迷你购物车
@@ -43,7 +65,7 @@ $(function () {
     /**
      * 6. 点击切换地址tab
      */
-    function tabs() {
+    function addressTabs() {
         var $lis = $('#store_tabs > li')
         var currIndex = 0
         $lis.click(function () {
