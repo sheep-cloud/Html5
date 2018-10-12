@@ -22,6 +22,33 @@ $(function () {
     showHide()
     hoverSubMenu()
     search()
+    share()
+
+    /**
+     * 4. 点击显示或者隐藏更多的分享图标
+     */
+    function share() {
+        var isOpen = false // 标识当前是否显示更多（默认不显示）
+        var $shareMore = $('#shareMore')
+        var $parent = $shareMore.parent() // div标签
+        var $as = $shareMore.prevAll('a:lt(2)') // 查找之前的标签（倒着找）
+        var $b = $shareMore.children()
+
+        $shareMore.click(function () {
+            if (isOpen) {
+                // 关闭
+                $parent.css('width', 155)
+                $as.hide()
+                $b.removeClass('backword')
+            } else {
+                // 打开
+                $parent.css('width', 200)
+                $as.show()
+                $b.addClass('backword')
+            }
+            isOpen = !isOpen
+        })
+    }
 
     /**
      * 3. 输入搜索关键字, 列表显示匹配的结果
