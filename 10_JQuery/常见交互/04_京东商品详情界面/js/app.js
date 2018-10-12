@@ -25,6 +25,20 @@ $(function () {
     share()
     address()
     tabs()
+    minicart()
+
+    /**
+     * 7. 鼠标移入移出切换显示迷你购物车
+     */
+    function minicart() {
+        $('#minicart').hover(function () {
+            this.className = 'minicart'
+            $(this).children(':last').show()
+        }, function () {
+            this.className = ''
+            $(this).children(':last').hide()
+        })
+    }
 
     /**
      * 6. 点击切换地址tab
