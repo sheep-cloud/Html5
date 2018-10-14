@@ -27,6 +27,66 @@ $(function () {
     addressTabs()
     minicart()
     productTabs()
+    moveMinImg()
+
+    /**
+     * 9. 点击向右/左, 移动当前展示商品的小图片
+     */
+    function moveMinImg() {
+        var $as = $('#preview > h1 > a')
+        var $backward = $as.first()
+        var $forward = $as.last()
+        var $ul = $('#icon_list')
+        const SHOW_COUNT = 5 // 显示的图片总数
+        var imgCount = $ul.children('li').length
+        var moveCount = 0 // 移动的次数（点击向右为正，向左为负）
+        var liWidth = $ul.children(':first').width() // 图片宽度
+
+        // 初始化更新，向右按钮
+        if (imgCount > SHOW_COUNT) {
+            $forward.attr('class', 'forward')
+        }
+
+        // 给向右按钮绑定监听
+        $forward.click(function () {
+            // 判断是否需要移动，如果不需要直接结束
+            if (moveCount === imgCount - SHOW_COUNT) {
+                return
+            }
+            moveCount++
+
+            // 更新向左按钮
+            $backward.attr('class', 'backward')
+            // 更新向右按钮
+            if (moveCount === imgCount - SHOW_COUNT) {
+                $forward.attr('class', 'forward_disabled')
+            }
+            // 移动ul
+            $ul.css({
+                left: -moveCount * liWidth
+            })
+        })
+
+        // 给向左按钮绑定监听
+        $backward.click(function () {
+            // 判断是否需要移动，如果不需要直接结束
+            if (moveCount === 0) {
+                return
+            }
+            moveCount--
+
+            // 更新向右按钮
+            $forward.attr('class', 'forward')
+            // 更新相左按钮
+            if (moveCount === 0) {
+                $backward.attr('class', 'backward_disabled')
+            }
+            // 移动ul
+            $ul.css({
+                left: -moveCount * liWidth
+            })
+        })
+    }
 
     /**
      * 8. 点击切换产品选项 (商品详情等显示出来)
@@ -36,11 +96,11 @@ $(function () {
         var $contents = $('#product_detail > div:gt(0)')
         var currIndex = 0
         $lis.click(function () {
-            $lis[currIndex].className = ''
-            this.className = 'current'
             // 隐藏当前已显示内容的contents
+            $lis[currIndex].className = ''
             $($contents[currIndex]).hide()
             // 显示当前对应的content
+            this.className = 'current'
             var index = $(this).index()
             $contents.eq(index).show()
 
