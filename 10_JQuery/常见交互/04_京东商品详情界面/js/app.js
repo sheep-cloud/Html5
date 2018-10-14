@@ -28,12 +28,100 @@ $(function () {
     minicart()
     productTabs()
     moveMinImg()
-    hoverMinImg()
+    mediumImg()
+    bigImg()
+
+    /**
+     * 11. 当鼠标在中图上移动时, 显示对应大图的附近部分区域
+     */
+    function bigImg() {
+        var $medimImg = $('#mediumImg')
+        var $mask = $('#mask') // 小黄块
+        var $maskTop = $('#maskTop')
+        var $largeImgContainer = $('#largeImgContainer')
+        var $loading = $('#loading')
+        var $largeImg = $('#largeImg')
+        var maskWidth = $mask.width()
+        var maskHeight = $mask.height()
+        var maskTopWidth = $maskTop.width()
+        var maskTopHeight = $maskTop.height()
+
+        $maskTop.hover(function () {
+            // 显示小黄块
+            $mask.show()
+
+            // 动态加载对应的大图
+            var src = $medimImg.attr('src').replace('-m.', '-l.')
+            $largeImg.attr('src', src)
+            $largeImgContainer.show()
+
+            $largeImg.on('load', function () { // 大图加载完成
+                // 动态获取大图的尺寸
+                var largeWidth = $largeImg.width()
+                var largeHeight = $largeImg.height()
+                // 给$largeImgContainer设置尺寸
+                $largeImgContainer.css({
+                    width: largeWidth / 2,
+                    height: largeHeight / 2
+                })
+                // 显示大图
+                $(this).show()
+                // 隐藏加载进度
+                $loading.hide()
+
+                // 鼠标移动监听
+                $maskTop.mousemove(function (event) { // 在移动过程中被反复调用
+                    /*1. 移动小黄块*/
+                    // 计算出小黄块的left/top
+                    // 事件的坐标
+                    var eventLeft = event.offsetX
+                    var eventTop = event.offsetY
+                    var left = eventLeft - maskWidth / 2
+                    var top = eventTop - maskHeight / 2
+                    // left值在[0, maskTopWidth - maskWidth]区间
+                    // top值在[0, maskTopHeight - maskHeight]区间
+                    var maskMaxLeft = maskTopWidth - maskWidth
+                    var maskMaxTop = maskTopHeight - maskHeight
+                    if (left < 0) {
+                        left = 0
+                    } else if (left > maskMaxLeft) {
+                        left = maskMaxLeft
+                    }
+
+                    if (top < 0) {
+                        top = 0
+                    } else if (top > maskMaxTop) {
+                        top = maskMaxTop
+                    }
+
+                    // 给$mask重新定位
+                    $mask.css({
+                        left: left,
+                        top: top
+                    })
+
+                    /*2. 移动大图*/
+                    // 得到大图的坐标
+                    left = -left * largeWidth / maskTopWidth
+                    top = -top * largeHeight / maskTopHeight
+                    // 设置大图的坐标
+                    $largeImg.css({
+                        left: left,
+                        top: top
+                    })
+                })
+            })
+        }, function () {
+            $mask.hide()
+            $largeImgContainer.hide()
+            $largeImg.hide()
+        })
+    }
 
     /**
      * 10. 当鼠标悬停在某个小图上,在上方显示对应的中图
      */
-    function hoverMinImg() {
+    function mediumImg() {
         $('#icon_list > li').hover(function () {
             var $img = $(this).children()
             // 显示对应的红色边框
