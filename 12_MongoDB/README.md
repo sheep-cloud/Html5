@@ -52,9 +52,9 @@
   - 服务命令
 
     ```ini
-    net start MongoDB		启动
-    net stop MongoDB		停止
-    sc.exe delete MongoDB	删除服务
+    启动: net start MongoDB
+    停止: net stop MongoDB
+    删除服务: sc.exe delete MongoDB
     ```
 
 ### 2.2. MongoDB 导出命令
@@ -70,14 +70,10 @@ mongoexport -h 127.0.0.1 -d rams -c bu_device_data -o demo.json
 ### 3.1. 数据库的使用
 
 ```ini
-# 查看所有数据库列表
-show dbs;
-# 查看当前连接在哪个数据库下面
-db;
-# 切换数据库
-use 数据库名;
-# 查看数据库下有哪些collection
-show collections;
+查看所有数据库列表: show dbs;
+查看当前连接在哪个数据库下面: db;
+切换数据库: use 数据库名;
+查看数据库下有哪些collection: show collections;
 ```
 
 ### 3.2 CRUD操作
