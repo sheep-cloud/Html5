@@ -65,13 +65,26 @@
 mongoexport -h 127.0.0.1 -d rams -c bu_device_data -o demo.json
 ```
 
-## 3. MongoDB 基本操作
+## 3. MongoDB 操作
 
-### 3.1 CRUD操作
+### 3.1. 数据库的使用
 
-#### 3.1.1. 插入文档
+```ini
+# 查看所有数据库列表
+show dbs;
+# 查看当前连接在哪个数据库下面
+db;
+# 切换数据库
+use 数据库名;
+# 查看数据库下有哪些collection
+show collections;
+```
 
-#### 3.1.2. 删除文档
+### 3.2 CRUD操作
+
+#### 3.2.1. 插入文档
+
+#### 3.2.2. 删除文档
 
 ```sql
 /*
@@ -99,7 +112,7 @@ db.stus.deleteOne(
     {name: "shs"}
 );
 
-// 逻辑删除
+-- 逻辑删除
 db.stus.updateOne(
     {name: "ts"}, {$set: {is_delete: 1}}
 );
@@ -109,7 +122,7 @@ db.stus.find(
 );
 ```
 
-#### 3.1.3. 修改文档
+#### 3.2.3. 修改文档
 
 ```mysql
 /*
@@ -132,7 +145,7 @@ db.stus.find(
 */
 db.stus.find({});
 
-//替换
+-- 替换
 db.stus.update(
     {name: "ts"}, {age: 28}
 );
@@ -161,7 +174,7 @@ db.stus.update(
 db.stus.find();
 ```
 
-#### 3.1.4. 查询文档
+#### 3.2.4. 查询文档
 
 ```sql
 /*
@@ -195,7 +208,7 @@ db.stus.findOne(
 
 db.stus.find({}).count();
 ```
-### 3.2. 文档之间的关系
+### 3.3. 文档之间的关系
 
 ```sql
 /**
@@ -210,7 +223,7 @@ db.stus.find({}).count();
             - 
 */
     
-// 一对多  用户（users） 和 订单（orders）
+-- 一对多  用户（users） 和 订单（orders）
 db.users.insert(
     [{username: "swk"}, {username: "zbj"}]
 );
@@ -224,7 +237,7 @@ db.orders.insert(
 );
 db.orders.find();
 
-// 查询zbj的订单
+-- 查询zbj的订单
 var user_id = db.users.findOne(
     {username: "zbj"}
 )._id;
@@ -232,7 +245,7 @@ db.orders.find(
     {user_id: user_id}
 );
 
-// 多对多  老师（teachers） 和 学生（students）
+-- 多对多  老师（teachers） 和 学生（students）
 db.teachers.insert(
     [{name: "洪七公"}, {name: "欧阳锋"}, {name: "黄药师"}]
 );
@@ -243,56 +256,56 @@ db.students.insert(
 );
 db.students.find();
 ```
-### 3.3. CRUD案例
+### 3.4. CRUD案例
 
 ```sql
-// 1. 进入my_test数据库
+-- 1. 进入my_test数据库
 use my_test;
 
-// 2. 向数据库的users集合中插入一个文档
+-- 2. 向数据库的users集合中插入一个文档
 db.users.insert(
     {username: "sunwukong"}
 );
 
-// 3. 查询my_test数据库中的集合
+-- 3. 查询my_test数据库中的集合
 show collections;
 
-// 4. 查询users集合中的文档
+-- 4. 查询users集合中的文档
 db.users.find();
 
-// 5. 向数据库的users集合中插入一个文档
+-- 5. 向数据库的users集合中插入一个文档
 db.users.insert(
     {username: "zhubajie"}
 );
 
-// 6. 查询数据库users集合中的文档数量
+-- 6. 查询数据库users集合中的文档数量
 db.users.find().count();
 
-// 7. 查询数据库users集合中username为wunsukong的文档
+-- 7. 查询数据库users集合中username为wunsukong的文档
 db.users.find(
     {username: "sunwukong"}
 );
 
-// 8. 向数据库users集合中的username为sunwukong的文档，添加一个address属性，属性值为huoguoshan
+-- 8. 向数据库users集合中的username为sunwukong的文档，添加一个address属性，属性值为huoguoshan
 db.users.update(
     {username: "sunwukong"},
     {$set: {address: "huoguoshan"}}
 );
 
-// 9. 使用{username: "tangseng"} 替换 username为zhubajie的文档
+-- 9. 使用{username: "tangseng"} 替换 username为zhubajie的文档
 db.users.replaceOne(
     {username: "zhubajie"},
     {username: "tangseng"}
 );
 
-// 10. 删除username为sunwukong的文档的address属性
+-- 10. 删除username为sunwukong的文档的address属性
 db.users.update(
     {username: "sunwukong"},
     {$unset: {address: 1}}
 );
 
-// 11. 向username为sunwukong的文档中，添加一个hobby:{cities: ["beijing", "shanghai", "shenzhen"], movies: ["sanguo", "hero"]}
-// MongoDB的文档的属性值也可以是一个文档，当一个文档的属性值是一个文档时，这个文档叫做内嵌文档
+-- 11. 向username为sunwukong的文档中，添加一个hobby:{cities: ["beijing", "shanghai", "shenzhen"], movies: ["sanguo", "hero"]}
+-- MongoDB的文档的属性值也可以是一个文档，当一个文档的属性值是一个文档时，这个文档叫做内嵌文档
 db.users.update(
     {username: "sunwukong"},
     {$set: {
@@ -305,7 +318,7 @@ db.users.update(
     }
 );
 
-// 12. 向username为tangseng的文档中，添加一个hobby:{movies: ["A Chinese Odyssey", "King of comedy"]}
+-- 12. 向username为tangseng的文档中，添加一个hobby:{movies: ["A Chinese Odyssey", "King of comedy"]}
 db.users.update(
     {username: "tangseng"},
     {$set: {
@@ -315,35 +328,35 @@ db.users.update(
     }
 );
 
-// 13. 查询喜欢电影hero的文档
-// MongoDB支持直接通过内嵌文档的属性进行查询，如果要查询内嵌文档则可以通过.的形式来匹配
-// 如果要通过内嵌文档来对文档进行查询，此时属性名必须使用引号
+-- 13. 查询喜欢电影hero的文档
+-- MongoDB支持直接通过内嵌文档的属性进行查询，如果要查询内嵌文档则可以通过.的形式来匹配
+-- 如果要通过内嵌文档来对文档进行查询，此时属性名必须使用引号
 db.users.find(
     {"hobby.movies": "hero"}
 );
 
-// 14. 向tangseng中添加一个新的电影Interstellar
-// push 用于向数组中添加一个新的元素
-// addToSet 用于向数组中添加一个新的元素，如果数组中已经存在了该元素则不会添加
+-- 14. 向tangseng中添加一个新的电影Interstellar
+-- push 用于向数组中添加一个新的元素
+-- addToSet 用于向数组中添加一个新的元素，如果数组中已经存在了该元素则不会添加
 db.users.update(
     {username: "tangseng"},
     {$push: {"hobby.movies": "Interstellar"}}
 );
 
-// 15. 删除喜欢beijing的用户
+-- 15. 删除喜欢beijing的用户
 db.users.remove(
     {"hobby.cities": "beijing"}
 );
 
-// 16. 删除users集合
+-- 16. 删除users集合
 db.users.remove({});
-// 删除suers与数据库
+-- 删除suers与数据库
 db.users.drop();
 
 show dbs;
 
-// 17. 向numbers中插入20000条数据
-// 插入20000次
+-- 17. 向numbers中插入20000条数据
+-- 插入20000次
 for(var i = 0; i < 20; i++) {
     db.numbers.insert(
         {number: i}
@@ -353,7 +366,7 @@ show collections;
 db.numbers.find();
 db.numbers.remove({});
 
-// 一次插入20000条
+-- 一次插入20000条
 var arr = [];
 for(var i = 0; i < 20000; i++) {
     arr.push({number: i})
@@ -362,40 +375,40 @@ db.numbers.insert(
     arr
 );
 
-// 18. 查询numbers中number为500的文档
+-- 18. 查询numbers中number为500的文档
 db.numbers.find(
     {number: 500}
 );
 
-// 19. 查询numbers中number大于50000的文档
+-- 19. 查询numbers中number大于50000的文档
 db.numbers.find(
     {number: {$gt: 5000}}
 );
 
-// 20. 查询numbers中number小于30的文档
+-- 20. 查询numbers中number小于30的文档
 db.numbers.find(
     {number: {$lt: 30}}
 );
 
-// 21. 查询numbers中number大于40小于50的文档
+-- 21. 查询numbers中number大于40小于50的文档
 db.numbers.find(
     {number: {$gt: 40, $lt: 50}}
 );
 
-// 22. 查询numbers中number大于19996的文档
+-- 22. 查询numbers中number大于19996的文档
 db.numbers.find(
     {number: {$gt: 19996}}
 );
 
-// 23. 查询numbers中前10条数据
-// limit() 设置显示数据的上限
+-- 23. 查询numbers中前10条数据
+-- limit() 设置显示数据的上限
 db.numbers.find().limit(10);
 
-// 24. 查询numbers中的第11条到20条数据
-// skip() 跳过指定数量的数据
+-- 24. 查询numbers中的第11条到20条数据
+-- skip() 跳过指定数量的数据
 db.numbers.find().skip(10).limit(10);
-// 25. 查询numbers中的第21条到30条数据
-// MongoDB会自动调整skip和limit的位置
+-- 25. 查询numbers中的第21条到30条数据
+-- MongoDB会自动调整skip和limit的位置
 db.numbers.find().limit(10).skip(20);
 
 /*
@@ -410,21 +423,21 @@ db.numbers.find().limit(10).skip(20);
   skip(跳过的条数)
 */
 
-// 26. 将dept和emp集合导入到数据库中
+-- 26. 将dept和emp集合导入到数据库中
 db.dept.find();
 db.emp.find();
 
-// 27. 查询工资小于2000的员工
+-- 27. 查询工资小于2000的员工
 db.emp.find(
     {sal: {$lt: 2000}}
 );
 
-// 28. 查询工资在1000-2000之间的员工
+-- 28. 查询工资在1000-2000之间的员工
 db.emp.find(
     {sal: {$gt: 1000, $lt: 2000}}
 );
 
-// 29. 查询工资小于1000或大于2500的员工
+-- 29. 查询工资小于1000或大于2500的员工
 db.emp.find(
     {$or: [
             {sal: {$lt: 1000}},
@@ -433,38 +446,38 @@ db.emp.find(
     }
 );
 
-// 30. 查询财务部(deptno)的所有员工
+-- 30. 查询财务部(deptno)的所有员工
 var depno = db.dept.find({dname: "财务部"})[0].deptno;
 db.emp.find(
     {depno: depno}
 );
 
-// 31. 查询销售部(deptno)的所有员工
+-- 31. 查询销售部(deptno)的所有员工
 var depno = db.dept.findOne({dname: "销售部"}).deptno;
 db.emp.find(
     {depno: depno}
 );
 
-// 32. 查询所有mgr为7698的所有员工
+-- 32. 查询所有mgr为7698的所有员工
 db.emp.find(
     {mgr: 7698}
 );
 
-// 33. 为所有薪资不大于1000的员工增加工资400元
-// $inc只能用于Number类型的值
+-- 33. 为所有薪资不大于1000的员工增加工资400元
+-- $inc只能用于Number类型的值
 db.emp.updateMany(
     {sal: {$lte: 1000}},
     {$inc: {sal: 400}}
 );
 db.emp.find();
 
-// 34. sort() 排序，1表示升序，-1表示降序
-// limit skip sort 可以以任意的顺序进行调用
+-- 34. sort() 排序，1表示升序，-1表示降序
+-- limit skip sort 可以以任意的顺序进行调用
 db.emp.find().sort(
     {sal: 1, empno: -1}
 );
 
-// 35. 投影，可以在find()第二个参数设置指定字段
+-- 35. 投影，可以在find()第二个参数设置指定字段
 db.emp.find(
     {}, {_id: 1, empno: 1, ename: 1, sal: 1}
 );
@@ -539,7 +552,7 @@ mongoose.connection.once('close', () => console.log('数据库连接已经断开
 
 #### 4.2.5 代码
 
-```javascript
+```js
 // 引入
 const mongoose = require('mongoose')
 
@@ -554,11 +567,13 @@ mongoose.connection.once('close', () => console.log('数据库连接已经断开
 mongoose.disconnect()
 ```
 
-### 4.3. mongoose 模块化
+### 4.3. Mongoose 模块化
 
 #### 4.3.1. 连接数据库的模块
 
-```javascript
+- `util/conn_mongo.js`
+
+```js
 /*
     定义一个模块，用来连接MongoDB数据库
  */
@@ -571,7 +586,9 @@ mongoose.connection.once('open', function () {
 
 #### 4.3.2. Model对象模块
 
-```javascript
+- `models/student.js`
+
+```js
 /*
     用来定义student的模型
  */
@@ -590,18 +607,19 @@ let stuSchema = new Schema({
 let StuModel = mongoose.model('students', stuSchema)
 
 module.exports = StuModel
-
 ```
 
 #### 4.3.3. 操作数据库
 
-```javascript
+- `05.index.js`
+
+```js
 require('./util/conn_mongo')
 let Student = require('./models/student')
 
 Student.find(
     {gender: '男'},
-    // 投影，两种方式
+    -- 投影，两种方式
     'name age -_id',
     {skip: 2, limit: 2},
     function (err, docs) {
