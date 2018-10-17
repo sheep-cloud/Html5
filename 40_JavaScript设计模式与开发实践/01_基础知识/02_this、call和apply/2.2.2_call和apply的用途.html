@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2.2.2_call和apply的用途</title>
+</head>
+<body>
+    <button id="btn1">我是一个button</button>
+
+    <script>
+        /*
+            1. 改变this指向
+         */
+
+        // 1. 改变this指向
+        var obj1 = {name: 'sven'}
+        var obj2 = {name: 'anne'}
+        window.name = 'window'
+        var getName = function () {
+            console.log(this.name)
+        }
+        getName() // window
+        getName.call(obj1) // sven
+        getName.apply(obj2) // anne
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        document.getElementById('btn1').onclick = function () {
+            console.log(this.id) // btn1
+            var callback = function () {
+                // 修正函数内的this，使其指向button
+                console.log(this.id) // btn1
+            }
+            callback.apply(this)
+        }
+
+        // TODO: colg [33页]
+    </script>
+</body>
+</html>

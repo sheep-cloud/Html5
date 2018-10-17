@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2.1.3_call和apply的区别</title>
+</head>
+<body>
+    <script>
+        /*
+            ES3给Function的原型定义了两个方法
+                Function.protorype.call
+                    第一个参数：指定函数体内this对象的指向
+                    第二个参数：带下标的集合，这个集合可以为数组，也可以为类数组
+                Function.prototype.apply
+                    第一个参数：指定函数体内this对象的指向
+                    第二个参数：每个参数被依次传入函数
+         */
+
+        var func = function (a, b, c) {
+            console.log(this) // window
+            console.log([a, b, c]) // [1, 2, 3]
+        }
+        func.apply(null, [1, 2, 3])
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        var func2 = function (a, b, c) {
+            console.log(this) // window
+            console.log([a, b, c]) // [1, 2, 3]
+        }
+        func2.call(null, 1, 2, 3)
+    </script>
+</body>
+</html>

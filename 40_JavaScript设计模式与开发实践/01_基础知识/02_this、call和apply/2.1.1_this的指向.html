@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2.1.1_this的指向</title>
+</head>
+<body>
+    <button id="btn1">我是一个button</button>
+
+    <script>
+        /*
+            除去不正常的with和eval的情况，具体到实际应用中，this的指向大致可以分为以下4种
+                1. 作为对象的方法调用
+                2. 作为普通函数调用
+                3. 构造器调用
+                4. Function.protorype.call 或 Funcation.prototype.apply调用
+         */
+
+        // 1. 作为对象的方法调用：当函数作为对象的方法被调用时，this指向该对象
+        var obj = {
+            a: 1,
+            getA: function () {
+                console.log(this === obj) // true
+                console.log(this.a) // 1
+            }
+        }
+        obj.getA()
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 2. 作为普通函数调用：当函数不作为对象的属性被调用时，也就是我们常说的普通函数方式，此时的this总是指向全局对象。在浏览器的js里，这个全局对象是window对象
+        window.name = 'globalName'
+        var getName = function () {
+            return this.name
+        }
+        console.log(getName()) // globalName
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        window.id = 'window'
+        document.getElementById('btn1').onclick = function () {
+            console.log(this.id) // btn1
+            var that = this // 保存button的引用
+            var callback = function () {
+                // console.log(this.id) // window
+                console.log(that.id) // btn1
+            }
+            callback()
+        }
+
+        // 3. 构造器调用：通常情况下，构造器里的this就指向返回的这个对象；如果构造器显式的返回了一个object类型的对象，那么最终会返回这个对象，而不是之前期待的this
+        var MyClass = function () {
+            this.name = 'sven'
+            return { // 显式的返回一个对象
+                name: 'anne'
+            }
+        }
+        var mc = new MyClass()
+        console.log(mc.name) // anne
+
+        /**
+         * @return {string}
+         */
+        var MyClass2 = function () {
+            this.name = 'sven'
+            return 'anne'// 返回string类型
+        }
+        var mc2 = new MyClass2()
+        console.log(mc2.name)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 4. Function.protorype.call 或 Funcation.prototype.apply调用：动态的改变传入函数的this
+        var obj1 = {
+            name: 'sven',
+            getName: function () {
+                return this.name
+            }
+        }
+        var obj2 = {
+            name: 'name'
+        }
+        console.log(obj1.getName()) // sven
+        console.log(obj1.getName.call(obj2)) // name
+
+
+    </script>
+</body>
+</html>
