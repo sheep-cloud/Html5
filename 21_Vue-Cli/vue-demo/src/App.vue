@@ -1,54 +1,54 @@
 <template>
   <div>
-    <header class="site-header jumbotron">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-xs-12">
-            <h1>请发表对Vue的评论</h1>
-          </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+        <div class="page-header">
+          <h2>Router Basic - 01</h2>
         </div>
       </div>
-    </header>
-    <div class="container">
-      <div class="row">
-        <!-- :comments 传递数据 -->
-        <Add :addComment="addComment"/>
-        <!--:addComment 传递方法 :deleteComment 逐层传递到 Item-->
-        <List :comments="comments" :deleteComment="deleteComment"/>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-1 col-xs-offset-2">
+        <div class="list-group">
+          <!-- 使用 router-link 组件来导航. -->
+          <!-- 通过传入 `to` 属性指定链接. -->
+          <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+          <router-link to="/about" class="list-group-item">About 组件</router-link>
+          <router-link to="/home" class="list-group-item">Home 组件</router-link>
+          <!--
+          <a href="#/about" class="list-group-item router-link-exact-active active">About</a>
+          <a href="#/home" class="list-group-item">Home</a>
+          -->
+        </div>
+      </div>
+      <div class="col-xs-9">
+        <div class="panel">
+          <div class="panel-body">
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <keep-alive>
+              <!--路由传递数据-->
+              <router-view msg="渐进式 JavaScript 框架"></router-view>
+            </keep-alive>
+            <!--
+            <div class="col-md-5">
+              <h2>About组件</h2>
+              <label>接收外部数据：</label>
+              <input type="text" class="form-control" placeholder="内容">
+            </div>
+            -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  // 引入组件
-  import Add from './components/Add'
-  import List from './components/List'
-
   export default {
-    // 映射成标签
-    components: {Add, List},
-    data() {
-      return {
-        comments: [
-          // 数据在哪个组件，更新数据的行为（方法）就应该定义在哪个组件
-          {username: 'Jack', content: 'Vue 还不错', createTime: '2018-08-02 04:34:11'},
-          {username: 'Rose', content: 'Vue So Easy', createTime: '2018-08-02 04:34:11'},
-          {username: 'Tom', content: 'Vue So So', createTime: '2018-08-02 04:34:11'},
-          {username: 'ClearLove', content: 'Vue 都不会，不如回家去养猪！', createTime: '2018-08-02 04:34:11'},
-          {username: 'Faker', content: 'Vue Is Supper Carry !', createTime: '2018-08-02 04:34:11'}
-        ]
-      }
-    },
-    methods: {
-      // 添加评论
-      addComment(comment) {
-        this.comments.unshift(comment)
-      },
-      // 删除指定下标的评论
-      deleteComment(index) {
-        this.comments.splice(index, 1)
-      }
+    mounted() {
+      console.log(this.$router)
     }
   }
 </script>

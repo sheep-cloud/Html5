@@ -66,7 +66,7 @@ Vue实战项目：硅谷外卖
 - Vue-cli是官方提供的用于搭建基于vue+webpack+es6项目的脚手架工具
 - 操作
 
-```properties
+```ini
 npm install -g vue-cli
 vue init webpack shop-client
 cd shop-client
@@ -77,7 +77,7 @@ npm run dev
 
 #### 2.1.2. 项目结构分析
 
-```properties
+```ini
 shop-client
 	|-- build				webpack 相关的配置文件夹（基本不需要修改）
 	|-- config				webpack 相关的配置文件夹（基本不需要修改）
@@ -100,14 +100,14 @@ shop-client
 
 - 编码测试
 
-```properties
+```ini
 npm run dev
 访问: http://localhost:8080/
 ```
 
 - 打包发布
 
-```properties
+```ini
 npm run build
 放在tomcat里，启动
 ```
@@ -124,7 +124,7 @@ npm run build
 
 ### 2.4. 项目源码目录设计
 
-```properties
+```ini
 src
 	|-- api				与后台交互模块文件类
 	|-- common			通用资源文件夹，如fonts/img/stylus
@@ -150,7 +150,7 @@ src
 
 #### 2.7.2. 整体vue组件结构
 
-```properties
+```ini
 src
 	|-- components						非路由组件文件夹
     	|-- FooterGuide					底部组件文件夹
@@ -186,9 +186,8 @@ src
 
 #### 2.7.4. 引入reset样式
 
-```properties
+```ini
 npm install --save reset-css
-
 npm remove --save reset-css
 ```
 
@@ -210,7 +209,7 @@ npm remove --save reset-css
 
 ##### 2.7.5.2. 处理响应延时
 
-```properties
+```ini
 npm install fastclick --save
 npm install es6-promise-min --save
 
@@ -239,7 +238,7 @@ npm remove es6-promise-min --save
 
 #### 2.8.1. 下载vue-router
 
-```properties
+```ini
 npm install vue-router --save
 ```
 
@@ -247,7 +246,7 @@ npm install vue-router --save
 
 - router/index.js
 
-```javascript
+```js
 /*
   路由器对象模块
  */
@@ -282,7 +281,7 @@ export default new VueRouter({
 
 - main.js
 
-```javascript
+```js
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -330,7 +329,7 @@ new Vue({
 
 #### 2.8.3. 请求不同路由路径
 
-```properties
+```ini
 http://localhost:8080/#/msite
 http://localhost:8080/#/search
 http://localhost:8080/#/order

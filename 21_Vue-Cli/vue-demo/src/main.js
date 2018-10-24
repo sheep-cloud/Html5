@@ -1,21 +1,17 @@
 import Vue from 'vue'
 import App from './App'
 
-// 引入 bootstrap.css 样式库
+// 引入路由器
+import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
-import ValidUtil from './util/ValidUtil'
-
-Vue.prototype.ValidUtil = ValidUtil
-
-// 引入 vue-layer(弹层），moment（日期处理） 组件
-import layer from 'vue-layer'
-import moment from 'moment'
-
-Vue.prototype.layer = layer(Vue)
-Vue.prototype.moment = moment()
 
 new Vue({
+  // 配置对象的属性名都是一些固定的名称，不能随便修改
   el: '#app',
+  // 映射组件标签
   components: {App},
-  template: '<App/>'
+  // 指定需要渲染到页面的模版
+  template: '<App/>',
+  // 配置路由器
+  router
 })
