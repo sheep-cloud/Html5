@@ -2,20 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>toolbox_01</title>
-<script type="text/javascript" src="../../00_libs/echarts-4.1.0/echarts.js"></script>
+<title>bar-柱状图</title>
+<script type="text/javascript" src="../../../../00_libs/echarts-4.1.0/echarts.js"></script>
 </head>
 <body>
-    <!--
-        工具箱组件：toolbox
-        - show：             是否显示
-        - feature：          具体显示的功能
-        - saveAsImage：      保存图片
-        - restore：          还原
-        - dataView：         数据视图
-        - dataZoom：         缩放视图
-        - magicType：        动态类型切换
-    -->
     <div id="main" style="width: 900px; height: 600px;"></div>
 
     <script>
@@ -41,33 +31,15 @@
             // 工具箱
             toolbox: {
                 show: true,
-                // 各工具配置项。
                 feature: {
-                    // 保存为图片。
                     saveAsImage: {
-                        show: true,
-                        type: 'png',
-                        // 保存的文件名称，默认使用 title.text 作为名称
-                        name: 'toolbox-工具栏组件'
-                    },
-                    // 还原
-                    restore: {
                         show: true
-                    },
-                    // 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
-                    dataView: {
-                        show: true
-                    },
-                    // 动态类型切换
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
                     }
                 }
             },
             // 图例
             legend: {
-                data: ['销量', '产量']
+                data: ['销量']
             },
             // x轴
             xAxis: {
@@ -81,11 +53,6 @@
                     name: '销量',
                     type: 'bar',
                     data: [120, 200, 150, 80, 70, 110]
-                },
-                {
-                    name: '产量',
-                    type: 'line',
-                    data: [200, 300, 200, 100, 100, 200]
                 }
             ]
         }

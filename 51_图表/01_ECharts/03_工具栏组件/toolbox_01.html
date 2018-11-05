@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>markLine,markPoint_01</title>
-<script type="text/javascript" src="../../00_libs/echarts-4.1.0/echarts.js"></script>
+<title>toolbox_01</title>
+<script type="text/javascript" src="../../../00_libs/echarts-4.1.0/echarts.js"></script>
 </head>
 <body>
     <!--
-        标记线：markLine
-        - 标记线的添加
-        - 最大值，平均值，最小值的标记线 'min', 'max', 'average'
-
-        标记点：markPoint
-        - 标记点的添加
-        - 最大值，平均值，最小值的标记点 'min', 'max', 'average'
-        - 任意位置的标记点
+        工具箱组件：toolbox
+        - show：             是否显示
+        - feature：          具体显示的功能
+        - saveAsImage：      保存图片
+        - restore：          还原
+        - dataView：         数据视图
+        - dataZoom：         缩放视图
+        - magicType：        动态类型切换
     -->
     <div id="main" style="width: 900px; height: 600px;"></div>
 
@@ -65,17 +65,13 @@
                     }
                 }
             },
-            tooltip: {
-                show: true,
-                trigger: 'axis'
-            },
             // 图例
             legend: {
                 data: ['销量', '产量']
             },
             // x轴
             xAxis: {
-                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '娃子']
             },
             // y轴
             yAxis: {},
@@ -84,18 +80,7 @@
                 {
                     name: '销量',
                     type: 'bar',
-                    data: [120, 200, 150, 80, 70, 110],
-                    markLine: {
-                        data: [
-                            {type: 'average', name: '平均线'}
-                        ]
-                    },
-                    markPoint: {
-                        data: [
-                            {type: 'max', name: '最大值'},
-                            {type: 'min', name: '最小值', symbol: 'diamond'}
-                        ]
-                    }
+                    data: [120, 200, 150, 80, 70, 110]
                 },
                 {
                     name: '产量',
