@@ -18,6 +18,12 @@ let module5 = (function (window, $) {
         console.log('otherFun()', data)
     }
 
+    $(function () {
+        $('#btn').click(function () {
+            alert('jQuery 点击事件')
+        })
+    })
+
     // 返回对外的接口
     return {
         'foo': foo,

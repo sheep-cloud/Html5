@@ -18,6 +18,12 @@
         console.log('otherFun', data)
     }
 
+    $(function () {
+        $('#btn').click(function () {
+            alert('jQuery 点击事件')
+        })
+    })
+
     // 暴露行为
     window.myModule = {
         foo,
