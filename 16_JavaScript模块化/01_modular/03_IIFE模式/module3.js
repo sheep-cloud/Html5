@@ -18,5 +18,8 @@
     }
 
     // 暴露行为
-    window.myModule = {foo, bar}
+    window.myModule = {
+        foo,
+        bar
+    }
 })(window)

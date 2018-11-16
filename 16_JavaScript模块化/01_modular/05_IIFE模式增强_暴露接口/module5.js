@@ -1,4 +1,4 @@
-;(function (window, $) {
+let module5 = (function (window, $) {
     // 数据
     let data = 'hello'
 
@@ -15,12 +15,12 @@
 
     // 内部私有的函数
     function otherFun() {
-        console.log('otherFun', data)
+        console.log('otherFun()', data)
     }
 
-    // 暴露行为
-    window.myModule = {
-        foo,
-        bar
+    // 返回对外的接口
+    return {
+        'foo': foo,
+        'bar': bar
     }
 })(window, $)
