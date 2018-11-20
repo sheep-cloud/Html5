@@ -12,6 +12,8 @@ import Search from '../views/Search/Search'
 import Order from '../views/Order/Order'
 // 个人
 import Profile from '../views/Profile/Profile'
+// 登录注册
+import Login from '../views/Login/Login'
 
 // 声明使用插件
 Vue.use(VueRouter)
@@ -19,10 +21,11 @@ Vue.use(VueRouter)
 // 所有路由
 const routes = [
   {path: '/', redirect: '/msite'},
-  {path: '/msite', component: Msite},
-  {path: '/search', component: Search},
-  {path: '/order', component: Order},
-  {path: '/profile', component: Profile}
+  {path: '/msite', component: Msite, meta: {showFooter: true}},
+  {path: '/search', component: Search, meta: {showFooter: true}},
+  {path: '/order', component: Order, meta: {showFooter: true}},
+  {path: '/profile', component: Profile, meta: {showFooter: true}},
+  {path: '/login', component: Login}
 ]
 
 export default new VueRouter({

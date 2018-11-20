@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <router-view/>
-    <FooterGuide/>
+    <div class="content">
+      <router-view/>
+    </div>
+    <FooterGuide v-show="$route.meta.showFooter"/>
   </div>
 </template>
 
@@ -14,5 +16,10 @@
 </script>
 
 <style>
-
+  #app {
+    width: 100%;
+    height: 100%;
+    background: #F5F5F5;
+    position: relative;
+  }
 </style>
