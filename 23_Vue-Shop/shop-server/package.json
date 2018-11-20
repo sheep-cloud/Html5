@@ -2,6 +2,7 @@
   "name": "shop-server",
   "version": "1.0.0",
   "description": "外卖-后台应用",
+  "author": "colg <121529654@qq.com>",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"

@@ -1,7 +1,7 @@
 {
   "name": "shop-client",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "外卖-前台应用",
   "author": "colg <121529654@qq.com>",
   "private": true,
   "scripts": {
