@@ -10,7 +10,7 @@ import axios from 'axios'
  * @param type  请求方法GET/POST
  * @return promise对象（异步返回的数据是：response.data）
  */
-function ajax(url, data = {}, type = 'GET') {
+function ajax(url = '', data = {}, type = 'GET') {
   return new Promise(function (resolve, reject) {
     // 执行异步ajax请求
     let promise
@@ -32,10 +32,10 @@ function ajax(url, data = {}, type = 'GET') {
     }
 
     // 包装成功，失败，返回的是response.data
-    promise.then(function (response) {
+    promise.then(response => {
       // 成功了调用resolve
       resolve(response.data)
-    }).catch(function (error) {
+    }).catch(error => {
       // 失败了调用reject
       reject(error)
     })

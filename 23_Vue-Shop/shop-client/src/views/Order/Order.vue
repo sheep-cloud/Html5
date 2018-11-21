@@ -1,5 +1,5 @@
 <template>
-  <div class="order">
+  <section class="order">
     <!--订单头部-->
     <HeaderTop title="订单列表"></HeaderTop>
     <!--订单列表-->
@@ -8,7 +8,7 @@
       <h3>登录后查看外卖订单</h3>
       <button>立即登陆</button>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>

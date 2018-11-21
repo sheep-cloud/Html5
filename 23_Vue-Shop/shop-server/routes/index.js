@@ -16,10 +16,10 @@ router.post('/login_pwd', function (req, res) {
   const name = req.body.name
   const pwd = md5(req.body.pwd)
   const captcha = req.body.captcha.toLowerCase()
-  console.log('/login_pwd', name, pwd, captcha, req.session)
+  console.log('/login_pwd', req.body, req.session)
 
   // 可以对用户名/密码格式进行检查, 如果非法, 返回提示信息
-  if(captcha!==req.session.captcha) {
+  if(captcha !== req.session.captcha) {
     return res.send({code: 1, msg: '验证码不正确'})
   }
   // 删除保存的验证码
@@ -58,7 +58,7 @@ router.get('/captcha', function (req, res) {
     color: true
   });
   req.session.captcha = captcha.text.toLowerCase();
-  console.log(req.session.captcha)
+  console.log(`/captcha, 验证码：${req.session.captcha}`)
   /*res.type('svg');
   res.status(200).send(captcha.data);*/
   res.type('svg');
@@ -94,8 +94,8 @@ router.get('/sendcode', function (req, res, next) {
 router.post('/login_sms', function (req, res, next) {
   var phone = req.body.phone;
   var code = req.body.code;
-  console.log('/login_sms', phone, code);
-  if (users[phone] != code) {
+  console.log('/login_sms', req.body);
+  if (users[phone] !== code) {
     res.send({code: 1, msg: '手机号或验证码不正确'});
     return;
   }
@@ -125,6 +125,7 @@ router.post('/login_sms', function (req, res, next) {
 router.get('/userinfo', function (req, res) {
   // 取出userid
   const userid = req.session.userid
+  console.log('/userinfo', req.session.userid)
   // 查询
   UserModel.findOne({_id: userid}, _filter, function (err, user) {
     // 如果没有, 返回错误提示
@@ -132,7 +133,7 @@ router.get('/userinfo', function (req, res) {
       // 清除浏览器保存的userid的cookie
       delete req.session.userid
 
-      res.send({code: 1, msg: '请先登陆'})
+      res.send({code: 1, msg: '请先登录'})
     } else {
       // 如果有, 返回user
       res.send({code: 0, data: user})
@@ -144,6 +145,7 @@ router.get('/userinfo', function (req, res) {
 router.get('/logout', function (req, res) {
   // 清除浏览器保存的userid的cookie
   delete req.session.userid
+  console.log('/logout', new Date().toLocaleString())
   // 返回数据
   res.send({code: 0})
 })
@@ -153,10 +155,7 @@ router.get('/logout', function (req, res) {
  */
 router.get('/position/:geohash', function (req, res) {
   const {geohash} = req.params
-  ajax(`http://cangdu.org:8001/v2/pois/${geohash}`)
-    .then(data => {
-      res.send({code: 0, data})
-    })
+  ajax(`http://cangdu.org:8001/v2/pois/${geohash}`).then(data => res.send({code: 0, data}))
 })
 
 /*
@@ -176,6 +175,7 @@ router.get('/index_category', function (req, res) {
 router.get('/shops', function (req, res) {
   const latitude = req.query.latitude
   const longitude = req.query.longitude
+  console.log(`/shops, longitude：${longitude}, latitude：${latitude}`)
 
   setTimeout(function () {
     const data = require('../data/shops.json')

@@ -12,10 +12,9 @@
  */
 // 1. 连接数据库
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/vue-shop')
-const conn = mongoose.connection
-conn.on('connected', function () {
-  console.log('数据库连接成功!')
+mongoose.connect('mongodb://localhost:27017/vue-shop', {useNewUrlParser: true})
+mongoose.connection.on('connected', function () {
+  console.log(`数据库连接成功：${new Date().toLocaleString()}`)
 })
 
 // 2. 得到对应特定集合的Model: UserModel

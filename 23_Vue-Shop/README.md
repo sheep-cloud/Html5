@@ -310,11 +310,58 @@ src
   npm remove --save reset-css
   ```
 
+- 补充自定义样式`static/css/reset-css-4.0.1/reset.css`
+
+  ```css
+  /* custom */
+  a {
+    color: #7e8c8d;
+    text-decoration: none;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  ::-webkit-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    background-color: rgba(125, 125, 125, 0.7);
+    -webkit-border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb:horizontal {
+    width: 5px;
+    background-color: rgba(125, 125, 125, 0.7);
+    -webkit-border-radius: 6px;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+  
+  body {
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  ```
+
 - 单页面引入`index.html`，作为静态资源引入
 
 ```html
 <!--引入reset样式-->
-<link rel="stylesheet" href="./static/css/reset-css-4.0.1/reset.min.css">
+<link rel="stylesheet" href="./static/css/reset-css-4.0.1/reset.css">
 ```
 
 #### 2.7.5. 移动端
@@ -490,7 +537,9 @@ http://localhost:8080/#/profile
   ```vue
   <template>
     <div id="app">
-      <router-view/>
+      <section class="content">
+        <router-view/>
+      </section>
       <FooterGuide/>
     </div>
   </template>
@@ -517,7 +566,7 @@ http://localhost:8080/#/profile
 
   ```vue
   <template>
-    <div class="footer_guide border-1px">
+    <footer class="footer_guide border-1px">
       <a href="javascript:" class="guide_item" :class="{on: msite === $route.path}" @click="goTo(msite)">
         <span class="item_icon">
           <i class="iconfont icon-waimai"></i>
@@ -542,7 +591,7 @@ http://localhost:8080/#/profile
         </span>
         <span>我的</span>
       </a>
-    </div>
+    </footer>
   </template>
   
   <script>
@@ -627,7 +676,7 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="msite">
+  <section class="msite">
     <!--首页头部-->
     <header class="header">
       <span class="header_search">
@@ -936,7 +985,7 @@ http://localhost:8080/#/profile
         </ul>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -1345,7 +1394,7 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="search">
+  <section class="search">
     <!--搜索头部-->
     <header class="header">
       <a class="header_title">
@@ -1357,7 +1406,7 @@ http://localhost:8080/#/profile
       <input type="search" name="search" placeholder="请输入商家或美食名称" class="search_input">
       <input type="submit" name="submit" class="search_submit">
     </form>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -1428,7 +1477,7 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="order">
+  <section class="order">
     <!--订单头部-->
     <header class="header">
       <a class="header_title">
@@ -1441,7 +1490,7 @@ http://localhost:8080/#/profile
       <h3>登录后查看外卖订单</h3>
       <button>立即登陆</button>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -1504,7 +1553,7 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="profile">
+  <section class="profile">
     <header class="header">
       <a class="header_title">
         <span class="header_title_text">我的</span>
@@ -1597,7 +1646,7 @@ http://localhost:8080/#/profile
         </div>
       </a>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -1834,13 +1883,13 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="header">
+  <header class="header">
     <slot name="left"></slot>
     <span class="header_title">
       <span class="header_title_text ellipsis">{{title}}</span>
     </span>
     <slot name="right"></slot>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -1906,7 +1955,7 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="msite">
+  <section class="msite">
     <!--首页头部-->
     <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
       <span class="header_search" slot="left">
@@ -1917,116 +1966,10 @@ http://localhost:8080/#/profile
       </span>
     </HeaderTop>
     <!--首页导航-->
-    <nav class="msite_nav">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg">
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg">
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/3.jpg">
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/4.jpg">
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/5.jpg">
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/6.jpg">
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/7.jpg">
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/8.jpg">
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/9.jpg">
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/10.jpg">
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/11.jpg">
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/12.jpg">
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/13.jpg">
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/14.jpg">
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg">
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg">
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-      </div>
-    </nav>
+    ...
     <!--首页附近商家-->
-  </div>
+    ...
+  </section>
 </template>
 
 <script>
@@ -2042,15 +1985,12 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="search">
+  <section class="search">
     <!--搜索头部-->
     <HeaderTop title="搜索"></HeaderTop>
     <!--搜索表单-->
-    <form class="search_form" action="#">
-      <input type="search" name="search" placeholder="请输入商家或美食名称" class="search_input">
-      <input type="submit" name="submit" class="search_submit">
-    </form>
-  </div>
+	...
+  </section>
 </template>
 
 <script>
@@ -2066,16 +2006,12 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="order">
+  <section class="order">
     <!--订单头部-->
     <HeaderTop title="订单列表"></HeaderTop>
     <!--订单列表-->
-    <section class="order_no_login">
-      <img src="./images/order/person.png">
-      <h3>登录后查看外卖订单</h3>
-      <button>立即登陆</button>
-    </section>
-  </div>
+	...
+  </section>
 </template>
 
 <script>
@@ -2091,97 +2027,12 @@ http://localhost:8080/#/profile
 
 ```vue
 <template>
-  <div class="profile">
+  <section class="profile">
     <!--个人头部-->
     <HeaderTop title="我的"></HeaderTop>
-    <section class="profile-number">
-      <a href="javascript:" class="profile-link">
-        <div class="profile_image">
-          <i class="iconfont icon-person"></i>
-        </div>
-        <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
-          <p>
-                <span class="user-icon">
-                  <i class="iconfont icon-shouji icon-mobile"></i>
-                </span>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
-          </p>
-        </div>
-        <span class="arrow">
-              <i class="iconfont icon-jiantou1"></i>
-            </span>
-      </a>
-    </section>
-    <section class="profile_info_data border-1px">
-      <ul class="info_data_list">
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top"><span>0.00</span>元</span>
-          <span class="info_data_bottom">我的余额</span>
-        </a>
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top"><span>0</span>个</span>
-          <span class="info_data_bottom">我的优惠</span>
-        </a>
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top"><span>0</span>分</span>
-          <span class="info_data_bottom">我的积分</span>
-        </a>
-      </ul>
-    </section>
-    <section class="profile_my_order border-1px">
-      <!-- 我的订单 -->
-      <a href='javascript:' class="my_order">
-            <span>
-              <i class="iconfont icon-order-s"></i>
-            </span>
-        <div class="my_order_div">
-          <span>我的订单</span>
-          <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
-        </div>
-      </a>
-      <!-- 积分商城 -->
-      <a href='javascript:' class="my_order">
-            <span>
-              <i class="iconfont icon-jifen"></i>
-            </span>
-        <div class="my_order_div">
-          <span>积分商城</span>
-          <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
-        </div>
-      </a>
-      <!-- 硅谷外卖会员卡 -->
-      <a href="javascript:" class="my_order">
-            <span>
-              <i class="iconfont icon-vip"></i>
-            </span>
-        <div class="my_order_div">
-          <span>硅谷外卖会员卡</span>
-          <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
-        </div>
-      </a>
-    </section>
-    <section class="profile_my_order border-1px">
-      <!-- 服务中心 -->
-      <a href="javascript:" class="my_order">
-            <span>
-              <i class="iconfont icon-fuwu"></i>
-            </span>
-        <div class="my_order_div">
-          <span>服务中心</span>
-          <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
-        </div>
-      </a>
-    </section>
-  </div>
+	<!--跳转登录注册-->
+    ...
+  </section>
 </template>
 
 <script>
@@ -2207,16 +2058,9 @@ npm install --save swiper
 
 ```vue
 <template>
-  <div class="msite">
+  <section class="msite">
     <!--首页头部-->
-    <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
-      <span class="header_search" slot="left">
-        <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
-    </HeaderTop>
+	...
     <!--首页导航-->
     <nav class="msite_nav">
       <div class="swiper-container">
@@ -2327,13 +2171,15 @@ npm install --save swiper
       </div>
     </nav>
     <!--首页附近商家-->
-  </div>
+    ...
+  </section>
 </template>
 
 <script>
-  import HeaderTop from '../../components/HeaderTop/HeaderTop'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+    
+  import HeaderTop from '../../components/HeaderTop/HeaderTop'
 
   export default {
     components: {HeaderTop},
@@ -2356,186 +2202,184 @@ npm install --save swiper
 
 ```vue
 <template>
-  <div class="shop_container">
-    <ul class="shop_list">
-      <li class="shop_li border-1px">
-        <a>
-          <div class="shop_left">
-            <img class="shop_img" src="./images/shop/1.jpg">
-          </div>
-          <div class="shop_right">
-            <section class="shop_detail_header">
-              <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
-              <ul class="shop_detail_ul">
-                <li class="supports">保</li>
-                <li class="supports">准</li>
-                <li class="supports">票</li>
-              </ul>
+  <ul class="shop_list">
+    <li class="shop_li border-1px">
+      <a>
+        <div class="shop_left">
+          <img class="shop_img" src="./images/shop/1.jpg">
+        </div>
+        <div class="shop_right">
+          <section class="shop_detail_header">
+            <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
+            <ul class="shop_detail_ul">
+              <li class="supports">保</li>
+              <li class="supports">准</li>
+              <li class="supports">票</li>
+            </ul>
+          </section>
+          <section class="shop_rating_order">
+            <section class="shop_rating_order_left">
+              <div class="star star-24">
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item half"></span>
+                <span class="star-item off"></span>
+              </div>
+              <div class="rating_section">
+                3.6
+              </div>
+              <div class="order_section">
+                月售106单
+              </div>
             </section>
-            <section class="shop_rating_order">
-              <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item half"></span>
-                  <span class="star-item off"></span>
-                </div>
-                <div class="rating_section">
-                  3.6
-                </div>
-                <div class="order_section">
-                  月售106单
-                </div>
-              </section>
-              <section class="shop_rating_order_right">
-                <span class="delivery_style delivery_right">硅谷专送</span>
-              </section>
+            <section class="shop_rating_order_right">
+              <span class="delivery_style delivery_right">硅谷专送</span>
             </section>
-            <section class="shop_distance">
-              <p class="shop_delivery_msg">
-                <span>¥20起送</span>
-                <span class="segmentation">/</span>
-                <span>配送费约¥5</span>
-              </p>
+          </section>
+          <section class="shop_distance">
+            <p class="shop_delivery_msg">
+              <span>¥20起送</span>
+              <span class="segmentation">/</span>
+              <span>配送费约¥5</span>
+            </p>
+          </section>
+        </div>
+      </a>
+    </li>
+    <li class="shop_li border-1px">
+      <a>
+        <div class="shop_left">
+          <img class="shop_img" src="./images/shop/2.jpg">
+        </div>
+        <div class="shop_right">
+          <section class="shop_detail_header">
+            <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
+            <ul class="shop_detail_ul">
+              <li class="supports">保</li>
+              <li class="supports">准</li>
+              <li class="supports">票</li>
+            </ul>
+          </section>
+          <section class="shop_rating_order">
+            <section class="shop_rating_order_left">
+              <div class="star star-24">
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item off"></span>
+              </div>
+              <div class="rating_section">
+                4.1
+              </div>
+              <div class="order_section">
+                月售106单
+              </div>
             </section>
-          </div>
-        </a>
-      </li>
-      <li class="shop_li border-1px">
-        <a>
-          <div class="shop_left">
-            <img class="shop_img" src="./images/shop/2.jpg">
-          </div>
-          <div class="shop_right">
-            <section class="shop_detail_header">
-              <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
-              <ul class="shop_detail_ul">
-                <li class="supports">保</li>
-                <li class="supports">准</li>
-                <li class="supports">票</li>
-              </ul>
+            <section class="shop_rating_order_right">
+              <span class="delivery_style delivery_right">硅谷专送</span>
             </section>
-            <section class="shop_rating_order">
-              <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item off"></span>
-                </div>
-                <div class="rating_section">
-                  4.1
-                </div>
-                <div class="order_section">
-                  月售106单
-                </div>
-              </section>
-              <section class="shop_rating_order_right">
-                <span class="delivery_style delivery_right">硅谷专送</span>
-              </section>
+          </section>
+          <section class="shop_distance">
+            <p class="shop_delivery_msg">
+              <span>¥20起送</span>
+              <span class="segmentation">/</span>
+              <span>配送费约¥5</span>
+            </p>
+          </section>
+        </div>
+      </a>
+    </li>
+    <li class="shop_li border-1px">
+      <a>
+        <div class="shop_left">
+          <img class="shop_img" src="./images/shop/3.jpg">
+        </div>
+        <div class="shop_right">
+          <section class="shop_detail_header">
+            <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
+            <ul class="shop_detail_ul">
+              <li class="supports">保</li>
+              <li class="supports">准</li>
+              <li class="supports">票</li>
+            </ul>
+          </section>
+          <section class="shop_rating_order">
+            <section class="shop_rating_order_left">
+              <div class="star star-24">
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item off"></span>
+                <span class="star-item off"></span>
+              </div>
+              <div class="rating_section">
+                3.2
+              </div>
+              <div class="order_section">
+                月售106单
+              </div>
             </section>
-            <section class="shop_distance">
-              <p class="shop_delivery_msg">
-                <span>¥20起送</span>
-                <span class="segmentation">/</span>
-                <span>配送费约¥5</span>
-              </p>
+            <section class="shop_rating_order_right">
+              <span class="delivery_style delivery_right">硅谷专送</span>
             </section>
-          </div>
-        </a>
-      </li>
-      <li class="shop_li border-1px">
-        <a>
-          <div class="shop_left">
-            <img class="shop_img" src="./images/shop/3.jpg">
-          </div>
-          <div class="shop_right">
-            <section class="shop_detail_header">
-              <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
-              <ul class="shop_detail_ul">
-                <li class="supports">保</li>
-                <li class="supports">准</li>
-                <li class="supports">票</li>
-              </ul>
+          </section>
+          <section class="shop_distance">
+            <p class="shop_delivery_msg">
+              <span>¥20起送</span>
+              <span class="segmentation">/</span>
+              <span>配送费约¥5</span>
+            </p>
+          </section>
+        </div>
+      </a>
+    </li>
+    <li class="shop_li border-1px">
+      <a>
+        <div class="shop_left">
+          <img class="shop_img" src="./images/shop/4.jpg">
+        </div>
+        <div class="shop_right">
+          <section class="shop_detail_header">
+            <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
+            <ul class="shop_detail_ul">
+              <li class="supports">保</li>
+              <li class="supports">准</li>
+              <li class="supports">票</li>
+            </ul>
+          </section>
+          <section class="shop_rating_order">
+            <section class="shop_rating_order_left">
+              <div class="star star-24">
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item on"></span>
+                <span class="star-item half"></span>
+                <span class="star-item off"></span>
+              </div>
+              <div class="rating_section">
+                3.6
+              </div>
+              <div class="order_section">
+                月售106单
+              </div>
             </section>
-            <section class="shop_rating_order">
-              <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item off"></span>
-                  <span class="star-item off"></span>
-                </div>
-                <div class="rating_section">
-                  3.2
-                </div>
-                <div class="order_section">
-                  月售106单
-                </div>
-              </section>
-              <section class="shop_rating_order_right">
-                <span class="delivery_style delivery_right">硅谷专送</span>
-              </section>
+            <section class="shop_rating_order_right">
+              <span class="delivery_style delivery_right">硅谷专送</span>
             </section>
-            <section class="shop_distance">
-              <p class="shop_delivery_msg">
-                <span>¥20起送</span>
-                <span class="segmentation">/</span>
-                <span>配送费约¥5</span>
-              </p>
-            </section>
-          </div>
-        </a>
-      </li>
-      <li class="shop_li border-1px">
-        <a>
-          <div class="shop_left">
-            <img class="shop_img" src="./images/shop/4.jpg">
-          </div>
-          <div class="shop_right">
-            <section class="shop_detail_header">
-              <h4 class="shop_title ellipsis">锄禾日当午，汗滴禾下土</h4>
-              <ul class="shop_detail_ul">
-                <li class="supports">保</li>
-                <li class="supports">准</li>
-                <li class="supports">票</li>
-              </ul>
-            </section>
-            <section class="shop_rating_order">
-              <section class="shop_rating_order_left">
-                <div class="star star-24">
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item on"></span>
-                  <span class="star-item half"></span>
-                  <span class="star-item off"></span>
-                </div>
-                <div class="rating_section">
-                  3.6
-                </div>
-                <div class="order_section">
-                  月售106单
-                </div>
-              </section>
-              <section class="shop_rating_order_right">
-                <span class="delivery_style delivery_right">硅谷专送</span>
-              </section>
-            </section>
-            <section class="shop_distance">
-              <p class="shop_delivery_msg">
-                <span>¥20起送</span>
-                <span class="segmentation">/</span>
-                <span>配送费约¥5</span>
-              </p>
-            </section>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </div>
+          </section>
+          <section class="shop_distance">
+            <p class="shop_delivery_msg">
+              <span>¥20起送</span>
+              <span class="segmentation">/</span>
+              <span>配送费约¥5</span>
+            </p>
+          </section>
+        </div>
+      </a>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -2543,14 +2387,11 @@ npm install --save swiper
 </script>
 
 <style scoped>
-  .shop_container {
-    margin-bottom: 50px;
-  }
-  .shop_container .shop_list .shop_li {
+  .shop_list .shop_li {
     position: relative;
     width: 100%;
   }
-  .shop_container .shop_list .shop_li::before {
+  .shop_list .shop_li::before {
     content: '';
     position: absolute;
     z-index: 200;
@@ -2561,44 +2402,44 @@ npm install --save swiper
     background-color: #f1f1f1;
     transform: scaleY(0.5);
   }
-  .shop_container .shop_list .shop_li > a {
+  .shop_list .shop_li >a {
     *zoom: 1;
     display: block;
     box-sizing: border-box;
     padding: 15px 8px;
     width: 100%;
   }
-  .shop_container .shop_list .shop_li > a::after {
+  .shop_list .shop_li >a::after {
     content: '';
     display: block;
     clear: both;
   }
-  .shop_container .shop_list .shop_li > a .shop_left {
+  .shop_list .shop_li >a .shop_left {
     float: left;
     box-sizing: border-box;
     width: 23%;
     height: 75px;
     padding-right: 10px;
   }
-  .shop_container .shop_list .shop_li > a .shop_left .shop_img {
+  .shop_list .shop_li >a .shop_left .shop_img {
     display: block;
     width: 100%;
     height: 100%;
   }
-  .shop_container .shop_list .shop_li > a .shop_right {
+  .shop_list .shop_li >a .shop_right {
     float: right;
     width: 77%;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_detail_header {
+  .shop_list .shop_li >a .shop_right .shop_detail_header {
     *zoom: 1;
     width: 100%;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_detail_header::after {
+  .shop_list .shop_li >a .shop_right .shop_detail_header::after {
     content: '';
     display: block;
     clear: both;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_detail_header .shop_title {
+  .shop_list .shop_li >a .shop_right .shop_detail_header .shop_title {
     float: left;
     width: 140px;
     color: #333;
@@ -2606,7 +2447,7 @@ npm install --save swiper
     line-height: 16px;
     font-weight: 700;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_detail_header .shop_title::before {
+  .shop_list .shop_li >a .shop_right .shop_detail_header .shop_title::before {
     content: '品牌';
     display: inline-block;
     font-size: 11px;
@@ -2617,11 +2458,11 @@ npm install --save swiper
     border-radius: 2px;
     margin-right: 5px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_detail_header .shop_detail_ul {
+  .shop_list .shop_li >a .shop_right .shop_detail_header .shop_detail_ul {
     float: right;
     margin-top: 3px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_detail_header .shop_detail_ul .supports {
+  .shop_list .shop_li >a .shop_right .shop_detail_header .shop_detail_ul .supports {
     float: left;
     font-size: 10px;
     color: #999;
@@ -2629,145 +2470,145 @@ npm install --save swiper
     padding: 0 2px;
     border-radius: 2px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order {
+  .shop_list .shop_li >a .shop_right .shop_rating_order {
     *zoom: 1;
     width: 100%;
     margin-top: 18px;
     margin-bottom: 8px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order::after {
+  .shop_list .shop_li >a .shop_right .shop_rating_order::after {
     content: '';
     display: block;
     clear: both;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left {
     float: left;
     color: #ff9a0d;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star {
     float: left;
     font-size: 0;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star .star-item {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star .star-item {
     display: inline-block;
     background-repeat: no-repeat;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item {
     width: 20px;
     height: 20px;
     margin-right: 22px;
     background-size: 20px 20px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item:last-child {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item:last-child {
     margin-right: 0;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.on {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.on {
     background-image: url("./images/stars/star48_on@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.on {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.on {
       background-image: url("./images/stars/star48_on@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.half {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.half {
     background-image: url("./images/stars/star48_half@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.half {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.half {
       background-image: url("./images/stars/star48_half@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.off {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.off {
     background-image: url("./images/stars/star48_off@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.off {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-48 .star-item.off {
       background-image: url("./images/stars/star48_off@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item {
     width: 15px;
     height: 15px;
     margin-right: 6px;
     background-size: 15px 15px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item:last-child {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item:last-child {
     margin-right: 0;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.on {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.on {
     background-image: url("./images/stars/star36_on@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.on {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.on {
       background-image: url("./images/stars/star36_on@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.half {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.half {
     background-image: url("./images/stars/star36_half@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.half {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.half {
       background-image: url("./images/stars/star36_half@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.off {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.off {
     background-image: url("./images/stars/star36_off@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.off {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-36 .star-item.off {
       background-image: url("./images/stars/star36_off@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item {
     width: 10px;
     height: 10px;
     margin-right: 3px;
     background-size: 10px 10px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item:last-child {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item:last-child {
     margin-right: 0;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.on {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.on {
     background-image: url("./images/stars/star24_on@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.on {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.on {
       background-image: url("./images/stars/star24_on@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.half {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.half {
     background-image: url("./images/stars/star24_half@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.half {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.half {
       background-image: url("./images/stars/star24_half@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.off {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.off {
     background-image: url("./images/stars/star24_off@2x.png");
   }
   @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
-    .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.off {
+    .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .star.star-24 .star-item.off {
       background-image: url("./images/stars/star24_off@3x.png");
     }
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .rating_section {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .rating_section {
     float: left;
     font-size: 10px;
     color: #ff6000;
     margin-left: 4px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_left .order_section {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_left .order_section {
     float: left;
     font-size: 10px;
     color: #666;
     transform: scale(0.8);
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_right {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_right {
     float: right;
     font-size: 0;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_right .delivery_style {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_right .delivery_style {
     transform-origin: 35px 0;
     transform: scale(0.7);
     display: inline-block;
@@ -2775,33 +2616,33 @@ npm install --save swiper
     padding: 1px;
     border-radius: 2px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_right .delivery_left {
-    color: #fff;
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_right .delivery_left {
+    /*color: #fff;*/
     margin-right: -10px;
     background-color: #02a774;
     border: 1px solid #02a774;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_rating_order .shop_rating_order_right .delivery_right {
+  .shop_list .shop_li >a .shop_right .shop_rating_order .shop_rating_order_right .delivery_right {
     color: #02a774;
     border: 1px solid #02a774;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_distance {
+  .shop_list .shop_li >a .shop_right .shop_distance {
     *zoom: 1;
     width: 100%;
     font-size: 12px;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_distance::after {
+  .shop_list .shop_li >a .shop_right .shop_distance::after {
     content: '';
     display: block;
     clear: both;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_distance .shop_delivery_msg {
+  .shop_list .shop_li >a .shop_right .shop_distance .shop_delivery_msg {
     float: left;
     transform-origin: 0;
     transform: scale(0.9);
     color: #666;
   }
-  .shop_container .shop_list .shop_li > a .shop_right .shop_distance .segmentation {
+  .shop_list .shop_li >a .shop_right .shop_distance .segmentation {
     color: #ccc;
   }
 </style>
@@ -2811,135 +2652,23 @@ npm install --save swiper
 
 ```vue
 <template>
-  <div class="msite">
+  <section class="msite">
     <!--首页头部-->
-    <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
-      <span class="header_search" slot="left">
-        <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
-    </HeaderTop>
+	...
     <!--首页导航-->
-    <nav class="msite_nav">
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg">
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg">
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/3.jpg">
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/4.jpg">
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/5.jpg">
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/6.jpg">
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/7.jpg">
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/8.jpg">
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/9.jpg">
-              </div>
-              <span>甜品饮品</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/10.jpg">
-              </div>
-              <span>商超便利</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/11.jpg">
-              </div>
-              <span>美食</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/12.jpg">
-              </div>
-              <span>简餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/13.jpg">
-              </div>
-              <span>新店特惠</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/14.jpg">
-              </div>
-              <span>准时达</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/1.jpg">
-              </div>
-              <span>预订早餐</span>
-            </a>
-            <a href="javascript:" class="link_to_food">
-              <div class="food_container">
-                <img src="./images/nav/2.jpg">
-              </div>
-              <span>土豪推荐</span>
-            </a>
-          </div>
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-      </div>
-    </nav>
+	...
     <!--首页附近商家-->
     <div class="msite_shop_list">
       <div class="shop_header">
         <i class="iconfont icon-xuanxiang"></i>
         <span class="shop_header_title">附近商家</span>
       </div>
-      <!--附近商家列表-->
-      <ShopList/>
+      <div class="shop_container">
+        <!--商家列表-->
+        <ShopList/>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -2962,95 +2691,6 @@ npm install --save swiper
     }
   }
 </script>
-
-<style scoped>
-  .msite {
-    width: 100%;
-  }
-  .msite .msite_nav {
-    position: relative;
-    margin-top: 45px;
-    height: 200px;
-    background: #fff;
-  }
-  .msite .msite_nav::before {
-    content: '';
-    position: absolute;
-    z-index: 200;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #e4e4e4;
-    transform: scaleY(0.5);
-  }
-  .msite .msite_nav .swiper-container {
-    width: 100%;
-    height: 100%;
-  }
-  .msite .msite_nav .swiper-container .swiper-wrapper {
-    width: 100%;
-    height: 100%;
-  }
-  .msite .msite_nav .swiper-container .swiper-wrapper .swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .msite .msite_nav .swiper-container .swiper-wrapper .swiper-slide .link_to_food {
-    width: 25%;
-  }
-  .msite .msite_nav .swiper-container .swiper-wrapper .swiper-slide .link_to_food .food_container {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 10px;
-    font-size: 0;
-  }
-  .msite .msite_nav .swiper-container .swiper-wrapper .swiper-slide .link_to_food .food_container img {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-  }
-  .msite .msite_nav .swiper-container .swiper-wrapper .swiper-slide .link_to_food span {
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 13px;
-    color: #666;
-  }
-  .msite .msite_nav .swiper-container .swiper-pagination > span.swiper-pagination-bullet-active {
-    background: #02a774;
-  }
-  .msite .msite_shop_list {
-    position: relative;
-    margin-top: 10px;
-    background: #fff;
-  }
-  .msite .msite_shop_list::before {
-    content: '';
-    position: absolute;
-    z-index: 200;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #e4e4e4;
-  }
-  .msite .msite_shop_list .shop_header {
-    padding: 10px 10px 0;
-  }
-  .msite .msite_shop_list .shop_header .shop_icon {
-    margin-left: 5px;
-    color: #999;
-  }
-  .msite .msite_shop_list .shop_header .shop_header_title {
-    color: #999;
-    font-size: 14px;
-    line-height: 20px;
-  }
-</style>
 ```
 
 ### 2.14. Login组件（静态）
@@ -3059,7 +2699,7 @@ npm install --save swiper
 
 ```vue
 <template>
-  <div class="loginContainer">
+  <section class="loginContainer">
     <div class="loginInner">
       <div class="login_header">
         <h2 class="login_logo">硅谷外卖</h2>
@@ -3109,168 +2749,12 @@ npm install --save swiper
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
   export default {}
 </script>
-
-<style scoped>
-  .loginContainer {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-  }
-  .loginContainer .loginInner {
-    padding-top: 60px;
-    width: 80%;
-    margin: 0 auto;
-  }
-  .loginContainer .loginInner .login_header .login_logo {
-    font-size: 40px;
-    font-weight: bold;
-    color: #02a774;
-    text-align: center;
-  }
-  .loginContainer .loginInner .login_header .login_header_title {
-    padding-top: 40px;
-    text-align: center;
-  }
-  .loginContainer .loginInner .login_header .login_header_title > a {
-    color: #333;
-    font-size: 14px;
-    padding-bottom: 4px;
-  }
-  .loginContainer .loginInner .login_header .login_header_title > a:first-child {
-    margin-right: 40px;
-  }
-  .loginContainer .loginInner .login_header .login_header_title > a.on {
-    color: #02a774;
-    font-weight: 700;
-    border-bottom: 2px solid #02a774;
-  }
-  .loginContainer .loginInner .login_content > form > div {
-    display: none;
-  }
-  .loginContainer .loginInner .login_content > form > div.on {
-    display: block;
-  }
-  .loginContainer .loginInner .login_content > form > div input {
-    width: 100%;
-    height: 100%;
-    padding-left: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    outline: 0;
-    font: 400 14px Arial;
-  }
-  .loginContainer .loginInner .login_content > form > div input:focus {
-    border: 1px solid #02a774;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_message {
-    position: relative;
-    margin-top: 16px;
-    height: 48px;
-    font-size: 14px;
-    background: #fff;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_message .get_verification {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    border: 0;
-    color: #ccc;
-    font-size: 14px;
-    background: transparent;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_verification {
-    position: relative;
-    margin-top: 16px;
-    height: 48px;
-    font-size: 14px;
-    background: #fff;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_verification .switch_button {
-    font-size: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: background-color 0.3s, border-color 0.3s;
-    padding: 0 6px;
-    width: 30px;
-    height: 16px;
-    line-height: 16px;
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-  }
-  .loginContainer .loginInner .login_content > form > div .login_verification .switch_button.off {
-    background: #fff;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_verification .switch_button.off .switch_text {
-    float: right;
-    color: #ddd;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_verification .switch_button.on {
-    background: #02a774;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_verification .switch_button > .switch_circle {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    width: 16px;
-    height: 16px;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_hint {
-    margin-top: 12px;
-    color: #999;
-    font-size: 14px;
-    line-height: 20px;
-  }
-  .loginContainer .loginInner .login_content > form > div .login_hint > a {
-    color: #02a774;
-  }
-  .loginContainer .loginInner .login_content > form .login_submit {
-    display: block;
-    width: 100%;
-    height: 42px;
-    margin-top: 30px;
-    border-radius: 4px;
-    background: #4cd96f;
-    color: #fff;
-    text-align: center;
-    font-size: 16px;
-    line-height: 42px;
-    border: 0;
-  }
-  .loginContainer .loginInner .login_content .about_us {
-    display: block;
-    font-size: 12px;
-    margin-top: 20px;
-    text-align: center;
-    color: #999;
-  }
-  .loginContainer .loginInner .go_back {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 30px;
-    height: 30px;
-  }
-  .loginContainer .loginInner .go_back > .iconfont {
-    font-size: 20px;
-    color: #999;
-  }
-</style>
 ```
 
 #### 2.14.2. 注册Login路由`src/router/index.js`
@@ -3285,8 +2769,10 @@ import Login from '../views/Login/Login'
 #### 2.14.3. `src/views/Profile/Profile.vue`
 
 ```vue
+<template>
+  <section class="profile">
     <!--个人头部-->
-    <HeaderTop title="我的"></HeaderTop>
+    ...
     <!--跳转登录注册-->
     <section class="profile-number">
       <router-link to="/login" class="profile-link">
@@ -3296,17 +2782,19 @@ import Login from '../views/Login/Login'
         <div class="user-info">
           <p class="user-info-top">登录/注册</p>
           <p>
-                <span class="user-icon">
-                  <i class="iconfont icon-shouji icon-mobile"></i>
-                </span>
+            <span class="user-icon">
+              <i class="iconfont icon-shouji icon-mobile"></i>
+            </span>
             <span class="icon-mobile-number">暂无绑定手机号</span>
           </p>
         </div>
         <span class="arrow">
-              <i class="iconfont icon-jiantou1"></i>
-            </span>
+          <i class="iconfont icon-jiantou1"></i>
+        </span>
       </router-link>
     </section>
+  </section>
+</template>
 ```
 
 #### 2.14.4. 控制Footer的显示隐藏

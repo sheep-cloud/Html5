@@ -70,7 +70,7 @@ function sendCode(phone, code, callback) {
         body : body,
         json : true
     }, function (error, response, body) {
-        console.log(error, response, body);
+        console.log(error, body)
         callback(body.statusCode==='000000');
         // callback(true);
     });

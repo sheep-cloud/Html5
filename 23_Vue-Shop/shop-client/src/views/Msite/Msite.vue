@@ -1,5 +1,5 @@
 <template>
-  <div class="msite">
+  <section class="msite">
     <!--首页头部-->
     <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
       <span class="header_search" slot="left">
@@ -124,10 +124,12 @@
         <i class="iconfont icon-xuanxiang"></i>
         <span class="shop_header_title">附近商家</span>
       </div>
-      <!--附近商家列表-->
-      <ShopList/>
+      <div class="shop_container">
+        <!--商家列表-->
+        <ShopList/>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -142,7 +144,7 @@
     mounted() {
       // 创建一个Swiper实例对象，实现轮播
       new Swiper('.swiper-container', {
-        loop: false, // 循环模式选项
+        loop: true, // 循环模式选项
         pagination: {// 如果需要分页器
           el: '.swiper-pagination'
         }
@@ -237,5 +239,8 @@
     color: #999;
     font-size: 14px;
     line-height: 20px;
+  }
+  .msite .msite_shop_list .shop_container {
+    margin-bottom: 50px;
   }
 </style>

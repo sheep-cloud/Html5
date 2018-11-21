@@ -1,5 +1,5 @@
 <template>
-  <div class="loginContainer">
+  <section class="loginContainer">
     <div class="loginInner">
       <div class="login_header">
         <h2 class="login_logo">硅谷外卖</h2>
@@ -49,7 +49,7 @@
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

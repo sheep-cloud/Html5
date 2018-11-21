@@ -1,5 +1,5 @@
 <template>
-  <div class="footer_guide border-1px">
+  <footer class="footer_guide border-1px">
     <a href="javascript:" class="guide_item" :class="{on: msite === $route.path}" @click="goTo(msite)">
       <span class="item_icon">
         <i class="iconfont icon-waimai"></i>
@@ -24,7 +24,7 @@
       </span>
       <span>我的</span>
     </a>
-  </div>
+  </footer>
 </template>
 
 <script>
