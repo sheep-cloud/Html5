@@ -1,6 +1,6 @@
 
 
-Vue实战项目：硅谷外卖
+# Vue实战项目：外卖
 
 ## 1. 准备
 
@@ -313,6 +313,65 @@ src
 - 补充自定义样式`static/css/reset-css-4.0.1/reset.css`
 
   ```css
+  /* http://meyerweb.com/eric/tools/css/reset/
+     v4.0 | 20180602
+     License: none (public domain)
+  */
+  
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  main, menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+  	margin: 0;
+  	padding: 0;
+  	border: 0;
+  	font-size: 100%;
+    font-weight: normal;
+  	vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure,
+  footer, header, hgroup, main, menu, nav, section {
+  	display: block;
+  }
+  /* HTML5 hidden-attribute fix for newer browsers */
+  *[hidden] {
+      display: none;
+  }
+  body {
+  	line-height: 1;
+  }
+  ol, ul {
+  	list-style: none;
+  }
+  blockquote, q {
+  	quotes: none;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+  	content: none;
+  }
+  table {
+  	border-collapse: collapse;
+  	border-spacing: 0;
+  }
+  
+  /*显示省略号*/
+  .ellipsis{
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  }
+  
   /* custom */
   a {
     color: #7e8c8d;
@@ -389,7 +448,7 @@ src
 
   ```html
   <!--处理移动端点击响应延时300ms的问题-->
-  <script src="./static/js/fastclick-1.0.6/fastclick.min.js"></script>
+  <script src="./static/js/fastclick-1.0.6/fastclick.js"></script>
   <script>
     if ('addEventListener' in document) {
       document.addEventListener('DOMContentLoaded', function () {
@@ -2860,8 +2919,6 @@ import Login from '../views/Login/Login'
 
 ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fxf02gwradj30ay097glk.jpg)
 
-#### 2.15.4. 使用postman工具测试接口
-
 ### 2.16. 前后台交互ajax
 
 #### 2.16.1. 下载axios
@@ -2870,8 +2927,440 @@ import Login from '../views/Login/Login'
 npm install --save axios
 ```
 
-
-
 #### 2.16.2. 封装ajax请求模块
 
+- `src\api\ajax.js`
+
+  ```js
+  /*
+  * ajax请求函数模块
+  * */
+  import axios from 'axios'
+  
+  /**
+   * ajax请求函数，返回promise对象
+   * @param url 请求地址
+   * @param data  请求参数
+   * @param type  请求方法GET/POST
+   * @return promise对象（异步返回的数据是：response.data）
+   */
+  function ajax(url = '', data = {}, type = 'GET') {
+    return new Promise(function (resolve, reject) {
+      // 执行异步ajax请求
+      let promise
+      if (type === 'GET') {
+        // 准备url query参数数据
+        let dataStr = '' // 数据拼接字符串
+        Object.keys(data).forEach(key => dataStr += `${key}=${data[key]}&`)
+        if (dataStr) {
+          dataStr = dataStr.substring(0, dataStr.lastIndexOf('&'))
+          url += `?${dataStr}`
+        }
+        // 发送GET请求
+        promise = axios.get(url)
+      } else {
+        // 发送POST请求
+        promise = axios.post(url, data)
+      }
+  
+      // 包装成功，失败，返回的是response.data
+      promise.then(response => {
+        // 成功了调用resolve
+        resolve(response.data)
+      }).catch(error => {
+        // 失败了调用reject
+        reject(error)
+      })
+    })
+  }
+  
+  export default ajax
+  ```
+
+- `src/api/index.js`
+
+  ```js
+  /*
+  * 与后台交互模块
+  * 包含n个接口请求函数的模块
+  * 函数的返回值：promise对象
+  * */
+  import ajax from './ajax'
+  
+  // 1、根据经纬度获取位置详情
+  export const reqAddress = geohash => ajax(`/position/${geohash}`)
+  
+  // 2、获取食品分类列表
+  export const reqCategorys = () => ajax(`/index_category`)
+  
+  // 3、根据经纬度获取商铺列表
+  export const reqShops = (longitude, latitude) => ajax(`/shops`, {longitude, latitude})
+  
+  // 4、根据经纬度和关键字搜索商铺列表
+  export const reqSearchShops = (keyword, geohash) => ajax('/search_shops', {keyword, geohash})
+  
+  // 5、获取一次性验证码
+  export const reqCaptcha = () => ajax('/captcha')
+  
+  // 6、用户名密码登陆
+  export const reqPwdLogin = (name, pwd, captcha) => ajax('/login_pwd', {name, pwd, captcha}, 'POST')
+  
+  // 7、发送短信验证码
+  export const reqSendCode = phone => ajax('/sendcode', {phone})
+  
+  // 8、手机号验证码登陆
+  export const reqSmsLogin = (phone, code) => ajax('/login_sms', {phone, code}, 'POST')
+  
+  // 9、根据会话获取用户信息
+  export const reqUser = () => ajax('/userinfo')
+  
+  // 10、用户登出
+  export const reqLogout = () => ajax('/logout')
+  ```
+
 #### 2.16.3. 配置代理
+
+- `config/index.js`
+
+  ```js
+      // 配置代理
+      proxyTable: {
+        '/api': { // 匹配所有以 '/api' 开头的请求路径
+          target: 'http://localhost:3000',  // 代理目标的基础路径
+          changeOrigin: true,  // 是否跨域
+          pathRewrite: { // 重写路径：去掉路径中开头的 '/api'
+            '^/api': ''
+          }
+        }
+      },
+  ```
+
+### 2.17. 使用vuex管理状态
+
+#### 2.17.1. 下载vuex
+
+```ini
+npm install --save vuex
+```
+
+#### 2.17.2. 定义state
+
+```js
+/*
+* 状态对象
+* */
+export default {
+  latitude: 40.10038, // 纬度
+  longitude: 116.36867, // 经度
+  address: {},// 地址相关信息
+  categorys: [], // 食品分类列表
+  shops: [] // 商铺列表
+}
+```
+
+#### 2.17.3. 定义mutation-types
+
+```js
+/*
+* 包含多个mutation的type名称常量
+* */
+export const RECEIVE_ADDRESS = 'receive_address' // 接收地址相关信息
+export const RECEIVE_CATEGORYS = 'receive_categorys' // 接收食品分类列表
+export const RECEIVE_SHOPS = 'receive_shops' // 接收商铺列表
+```
+
+#### 2.17.4. 定义mutations
+
+```js
+/*
+* 直接更新state的多个方法的对象
+* */
+import {RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS} from './mutation-types'
+
+export default {
+  [RECEIVE_ADDRESS](state, {address}) {
+    state.address = address
+  },
+  [RECEIVE_CATEGORYS](state, {categorys}) {
+    state.categorys = categorys
+  },
+  [RECEIVE_SHOPS](state, {shops}) {
+    state.shops = shops
+  }
+}
+```
+
+#### 2.17.5. 定义actions
+
+```js
+/*
+* 通过mutations间接更新state的多个方法的对象
+* */
+import {RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS} from './mutation-types'
+import {reqAddress, reqCategorys, reqShops} from '../api'
+
+export default {
+  // 异步获取地址相关信息
+  async getAddress({commit, state}) {
+    // 发送异步ajax请求
+    const geohash = state.latitude + ',' + state.longitude
+    const result = await reqAddress(geohash)
+    // 提交一个mutation
+    if (result.code === 0) {
+      const address = result.data
+      commit(RECEIVE_ADDRESS, {address})
+    }
+  },
+
+  // 异步获取食品分类列表
+  async getCategorys({commit}) {
+    // 发送异步ajax请求
+    const result = await reqCategorys()
+    // 提交一个mutation
+    if (result.code === 0) {
+      const categorys = result.data
+      commit(RECEIVE_CATEGORYS, {categorys})
+    }
+  },
+
+  // 异步获取商铺列表
+  async getShops({commit, state}) {
+    // 发送异步ajax请求
+    const {longitude, latitude} = state
+    const result = await reqShops(longitude, latitude)
+    // 提交一个mutation
+    if (result.code === 0) {
+      const shops = result.data
+      commit(RECEIVE_SHOPS, {shops})
+    }
+  }
+}
+```
+
+#### 2.17.6. 定义store对象`src/store/index.js`
+
+```js
+/*
+* vuex最核心的管理对象store
+* */
+import Vue from 'vue'
+import Vuex from 'vuex'
+import state from './state'
+import mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters
+})
+```
+
+#### 2.17.7 注册store`src/main.js`
+
+```js
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import store from './store'
+
+Vue.config.productionTip = false
+
+new Vue({
+  el: '#app',
+  render: h => h(App),
+  router, // 使用vue-router
+  store // 使用vuex
+})
+```
+
+### 2.18. 异步显示数据
+
+#### 2.18.1.
+
+#### 2.18.2.
+
+#### 2.18.3.
+
+### 2.19. 开发Star组件
+
+#### 2.19.1. `src/components/Star/Star.vue`
+
+```vue
+<template>
+  <div class="star" :class="'star-' + size">
+    <span class="star-item" v-for="(sc, index) in starClasses" :key="index" :class="sc"></span>
+  </div>
+</template>
+
+<script>
+  const CLASS_ON = 'on' // 黄星
+  const CLASS_HALF = 'half' // 半星
+  const CLASS_OFF = 'off' // 灰星
+
+  export default {
+    props: {
+      score: Number,
+      size: Number
+    },
+    computed: {
+      /*
+        评分算法：
+          3.2：3 + 0 + 2
+          3.5: 3 + 1 + 1
+       */
+      starClasses() {
+        const {score} = this
+        const scs = []
+        // 向scs中添加n个CLASS_ON
+        const scoreInteger = Math.floor(score) // 向下取整
+        while (scs.length < scoreInteger) {
+          scs.push(CLASS_ON)
+        }
+
+        // 向scs中添加0/1个CLASS_HALF
+        if (score * 10 - scoreInteger * 10 >= 5) {
+          scs.push(CLASS_HALF)
+        }
+
+        // 向scs中添加n个CLASS_OFF
+        while (scs.length < 5) {
+          scs.push(CLASS_OFF)
+        }
+
+        return scs
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .star {
+    float: left;
+    font-size: 0;
+  }
+  .star .star-item {
+    display: inline-block;
+    background-repeat: no-repeat;
+  }
+  .star.star-48 .star-item {
+    width: 20px;
+    height: 20px;
+    margin-right: 22px;
+    background-size: 20px 20px;
+  }
+  .star.star-48 .star-item:last-child {
+    margin-right: 0;
+  }
+  .star.star-48 .star-item.on {
+    background-image: url("./images/stars/star48_on@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-48 .star-item.on {
+      background-image: url("./images/stars/star48_on@3x.png");
+    }
+  }
+  .star.star-48 .star-item.half {
+    background-image: url("./images/stars/star48_half@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-48 .star-item.half {
+      background-image: url("./images/stars/star48_half@3x.png");
+    }
+  }
+  .star.star-48 .star-item.off {
+    background-image: url("./images/stars/star48_off@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-48 .star-item.off {
+      background-image: url("./images/stars/star48_off@3x.png");
+    }
+  }
+  .star.star-36 .star-item {
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    background-size: 15px 15px;
+  }
+  .star.star-36 .star-item:last-child {
+    margin-right: 0;
+  }
+  .star.star-36 .star-item.on {
+    background-image: url("./images/stars/star36_on@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-36 .star-item.on {
+      background-image: url("./images/stars/star36_on@3x.png");
+    }
+  }
+  .star.star-36 .star-item.half {
+    background-image: url("./images/stars/star36_half@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-36 .star-item.half {
+      background-image: url("./images/stars/star36_half@3x.png");
+    }
+  }
+  .star.star-36 .star-item.off {
+    background-image: url("./images/stars/star36_off@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-36 .star-item.off {
+      background-image: url("./images/stars/star36_off@3x.png");
+    }
+  }
+  .star.star-24 .star-item {
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    background-size: 10px 10px;
+  }
+  .star.star-24 .star-item:last-child {
+    margin-right: 0;
+  }
+  .star.star-24 .star-item.on {
+    background-image: url("./images/stars/star24_on@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-24 .star-item.on {
+      background-image: url("./images/stars/star24_on@3x.png");
+    }
+  }
+  .star.star-24 .star-item.half {
+    background-image: url("./images/stars/star24_half@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-24 .star-item.half {
+      background-image: url("./images/stars/star24_half@3x.png");
+    }
+  }
+  .star.star-24 .star-item.off {
+    background-image: url("./images/stars/star24_off@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    .star.star-24 .star-item.off {
+      background-image: url("./images/stars/star24_off@3x.png");
+    }
+  }
+</style>
+```
+
+#### 2.19.2. `src/components/ShopList/ShopList.vue`
+
+```vue
+<Star :score="shop.rating" :size="24"/>
+
+<script>
+  import {mapState} from 'vuex'
+  import Star from '../Star/Star'
+
+  export default {
+      ...
+  }
+</script>
+```
+

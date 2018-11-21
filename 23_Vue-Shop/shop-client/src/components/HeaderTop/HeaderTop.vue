@@ -2,7 +2,7 @@
   <header class="header">
     <slot name="left"></slot>
     <span class="header_title">
-      <span class="header_title_text ellipsis">{{title}}</span>
+      <span class="header_title_text" :class="ellipsis">{{title}}</span>
     </span>
     <slot name="right"></slot>
   </header>
@@ -11,7 +11,8 @@
 <script>
   export default {
     props: {
-      title: String
+      title: String,
+      ellipsis: String
     }
   }
 </script>
@@ -34,8 +35,8 @@
     width: 10%;
     height: 50%;
   }
-  .header .header_search .icon-sousuo {
-    font-size: 25px;
+  .header .header_search .iconfont {
+    font-size: 22px;
     color: #fff;
   }
   .header .header_title {
@@ -43,9 +44,18 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 30%;
     color: #fff;
+    font-size: 22px;
     text-align: center;
+  }
+  .header .header_search .icon-sousuo {
+    font-size: 25px;
+    color: #fff;
+  }
+  /*Msite 样式有问题*/
+  .header .header_title {
+    width: 50%;
     margin-left: -5%;
   }
   .header .header_title .header_title_text {

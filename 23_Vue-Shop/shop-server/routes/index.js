@@ -162,10 +162,15 @@ router.get('/position/:geohash', function (req, res) {
 获取首页分类列表
  */
 router.get('/index_category', function (req, res) {
+  /*
   setTimeout(function () {
     const data = require('../data/index_category.json')
     res.send({code: 0, data})
   }, 300)
+  */
+
+  const data = require('../data/index_category.json')
+  res.send({code: 0, data})
 })
 
 /*
@@ -176,11 +181,15 @@ router.get('/shops', function (req, res) {
   const latitude = req.query.latitude
   const longitude = req.query.longitude
   console.log(`/shops, longitude：${longitude}, latitude：${latitude}`)
-
+  /*
   setTimeout(function () {
     const data = require('../data/shops.json')
     res.send({code: 0, data})
   }, 300)
+  */
+
+  const data = require('../data/shops.json')
+  res.send({code: 0, data})
 })
 
 router.get('/search_shops', function (req, res) {
