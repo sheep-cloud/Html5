@@ -102,7 +102,6 @@ router.post('/login_sms', function (req, res, next) {
   //删除保存的code
   delete users[phone];
 
-
   UserModel.findOne({phone}, function (err, user) {
     if (user) {
       req.session.userid = user._id
