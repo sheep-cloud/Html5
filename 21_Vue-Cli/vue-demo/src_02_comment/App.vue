@@ -11,9 +11,9 @@
     </header>
     <div class="container">
       <div class="row">
-        <!-- :comments 传递数据 -->
+        <!-- :addComment 传递方法 -->
         <Add :addComment="addComment"/>
-        <!--:addComment 传递方法 :deleteComment 逐层传递到 Item-->
+        <!-- :comments 传递数据 :deleteComment 逐层传递到 Item -->
         <List :comments="comments" :deleteComment="deleteComment"/>
       </div>
     </div>

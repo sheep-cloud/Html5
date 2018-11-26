@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
   import TodoItem from './TodoItem'
 
   export default {

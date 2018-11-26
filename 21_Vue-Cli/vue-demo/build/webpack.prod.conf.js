@@ -26,7 +26,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
-    publicPath: '/vue/08_vue-router/'      // 打包文件夹的名称
+    publicPath: '/vue/08_vue_router_01/'      // 打包文件夹的名称
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html

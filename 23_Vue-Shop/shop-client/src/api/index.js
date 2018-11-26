@@ -36,3 +36,6 @@ export const reqUser = () => ajax(`${BASE_URL}/userinfo`)
 
 // 10、用户登出
 export const reqLogout = () => ajax(`${BASE_URL}/logout`)
+
+// 11、测试SpringBoot后台接口
+export const reqHello = () => ajax(`${BASE_URL}/hello`)

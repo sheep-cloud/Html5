@@ -1,4 +1,4 @@
-Vue
+# Vue
 
 ## 1. Vue核心
 
@@ -208,7 +208,7 @@ serve dist
 
 - .eslintrc.js：全局规则配置文件
 
-```javascript
+```js
   // add your custom rules here
   rules: {
     // allow async-await
@@ -261,39 +261,57 @@ serve dist
 
 #### 2.4.2. 基本使用
 
-- 引入组件
-- 映射成标签
-- 使用组件标签
+- `src/components/HelloWorld.vue`
 
-```vue
-<template>
-  <div>
-    <img class="logo" src="./assets/logo.png" alt="logo">
-    <!--3. 使用组件标签-->
-    <HelloWolrd/>
-  </div>
-</template>
-
-<script>
-
-  // 1. 引入HelloWorld组件
-  import HelloWolrd from './components/HelloWorld'
-
-  export default {
-    // 2. 映射组件标签
-    components: {
-      HelloWolrd
+  ```vue
+  <template>
+    <div>
+      <h2 class="msg">{{msg}}</h2>
+    </div>
+  </template>
+  
+  <script>
+    export default {        // 向外暴露一个配置对象（与Vue一致）
+      data() {              // 必须写函数
+        return {
+          msg: 'Hello Vue Components'
+        }
+      }
     }
-  }
-</script>
+  </script>
+  
+  <style scoped>
+    .msg {
+      color: red;
+    }
+  </style>
+  ```
 
-<style scoped>
-  .logo {
-    width: 200px;
-    height: 200px;
-  }
-</style>
-```
+- `src/App.vue`
+
+  ```vue
+  <template>
+    <div>
+      <img src="./assets/img/logo.png" alt="logo">
+      <!--3. 使用组件标签-->
+      <HelloWolrd/>
+    </div>
+  </template>
+  
+  <script>
+    // 1. 引入HelloWorld组件
+    import HelloWolrd from './components/HelloWorld'
+  
+    export default {
+      // 2. 映射组件标签
+      components: {HelloWolrd}
+    }
+  </script>
+  
+  <style scoped>
+  
+  </style>
+  ```
 
 #### 2.4.3. 关于标签名与标签属性名书写问题
 
@@ -320,7 +338,10 @@ serve dist
 #### 2.6.1. 使用组件标签时
 
 ```vue
-<List :comments="comments" :deleteComment="deleteComment"/>
+        <!-- :addComment 传递方法 -->
+        <Add :addComment="addComment"/>
+        <!-- :comments 传递数据 :deleteComment 逐层传递到 Item -->
+        <List :comments="comments" :deleteComment="deleteComment"/>
 ```
 
 #### 2.6.2. 自定义MyComponent时
@@ -363,7 +384,7 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 ### 2.7. 组件间通信2：vue自定义事件
 
-#### 2.7.1. 绑定时间监听
+#### 2.7.1. 绑定事件监听
 
 - 方式一：通过 v-on 绑定
 
@@ -412,7 +433,7 @@ npm install pubsub-js --save
 
 #### 2.8.2. 订阅消息
 
-```javascript
+```js
 import PubSub from 'pubsub-js'
 
     mounted() {
@@ -426,7 +447,7 @@ import PubSub from 'pubsub-js'
 
 #### 2.8.3. 发布消息
 
-```javascript
+```js
       // 删除
       deleteItem() {
         let {layer, todo, index} = this
@@ -477,7 +498,7 @@ npm install vue-resource --save
 
 - 编码：
 
-```javascript
+```js
 // 引入模块
 import vueResource from 'vue-resource'
 
@@ -516,7 +537,7 @@ npm install axios --save
 
 - 编码：
 
-```javascript
+```js
   // 引入组件
   import axios from 'axios'
 
@@ -540,7 +561,7 @@ axios.get(url).then(response => {
 
 ### 3.5. demo3：github users
 
-```javascript
+```js
     mounted() {
       // 是否再次发ajax请求，不是，而是在点击之后
       // 订阅搜索的消息
@@ -653,7 +674,7 @@ npm install babel-plugin-component --save-dev
 
 - main.js
 
-```javascript
+```js
 import Vue from 'vue'
 import App from './App'
 // 引入指定组件
@@ -727,7 +748,7 @@ npm install vue-router --save
 
 - VueRouter()：	用于创建路由器的构建函数
 
-```javascript
+```js
 // 默认暴露
 export default new VueRouter({
   // 多个配置项
@@ -736,7 +757,7 @@ export default new VueRouter({
 
 - 路由配置
 
-```javascript
+```js
 export default new VueRouter({
   // 多个配置项
   routes: [
@@ -751,7 +772,7 @@ export default new VueRouter({
 
 - 注册路由器
 
-```javascript
+```js
 // 引入组件
 import Vue from 'vue'
 import App from './App'
@@ -847,7 +868,7 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 
 #### 5.2.4. 路由器模块：src/router/index.js
 
-```javascript
+```js
 /*
   路由器模块
  */
@@ -888,7 +909,7 @@ export default new VueRouter({
 
 #### 5.2.5. 注册路由器：main.js
 
-```javascript
+```js
 import Vue from 'vue'
 import App from './App'
 
@@ -927,7 +948,7 @@ new Vue({
 
 #### 5.3.3. 配置嵌套路由：router.js
 
-```javascript
+```js
 /*
   路由器模块
  */
@@ -1009,7 +1030,7 @@ export default new VueRouter({
 
 ### 5.6. 编程式路由导航
 
-```javascript
+```js
 // 这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
 this.$router.push(`url`)
 // 跟 router.push 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
@@ -1022,20 +1043,20 @@ this.$router.replace(`url`)
 
 - 路由配置
 
-```javascript
+```js
 {path: '/home/message/detail/:id', component: MessageDetail}
 ```
 
 - 传递参数
 
-```javascript
+```js
 this.$router.push(`/home/message/detail/12345`)
 ```
 
 - url：  `http://xxx/id=12345`
 - 接收参数
 
-```javascript
+```js
 this.$route.params.id
 ```
 
@@ -1043,13 +1064,13 @@ this.$route.params.id
 
 - 路由配置
 
-```javascript
+```js
 {path: '/home/message/detail', component: MessageDetail}
 ```
 
 - 传递参数
 
-```javascript
+```js
         this.$router.push(
           {
             path: `/home/message/detail`,
@@ -1061,7 +1082,7 @@ this.$route.params.id
 - url： `http://xxx?id=12345`
 - 接收参数
 
-```javascript
+```js
 this.$route.query.id
 ```
 
@@ -1069,13 +1090,13 @@ this.$route.query.id
 
 - **路由配置（必须配置name）**
 
-```javascript
+```js
 {path: '/home/message/detail', name: 'detail', component: MessageDetail}
 ```
 
 - 传递参数
 
-```javascript
+```js
         this.$router.push(
           {
             name: 'detail',
@@ -1087,7 +1108,7 @@ this.$route.query.id
 - url：`http://xxx` 参数隐式传递
 - 接收参数
 
-```javascript
+```js
 this.$route.params.id
 ```
 

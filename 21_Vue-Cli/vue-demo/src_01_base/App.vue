@@ -12,9 +12,7 @@
 
   export default {
     // 2. 映射组件标签
-    components: {
-      HelloWolrd
-    }
+    components: {HelloWolrd}
   }
 </script>
 

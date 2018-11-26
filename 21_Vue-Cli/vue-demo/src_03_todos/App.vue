@@ -17,10 +17,7 @@
   const TODOS_KEY = 'todos_key'
 
   export default {
-
-    components: {
-      TodoHeader, TodoMain, TodoFooter
-    },
+    components: {TodoHeader, TodoMain, TodoFooter},
     data() {
       return {
         // 从 localStorage 读取todos

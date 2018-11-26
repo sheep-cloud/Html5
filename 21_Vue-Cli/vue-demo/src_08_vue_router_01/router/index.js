@@ -2,14 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // 引入路由组件
-import GoodsList from './../views/GoodsList'
-import Title from './../views/Title'
-import Image from './../views/Image'
-import Cart from './../views/Cart'
+import GoodsList from '../views/GoodsList'
+import Title from '../views/Title'
+import Image from '../views/Image'
+import Cart from '../views/Cart'
 
 Vue.use(VueRouter)
 
-let routes = [
+const routes = [
   {
     path: '/goods/:goodsId/user/:name', name: 'GoodsList', component: GoodsList,
     children: [
