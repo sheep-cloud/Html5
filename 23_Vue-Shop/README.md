@@ -543,8 +543,8 @@ npm install vue-router --save
   ```vue
   <template>
     <div id="app">
-      <router-view/>
-      <FooterGuide/>
+      <router-view></router-view>
+      <FooterGuide></FooterGuide>
     </div>
   </template>
   
@@ -597,9 +597,9 @@ http://localhost:8080/#/profile
   <template>
     <div id="app">
       <section class="content">
-        <router-view/>
+        <router-view></router-view>
       </section>
-      <FooterGuide/>
+      <FooterGuide></FooterGuide>
     </div>
   </template>
   
@@ -626,25 +626,25 @@ http://localhost:8080/#/profile
   ```vue
   <template>
     <footer class="footer_guide border-1px">
-      <a href="javascript:" class="guide_item" :class="{on: msite === $route.path}" @click="goTo(msite)">
+      <a href="javascript:" class="guide_item" :class="{on: $route.path === msite}" @click="goTo(msite)">
         <span class="item_icon">
           <i class="iconfont icon-waimai"></i>
         </span>
         <span>外卖</span>
       </a>
-      <a href="javascript:" class="guide_item" :class="{on: search === $route.path}" @click="goTo(search)">
+      <a href="javascript:" class="guide_item" :class="{on: $route.path === search}" @click="goTo(search)">
         <span class="item_icon">
           <i class="iconfont icon-search"></i>
         </span>
         <span>搜索</span>
       </a>
-      <a href="javascript:" class="guide_item" :class="{on: order === $route.path}" @click="goTo(order)">
+      <a href="javascript:" class="guide_item" :class="{on: $route.path === order}" @click="goTo(order)">
         <span class="item_icon">
           <i class="iconfont icon-dingdan"></i>
         </span>
         <span>订单</span>
       </a>
-      <a href="javascript:" class="guide_item" :class="{on: profile === $route.path}" @click="goTo(profile)">
+      <a href="javascript:" class="guide_item" :class="{on: $route.path === profile}" @click="goTo(profile)">
         <span class="item_icon">
           <i class="iconfont icon-geren"></i>
         </span>
@@ -1945,7 +1945,7 @@ http://localhost:8080/#/profile
   <header class="header">
     <slot name="left"></slot>
     <span class="header_title">
-      <span class="header_title_text ellipsis">{{title}}</span>
+      <span class="header_title_text" :class="ellipsis">{{title}}</span>
     </span>
     <slot name="right"></slot>
   </header>
@@ -1954,7 +1954,8 @@ http://localhost:8080/#/profile
 <script>
   export default {
     props: {
-      title: String
+      title: String,
+      ellipsis: String
     }
   }
 </script>
@@ -1977,8 +1978,8 @@ http://localhost:8080/#/profile
     width: 10%;
     height: 50%;
   }
-  .header .header_search .icon-sousuo {
-    font-size: 25px;
+  .header .header_search .iconfont {
+    font-size: 22px;
     color: #fff;
   }
   .header .header_title {
@@ -1986,9 +1987,18 @@ http://localhost:8080/#/profile
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 30%;
     color: #fff;
+    font-size: 22px;
     text-align: center;
+  }
+  .header .header_search .icon-sousuo {
+    font-size: 25px;
+    color: #fff;
+  }
+  /*Msite 样式有问题*/
+  .header .header_title {
+    width: 50%;
     margin-left: -5%;
   }
   .header .header_title .header_title_text {
@@ -2016,7 +2026,7 @@ http://localhost:8080/#/profile
 <template>
   <section class="msite">
     <!--首页头部-->
-    <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
+    <HeaderTop title="昌平区北七家宏福科技园(337省道北)" :ellipsis="'ellipsis'">
       <span class="header_search" slot="left">
         <i class="iconfont icon-sousuo"></i>
       </span>
@@ -2724,7 +2734,7 @@ npm install --save swiper
       </div>
       <div class="shop_container">
         <!--商家列表-->
-        <ShopList/>
+        <ShopList></ShopList>
       </div>
     </div>
   </section>
@@ -3180,11 +3190,217 @@ new Vue({
 
 ### 2.18. 异步显示数据
 
-#### 2.18.1.
+#### 2.18.1. `src/App.vue`
 
-#### 2.18.2.
+```vue
+<template>
+  <div id="app">
+    <section class="content">
+      <router-view></router-view>
+    </section>
+    <FooterGuide v-show="$route.meta.showFooter"></FooterGuide>
+  </div>
+</template>
 
-#### 2.18.3.
+<script>
+  import {mapActions} from 'vuex'
+  import FooterGuide from './components/FooterGuide/FooterGuide'
+
+  export default {
+    components: {FooterGuide},
+    mounted() {
+      // this.$store.dispatch('getAddress')
+      this.getAddress()
+    },
+    methods: {
+      ...mapActions(['getAddress'])
+    }
+  }
+</script>
+```
+
+#### 2.18.2. `src/views/Msite/Msite.vue`
+
+```vue
+<template>
+  <section class="msite">
+    <!--首页头部-->
+    ...
+    <!--首页导航-->
+    <nav class="msite_nav">
+      <div class="swiper-container" v-if="categorys.length">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" v-for="(categorys, index) in categorysArr" :key="index">
+            <a href="javascript:" class="link_to_food" v-for="(category, index) in categorys" :key="index">
+              <div class="food_container">
+                <!--<img src="./images/nav/1.jpg">-->
+                <img :src="baseImageUrl + category.image_url">
+              </div>
+              <span>{{category.title}}</span>
+            </a>
+          </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+      <img src="./images/msite_back.svg" alt="back" v-else>
+    </nav>
+    <!--首页附近商家-->
+    <div class="msite_shop_list">
+      <div class="shop_header">
+        <i class="iconfont icon-xuanxiang"></i>
+        <span class="shop_header_title">附近商家</span>
+      </div>
+      <div class="shop_container">
+        <!--商家列表-->
+        <ShopList></ShopList>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+  import Swiper from 'swiper'
+  import 'swiper/dist/css/swiper.min.css'
+
+  import HeaderTop from '../../components/HeaderTop/HeaderTop'
+  import ShopList from '../../components/ShopList/ShopList'
+
+  import {mapState, mapActions} from 'vuex'
+
+  export default {
+    components: {HeaderTop, ShopList},
+    data() {
+      return {
+        baseImageUrl: 'https://fuss10.elemecdn.com'
+      }
+    },
+    mounted() {
+      // this.$store.dispatch('getCategorys')
+      // this.$store.dispatch('getShops')
+      this.getCategorys()
+      this.getShops()
+    },
+    methods: {
+      ...mapActions(['getCategorys', 'getShops'])
+    },
+    computed: {
+      ...mapState(['address', 'categorys']),
+      /*
+        根据categorys一维数组生成一个二维数组
+        小数组中的元素个数最大是8
+       */
+      categorysArr() {
+        // 准备空的二维数组
+        let arr = []
+        // 准备一个小数组（最大长度为8）
+        let minArr = []
+        // 遍历categorys
+        this.categorys.forEach(c => {
+          // 如果当前小数组已经满了，创建一个新的
+          if (minArr.length === 8) {
+            minArr = []
+          }
+          // 如果minArr是空的，将小数组保存到大数组中
+          if (minArr.length === 0) {
+            arr.push(minArr)
+          }
+          // 将当前分类保存到小数组中
+          minArr.push(c)
+        })
+
+        return arr
+      }
+    },
+    watch: {
+      categorys(value) { // categorys数组中有数据了，在异步更新界面之前执行
+        // 界面更新就立即创建Swiper对象
+        this.$nextTick(() => { // 一旦完成界面更新，就立即调用（此条语句要写在数据更新之后）
+          // 创建一个Swiper实例对象，实现轮播
+          new Swiper('.swiper-container', {
+            loop: true, // 循环模式选项
+            pagination: {// 如果需要分页器
+              el: '.swiper-pagination'
+            }
+          })
+        })
+      }
+    }
+  }
+</script>
+```
+
+
+
+#### 2.18.3. `src/components/ShopList/ShopList.vue`
+
+```vue
+<template>
+  <ul class="shop_list" v-if="shops.length">
+    <li class="shop_li border-1px" v-for="(shop, index) in shops" :key="index">
+      <a>
+        <div class="shop_left">
+          <!--<img class="shop_img" src="./images/shop/1.jpg">-->
+          <img class="shop_img" :src="baseImageUrl + shop.image_path">
+        </div>
+        <div class="shop_right">
+          <section class="shop_detail_header">
+            <h4 class="shop_title ellipsis">{{shop.name}}</h4>
+            <ul class="shop_detail_ul">
+              <li class="supports" v-for="(support, index) in shop.supports" :key="index">
+                {{support.icon_name}}
+              </li>
+            </ul>
+          </section>
+          <section class="shop_rating_order">
+            <section class="shop_rating_order_left">
+              <!--评分-->
+              ...
+              <div class="rating_section">
+                {{shop.rating}}
+              </div>
+              <div class="order_section">
+                月售{{shop.recent_order_num}}单
+              </div>
+            </section>
+            <section class="shop_rating_order_right">
+              <span class="delivery_style delivery_right">{{shop.delivery_mode.text}}</span>
+            </section>
+          </section>
+          <section class="shop_distance">
+            <p class="shop_delivery_msg">
+              <span>¥{{shop.float_minimum_order_amount}}起送</span>
+              <span class="segmentation">/</span>
+              <span>配送费约¥{{shop.float_delivery_fee}}</span>
+            </p>
+          </section>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <ul v-else>
+    <li><img src="./images/shop_back.svg" alt="back"></li>
+    <li><img src="./images/shop_back.svg" alt="back"></li>
+    <li><img src="./images/shop_back.svg" alt="back"></li>
+    <li><img src="./images/shop_back.svg" alt="back"></li>
+  </ul>
+</template>
+
+<script>
+  import {mapState} from 'vuex'
+
+  export default {
+    data() {
+      return {
+        baseImageUrl: 'https://cangdu.org:8001/img/'
+      }
+    },
+    computed: {
+      ...mapState(['shops'])
+    }
+  }
+</script>
+```
 
 ### 2.19. 开发Star组件
 
@@ -3352,6 +3568,7 @@ new Vue({
 #### 2.19.2. `src/components/ShopList/ShopList.vue`
 
 ```vue
+<!--评分-->
 <Star :score="shop.rating" :size="24"/>
 
 <script>
@@ -3364,3 +3581,22 @@ new Vue({
 </script>
 ```
 
+### 2.20. 实现登录注册功能
+
+#### 2.20.1. 说明
+
+- 界面相关效果
+  - 切换登录方式
+  - 手机号合法检查
+  - 倒计时效果
+  - 切换显示或隐藏密码
+  - 前台验证提示
+- 前后台交互功能
+  - 动态一次性图形验证码
+  - 动态一次性短信验证码
+  - 短信登录
+  - 密码登录
+  - 获取用户信息，实现自动登录
+  - 退出登录
+
+### 2.21. 搭建商家整体界面

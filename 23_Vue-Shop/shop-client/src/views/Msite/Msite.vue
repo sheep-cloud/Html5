@@ -36,7 +36,7 @@
       </div>
       <div class="shop_container">
         <!--商家列表-->
-        <shop-list/>
+        <ShopList></ShopList>
       </div>
     </div>
   </section>
@@ -49,7 +49,7 @@
   import HeaderTop from '../../components/HeaderTop/HeaderTop'
   import ShopList from '../../components/ShopList/ShopList'
 
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
 
   export default {
     components: {HeaderTop, ShopList},
@@ -59,24 +59,27 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getCategorys')
-      this.$store.dispatch('getShops')
+      // this.$store.dispatch('getCategorys')
+      // this.$store.dispatch('getShops')
+      this.getCategorys()
+      this.getShops()
+    },
+    methods: {
+      ...mapActions(['getCategorys', 'getShops'])
     },
     computed: {
       ...mapState(['address', 'categorys']),
-
       /*
         根据categorys一维数组生成一个二维数组
         小数组中的元素个数最大是8
        */
       categorysArr() {
-        const {categorys} = this
         // 准备空的二维数组
         let arr = []
         // 准备一个小数组（最大长度为8）
         let minArr = []
         // 遍历categorys
-        categorys.forEach(c => {
+        this.categorys.forEach(c => {
           // 如果当前小数组已经满了，创建一个新的
           if (minArr.length === 8) {
             minArr = []

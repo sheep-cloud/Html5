@@ -53,16 +53,17 @@ router.post('/login_pwd', function (req, res) {
  */
 router.get('/captcha', function (req, res) {
   var captcha = svgCaptcha.create({
-    ignoreChars: '0o1l',
-    noise: 2,
-    color: true
+    size: 4,              // 验证码长度
+    ignoreChars: '0o1l',  // 验证码字符中排除0o1l
+    noise: 2,             // 干扰线的数量
+    color: true           // 验证码的字符是否有颜色
   });
+  // 保存到session
   req.session.captcha = captcha.text.toLowerCase();
   console.log(`/captcha, 验证码：${req.session.captcha}`)
-  /*res.type('svg');
-  res.status(200).send(captcha.data);*/
-  res.type('svg');
-  res.send(captcha.data)
+  res.type('svg')
+     .status(200)
+     .send(captcha.data);
 });
 
 /*
@@ -115,7 +116,6 @@ router.post('/login_sms', function (req, res, next) {
       })
     }
   })
-
 })
 
 /*
@@ -161,15 +161,10 @@ router.get('/position/:geohash', function (req, res) {
 获取首页分类列表
  */
 router.get('/index_category', function (req, res) {
-  /*
   setTimeout(function () {
     const data = require('../data/index_category.json')
     res.send({code: 0, data})
-  }, 300)
-  */
-
-  const data = require('../data/index_category.json')
-  res.send({code: 0, data})
+  }, 30)
 })
 
 /*
@@ -180,15 +175,10 @@ router.get('/shops', function (req, res) {
   const latitude = req.query.latitude
   const longitude = req.query.longitude
   console.log(`/shops, longitude：${longitude}, latitude：${latitude}`)
-  /*
   setTimeout(function () {
     const data = require('../data/shops.json')
     res.send({code: 0, data})
-  }, 300)
-  */
-
-  const data = require('../data/shops.json')
-  res.send({code: 0, data})
+  }, 30)
 })
 
 router.get('/search_shops', function (req, res) {

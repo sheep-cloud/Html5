@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <section class="content">
-      <router-view/>
+      <router-view></router-view>
     </section>
-    <FooterGuide v-show="$route.meta.showFooter"/>
+    <FooterGuide v-show="$route.meta.showFooter"></FooterGuide>
   </div>
 </template>
 

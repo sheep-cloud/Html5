@@ -17,6 +17,7 @@
           </section>
           <section class="shop_rating_order">
             <section class="shop_rating_order_left">
+              <!--评分-->
               <Star :score="shop.rating" :size="24"/>
               <div class="rating_section">
                 {{shop.rating}}

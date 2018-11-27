@@ -2,8 +2,9 @@
   <section class="profile">
     <!--个人头部-->
     <HeaderTop title="我的"></HeaderTop>
-    <!--跳转登录注册-->
+    <!--登录/注册-->
     <section class="profile-number">
+      <!--跳转登录注册-->
       <router-link to="/login" class="profile-link">
         <div class="profile_image">
           <i class="iconfont icon-person"></i>
@@ -22,6 +23,7 @@
         </span>
       </router-link>
     </section>
+    <!--余额积分-->
     <section class="profile_info_data border-1px">
       <ul class="info_data_list">
         <a href="javascript:" class="info_data_link">
@@ -38,6 +40,7 @@
         </a>
       </ul>
     </section>
+    <!--订单商城-->
     <section class="profile_my_order border-1px">
       <!-- 我的订单 -->
       <a href='javascript:' class="my_order">
@@ -47,46 +50,46 @@
         <div class="my_order_div">
           <span>我的订单</span>
           <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
+            <i class="iconfont icon-jiantou1"></i>
+          </span>
         </div>
       </a>
       <!-- 积分商城 -->
       <a href='javascript:' class="my_order">
-            <span>
-              <i class="iconfont icon-jifen"></i>
-            </span>
+        <span>
+          <i class="iconfont icon-jifen"></i>
+        </span>
         <div class="my_order_div">
           <span>积分商城</span>
           <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
+            <i class="iconfont icon-jiantou1"></i>
+          </span>
         </div>
       </a>
       <!-- 硅谷外卖会员卡 -->
       <a href="javascript:" class="my_order">
-            <span>
-              <i class="iconfont icon-vip"></i>
-            </span>
+        <span>
+          <i class="iconfont icon-vip"></i>
+        </span>
         <div class="my_order_div">
           <span>硅谷外卖会员卡</span>
           <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
+            <i class="iconfont icon-jiantou1"></i>
+          </span>
         </div>
       </a>
     </section>
+    <!--服务中心-->
     <section class="profile_my_order border-1px">
-      <!-- 服务中心 -->
       <a href="javascript:" class="my_order">
-            <span>
-              <i class="iconfont icon-fuwu"></i>
-            </span>
+        <span>
+          <i class="iconfont icon-fuwu"></i>
+        </span>
         <div class="my_order_div">
           <span>服务中心</span>
           <span class="my_order_icon">
-                <i class="iconfont icon-jiantou1"></i>
-              </span>
+            <i class="iconfont icon-jiantou1"></i>
+          </span>
         </div>
       </a>
     </section>

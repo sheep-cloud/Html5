@@ -19,12 +19,6 @@ new Vue({
 })
 */
 
-new Vue({
-  el: '#app',
-  render: h => h(App),
-  store
-})
-
 /*
 new Vue({
   el: '#app',
@@ -34,3 +28,19 @@ new Vue({
   store
 })
 */
+
+/*
+new Vue({
+  el: '#app',
+  render: function (h) {
+    return h(App)   // <App/>
+  },
+  store
+})
+*/
+
+new Vue({
+  el: '#app',
+  render: h => h(App),
+  store
+})
