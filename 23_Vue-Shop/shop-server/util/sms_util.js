@@ -23,38 +23,40 @@ exports.randomCode = randomCode
 向指定号码发送指定验证码
  */
 function sendCode(phone, code, callback) {
-    var ACCOUNT_SID = '8aaf070855b647ab0155b9f80994058a'
-    var AUTH_TOKEN = 'aa8aa679414e49df8908ea5b3d043c24'
+    var ACCOUNT_SID = '8aaf0708674db3ee016756141538068f'
+    var AUTH_TOKEN = '3e2a23787b844b65ab2dc60bfb27076b'
     var Rest_URL = 'https://app.cloopen.com:8883'
-    var AppID = '8aaf070855b647ab0155b9f809f90590'
-    //1. 准备请求url
+    var AppID = '8aaf0708674db3ee0167561415930695'
+
+    // 1. 准备请求url
     /*
-     1.使用MD5加密（账户Id + 账户授权令牌 + 时间戳）。其中账户Id和账户授权令牌根据url的验证级别对应主账户。
-     时间戳是当前系统时间，格式"yyyyMMddHHmmss"。时间戳有效时间为24小时，如：20140416142030
-     2.SigParameter参数需要大写，如不能写成sig=abcdefg而应该写成sig=ABCDEFG
+        REST API 验证参数，生成规则如下
+        1.使用MD5加密（账户Id + 账户授权令牌 + 时间戳）。其中账户Id和账户授权令牌根据url的验证级别对应主账户。
+            时间戳是当前系统时间，格式"yyyyMMddHHmmss"。时间戳有效时间为24小时，如：20140416142030
+        2.SigParameter参数需要大写，如不能写成sig=abcdefg而应该写成sig=ABCDEFG
      */
     var sigParameter = ''
     var time = moment().format('YYYYMMDDHHmmss')
     sigParameter = md5(ACCOUNT_SID + AUTH_TOKEN + time)
+    // URL格式：/2013-12-26/Accounts/{accountSid}/SMS/TemplateSMS?sig={SigParameter}
     var url = Rest_URL + '/2013-12-26/Accounts/' + ACCOUNT_SID + '/SMS/TemplateSMS?sig=' + sigParameter
 
-    //2. 准备请求体
+    // 2. 准备请求体
     var body = {
         to: phone,
         appId: AppID,
-        templateId: '1',
-        'datas': [code, '1']
+        templateId: 1,
+        datas: [code, '1']
     }
-    //body = JSON.stringify(body);
 
-    //3. 准备请求头
+    // 3. 准备请求头
     /*
-     1.使用Base64编码（账户Id + 冒号 + 时间戳）其中账户Id根据url的验证级别对应主账户
-     2.冒号为英文冒号
-     3.时间戳是当前系统时间，格式"yyyyMMddHHmmss"，需与SigParameter中时间戳相同。
+        验证信息，生成规则详见下方说明
+        1.使用Base64编码（账户Id + 冒号 + 时间戳）其中账户Id根据url的验证级别对应主账户
+        2.冒号为英文冒号
+        3.时间戳是当前系统时间，格式"yyyyMMddHHmmss"，需与SigParameter中时间戳相同。
      */
-    var authorization = ACCOUNT_SID + ':' + time
-    authorization = Base64.encode(authorization)
+    var authorization = Base64.encode(ACCOUNT_SID + ':' + time)
     var headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json;charset=utf-8',
@@ -63,7 +65,6 @@ function sendCode(phone, code, callback) {
     }
 
     //4. 发送请求, 并得到返回的结果, 调用callback
-    // callback(true);
     request({
         method: 'POST',
         url: url,
@@ -73,7 +74,6 @@ function sendCode(phone, code, callback) {
     }, function (error, response, body) {
         console.log(error, body)
         callback(body.statusCode === '000000')
-        // callback(true);
     })
 }
 

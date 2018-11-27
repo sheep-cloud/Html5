@@ -3599,4 +3599,182 @@ new Vue({
   - 获取用户信息，实现自动登录
   - 退出登录
 
+#### 2.20.2. AlertTip组件(提示框)
+
+##### 2.20.2.1.  `src/components/AlertTip/AlertTip.vue`
+
+```vue
+<template>
+  <div class="alert_container">
+    <section class="tip_text_container">
+      <div class="tip_icon">
+        <span></span>
+        <span></span>
+      </div>
+      <p class="tip_text">{{alertText}}</p>
+      <div class="confrim" @click="closeTip">确认</div>
+    </section>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      alertText: String
+    },
+    methods: {
+      closeTip() {
+        // 分发自定义事件（事件名：closeTip）
+        this.$emit('closeTip')
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .alert_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, .5);
+  }
+  .alert_container .tip_text_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -90px;
+    margin-left: -110px;
+    width: 60%;
+    animation: linear;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+  }
+  .alert_container .tip_text_container .tip_icon {
+    width: 55px;
+    height: 55px;
+    border: 2px solid #F8CB86;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .alert_container .tip_text_container .tip_icon span:nth-of-type(1) {
+    width: 2px;
+    height: 30px;
+    background-color: #F8CB86;
+  }
+  .alert_container .tip_text_container .tip_icon span:nth-of-type(2) {
+    width: 2px;
+    height: 2px;
+    border: 1px;
+    border-radius: 50%;
+    margin-top: 2px;
+    background-color: #F8CB86;
+  }
+  .alert_container .tip_text_container .tip_text {
+    font-size: 14px;
+    color: #333;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 10px;
+    padding: 0 5px;
+  }
+  .alert_container .tip_text_container .confrim {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #4CD964;
+    width: 100%;
+    text-align: center;
+    line-height: 35px;
+    border: 1px;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+</style>
+```
+
+##### 2.20.2.2. `src\views\Login\Login.vue`
+
+```vue
+<template>
+	...
+    <AlertTip :alertText="alertText" v-show="alertShow" @closeTip="closeTip"></AlertTip>
+  </section>
+</template>
+
+<script>
+  import AlertTip from '../../components/AlertTip/AlertTip'
+
+  export default {
+    components: {AlertTip},
+    data() {
+      return {
+        loginWay: true, // true：短信登录；false：密码登录
+        computeTime: 0, // 计时的时间
+        showPwd: false, // 是否显示密码
+        phone: '', // 手机号
+        code: '', // 手机验证码
+        name: '', // 手机/邮箱/用户名
+        pwd: '', // 密码
+        captcha: '', // 图形验证码
+        alertText: '', // 提示文本
+        alertShow: false // 是否显示警告框
+      }
+    },
+    methods: {
+      ...
+      // 显示AlertTip
+      showTip(alertText) {
+        this.alertShow = true
+        this.alertText = alertText
+      },
+      // 关闭AlertTip
+      closeTip () {
+        this.alertShow = false
+        this.alertText = ''
+      },
+      // 异步登录
+      login() {
+        // 前台表单验证
+        if (this.loginWay) { // 短信登录
+          const {isPhone, phone, code} = this
+          if (!isPhone) {
+            // 手机号不正确
+            this.showTip('手机号不正确')
+          } else if (!/^\d{6}$/.test(code)) {
+            // 验证码必须是6位数字
+            this.showTip('验证码必须是6位数字')
+          }
+        } else { // 密码登录
+          const {name, pwd, captcha} = this
+          if (!name) {
+            // 必须指定用户名
+            this.showTip('必须指定用户名')
+          } else if (!pwd) {
+            // 密码必须指定
+            this.showTip('密码必须指定')
+          } else if (!captcha) {
+            // 验证码必须指定
+            this.showTip('密码必须指定')
+          }
+        }
+      }
+    }
+  }
+</script>
+```
+
 ### 2.21. 搭建商家整体界面

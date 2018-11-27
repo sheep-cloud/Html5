@@ -81,10 +81,10 @@ router.get('/sendcode', function (req, res, next) {
     if (success) {
       users[phone] = code
       console.log('保存验证码: ', phone, code)
-      res.send({"code": 0})
+      res.send({code: 0, data: code})
     } else {
       //3. 返回响应数据
-      res.send({"code": 1, msg: '短信验证码发送失败'})
+      res.send({code: 1, msg: '短信验证码发送失败'})
     }
   })
 })
