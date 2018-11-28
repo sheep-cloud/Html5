@@ -44,7 +44,7 @@
               <section class="login_message">
                 <input type="text" maxlength="4" placeholder="验证码" v-model="captcha">
                 <!--<img class="get_verification" src="./images/captcha.svg" alt="captcha">-->
-                <img class="get_verification" :src="reqCaptcha" alt="captcha" @click="getCaptcha">
+                <img class="get_verification" :src="reqCaptcha" alt="captcha" @click="getCaptcha" ref="captcha">
               </section>
             </section>
           </div>
@@ -103,7 +103,7 @@
 
           // 发送ajax请求（向指定手机号发送验证码短信）
           const result = await reqSendCode(this.phone)
-          if (result.code === 1) {
+          if (result.code === 1) { // 发送验证码失败
             // 显示提示
             this.showTip(result.msg)
             // 停止倒计时
@@ -127,34 +127,74 @@
         this.alertText = ''
       },
       // 获取一个新的图片验证码
-      getCaptcha(event) {
-        // 每次指定的src要不一样
+      /*getCaptcha(event) {
+        // 每次指定的src要不一样，此方式其他方法调用不了
         event.target.src = this.reqCaptcha + '?time=' + Date.now()
+      },*/
+      getCaptcha() {
+        // 每次指定的src要不一样
+        this.$refs.captcha.src = this.reqCaptcha + '?time=' + Date.now()
+        // 清空验证码
+        this.captcha = ''
       },
       // 异步登录
-      login() {
+      async login() {
+        let result
         // 前台表单验证
         if (this.loginWay) { // 短信登录
           const {isPhone, phone, code} = this
           if (!isPhone) {
             // 手机号不正确
             this.showTip('手机号不正确')
-          } else if (!/^\d{6}$/.test(code)) {
+            return
+          }
+          if (!/^\d{6}$/.test(code)) {
             // 验证码必须是6位数字
             this.showTip('验证码必须是6位数字')
+            return
           }
+          // 发送ajax请求短信登录
+          result = await reqSmsLogin(phone, code)
         } else { // 密码登录
           const {name, pwd, captcha} = this
           if (!name) {
             // 必须指定用户名
             this.showTip('必须指定用户名')
-          } else if (!pwd) {
+            return
+          }
+          if (!pwd) {
             // 密码必须指定
             this.showTip('密码必须指定')
-          } else if (!captcha) {
+            return
+          }
+          if (!captcha) {
             // 验证码必须指定
             this.showTip('密码必须指定')
+            return
           }
+          // 发送ajax请求密码登录
+          result = await reqPwdLogin(name, pwd, captcha)
+        }
+
+        // 停止倒计时
+        if (this.computeTime) {
+          this.computeTime = 0
+          clearInterval(this.intervalId)
+          // 重置为0
+          this.intervalId = 0
+        }
+
+        // 根据结果数据处理
+        if (result.code === 0) {
+          const user = result.data
+          // 将user保存到vuex的state
+          this.$store.dispatch('recordUser', user)
+          // 去个人中心界面
+          this.$router.replace('/profile')
+        } else {
+          this.showTip(result.msg)
+          // 刷新验证码
+          this.getCaptcha()
         }
       }
     }

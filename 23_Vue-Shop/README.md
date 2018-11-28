@@ -1970,18 +1970,6 @@ http://localhost:8080/#/profile
     width: 100%;
     height: 45px;
   }
-  .header .header_search {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10%;
-    height: 50%;
-  }
-  .header .header_search .iconfont {
-    font-size: 22px;
-    color: #fff;
-  }
   .header .header_title {
     position: absolute;
     top: 50%;
@@ -1992,30 +1980,20 @@ http://localhost:8080/#/profile
     font-size: 22px;
     text-align: center;
   }
-  .header .header_search .icon-sousuo {
-    font-size: 25px;
-    color: #fff;
-  }
-  /*Msite 样式有问题*/
   .header .header_title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 50%;
+    color: #fff;
+    text-align: center;
     margin-left: -5%;
   }
   .header .header_title .header_title_text {
     font-size: 20px;
     color: #fff;
     display: block;
-  }
-  .header .header_login {
-    font-size: 14px;
-    color: #fff;
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .header .header_login .header_login_text {
-    color: #fff;
   }
 </style>
 ```
@@ -3599,7 +3577,7 @@ new Vue({
   - 获取用户信息，实现自动登录
   - 退出登录
 
-#### 2.20.2. AlertTip组件(提示框)
+#### 2.20.2. 开发AlertTip组件(提示框)
 
 ##### 2.20.2.1.  `src/components/AlertTip/AlertTip.vue`
 
@@ -3776,5 +3754,157 @@ new Vue({
   }
 </script>
 ```
+
+#### 2.20.3. 使用mint-ui
+
+##### 2.20.3.1. 下载mint-ui
+
+```ini
+npm install --save mint-ui
+```
+
+##### 2.20.3.2. 实现按需打包
+
+- 下载 `babel-plugin-component`
+
+  ```ini
+  借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+  
+  npm install --save-dev babel-plugin-component
+  ```
+
+- 修改`.babelrc`
+
+  ```json
+  {
+    "presets": [
+      ["env", {
+        "modules": false,
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+        }
+      }],
+      "stage-2"
+    ],
+    "plugins": ["transform-vue-jsx", "transform-runtime", ["component", [
+      {
+        "libraryName": "mint-ui",
+        "style": true
+      }
+    ]]]
+  }
+  ```
+
+##### 2.20.3.2. 使用mint-ui的组件
+
+- `src/main.js`
+
+  ```js
+  import {Button} from 'mint-ui'
+  
+  // 注册全局组件标签
+  Vue.component(Button.name, Button) // 标签 <mt-button></mt-button>
+  ```
+
+- `src/views/Profile/Profile.vue`
+
+  ```vue
+  <!--标签组件-->
+  <mt-button type="danger" class="profile" v-if="userInfo._id" @click="signOut">退出登录</mt-button>
+  
+  <!--非标签组件-->
+  <script>
+    import {mapState, mapActions} from 'vuex'
+    import {MessageBox, Toast} from 'mint-ui'
+  
+    export default {
+      components: {HeaderTop},
+      computed: {
+        ...mapState(['userInfo'])
+      },
+      methods: {
+        ...mapActions(['logout']),
+        // 退出登录
+        signOut() {
+          MessageBox.confirm('确认退出吗?').then(
+            action => {
+              // 请求退出
+              // this.$store.dispatch('logout')
+              this.logout()
+              Toast('退出成功')
+            }, action => {
+              console.log('点击了取消')
+            })
+        }
+      }
+    }
+  </script>
+  ```
+
+#### 2.20.4. vuex
+
+- `state.js`
+
+  ```js
+  export default {
+    ...,
+    userInfo: {} // 用户信息
+  }
+  ```
+
+- `mutation-types.js`
+
+  ```js
+  export const RECEIVE_USERINFO = 'receive_userinfo' // 接收用户信息
+  export const RESET_USERINFO = 'reset_userinfo' // 重置用户信息
+  ```
+
+- `mutations.js`
+
+  ```js
+  import {..., RECEIVE_USERINFO, RESET_USERINFO} from './mutation-types'
+  
+  export default {
+    ...,
+    [RECEIVE_USERINFO](state, {userInfo}) {
+      state.userInfo = userInfo
+    },
+    [RESET_USERINFO](state) {
+      state.userInfo = {}
+    }
+  }
+  ```
+
+- `actions.js`
+
+  ```js
+  import {..., RECEIVE_USERINFO, RESET_USERINFO} from './mutation-types'
+  import {..., reqUserInfo, reqLogout} from '../api'
+  
+  export default {
+    ...,
+    // 同步记录用户信息
+    recordUser({commit}, userInfo) {
+      commit(RECEIVE_USERINFO, {userInfo})
+    },
+  
+    // 异步获取用户信息
+    async getUserInfo({commit}) {
+      const result = await reqUserInfo()
+      if (result.code === 0) {
+        const userInfo = result.data
+        commit(RECEIVE_USERINFO, {userInfo})
+      }
+    },
+  
+    // 异步登出
+    async logout({commit}) {
+      const result = await reqLogout()
+      if (result.code === 0) {
+        commit(RESET_USERINFO)
+      }
+    }
+  }
+  ```
 
 ### 2.21. 搭建商家整体界面

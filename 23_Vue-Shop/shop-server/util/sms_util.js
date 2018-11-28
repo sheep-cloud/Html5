@@ -19,6 +19,8 @@ function randomCode(length) {
 // console.log(randomCode(6));
 exports.randomCode = randomCode
 
+// 【容联-云通讯】文档：http://doc.yuntongxun.com/p/5a533de33b8496dd00dce07c
+
 /*
 向指定号码发送指定验证码
  */
@@ -35,9 +37,8 @@ function sendCode(phone, code, callback) {
             时间戳是当前系统时间，格式"yyyyMMddHHmmss"。时间戳有效时间为24小时，如：20140416142030
         2.SigParameter参数需要大写，如不能写成sig=abcdefg而应该写成sig=ABCDEFG
      */
-    var sigParameter = ''
     var time = moment().format('YYYYMMDDHHmmss')
-    sigParameter = md5(ACCOUNT_SID + AUTH_TOKEN + time)
+    var sigParameter = md5(ACCOUNT_SID + AUTH_TOKEN + time).toUpperCase()
     // URL格式：/2013-12-26/Accounts/{accountSid}/SMS/TemplateSMS?sig={SigParameter}
     var url = Rest_URL + '/2013-12-26/Accounts/' + ACCOUNT_SID + '/SMS/TemplateSMS?sig=' + sigParameter
 
@@ -45,8 +46,8 @@ function sendCode(phone, code, callback) {
     var body = {
         to: phone,
         appId: AppID,
-        templateId: 1,
-        datas: [code, '1']
+        templateId: '1', // 免费开发测试使用的模板ID为1，形式为：【云通讯】您使用的是云通讯短信模板，您的验证码是{1}，请于{2}分钟内正确输入。
+        datas: [code, '1'] // 其中{1}和{2}为短信模板的参数。
     }
 
     // 3. 准备请求头
@@ -64,7 +65,7 @@ function sendCode(phone, code, callback) {
         'Authorization': authorization
     }
 
-    //4. 发送请求, 并得到返回的结果, 调用callback
+    // 4. 发送请求, 并得到返回的结果, 调用callback
     request({
         method: 'POST',
         url: url,
@@ -80,6 +81,7 @@ function sendCode(phone, code, callback) {
 exports.sendCode = sendCode
 
 /*
-sendCode('13716962779', randomCode(6), function (success) {
+sendCode('18727019986', randomCode(6), function (success) {
     console.log(success);
-})*/
+})
+*/

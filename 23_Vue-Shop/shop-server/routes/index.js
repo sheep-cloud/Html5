@@ -69,7 +69,7 @@ router.get('/captcha', function (req, res) {
 /*
 发送验证码短信
 */
-router.get('/sendcode', function (req, res, next) {
+router.get('/sendcode', function (req, res) {
   //1. 获取请求参数数据
   var phone = req.query.phone;
   //2. 处理数据

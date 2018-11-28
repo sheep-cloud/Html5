@@ -2,12 +2,15 @@
   <section class="msite">
     <!--首页头部-->
     <HeaderTop :title="address.name" :ellipsis="'ellipsis'">
-      <span class="header_search" slot="left">
+      <router-link to="/search" class="header_search" slot="left">
         <i class="iconfont icon-sousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+      </router-link>
+      <router-link :to="userInfo._id ? '/userInfo' : '/login'" class="header_login" slot="right">
+        <span class="header_login_text" v-if="!userInfo._id">登录|注册</span>
+        <span class="header_login_text" v-else>
+          <i class="iconfont icon-person"></i>
+        </span>
+      </router-link>
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
@@ -68,7 +71,7 @@
       ...mapActions(['getCategorys', 'getShops'])
     },
     computed: {
-      ...mapState(['address', 'categorys']),
+      ...mapState(['address', 'categorys', 'userInfo']),
       /*
         根据categorys一维数组生成一个二维数组
         小数组中的元素个数最大是8
@@ -115,6 +118,33 @@
 <style scoped>
   .msite {
     width: 100%;
+  }
+  .msite .header .header_search {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10%;
+    height: 50%;
+  }
+  .msite .header .header_search .iconfont {
+    font-size: 22px;
+    color: #fff;
+  }
+  .msite .header .header_search .icon-sousuo {
+    font-size: 25px;
+    color: #fff;
+  }
+  .msite .header .header_login {
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .msite .header .header_login .header_login_text {
+    color: #fff;
   }
   .msite .msite_nav {
     position: relative;

@@ -12,6 +12,8 @@ import Search from '../views/Search/Search'
 import Order from '../views/Order/Order'
 // 个人
 import Profile from '../views/Profile/Profile'
+// 个人中心
+import UserInfo from '../views/Profile/UserInfo'
 // 登录注册
 import Login from '../views/Login/Login'
 
@@ -25,6 +27,7 @@ const routes = [
   {path: '/search', component: Search, meta: {showFooter: true}},
   {path: '/order', component: Order, meta: {showFooter: true}},
   {path: '/profile', component: Profile, meta: {showFooter: true}},
+  {path: '/userInfo', component: UserInfo},
   {path: '/login', component: Login}
 ]
 
