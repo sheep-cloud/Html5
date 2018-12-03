@@ -32,7 +32,7 @@ router.post('/login_pwd', function (req, res) {
         res.send({code: 1, msg: '用户名或密码不正确!'})
       } else {
         req.session.userid = user._id
-        res.send({code: 0, data: {_id: user._id, name: user.name, phone: user.phone}})
+        res.send({code: 0, data: {_id: user._id, name: user.name}})
       }
     } else {
       const userModel = new UserModel({name, pwd})
@@ -79,12 +79,12 @@ router.get('/sendcode', function (req, res) {
   console.log(`向${phone}发送验证码短信: ${code}`);
   sms_util.sendCode(phone, code, function (success) {//success表示是否成功
     if (success) {
-      users[phone] = code
+      users[code] = code
       console.log('保存验证码: ', phone, code)
       res.send({code: 0, data: code})
     } else {
       //3. 返回响应数据
-      res.send({code: 1, msg: '短信验证码发送失败'})
+      res.send({code: 1, msg: '短信验证码发送失败！'})
     }
   })
 })
@@ -96,12 +96,12 @@ router.post('/login_sms', function (req, res, next) {
   var phone = req.body.phone;
   var code = req.body.code;
   console.log('/login_sms', req.body);
-  if (users[phone] !== code) {
-    res.send({code: 1, msg: '手机号或验证码不正确'});
+  if (users[code] !== code) {
+    res.send({code: 1, msg: '手机号或验证码不正确！'});
     return;
   }
   //删除保存的code
-  delete users[phone];
+  delete users[code];
 
   UserModel.findOne({phone}, function (err, user) {
     if (user) {
@@ -132,7 +132,7 @@ router.get('/userinfo', function (req, res) {
       // 清除浏览器保存的userid的cookie
       delete req.session.userid
 
-      res.send({code: 1, msg: '请先登录'})
+      res.send({code: 1, msg: '请先登录！'})
     } else {
       // 如果有, 返回user
       res.send({code: 0, data: user})

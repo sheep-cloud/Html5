@@ -63,7 +63,7 @@
 
 <script>
   import AlertTip from '../../components/AlertTip/AlertTip'
-  import {reqCaptcha, reqSendCode, reqSmsLogin, reqPwdLogin} from '../../api'
+  import api from '../../api'
 
   export default {
     components: {AlertTip},
@@ -79,7 +79,7 @@
         captcha: '', // 图形验证码
         alertText: '', // 提示文本
         alertShow: false, // 是否显示警告框
-        reqCaptcha // 一次性验证码请求地址
+        reqCaptcha: api.reqCaptcha // 一次性验证码请求地址
       }
     },
     computed: {
@@ -102,7 +102,7 @@
           }, 1000)
 
           // 发送ajax请求（向指定手机号发送验证码短信）
-          const result = await reqSendCode(this.phone)
+          const result = await api.reqSendCode(this.phone)
           if (result.code === 1) { // 发送验证码失败
             // 显示提示
             this.showTip(result.msg)
@@ -154,7 +154,7 @@
             return
           }
           // 发送ajax请求短信登录
-          result = await reqSmsLogin(phone, code)
+          result = await api.reqSmsLogin(phone, code)
         } else { // 密码登录
           const {name, pwd, captcha} = this
           if (!name) {
@@ -169,11 +169,11 @@
           }
           if (!captcha) {
             // 验证码必须指定
-            this.showTip('密码必须指定')
+            this.showTip('验证码必须指定')
             return
           }
           // 发送ajax请求密码登录
-          result = await reqPwdLogin(name, pwd, captcha)
+          result = await api.reqPwdLogin(name, pwd, captcha)
         }
 
         // 停止倒计时

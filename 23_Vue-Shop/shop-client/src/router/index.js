@@ -16,6 +16,18 @@ import Profile from '../views/Profile/Profile'
 import UserInfo from '../views/Profile/UserInfo'
 // 登录注册
 import Login from '../views/Login/Login'
+// 商品
+import Shop from '../views/Shop/Shop'
+// 点餐
+import ShopGoods from '../views/Shop/ShopGoods/ShopGoods'
+// 评价
+import ShopRatings from '../views/Shop/ShopRatings/ShopRatings'
+// 信息
+import ShopInfo from '../views/Shop/ShopInfo/ShopInfo'
+// 测试
+import Test from '../views/Test/Test'
+// 滑块
+import Switch from '../components/Switch/Switch'
 
 // 声明使用插件
 Vue.use(VueRouter)
@@ -28,7 +40,17 @@ const routes = [
   {path: '/order', component: Order, meta: {showFooter: true}},
   {path: '/profile', component: Profile, meta: {showFooter: true}},
   {path: '/userInfo', component: UserInfo},
-  {path: '/login', component: Login}
+  {path: '/login', component: Login},
+  {
+    path: '/shop', component: Shop, children: [
+      {path: '', redirect: '/shop/goods'},
+      {path: '/shop/goods', component: ShopGoods},
+      {path: '/shop/ratings', component: ShopRatings},
+      {path: '/shop/info', component: ShopInfo}
+    ]
+  },
+  {path: '/test', component: Test},
+  {path: '/switch', component: Switch}
 ]
 
 export default new VueRouter({

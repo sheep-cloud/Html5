@@ -1,6 +1,6 @@
 <template>
   <ul class="shop_list" v-if="shops.length">
-    <li class="shop_li border-1px" v-for="(shop, index) in shops" :key="index">
+    <li class="shop_li border-1px" v-for="(shop, index) in shops" :key="index" @click="$router.push('/shop')">
       <a>
         <div class="shop_left">
           <!--<img class="shop_img" src="./images/shop/1.jpg">-->
@@ -57,7 +57,7 @@
     components: {Star},
     data() {
       return {
-        baseImageUrl: 'https://cangdu.org:8001/img/'
+        baseImageUrl: 'https://fuss10.elemecdn.com'
       }
     },
     computed: {
