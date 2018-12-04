@@ -67,9 +67,6 @@
       this.getCategorys()
       this.getShops()
     },
-    methods: {
-      ...mapActions(['getCategorys', 'getShops'])
-    },
     computed: {
       ...mapState(['address', 'categorys', 'userInfo']),
       /*
@@ -97,6 +94,9 @@
 
         return arr
       }
+    },
+    methods: {
+      ...mapActions(['getCategorys', 'getShops'])
     },
     watch: {
       categorys(value) { // categorys数组中有数据了，在异步更新界面之前执行
