@@ -120,10 +120,12 @@
           action => {
             // 请求退出
             // this.$store.dispatch('logout')
+            console.log(`点击了${action}: ${new Date().toLocaleString()}`)
             this.logout()
             Toast('退出成功')
-          }, action => {
-            console.log('点击了取消')
+          },
+          action => {
+            console.log(`点击了${action}`)
           })
       }
     }

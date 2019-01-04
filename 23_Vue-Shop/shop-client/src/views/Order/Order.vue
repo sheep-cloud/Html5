@@ -5,17 +5,22 @@
     <!--订单列表-->
     <section class="order_no_login">
       <img src="./images/order/person.png">
-      <h3>登录后查看外卖订单</h3>
-      <button>立即登陆</button>
+      <h3 v-show="!userInfo._id">登录后查看外卖订单</h3>
+      <!--<button>立即登录</button>-->
+      <router-link to="/login" tag="button" v-show="!userInfo._id">立即登录</router-link>
     </section>
   </section>
 </template>
 
 <script>
   import HeaderTop from '../../components/HeaderTop/HeaderTop'
+  import {mapState} from 'vuex'
 
   export default {
-    components: {HeaderTop}
+    components: {HeaderTop},
+    computed: {
+      ...mapState(['userInfo'])
+    }
   }
 </script>
 

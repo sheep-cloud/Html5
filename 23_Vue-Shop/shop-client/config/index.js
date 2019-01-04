@@ -12,10 +12,10 @@ module.exports = {
     assetsPublicPath: '/',
     // 配置代理
     proxyTable: {
-      '/api': { // 匹配所有以 '/api' 开头的请求路径
+      '/api': {                           // 匹配所有以 '/api' 开头的请求路径
         target: 'http://localhost:3000',  // 代理目标的基础路径
-        changeOrigin: true,  // 是否跨域
-        pathRewrite: { // 重写路径：去掉路径中开头的 '/api'
+        changeOrigin: true,               // 是否跨域
+        pathRewrite: {                    // 重写路径: 去掉路径中开头的 '/api'
           '^/api': ''
         }
       }

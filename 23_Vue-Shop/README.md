@@ -3013,10 +3013,10 @@ npm install --save axios
   ```js
       // 配置代理
       proxyTable: {
-        '/api': { // 匹配所有以 '/api' 开头的请求路径
+        '/api': {                           // 匹配所有以 '/api' 开头的请求路径
           target: 'http://localhost:3000',  // 代理目标的基础路径
-          changeOrigin: true,  // 是否跨域
-          pathRewrite: { // 重写路径：去掉路径中开头的 '/api'
+          changeOrigin: true,               // 是否跨域
+          pathRewrite: {                    // 重写路径: 去掉路径中开头的 '/api'
             '^/api': ''
           }
         }
@@ -3983,7 +3983,7 @@ export default {
 
 #### 2.22.4. vuex
 
-### 2.23. ShopHeader组件
+### 2.23. 开发ShopHeader组件
 
 - `src\components\ShopHeader\ShopHeader.vue`
 
@@ -4539,4 +4539,1182 @@ export default {
   </style>
   ```
 
+### 2.24. 开发ShopGoods组件
 
+#### 2.24.1. 说明
+
+- ShopGoods组件是一个较复杂的路由组件
+
+- 内部使用了另外3个组件
+  - ShopCart: 购物车组件
+  - CartControl: 购物车操作组件
+  - Food: 食品详情组件
+
+- 使用第三方库better-scroll: UI 滑动
+
+  ```ini
+  npm install --save better-scroll
+  ```
+
+#### 2.24.2. `src\views\Shop\ShopGoods\ShopGoods.vue`
+
+```vue
+<template>
+  <section class="shop_goods">
+    <!--菜单-->
+    <div class="menu-wrapper" ref="menuWrapper">
+      <ul>
+        <li class="menu-item" :class="{current : index === currentIndex}" v-for="(shopGood, index) in shopGoods" :key="index" @click="clickMenuItem(index)">
+            <span class="text bottom-border-1px">
+              <img class="icon" :src="shopGood.icon" v-if="shopGood.icon">
+              {{shopGood.name}}
+            </span>
+        </li>
+      </ul>
+    </div>
+    <!--商品-->
+    <div class="foods-wrapper" ref="foodsWrapper">
+      <ul ref="foodsUl">
+        <li class="food-list-hook" v-for="(shopGood, index) in shopGoods" :key="index">
+          <h1 class="title">{{shopGood.name}}</h1>
+          <ul>
+            <li class="food-item bottom-border-1px" v-for="(food, index) in shopGood.foods" :key="index">
+              <div class="icon">
+                <img width="57" height="57" :src="food.icon">
+              </div>
+              <div class="content">
+                <h2 class="name">{{food.name}}</h2>
+                <p class="desc">{{food.description}}</p>
+                <div class="extra">
+                  <span class="count">月售 {{food.sellCount}} 份</span>
+                  <span>好评率 {{food.rating}}%</span></div>
+                <div class="price">
+                  <span class="now">￥{{food.price}}</span>
+                  <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
+                </div>
+                <div class="cartcontrol-wrapper">
+                  CartControl
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+</template>
+
+<script>
+  import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
+
+  export default {
+    data() {
+      return {
+        scrollY: 0,   // 右侧滑动的Y轴坐标（滑动过程中实时变化）
+        tops: []      // 所有右侧分类li的top组成的数组（列表第一次显示后就不再变化）
+      }
+    },
+    mounted() {
+      this.$store.dispatch('getShopGoods', () => { // 数据更新后执行
+        this.$nextTick(() => { // 列表数据更新显示后执行
+          this._initScroll()
+          this._initTops()
+        })
+      })
+    },
+    computed: {
+      ...mapState(['shopGoods']),
+      /**
+       * 计算得到当前分类的下标
+       * @return {number}
+       */
+      currentIndex() { // 初始和相关数据发生变化
+        /*
+          当前坐标计算
+            实现列表滑动
+            类名：current 标识当前分类
+            设计一个计算属性：currentIndex
+            根据哪些数据计算？
+              scrollY: 右侧滑动的Y轴坐标（滑动过程中实时变化）
+              tops: 所有右侧分类li的top组成的数组（列表第一次显示后就不再变化）
+
+            1. 在滑动过程中，实时收集scrollY
+            2. 列表第一次显示后，收集tops
+            3. 实现currentIndex的计算逻辑
+         */
+
+        // 得到条件数据
+        const {scrollY, tops} = this
+
+        // 根据条件计算产生一个结果
+        return tops.findIndex((top, index) => {
+          // scrollY >= 当前top && scrolly < 下一个top
+          return scrollY >= top && scrollY < tops[index + 1]
+        })
+      }
+    },
+    methods: {
+      /**
+       * 初始化滚动条
+       */
+      _initScroll() {
+        // 列表显示之后创建
+        new BScroll('.menu-wrapper', {
+          click: true
+        })
+        this.foodsScroll = new BScroll('.foods-wrapper', {
+          probeType: 2,    // 惯性滑动不会触发
+          click: true
+        })
+        // 给右侧列表绑定scroll监听
+        this.foodsScroll.on('scroll', ({x, y}) => {
+          this.scrollY = Math.abs(y)
+        })
+        // 给右侧列表绑定scrollEnd监听
+        this.foodsScroll.on('scrollEnd', ({x, y}) => {
+          this.scrollY = Math.abs(y)
+        })
+      },
+      /**
+       * 初始化列表
+       */
+      _initTops() {
+        // 1. 初始化tops
+        const tops = []
+        let top = 0
+        tops.push(top)
+        // 2. 收集
+        // 找到所有分类的li
+        // const lis = this.$refs.foodsUl.getElementsByClassName('food-list-hook')
+        const lis = this.$refs.foodsUl.children
+        console.log(lis)
+        // 伪数组转为真数组，遍历
+        Array.prototype.slice.call(lis).forEach(li => {
+          top += li.clientHeight
+          tops.push(top)
+        })
+        console.log(tops)
+        // 3. 更新数据
+        this.tops = tops
+      },
+      clickMenuItem(index) {
+        // 右侧列表滑动到对应的位置
+        // 得到目标位置的scrollY
+        const scrollY = this.tops[index]
+        // 立即更新scrollY（让点击的分类项成为当前分类）
+        this.scrollY = scrollY
+        // 平滑滚动右侧列表
+        this.foodsScroll.scrollTo(0, -scrollY, 300)
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .shop_goods {
+    display: flex;
+    position: absolute;
+    top: 195px;
+    bottom: 46px;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+  }
+  .shop_goods .menu-wrapper {
+    flex: 0 0 80px;
+    width: 80px;
+    background: #f3f5f7;
+  }
+  .shop_goods .menu-wrapper .menu-item {
+    display: table;
+    height: 54px;
+    width: 56px;
+    padding: 0 12px;
+    line-height: 14px;
+  }
+  .shop_goods .menu-wrapper .menu-item.current {
+    position: relative;
+    z-index: 10;
+    margin-top: -1px;
+    background: #fff;
+    color: green;
+    font-weight: 700;
+  }
+  .shop_goods .menu-wrapper .menu-item.current .text {
+    border: none;
+  }
+  .shop_goods .menu-wrapper .menu-item .icon {
+    display: inline-block;
+    vertical-align: top;
+    width: 12px;
+    height: 12px;
+    margin-right: 2px;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+  }
+  .shop_goods .menu-wrapper .menu-item .text {
+    display: table-cell;
+    width: 56px;
+    vertical-align: middle;
+    border-bottom: 1px rgba(7, 17, 27, 0.1);
+    font-size: 12px;
+  }
+  .shop_goods .foods-wrapper {
+    flex: 1;
+  }
+  .shop_goods .foods-wrapper .title {
+    padding-left: 14px;
+    height: 26px;
+    line-height: 26px;
+    border-left: 2px solid #d9dde1;
+    font-size: 12px;
+    color: rgb(147, 153, 159);
+    background: #f3f5f7;
+  }
+  .shop_goods .foods-wrapper .food-item {
+    display: flex;
+    margin: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px rgba(7, 17, 27, 0.1);
+  }
+  .shop_goods .foods-wrapper .food-item:last-child {
+    border: none;
+    margin-bottom: 0;
+  }
+  .shop_goods .foods-wrapper .food-item .icon {
+    flex: 0 0 57px;
+    margin-right: 10px;
+  }
+  .shop_goods .foods-wrapper .food-item .content {
+    flex: 1;
+  }
+  .shop_goods .foods-wrapper .food-item .content .name {
+    margin: 2px 0 8px 0;
+    height: 14px;
+    line-height: 14px;
+    font-size: 14px;
+    color: rgb(7, 17, 27);
+  }
+  .shop_goods .foods-wrapper .food-item .content .desc, .extra {
+    line-height: 10px;
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+  .shop_goods .foods-wrapper .food-item .content .desc {
+    line-height: 12px;
+    margin-bottom: 8px;
+  }
+  .shop_goods .foods-wrapper .food-item .content .extra .count {
+    margin-right: 12px;
+  }
+  .shop_goods .foods-wrapper .food-item .content .price {
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .shop_goods .foods-wrapper .food-item .content .price .now {
+    margin-right: 8px;
+    font-size: 14px;
+    color: rgb(240, 20, 20);
+  }
+  .shop_goods .foods-wrapper .food-item .content .price .old {
+    text-decoration: line-through;
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+  .shop_goods .foods-wrapper .food-item .content .cartcontrol-wrapper {
+    position: absolute;
+    right: 12px;
+  }
+</style>
+```
+
+### 2.25. 开发CartControl组件
+
+#### 2.25.1. `src\components\CartControl\CartControl.vue`
+
+```vue
+<template>
+  <div class="cartcontrol">
+    <transition name="move">
+      <div class="iconfont icon-remove_circle_outline" v-if="food.count" @click="updateFoodCount(false)"></div>
+    </transition>
+    <div class="cart-count" v-if="food.count">{{food.count}}</div>
+    <div class="iconfont icon-add_circle" @click="updateFoodCount(true)"></div>
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      food: Object
+    },
+    methods: {
+      /**
+       * 更新foodCount
+       * @param isAdd true：添加；false：减少
+       */
+      updateFoodCount(isAdd) {
+        this.$store.dispatch('updateFoodCount', {isAdd, food: this.food})
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .cartcontrol {
+    font-size: 0;
+  }
+  .cartcontrol .cart-decrease {
+    display: inline-block;
+    padding: 6px;
+    line-height: 24px;
+    font-size: 24px;
+    color: rgb(0, 160, 220);
+  }
+  .cartcontrol .icon-remove_circle_outline {
+    display: inline-block;
+    padding: 6px;
+    line-height: 24px;
+    font-size: 24px;
+    color: green;
+  }
+  .cartcontrol .icon-remove_circle_outline.move-enter-active {
+    transition: all .3s;
+  }
+  .cartcontrol .icon-remove_circle_outline.move-leave-active {
+    transition: all .3s;
+  }
+  .cartcontrol .icon-remove_circle_outline.move-enter {
+    opacity: 0;
+    transform: translateX(15px) rotate(180deg);
+  }
+  .cartcontrol .icon-remove_circle_outline.move-leave-to {
+    opacity: 0;
+    transform: translateX(15px) rotate(180deg);
+  }
+  .cartcontrol .cart-count {
+    display: inline-block;
+    vertical-align: top;
+    width: 12px;
+    padding-top: 6px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+  .cartcontrol .icon-add_circle {
+    display: inline-block;
+    padding: 6px;
+    line-height: 24px;
+    font-size: 24px;
+    color: green;
+  }
+</style>
+```
+
+#### 2.25.2. `vuex`
+
+- `mutation-types.js`
+
+  ```js
+  /*
+  * 包含多个mutation的type名称常量
+  * */
+  export default {
+    INCREMENT_FOOT_COUNT : 'increment_foot_count',  // 增加food中的count
+    DECREMENT_FOOT_COUNT : 'decrement_foot_count'   // 减少food中的count
+  }
+  
+  ```
+
+- `mutation.js`
+
+  ```js
+  /*
+  * 直接更新state的多个方法的对象
+  * */
+  import types from './mutation-types'
+  import Vue from 'vue'
+  
+  export default {
+    [types.INCREMENT_FOOT_COUNT](state, {food}) {
+      if (!food.count) { // 第一次增加
+        // food.count = 1 // 新增属性（没有数据绑定）
+        /*
+          Vue.set( target, key, value)
+            对象，属性名，属性值
+         */
+        Vue.set(food, 'count', 1) // 让新增的属性也有数据绑定
+      } else {
+        food.count++
+      }
+    },
+    [types.DECREMENT_FOOT_COUNT](state, {food}) {
+      if (food.count) {
+        food.count--
+      }
+    }
+  }
+  ```
+
+- `actions.js`
+
+  ```js
+  /*
+  * 通过mutations间接更新state的多个方法的对象
+  * */
+  import types from './mutation-types'
+  import api from '../api'
+  
+  export default {
+    // 同步更新food中的count数量
+    updateFoodCount({commit}, {isAdd, food}) {
+      if (isAdd) {
+        commit(types.INCREMENT_FOOT_COUNT, {food})
+      } else {
+        commit(types.DECREMENT_FOOT_COUNT, {food})
+      }
+    }
+  }
+  ```
+
+#### 2.25.3. `src\views\Shop\ShopGoods\ShopGoods.vue`
+
+```vue
+<template>
+                <div class="cartcontrol-wrapper">
+                  <CartControl :food="food"></CartControl>
+                </div>
+</template>
+<script>
+  import CartControl from '../../../components/CartControl/CartControl'
+  export default {
+    components: {CartControl}
+  }
+</script>
+```
+
+### 2.26. 开发Food组件
+
+#### 2.26.1. `src\components\Food\Food.vue`
+
+```vue
+<template>
+  <transition name="fade">
+    <div class="food" v-if="isShow">
+      <div class="food-content">
+        <div class="image-header">
+          <img :src="food.image">
+          <p class="foodpanel-desc">{{food.info}}</p>
+          <div class="back" @click="toggleShow">
+            <i class="iconfont icon-arrow_left"></i>
+          </div>
+        </div>
+        <div class="content">
+          <h1 class="title">{{food.name}}</h1>
+          <div class="detail">
+            <span class="sell-count">月售 {{food.sellCount}} 份</span>
+            <span class="rating">好评率 {{food.rating}}%</span>
+          </div>
+          <div class="price">
+            <span class="now">￥{{food.price}}</span>
+            <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
+          </div>
+          <div class="cartcontrol-wrapper">
+            <CartControl :food="food"></CartControl>
+          </div>
+        </div>
+      </div>
+      <div class="food-cover" @click="toggleShow"></div>
+    </div>
+  </transition>
+</template>
+
+<script>
+  import CartControl from '../CartControl/CartControl'
+
+  export default {
+    components: {CartControl},
+    props: {
+      food: Object
+    },
+    data() {
+      return {
+        isShow: false
+      }
+    },
+    methods: {
+      toggleShow() {
+        this.isShow = !this.isShow
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .food {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 38px;
+    z-index: 101;
+    width: 100%;
+  }
+  .food.fade-enter-active, .food.fade-leave-active {
+    transition: opacity .3s;
+  }
+  .food.fade-enter, .food.fade-leave-to {
+    opacity: 0;
+  }
+  .food .food-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 65%;
+    z-index: 66;
+    background: #fff;
+    border-radius: 5px;
+  }
+  .food .food-content .image-header {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+  }
+  .food .food-content .image-header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .food .food-content .image-header .foodpanel-desc {
+    font-size: 10px;
+    color: #ddd;
+    letter-spacing: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px 10px;
+  }
+  .food .food-content .image-header .back {
+    position: absolute;
+    top: 10px;
+    left: 0;
+  }
+  .food .food-content .image-header .back .icon-arrow_left {
+    display: block;
+    padding: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+  .food .food-content .content {
+    position: relative;
+    padding: 18px;
+  }
+  .food .food-content .content .title {
+    line-height: 14px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgb(7, 17, 27);
+  }
+  .food .food-content .content .detail {
+    margin-bottom: 18px;
+    line-height: 10px;
+    height: 10px;
+    font-size: 0;
+  }
+  .food .food-content .content .detail .sell-count, .food .food-content .content .detail .rating {
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+  .food .food-content .content .detail .sell-count {
+    margin-right: 12px;
+  }
+  .food .food-content .content .price {
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .food .food-content .content .price .now {
+    margin-right: 8px;
+    font-size: 14px;
+    color: #f01414;
+  }
+  .food .food-content .content .price .old {
+    text-decoration: line-through;
+    font-size: 10px;
+    color: #93999f;
+  }
+  .food .food-content .content .cartcontrol-wrapper {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+  }
+  .food .food-content .content .buy {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 10;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    font-size: 10px;
+    color: #fff;
+    background: #00a0dc;
+  }
+  .food .food-content .content .buy.fade-transition {
+    transition: all 0.2s;
+    opacity: 1;
+  }
+  .food .food-content .content .buy.fade-enter, .food .food-content .content .buy.fade-leave {
+    opacity: 0;
+  }
+  .food .food-cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -48px;
+    left: 0;
+    z-index: 55;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>
+```
+
+#### 2.26.2. `src\views\Shop\ShopGoods\ShopGoods.vue`
+
+```vue
+<template>
+  <div>
+    <section class="shop_goods">
+      <!--商品-->
+      <div class="foods-wrapper" ref="foodsWrapper">
+        <ul ref="foodsUl">
+          <li class="food-list-hook" v-for="(shopGood, index) in shopGoods" :key="index">
+            <h1 class="title">{{shopGood.name}}</h1>
+            <ul>
+              <li class="food-item bottom-border-1px" v-for="(food, index) in shopGood.foods" :key="index" @click="showFood(food)">
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <Food :food="food" ref="food"></Food>
+  </div>
+</template>
+
+<script>
+  import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
+  import CartControl from '../../../components/CartControl/CartControl'
+  import Food from '../../../components/Food/Food'
+
+  export default {
+    components: {CartControl, Food},
+    data() {
+      return {
+        food: {}      // 需要显示的food
+      }
+    },
+    methods: {
+      /**
+       * 显示点击的food
+       * @param food
+       */
+      showFood(food) {
+        // 设置food
+        this.food = food
+        // 显示food组件（调用子组件对象的方法）
+        this.$refs.food.toggleShow()
+      }
+    }
+  }
+</script>
+```
+
+#### 2.26.3. `src\components\CartControl\CartControl.vue`
+
+```vue
+<template>
+  <div class="cartcontrol">
+    <transition name="move">
+      <div class="iconfont icon-remove_circle_outline" v-if="food.count" @click.stop="updateFoodCount(false)"></div>
+    </transition>
+    <div class="cart-count" v-if="food.count">{{food.count}}</div>
+    <div class="iconfont icon-add_circle" @click.stop="updateFoodCount(true)"></div>
+  </div>
+</template>
+```
+
+### 2.27. 开发ShopCart组件
+
+#### 2.27.1. `src\components\ShopCart\ShopCart.vue`
+
+```vue
+<template>
+  <div>
+    <div class="shopcart">
+      <div class="content">
+        <div class="content-left" @click="toggleShow">
+          <div class="logo-wrapper">
+            <div class="logo" :class="{highlight: totalCount}">
+              <i class="iconfont icon-shopping_cart highlight"></i>
+            </div>
+            <div class="num" v-if="totalCount">{{totalCount}}</div>
+          </div>
+          <div class="price" :class="{highlight: totalCount}">￥{{totalPrice}}</div>
+          <div class="desc">另需配送费￥{{shopInfo.deliveryPrice}} 元</div>
+        </div>
+        <div class="content-right">
+          <div class="pay" :class="payClass">
+            {{payText}}
+          </div>
+        </div>
+      </div>
+      <transition name="move">
+        <div class="shopcart-list" v-show="listShow">
+          <div class="list-header">
+            <h1 class="title">购物车</h1>
+            <span class="empty" @click="clearCart">清空</span>
+          </div>
+          <div class="list-content">
+            <ul>
+              <li class="food" v-for="(food, index) in cartFoods" :key="index">
+                <span class="name">{{food.name}}</span>
+                <div class="price"><span>￥{{food.price}}</span></div>
+                <div class="cartcontrol-wrapper">
+                  <CartControl :food="food"></CartControl>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </transition>
+    </div>
+    <transition name="fade">
+      <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
+    </transition>
+  </div>
+</template>
+
+<script>
+  import BScroll from 'better-scroll'
+  import {mapState, mapGetters} from 'vuex'
+  import CartControl from '../CartControl/CartControl'
+  import {MessageBox, Toast} from 'mint-ui'
+
+  export default {
+    components: {CartControl},
+    data() {
+      return {
+        isShow: false
+      }
+    },
+    computed: {
+      ...mapState(['cartFoods', 'shopInfo']),
+      ...mapGetters(['totalCount', 'totalPrice']),
+      payClass() {
+        const {totalPrice} = this
+        const {minPrice} = this.shopInfo
+        return totalPrice >= minPrice ? 'enough' : 'not-enough'
+      },
+      payText() {
+        const {totalPrice} = this
+        const {minPrice} = this.shopInfo
+        if (totalPrice === 0) {
+          return `￥${minPrice} 元起送`
+        } else if (totalPrice < minPrice) {
+          return `还差￥${minPrice - totalPrice} 元起送`
+        } else {
+          return '去结算'
+        }
+      },
+      /**
+       * 计算listShow属性
+       *  Unexpected side effect in "listShow" computed property
+       *  计算属性中的意外副作用；
+       *  计算属性内不应该对属性值做变更，解决这个问题的做法之一是使用watch监听：
+       * @return {boolean}
+       */
+      /*
+      listShow() {
+        // 如果总数量为0，直接不显示
+        if (!this.totalCount) {
+          this.isShow = false
+          return false
+        }
+        // 购物车滑动
+        if (this.isShow) {
+          this.$nextTick(() => {
+            // 实现BScroll的实例是一个单例
+            if (!this.scroll) {
+              this.scroll = new BScroll('.list-content', {click: true})
+            } else {
+              this.scroll.refresh() // 让滚动条刷新一下：重新统计内容的高度，形成滚动条
+            }
+          })
+        }
+
+        return this.isShow
+      }
+      */
+      listShow: {
+        get() {
+          return this.isShow
+        },
+        set() {
+          // 如果总数量为0，直接不显示
+          if (!this.totalCount) {
+            this.isShow = false
+          }
+        }
+      }
+    },
+    watch: {
+      totalCount(newValue) {
+        if (!newValue) {
+          this.isShow = false
+        }
+      },
+      isShow(newValue) {
+        if (newValue) {
+          this.$nextTick(() => {
+            // 实现BScroll的实例是一个单例
+            if (!this.scroll) {
+              this.scroll = new BScroll('.list-content', {click: true})
+            } else {
+              this.scroll.refresh() // 让滚动条刷新一下：重新统计内容的高度，形成滚动条
+            }
+          })
+        }
+      }
+    },
+    methods: {
+      toggleShow() {
+        if (this.totalCount) {
+          // 只有当总数量大于0时才切换
+          this.isShow = !this.isShow
+        }
+      },
+      clearCart() {
+        MessageBox.confirm('确定清空购物车吗？').then(
+          action => {
+            console.log(`点击了${action}: ${new Date().toLocaleString()}`)
+            this.$store.dispatch('clearCart')
+            Toast('清空成功')
+          },
+          action => {
+            console.log(`点击了${action}`)
+          }
+        )
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .shopcart {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 100%;
+    height: 48px;
+  }
+  .shopcart .content {
+    display: flex;
+    background: #141d27;
+    font-size: 0;
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .shopcart .content .content-left {
+    flex: 1;
+  }
+  .shopcart .content .content-left .logo-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    top: -10px;
+    margin: 0 12px;
+    padding: 6px;
+    width: 56px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: #141d27;
+  }
+  .shopcart .content .content-left .logo-wrapper .logo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    text-align: center;
+    background: #2b343c;
+  }
+  .shopcart .content .content-left .logo-wrapper .logo.highlight {
+    background: green;
+  }
+  .shopcart .content .content-left .logo-wrapper .logo .icon-shopping_cart {
+    line-height: 44px;
+    font-size: 24px;
+    color: #80858a;
+  }
+  .shopcart .content .content-left .logo-wrapper .logo .icon-shopping_cart.highlight {
+    color: #fff;
+  }
+  .shopcart .content .content-left .logo-wrapper .num {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 16px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    background: rgb(240, 20, 20);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+  .shopcart .content .content-left .price {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    line-height: 24px;
+    padding-right: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .shopcart .content .content-left .price.highlight {
+    color: #fff;
+  }
+  .shopcart .content .content-left .desc {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-bottom: 15px;
+    margin-left: -45px;
+    font-size: 10px;
+  }
+  .shopcart .content .content-right {
+    flex: 0 0 105px;
+    width: 105px;
+  }
+  .shopcart .content .content-right .pay {
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .shopcart .content .content-right .pay.not-enough {
+    background: #2b333b;
+  }
+  .shopcart .content .content-right .pay.enough {
+    background: #00b43c;
+    color: #fff;
+  }
+  .shopcart .ball-container .ball {
+    position: fixed;
+    left: 32px;
+    bottom: 22px;
+    z-index: 200;
+    transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+  }
+  .shopcart .ball-container .ball .inner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: green;
+    transition: all 0.4s linear;
+  }
+  .shopcart .shopcart-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    transform: translateY(-100%);
+  }
+  .shopcart .shopcart-list.move-enter-active, .shopcart .shopcart-list.move-leave-active {
+    transition: .3s;
+  }
+  .shopcart .shopcart-list.move-enter, .shopcart .shopcart-list.move-leave-to {
+    transform: translateY(0);
+  }
+  .shopcart .shopcart-list .list-header {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 18px;
+    background: #f3f5f7;
+    border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+  }
+  .shopcart .shopcart-list .list-header .title {
+    float: left;
+    font-size: 14px;
+    color: rgb(7, 17, 27);
+  }
+  .shopcart .shopcart-list .list-header .empty {
+    float: right;
+    font-size: 12px;
+    color: rgb(0, 160, 220);
+  }
+  .shopcart .shopcart-list .list-content {
+    padding: 0 18px;
+    max-height: 217px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .shopcart .shopcart-list .list-content .food {
+    position: relative;
+    padding: 12px 0;
+    box-sizing: border-box;
+    border-bottom: 1px rgba(7, 17, 27, 0.1);
+  }
+  .shopcart .shopcart-list .list-content .food .name {
+    line-height: 24px;
+    font-size: 14px;
+    color: rgb(7, 17, 27);
+  }
+  .shopcart .shopcart-list .list-content .food .price {
+    position: absolute;
+    right: 90px;
+    bottom: 12px;
+    line-height: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgb(240, 20, 20);
+  }
+  .shopcart .shopcart-list .list-content .food .cartcontrol-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+  }
+  .list-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 1;
+    background: rgba(7, 17, 27, 0.6);
+  }
+  .list-mask.fade-enter-active, .list-mask.fade-leave-active {
+    transition: .5s;
+  }
+  .list-mask.fade-enter, .list-mask.fade-leave-to {
+    opacity: 0;
+    background: rgba(7, 17, 27, 0);
+  }
+</style>
+```
+
+#### 2.27.2. `vuex`
+
+- `state.js`
+
+  ```js
+  export default {
+    cartFoods: [],                // 购物车中食品的列表
+  }
+  ```
+
+- `mutation-types.js`
+
+  ```js
+  export default {
+    INCREMENT_FOOT_COUNT : 'increment_foot_count',  // 增加food中的count
+    DECREMENT_FOOT_COUNT : 'decrement_foot_count',  // 减少food中的count
+    CLEAR_CART : 'clear_cart'                       // 清空购物车
+  }
+  ```
+
+- `mutations.js`
+
+  ```js
+  /*
+  * 直接更新state的多个方法的对象
+  * */
+  // import {RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_USERINFO, RESET_USERINFO} from './mutation-types'
+  import types from './mutation-types'
+  import Vue from 'vue'
+  
+  export default {
+    [types.INCREMENT_FOOT_COUNT](state, {food}) {
+      if (!food.count) { // 第一次增加
+        // food.count = 1 // 新增属性（没有数据绑定）
+        /*
+          Vue.set( target, key, value)
+            对象，属性名，属性值
+         */
+        Vue.set(food, 'count', 1) // 让新增的属性也有数据绑定
+        // 将food添加到cartFoods中
+        state.cartFoods.push(food)
+      } else {
+        food.count++
+      }
+    },
+    [types.DECREMENT_FOOT_COUNT](state, {food}) {
+      if (food.count) {
+        food.count--
+        if (!food.count) {
+          // 将food从cartFoods中移除
+          state.cartFoods.splice(state.cartFoods.indexOf(food), 1)
+        }
+      }
+    },
+    [types.CLEAR_CART](state) {
+      // 清除food中的count
+      state.cartFoods.forEach(food => food.count = 0)
+      // 移除购物车中所有购物项
+      state.cartFoods = []
+    }
+  }
+  ```
+
+- `actions.js`
+
+  ```js
+  import types from './mutation-types'
+  import api from '../api'
+  
+  export default {
+    // 同步更新food中的count数量
+    updateFoodCount({commit}, {isAdd, food}) {
+      if (isAdd) {
+        commit(types.INCREMENT_FOOT_COUNT, {food})
+      } else {
+        commit(types.DECREMENT_FOOT_COUNT, {food})
+      }
+    },
+  
+    // 同步清空购物车
+    clearCart({commit}) {
+      commit(types.CLEAR_CART)
+    }
+  }
+  ```
+
+- `getters.js`
+
+  ```js
+  export default {
+    totalCount(state) {
+      return state.cartFoods.reduce((preTotal, food) => preTotal + food.count, 0)
+    },
+    totalPrice(state) {
+      return state.cartFoods.reduce((preTotal, food) => preTotal + food.count * food.price, 0)
+    }
+  }
+  ```

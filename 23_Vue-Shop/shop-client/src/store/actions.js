@@ -63,11 +63,13 @@ export default {
   },
 
   // 异步获取商品列表
-  async getShopGoods({commit}) {
+  async getShopGoods({commit}, callback) {
     const result = await api.reqShopGoods()
     if (result.code === 0) {
       const shopGoods = result.data
       commit(types.RECEIVE_GOODS, {shopGoods})
+      // 数据更新了，通知一下组件
+      callback && callback()
     }
   },
 
@@ -87,5 +89,19 @@ export default {
       const shopInfo = result.data
       commit(types.RECEIVE_INFO, {shopInfo})
     }
+  },
+
+  // 同步更新food中的count数量
+  updateFoodCount({commit}, {isAdd, food}) {
+    if (isAdd) {
+      commit(types.INCREMENT_FOOT_COUNT, {food})
+    } else {
+      commit(types.DECREMENT_FOOT_COUNT, {food})
+    }
+  },
+
+  // 同步清空购物车
+  clearCart({commit}) {
+    commit(types.CLEAR_CART)
   }
 }

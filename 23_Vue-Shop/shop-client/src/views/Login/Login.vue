@@ -92,8 +92,8 @@
       async getCode() {
         // 如果当前没有计时
         if (!this.computeTime) { // this.computeTime === 0
-          // 启动倒计时，默认30s
-          this.computeTime = 30
+          // 启动倒计时，默认60s
+          this.computeTime = 60
           this.intervalId = setInterval(() => {
             this.computeTime--
             if (!this.computeTime) {

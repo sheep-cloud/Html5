@@ -32,13 +32,18 @@ import Switch from '../components/Switch/Switch'
 // 声明使用插件
 Vue.use(VueRouter)
 
+// 是否显示组件
+const meta = {
+  showFooter: true
+}
+
 // 所有路由
 const routes = [
   {path: '/', redirect: '/msite'},
-  {path: '/msite', component: Msite, meta: {showFooter: true}},
-  {path: '/search', component: Search, meta: {showFooter: true}},
-  {path: '/order', component: Order, meta: {showFooter: true}},
-  {path: '/profile', component: Profile, meta: {showFooter: true}},
+  {path: '/msite', component: Msite, meta},
+  {path: '/search', component: Search, meta},
+  {path: '/order', component: Order, meta},
+  {path: '/profile', component: Profile, meta},
   {path: '/userInfo', component: UserInfo},
   {path: '/login', component: Login},
   {

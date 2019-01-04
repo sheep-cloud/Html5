@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="shop">
     <ShopHeader></ShopHeader>
     <div class="tab">
       <div class="tab-item">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <router-view></router-view>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -28,27 +28,27 @@
 </script>
 
 <style scoped>
-  .tab {
+  .shop .tab {
     height: 40px;
     line-height: 40px;
     background: #fff;
     border-bottom: 1px rgba(7, 17, 27, 0.1);
   }
-  .tab .tab-item {
+  .shop .tab .tab-item {
     float: left;
     width: 33.33333%;
     text-align: center;
     font-size: 14px;
     color: rgb(77, 85, 93);
   }
-  .tab .tab-item a {
+  .shop .tab .tab-item a {
     display: block;
     position: relative;
   }
-  .tab .tab-item a.router-link-active {
+  .shop .tab .tab-item a.router-link-active {
     color: #02a774;
   }
-  .tab .tab-item a.router-link-active::after {
+  .shop .tab .tab-item a.router-link-active::after {
     content: '';
     position: absolute;
     left: 77%;
