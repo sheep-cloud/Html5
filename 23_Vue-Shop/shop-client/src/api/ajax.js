@@ -30,13 +30,13 @@ function ajax(url = '', data = {}, type = 'GET') {
     }
 
     // 包装成功，失败，返回的是response.data
-    promise.then(response => {
+    promise.then(response =>{
       // 成功了调用resolve()
-      resolve(response.data)
-    }).catch(error => {
+      resolve(response.data)}
+    ).catch(error =>
       // 失败了调用reject()
       reject(error)
-    })
+    )
   })
 }
 

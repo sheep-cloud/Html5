@@ -13,7 +13,7 @@
           <div class="desc">另需配送费￥{{shopInfo.deliveryPrice}} 元</div>
         </div>
         <div class="content-right">
-          <div class="pay" :class="payClass">
+          <div class="pay" :class="payClass" @click="pay">
             {{payText}}
           </div>
         </div>
@@ -144,16 +144,15 @@
         }
       },
       clearCart() {
-        MessageBox.confirm('确定清空购物车吗？').then(
-          action => {
-            console.log(`点击了${action}: ${new Date().toLocaleString()}`)
-            this.$store.dispatch('clearCart')
-            Toast('清空成功')
-          },
-          action => {
-            console.log(`点击了${action}`)
-          }
-        )
+        MessageBox.confirm('确定清空购物车吗？').then(() => {
+          this.$store.dispatch('clearCart')
+          Toast('清空成功')
+        }, () => console.log())
+      },
+      pay() {
+        MessageBox.confirm('结算？').then(() => {
+          Toast('结算成功')
+        }, () => console.log())
       }
     }
   }

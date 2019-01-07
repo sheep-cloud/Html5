@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  const CLASS_ON = 'on' // 黄星
-  const CLASS_HALF = 'half' // 半星
-  const CLASS_OFF = 'off' // 灰星
+  const CLASS_ON = 'on'       // 黄星
+  const CLASS_HALF = 'half'   // 半星
+  const CLASS_OFF = 'off'     // 灰星
 
   export default {
     props: {

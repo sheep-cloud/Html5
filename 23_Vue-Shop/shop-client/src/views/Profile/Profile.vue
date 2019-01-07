@@ -116,17 +116,12 @@
       ...mapActions(['logout']),
       // 退出登录
       signOut() {
-        MessageBox.confirm('确认退出吗?').then(
-          action => {
-            // 请求退出
-            // this.$store.dispatch('logout')
-            console.log(`点击了${action}: ${new Date().toLocaleString()}`)
-            this.logout()
-            Toast('退出成功')
-          },
-          action => {
-            console.log(`点击了${action}`)
-          })
+        MessageBox.confirm('确认退出吗？').then(() => {
+          // 请求退出
+          // this.$store.dispatch('logout')
+          this.logout()
+          Toast('退出成功')
+        }, () => console.log())
       }
     }
   }

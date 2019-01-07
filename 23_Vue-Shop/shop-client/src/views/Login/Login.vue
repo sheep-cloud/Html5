@@ -133,7 +133,7 @@
       },*/
       getCaptcha() {
         // 每次指定的src要不一样
-        this.$refs.captcha.src = this.reqCaptcha + '?time=' + Date.now()
+        this.$refs.captcha.src = this.reqCaptcha + `?time=${Date.now()}`
         // 清空验证码
         this.captcha = ''
       },
