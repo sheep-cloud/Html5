@@ -58,5 +58,8 @@ export default {
     state.cartFoods.forEach(food => food.count = 0)
     // 移除购物车中所有购物项
     state.cartFoods = []
+  },
+  [types.RECEIVE_SEARCH_SHOPS](state, {searchShops}) {
+    state.searchShops = searchShops
   }
 }

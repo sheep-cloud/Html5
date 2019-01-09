@@ -3935,7 +3935,7 @@ npm install --save mint-ui
 npm install mockjs --save
 ```
 
-##### 2.22.3.2. 使用`src/mock/mockServer.js`
+##### 2.22.3.2. 使用`src/mock/index.js`
 
 ```js
 /*
@@ -5035,15 +5035,15 @@ export default {
   import CartControl from '../CartControl/CartControl'
 
   export default {
-    components: {CartControl},
-    props: {
-      food: Object
-    },
     data() {
       return {
         isShow: false
       }
     },
+    props: {
+      food: Object
+    },
+    components: {CartControl},
     methods: {
       toggleShow() {
         this.isShow = !this.isShow
@@ -5312,12 +5312,12 @@ export default {
   import {MessageBox, Toast} from 'mint-ui'
 
   export default {
-    components: {CartControl},
     data() {
       return {
         isShow: false
       }
     },
+    components: {CartControl},
     computed: {
       ...mapState(['cartFoods', 'shopInfo']),
       ...mapGetters(['totalCount', 'totalPrice']),
@@ -5718,3 +5718,1023 @@ export default {
     }
   }
   ```
+
+### 2.28. 开发ShopRatings组件
+
+#### 2.28.1. `src\views\Shop\ShopRatings\ShopRatings.vue`
+
+```vue
+<template>
+  <div>
+    <section class="shop_ratings" ref="ratings">
+      <div class="ratings-content">
+        <div class="overview">
+          <div class="overview-left">
+            <h1 class="score">{{shopInfo.score}}</h1>
+            <div class="title">综合评分</div>
+            <div class="rank">高于周边商家 {{shopInfo.rankRate}}%</div>
+          </div>
+          <div class="overview-right">
+            <div class="score-wrapper">
+              <span class="title">服务态度</span>
+              <Star :score="shopInfo.serviceScore" :size="24"/>
+              <span class="score">{{shopInfo.serviceScore}}</span>
+            </div>
+            <div class="score-wrapper">
+              <span class="title">商品评分</span>
+              <Star :score="shopInfo.foodScore" :size="24"/>
+              <span class="score">{{shopInfo.foodScore}}</span>
+            </div>
+            <div class="delivery-wrapper">
+              <span class="title">送达时间</span>
+              <span class="delivery">{{shopInfo.deliveryTime}} 分钟</span>
+            </div>
+          </div>
+        </div>
+        <div class="split"></div>
+        <div class="rating-select">
+          <div class="rating-type border-1px">
+            <span class="block positive" :class="{active : selectType === 2}" @click="setSelectType(2)">
+              全部
+              <span class="count">{{shopRatings.length}}</span>
+            </span>
+            <span class="block positive" :class="{active : selectType === 0}" @click="setSelectType(0)">
+              满意
+              <span class="count">{{positiveSize}}</span>
+            </span>
+            <span class="block negative" :class="{active : selectType === 1}" @click="setSelectType(1)">
+              不满意
+              <span class="count">{{shopRatings.length - positiveSize}}</span>
+            </span>
+          </div>
+          <div class="switch" :class="{on : onlyShowText}" @click="toggleOnlyShowText">
+            <span class="iconfont icon-check_circle"></span>
+            <span class="text">只看有内容的评价</span>
+            <span class="count">({{filterRatings.length}})</span>
+          </div>
+        </div>
+        <div class="rating-wrapper">
+          <ul>
+            <li class="rating-item" v-for="(ratings, index) in filterRatings" :key="index">
+              <div class="avatar">
+                <img width="28" height="28" :src="ratings.avatar">
+              </div>
+              <div class="content">
+                <h1 class="name">{{ratings.username}}</h1>
+                <div class="star-wrapper">
+                  <Star :score="ratings.score" :size="24"/>
+                  <span class="delivery">{{ratings.deliveryTime}}</span>
+                </div>
+                <p class="text">{{ratings.text}}</p>
+                <div class="recommend" v-show="ratings.recommend">
+                  <!--rateType： 0 满意； 1 不满意-->
+                  <span class="iconfont" :class="ratings.rateType === 0 ? 'icon-thumb_up' : 'icon-thumb_down'"></span>
+                  <span class="item" v-for="(item, index) in ratings.recommend" :key="index">{{item}}</span>
+                </div>
+                <div class="time">{{ratings.rateTime}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+  import Star from '../../../components/Star/Star'
+  import BScroll from 'better-scroll'
+  import {mapState, mapGetters} from 'vuex'
+
+  export default {
+    data() {
+      return {
+        onlyShowText: true,    // 是否只显示有文本的评价
+        selectType: 2          // 选择的评价类型：0满意，1不满意，2全部
+      }
+    },
+    mounted() {
+      this.$store.dispatch('getShopRatings', () => {
+        this.$nextTick(() => {
+          new BScroll(this.$refs.ratings, {
+            click: true
+          })
+        })
+      })
+    },
+    components: {Star},
+    computed: {
+      ...mapState(['shopInfo', 'shopRatings']),
+      ...mapGetters(['positiveSize']),
+      /**
+       * 过滤数据
+       */
+      filterRatings() {
+        // 得到相关的数据
+        const {shopRatings, onlyShowText, selectType} = this
+
+        // 产生一个过滤的新数组
+        return shopRatings.filter(rating => {
+          const {rateType, text} = rating
+          /*
+            条件1：
+              selectType：0/1/2
+              rateType: 0/1
+              selectType === 2 || selectType === rateType
+            条件2：
+              onlyShowText: true/false
+              text: 有值/没值
+              !onlyShowText || text
+           */
+          return (selectType === 2 || selectType === rateType) && (!onlyShowText || text)
+        })
+      }
+    },
+    methods: {
+      setSelectType(selectType) {
+        this.selectType = selectType
+      },
+      toggleOnlyShowText() {
+        this.onlyShowText = !this.onlyShowText
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .shop_ratings {
+    position: absolute;
+    top: 195px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+  }
+  .shop_ratings .ratings-content .overview {
+    display: flex;
+    padding: 18px 0;
+  }
+  .shop_ratings .ratings-content .overview .overview-left {
+    flex: 0 0 137px;
+    padding: 6px 0;
+    width: 137px;
+    border-right: 1px solid rgba(7, 17, 27, 0.1);
+    text-align: center;
+  }
+  @media only screen and (max-width: 320px) {
+    .shop_ratings .ratings-content .overview .overview-left {
+      flex: 0 0 120px;
+      width: 120px;
+    }
+  }
+  .shop_ratings .ratings-content .overview .overview-left .score {
+    margin-bottom: 6px;
+    line-height: 28px;
+    font-size: 24px;
+    color: rgb(255, 153, 0);
+  }
+  .shop_ratings .ratings-content .overview .overview-left .title {
+    margin-bottom: 8px;
+    line-height: 12px;
+    font-size: 12px;
+    color: rgb(7, 17, 27);
+  }
+  .shop_ratings .ratings-content .overview .overview-left .rank {
+    line-height: 10px;
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+  .shop_ratings .ratings-content .overview .overview-right {
+    flex: 1;
+    padding: 6px 0 6px 24px;
+  }
+  @media only screen and (max-width: 320px) {
+    .shop_ratings .ratings-content .overview .overview-right {
+      padding-left: 6px;
+    }
+  }
+  .shop_ratings .ratings-content .overview .overview-right .score-wrapper {
+    margin-bottom: 8px;
+    font-size: 0;
+  }
+  .shop_ratings .ratings-content .overview .overview-right .score-wrapper .title {
+    display: inline-block;
+    line-height: 18px;
+    vertical-align: top;
+    font-size: 12px;
+    color: rgb(7, 17, 27);
+  }
+  .shop_ratings .ratings-content .overview .overview-right .score-wrapper .star {
+    display: inline-block;
+    margin: 0 12px;
+    vertical-align: top;
+  }
+  .shop_ratings .ratings-content .overview .overview-right .score-wrapper .score {
+    display: inline-block;
+    line-height: 18px;
+    vertical-align: top;
+    font-size: 12px;
+    color: rgb(255, 153, 0);
+  }
+  .shop_ratings .ratings-content .overview .overview-right .delivery-wrapper {
+    font-size: 0;
+  }
+  .shop_ratings .ratings-content .overview .overview-right .delivery-wrapper .title {
+    line-height: 18px;
+    font-size: 12px;
+    color: rgb(7, 17, 27);
+  }
+  .shop_ratings .ratings-content .overview .overview-right .delivery-wrapper .delivery {
+    margin-left: 12px;
+    font-size: 12px;
+    color: rgb(147, 153, 159);
+  }
+  .shop_ratings .ratings-content .split {
+    width: 100%;
+    height: 16px;
+    border-top: 1px solid rgba(7, 17, 27, 0.1);
+    border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+    background: #f3f5f7;
+  }
+  .shop_ratings .ratings-content .rating-select .rating-type {
+    padding: 18px 0;
+    margin: 0 18px;
+    border: 1px rgba(7, 17, 27, 0.1);
+    font-size: 0;
+  }
+  .shop_ratings .ratings-content .rating-select .rating-type .block {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-right: 8px;
+    line-height: 16px;
+    border-radius: 1px;
+    font-size: 12px;
+    color: rgb(77, 85, 93);
+    background: rgba(77, 85, 93, 0.2);
+  }
+  .shop_ratings .ratings-content .rating-select .rating-type .block.active {
+    background: green;
+    color: #fff;
+  }
+  .shop_ratings .ratings-content .rating-select .rating-type .block .count {
+    margin-left: 2px;
+    font-size: 8px;
+  }
+  .shop_ratings .ratings-content .rating-select .switch {
+    padding: 12px 18px;
+    line-height: 24px;
+    border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+    color: rgb(147, 153, 159);
+    font-size: 0;
+  }
+  .shop_ratings .ratings-content .rating-select .switch.on .icon-check_circle {
+    color: green;
+  }
+  .shop_ratings .ratings-content .rating-select .switch .icon-check_circle {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 4px;
+    font-size: 24px;
+  }
+  .shop_ratings .ratings-content .rating-select .switch .text {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+  }
+  .shop_ratings .ratings-content .rating-select .switch .count {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+  }
+  .shop_ratings .ratings-content .rating-wrapper {
+    padding: 0 18px;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item {
+    display: flex;
+    padding: 18px 0;
+    border-bottom: 1px rgba(7, 17, 27, 0.1);
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .avatar {
+    flex: 0 0 28px;
+    width: 28px;
+    margin-right: 12px;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item img {
+    border-radius: 50%;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content {
+    position: relative;
+    flex: 1;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .name {
+    margin-bottom: 4px;
+    line-height: 12px;
+    font-size: 10px;
+    color: rgb(7, 17, 27);
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .star-wrapper {
+    margin-bottom: 6px;
+    font-size: 0;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .star-wrapper .star {
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: top;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .star-wrapper .delivery {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 12px;
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .text {
+    margin-bottom: 8px;
+    line-height: 18px;
+    color: rgb(7, 17, 27);
+    font-size: 12px;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .recommend {
+    line-height: 16px;
+    font-size: 0;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .recommend .icon-thumb_up, .icon-thumb_down, .item {
+    display: inline-block;
+    margin: 0 8px 4px 0;
+    font-size: 9px;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .recommend .icon-thumb_up {
+    color: yellow;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .recommend .icon-thumb_down {
+    color: rgb(147, 153, 159);
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .recommend .item {
+    padding: 0 6px;
+    border: 1px solid rgba(7, 17, 27, 0.1);
+    border-radius: 1px;
+    color: rgb(147, 153, 159);
+    background: #fff;
+  }
+  .shop_ratings .ratings-content .rating-wrapper .rating-item .content .time {
+    position: absolute;
+    top: 5px;
+    left: 160px;
+    line-height: 12px;
+    font-size: 10px;
+    color: rgb(147, 153, 159);
+  }
+</style>
+```
+
+#### 2.28.2. `vuex`
+
+- `actions.js`
+
+  ```js
+    // 异步获取商家评价列表
+    async getShopRatings({commit}, callback) {
+      const result = await api.reqShopRatings()
+      if (result.code === 0) {
+        const shopRatings = result.data
+        commit(types.RECEIVE_RATINGS, {shopRatings})
+        // 数据更新了，通知一下组件
+        callback && callback()
+      }
+    },
+  ```
+
+- `getter.js`
+
+  ```js
+    positiveSize(state) {
+      return state.shopRatings.reduce((preTotal, rating) => preTotal + (rating.rateType === 0 ? 1 : 0), 0)
+    }
+  ```
+
+### 2.29. 开发ShopInfo组件
+
+#### 2.29.1. `src\views\Shop\ShopInfo\ShopInfo.vue`
+
+```vue
+<template>
+  <div>
+    <section class="shop_info">
+      <div class="info-content">
+        <!--配送信息-->
+        <section class="section">
+          <h3 class="section-title">配送信息</h3>
+          <div class="delivery">
+            <div>
+              <span class="delivery-icon">{{shopInfo.description}}</span>
+              <span>由商家配送提供配送， 约 {{shopInfo.deliveryTime}} 分钟送达， 距离 {{shopInfo.distance}}</span>
+            </div>
+            <div class="delivery-money">配送费￥{{shopInfo.deliveryPrice}}</div>
+          </div>
+        </section>
+
+        <div class="split"></div>
+
+        <!--活动与服务-->
+        <section class="section">
+          <h3 class="section-title">活动与服务</h3>
+          <div class="activity">
+            <div class="activity-item" :class="supportClasses[support.type]" v-for="(support, index) in shopInfo.supports" :key="index">
+              <span class="content-tag">
+              <span class="mini-tag">{{support.name}}</span>
+              </span>
+              <span class="activity-content">{{support.content}}</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="split"></div>
+
+        <!--商家实景-->
+        <section class="section">
+          <h3 class="section-title">商家实景</h3>
+          <div class="pic-wrapper">
+            <ul class="pic-list" ref="picsUl">
+              <li class="pic-item" v-for="(pic, index) in shopInfo.pics" :key="index">
+                <img width="120" height="90" :src="pic"/>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <div class="split"></div>
+
+        <!--商家信息-->
+        <section class="section">
+          <h3 class="section-title">商家信息</h3>
+          <ul class="detail">
+            <li><span class="bold">品类</span> <span>{{shopInfo.category}}</span></li>
+            <li><span class="bold">商家电话</span> <span>{{shopInfo.phone}}</span></li>
+            <li><span class="bold">地址</span> <span>{{shopInfo.address}}</span></li>
+            <li><span class="bold">营业时间</span> <span>{{shopInfo.workTime}}</span></li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+  import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
+
+  export default {
+    data() {
+      return {
+        supportClasses: ['activity-green', 'activity-red', 'activity-orange']
+      }
+    },
+    mounted() {
+      // 如果数据还没有，直接结束
+      if (!this.shopInfo.pics) {
+        return
+      }
+
+      // 数据有了，可以创建BScroll对象形成滑动
+      this._initScroll()
+    },
+    computed: {
+      ...mapState(['shopInfo'])
+    },
+    watch: {
+      shopInfo() { // 刷新流程 ---> 更新数据
+        this.$nextTick(() => {
+          this._initScroll()
+        })
+      }
+    },
+    methods: {
+      /**
+       * 初始化滑动框
+       * @private
+       */
+      _initScroll() {
+        new BScroll('.shop_info')
+        // 动态计算Ul的宽度并赋值
+        const ul = this.$refs.picsUl
+        const liWidth = 120
+        const space = 6
+        const count = this.shopInfo.pics.length
+        ul.style.width = (liWidth + space) * count - space + 'px'
+        // 水平滑动
+        new BScroll('.pic-wrapper', {
+          scrollX: true
+        })
+      }
+    }
+
+  }
+</script>
+
+<style scoped>
+  .shop_info {
+    position: absolute;
+    top: 195px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+  }
+  .shop_info .info-content .section {
+    padding: 16px 14px 14px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #666;
+    border-bottom: 1px solid #eee;
+    position: relative;
+  }
+  .shop_info .info-content .section .section-title {
+    color: #000;
+    font-weight: 700;
+    line-height: 16px;
+  }
+  .shop_info .info-content .section .section-title > .iconfont {
+    float: right;
+    color: #ccc;
+  }
+  .shop_info .info-content .section .delivery {
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .shop_info .info-content .section .delivery .delivery-icon {
+    width: 55px;
+    font-size: 11px;
+    margin-right: 10px;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    background-color: #0097ff;
+    padding: 1px 0;
+    border-radius: 4px;
+  }
+  .shop_info .info-content .section .delivery .delivery-money {
+    margin-top: 5px;
+  }
+  .shop_info .info-content .section .activity {
+    margin-top: 16px;
+  }
+  .shop_info .info-content .section .activity .activity-item {
+    margin-bottom: 12px;
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+  }
+  .shop_info .info-content .section .activity .activity-item.activity-green .content-tag {
+    background-color: #70bc46;
+  }
+  .shop_info .info-content .section .activity .activity-item.activity-red .content-tag {
+    background-color: #f07373;
+  }
+  .shop_info .info-content .section .activity .activity-item.activity-orange .content-tag {
+    background-color: #f1884f;
+  }
+  .shop_info .info-content .section .activity .activity-item .content-tag {
+    display: inline-block;
+    border-radius: 2px;
+    width: 36px;
+    height: 18px;
+    margin-right: 10px;
+    color: #fff;
+    font-style: normal;
+    position: relative;
+  }
+  .shop_info .info-content .section .activity .activity-item .content-tag .mini-tag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: -100%;
+    bottom: -100%;
+    font-size: 24px;
+    transform: scale(.5);
+    transform-origin: 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .shop_info .info-content .section .pic-wrapper {
+    width: 100%;
+    overflow: hidden;
+    white-space: normal;
+    margin-top: 16px;
+  }
+  .shop_info .info-content .section .pic-wrapper .pic-list {
+    font-size: 0;
+  }
+  .shop_info .info-content .section .pic-wrapper .pic-list .pic-item {
+    display: inline-block;
+    margin-right: 6px;
+    width: 120px;
+    height: 90px;
+  }
+  .shop_info .info-content .section .pic-wrapper .pic-list .pic-item:last-child {
+    margin: 0;
+  }
+  .shop_info .info-content .section .detail {
+    margin-bottom: -16px;
+  }
+  .shop_info .info-content .section .detail > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: -10px;
+    padding: 16px 12px 16px 0;
+    line-height: 16px;
+    border-bottom: 1px #ddd;
+    font-size: 13px;
+  }
+  .shop_info .info-content .section .detail > li > .bold {
+    font-weight: 700;
+    color: #333;
+  }
+  .shop_info .info-content .section .detail > li:last-child {
+    border: none;
+  }
+  .shop_info .info-content .split {
+    width: 100%;
+    height: 16px;
+    border-top: 1px solid rgba(7, 17, 27, 0.1);
+    border-bottom: 1px solid rgba(7, 17, 27, 0.1);
+    background: #f3f5f7;
+  }
+</style>
+```
+
+### 2.30. 开发Search组件
+
+#### 2.30.1. `src\views\Search\Search.vue`
+
+```vue
+<template>
+  <section class="search">
+    <!--搜索头部-->
+    <HeaderTop title="搜索"></HeaderTop>
+    <!--搜索表单-->
+    <form class="search_form" @submit.prevent="search">
+      <input type="search" name="search" placeholder="请输入商家或美食名称" class="search_input" v-model="keyword">
+      <input type="submit" name="submit" class="search_submit">
+    </form>
+    <!--结果列表-->
+    <section class="list" v-if="isSearchShops">
+      <ul class="list_container">
+        <!--:to="{path:'/shop', query:{id:item.id}}" -->
+        <router-link :to="`/shop?id=${item.id}`" tag="li" class="list_li" v-for="(item, index) in searchShops" :key="index">
+          <section class="item_left">
+            <img :src="baseImageUrl + item.image_path" class="restaurant_img">
+          </section>
+          <section class="item_right">
+            <div class="item_right_text">
+              <p>
+                <span>{{item.name}}</span>
+              </p>
+              <p>月售 {{item.month_sales || item.rating_count}} 单</p>
+              <p>{{item.delivery_fee || item.float_minimum_order_amount}} 元起送 / 距离{{item.distance}}</p>
+            </div>
+          </section>
+        </router-link>
+      </ul>
+    </section>
+
+    <div class="search_none" v-else>很抱歉！无搜索结果</div>
+  </section>
+</template>
+
+<script>
+  import HeaderTop from '../../components/HeaderTop/HeaderTop'
+  import {mapState} from 'vuex'
+
+  export default {
+    data() {
+      return {
+        keyword: '',
+        baseImageUrl: 'http://cangdu.org:8001/img/',
+        isSearchShops: true
+      }
+    },
+    components: {HeaderTop},
+    computed: {
+      ...mapState(['searchShops'])
+    },
+    watch: {
+      searchShops(newValue) {
+        this.isSearchShops = newValue.length > 0
+      }
+    },
+    methods: {
+      search() {
+        // 得到搜索关键字进行搜索
+        const keyword = this.keyword.trim()
+        if (keyword) {
+          this.$store.dispatch('searchShops', keyword)
+        }
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .search {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .search .search_form {
+    margin-top: 45px;
+    background-color: #fff;
+    padding: 12px 8px;
+  }
+  .search .search_form::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  .search .search_form input {
+    height: 35px;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-weight: bold;
+    outline: none;
+  }
+  .search .search_form input.search_input {
+    float: left;
+    width: 79%;
+    border: 4px solid #f2f2f2;
+    font-size: 14px;
+    color: #333;
+    background-color: #f2f2f2;
+  }
+  .search .search_form input.search_submit {
+    float: right;
+    width: 18%;
+    border: 4px solid #02a774;
+    font-size: 16px;
+    color: #fff;
+    background-color: #02a774;
+  }
+  .search .list .list_container {
+    background-color: #fff;
+  }
+  .search .list .list_container .list_li {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 133, 237, 0.09);
+  }
+  .search .list .list_container .list_li .item_left {
+    margin-right: 10px;
+  }
+  .search .list .list_container .list_li .item_left .restaurant_img {
+    width: 50px;
+    height: 50px;
+    display: block;
+  }
+  .search .list .list_container .list_li .item_right {
+    font-size: 12px;
+    flex: 1;
+  }
+  .search .list .list_container .list_li .item_right .item_right_text p {
+    line-height: 12px;
+    margin-bottom: 6px;
+  }
+  .search .list .list_container .list_li .item_right .item_right_text p:last-child {
+    margin-bottom: 0;
+  }
+  .search .search_none {
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+    margin: 0.125rem auto 0;
+  }
+</style>
+```
+
+#### 2.30.3. `vuex`
+
+- `state.js`
+
+  ```js
+  export default {
+    searchShops: [],              // 搜索得到的商家列表
+  }
+  ```
+
+- `mutation-types.js`
+
+  ```js
+  export default {
+    RECEIVE_SEARCH_SHOPS : 'receive_search_shops',  // 接收搜索得到的商家数组
+  }
+  ```
+
+- `mutations.js`
+
+  ```js
+  export default {
+    [types.RECEIVE_SEARCH_SHOPS](state, {searchShops}) {
+      state.searchShops = searchShops
+    }
+  }
+  ```
+
+- `actions.js`
+
+  ```js
+  export default {
+    // 异步获取搜索得到的商家数组
+    async searchShops({commit, state}, keyword) {
+      const geohash = state.latitude + ',' + state.longitude
+      const result = await api.reqSearchShops(geohash, keyword)
+      if (result.code === 0) {
+        const searchShops = result.data
+        commit(types.RECEIVE_SEARCH_SHOPS, {searchShops})
+      }
+    }
+  }
+  ```
+
+### 2.31. 开发日期过滤器
+
+- 下载日期插件
+
+  ```ini
+  npm install moment --save
+  ```
+
+- `src\filters\index.js`
+
+  ```js
+  import Vue from 'vue'
+  import moment from 'moment'
+  
+  // 自定义过滤器
+  Vue.filter('date-format', (value, formatStr = 'YYYY-MM-DD HH:mm:ss') => moment(value).format(formatStr))
+  ```
+
+- 使用
+
+  ```vue
+  <div class="time">{{ratings.rateTime | date-format}}</div>
+  ```
+
+### 2.32. 项目优化扩展
+
+#### 2.32.1. 缓存路由组件对象
+
+```vue
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+```
+
+- 好处：复用路由组件对象，复用路由组件获取的后台数据
+
+#### 2.32.2. 路由组件懒加载
+
+- `src\router\index.js`
+
+  ```js
+  /*
+    路由器对象模块
+   */
+  import Vue from 'vue'
+  import VueRouter from 'vue-router'
+  
+  /*
+  // 首页
+  import Msite from '../views/Msite/Msite'
+  // 搜索
+  import Search from '../views/Search/Search'
+  // 订单
+  import Order from '../views/Order/Order'
+  // 个人
+  import Profile from '../views/Profile/Profile'
+  */
+  
+  
+  /*
+    路由组件懒加载；
+      返回的都是路由组件的函数，只有执行此函数才会加载路由组件，这个函数在请求对应的路由路径时才会执行
+      推荐顶级路由使用懒加载
+   */
+  // 首页
+  const Msite = () => import('../views/Msite/Msite')
+  // 搜索
+  const Search = () => import('../views/Search/Search')
+  // 订单
+  const Order = () => import('../views/Order/Order')
+  // 个人
+  const Profile = () => import('../views/Profile/Profile')
+  
+  // 个人中心
+  import UserInfo from '../views/Profile/UserInfo'
+  // 登录注册
+  import Login from '../views/Login/Login'
+  // 商品
+  import Shop from '../views/Shop/Shop'
+  // 点餐
+  import ShopGoods from '../views/Shop/ShopGoods/ShopGoods'
+  // 评价
+  import ShopRatings from '../views/Shop/ShopRatings/ShopRatings'
+  // 信息
+  import ShopInfo from '../views/Shop/ShopInfo/ShopInfo'
+  // 测试
+  import Test from '../views/Test/Test'
+  // 滑块
+  import Switch from '../components/Switch/Switch'
+  
+  
+  // 声明使用插件
+  Vue.use(VueRouter)
+  
+  // 是否显示组件
+  const meta = {
+    showFooter: true
+  }
+  
+  // 所有路由
+  const routes = [
+    {path: '/', redirect: '/msite'},
+    {path: '/msite', component: Msite, meta},
+    {path: '/search', component: Search, meta},
+    {path: '/order', component: Order, meta},
+    {path: '/profile', component: Profile, meta},
+    {path: '/userInfo', component: UserInfo},
+    {path: '/login', component: Login},
+    {
+      path: '/shop', component: Shop, children: [
+        {path: '', redirect: '/shop/goods'},
+        {path: '/shop/goods', component: ShopGoods},
+        {path: '/shop/ratings', component: ShopRatings},
+        {path: '/shop/info', component: ShopInfo}
+      ]
+    },
+    {path: '/test', component: Test},
+    {path: '/switch', component: Switch}
+  ]
+  
+  export default new VueRouter({
+    routes
+  })
+  ```
+
+#### 2.32.3. 图片懒加载
+
+##### 2.32.3.1. 下载vue-lazyload
+
+```ini
+npm install vue-lazyload --save
+```
+
+##### 2.32.3.2. 使用
+
+```vue
+import VueLazyload from 'vue-lazyload'
+import loading from './common/imgs/loading.gif'
+
+Vue.use(VueLazyload, { // 内部自定义了一个指令v-lazy
+  loading
+})
+
+<!--<img :scr="food.image">-->
+<img v-lazy="food.image">
+```
+
+#### 2.32.4. 打包文件分析与优化
+
+- vue脚手架提供了一个用于可视化分析打包文件的包webpack -bundle-analyzer和配置
+
+- 启用打包可视化：`npm run build --report`
+
+  ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fyzeip9qg6j31e60qo0ws.jpg)
+
+- 优化：使用`date-fns`代替`moment`
+
+  - 下载
+
+    ```ini
+    npm install date-fns --save
+    ```
+
+  - 使用`src\filters\index.js`
+
+    ```js
+    import Vue from 'vue'
+    // import moment from 'moment'
+    
+    // import {format} from 'date-fns'
+    import format from 'date-fns/format'
+    
+    // 自定义过滤器
+    Vue.filter('date-format', (value, formatStr = 'YYYY-MM-DD HH:mm:ss') => /*moment(value).format(formatStr)*/ format(value, formatStr))
+    ```
+
+
+
+

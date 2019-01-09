@@ -24,9 +24,8 @@ module.exports = function ajax(url = '', data = {}, type = 'GET') {
 
     promise.then(response => {
       resolve(response.data)
+    }).catch(error => {
+      reject(error)
     })
-      .catch(error => {
-        reject(error)
-      })
   })
 }

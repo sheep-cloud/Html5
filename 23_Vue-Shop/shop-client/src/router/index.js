@@ -4,6 +4,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+/*
 // 首页
 import Msite from '../views/Msite/Msite'
 // 搜索
@@ -12,6 +13,23 @@ import Search from '../views/Search/Search'
 import Order from '../views/Order/Order'
 // 个人
 import Profile from '../views/Profile/Profile'
+*/
+
+
+/*
+  路由组件懒加载；
+    返回的都是路由组件的函数，只有执行此函数才会加载路由组件，这个函数在请求对应的路由路径时才会执行
+    推荐顶级路由使用懒加载
+ */
+// 首页
+const Msite = () => import('../views/Msite/Msite')
+// 搜索
+const Search = () => import('../views/Search/Search')
+// 订单
+const Order = () => import('../views/Order/Order')
+// 个人
+const Profile = () => import('../views/Profile/Profile')
+
 // 个人中心
 import UserInfo from '../views/Profile/UserInfo'
 // 登录注册
@@ -28,6 +46,7 @@ import ShopInfo from '../views/Shop/ShopInfo/ShopInfo'
 import Test from '../views/Test/Test'
 // 滑块
 import Switch from '../components/Switch/Switch'
+
 
 // 声明使用插件
 Vue.use(VueRouter)

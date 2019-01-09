@@ -34,7 +34,7 @@
             <p class="shop_delivery_msg">
               <span>¥{{shop.float_minimum_order_amount}}起送</span>
               <span class="segmentation">/</span>
-              <span>配送费约¥{{shop.float_delivery_fee}}</span>
+              <span>配送费约¥{{shop.float_delivery_fee}}</span>fo
             </p>
           </section>
         </div>
@@ -54,12 +54,12 @@
   import Star from '../Star/Star'
 
   export default {
-    components: {Star},
     data() {
       return {
         baseImageUrl: 'https://fuss10.elemecdn.com'
       }
     },
+    components: {Star},
     computed: {
       ...mapState(['shops'])
     }

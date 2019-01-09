@@ -55,7 +55,6 @@
   import {mapState, mapActions} from 'vuex'
 
   export default {
-    components: {HeaderTop, ShopList},
     data() {
       return {
         baseImageUrl: 'https://fuss10.elemecdn.com'
@@ -67,6 +66,7 @@
       this.getCategorys()
       this.getShops()
     },
+    components: {HeaderTop, ShopList},
     computed: {
       ...mapState(['address', 'categorys', 'userInfo']),
       /*

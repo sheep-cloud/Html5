@@ -56,7 +56,6 @@
   import ShopCart from '../../../components/ShopCart/ShopCart'
 
   export default {
-    components: {CartControl, Food, ShopCart},
     data() {
       return {
         scrollY: 0,   // 右侧滑动的Y轴坐标（滑动过程中实时变化）
@@ -72,6 +71,7 @@
         })
       })
     },
+    components: {CartControl, Food, ShopCart},
     computed: {
       ...mapState(['shopGoods']),
       /**

@@ -74,11 +74,13 @@ export default {
   },
 
   // 异步获取商家评价列表
-  async getShopRatings({commit}) {
+  async getShopRatings({commit}, callback) {
     const result = await api.reqShopRatings()
     if (result.code === 0) {
-      const shoppRatings = result.data
-      commit(types.RECEIVE_RATINGS, {shoppRatings})
+      const shopRatings = result.data
+      commit(types.RECEIVE_RATINGS, {shopRatings})
+      // 数据更新了，通知一下组件
+      callback && callback()
     }
   },
 
@@ -103,5 +105,15 @@ export default {
   // 同步清空购物车
   clearCart({commit}) {
     commit(types.CLEAR_CART)
+  },
+
+  // 异步获取搜索得到的商家数组
+  async searchShops({commit, state}, keyword) {
+    const geohash = state.latitude + ',' + state.longitude
+    const result = await api.reqSearchShops(geohash, keyword)
+    if (result.code === 0) {
+      const searchShops = result.data
+      commit(types.RECEIVE_SEARCH_SHOPS, {searchShops})
+    }
   }
 }

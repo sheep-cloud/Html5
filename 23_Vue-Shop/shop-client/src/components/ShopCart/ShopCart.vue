@@ -51,12 +51,12 @@
   import {MessageBox, Toast} from 'mint-ui'
 
   export default {
-    components: {CartControl},
     data() {
       return {
         isShow: false
       }
     },
+    components: {CartControl},
     computed: {
       ...mapState(['cartFoods', 'shopInfo']),
       ...mapGetters(['totalCount', 'totalPrice']),

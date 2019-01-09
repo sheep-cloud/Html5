@@ -23,5 +23,6 @@ export default {
   RECEIVE_INFO: 'receive_shop_info',              // 接收商家信息
   INCREMENT_FOOT_COUNT : 'increment_foot_count',  // 增加food中的count
   DECREMENT_FOOT_COUNT : 'decrement_foot_count',  // 减少food中的count
-  CLEAR_CART : 'clear_cart'                       // 清空购物车
+  CLEAR_CART : 'clear_cart',                      // 清空购物车
+  RECEIVE_SEARCH_SHOPS : 'receive_search_shops',  // 接收搜索得到的商家数组
 }
