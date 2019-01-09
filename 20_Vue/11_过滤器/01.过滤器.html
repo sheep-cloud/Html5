@@ -12,9 +12,9 @@
     <div id="demo">
         <h2>显示格式化的日期时间</h2>
         <p>{{date}}</p>
-        <p>完整版：{{date | dateString}}</p>
-        <p>年月日：{{date | dateString('YYYY-MM-DD')}}</p>
-        <p>时分秒：{{date | dateString('HH:mm:ss')}}</p>
+        <p>完整版：{{date | date-format}}</p>
+        <p>年月日：{{date | date-format('YYYY-MM-DD')}}</p>
+        <p>时分秒：{{date | date-format('HH:mm:ss')}}</p>
     </div>
 
     <script src="../../00_libs/vue-2.5.2/vue.js"></script>
@@ -22,10 +22,10 @@
     <script src="../../00_libs/moment-2.22.2/moment.js"></script>
     <script>
         // 自定义过滤器
-        Vue.filter('dateString', function (value, format = 'YYYY-MM-DD HH:mm:ss') { // es6写法，形参默认值
+        Vue.filter('date-format', function (date, formatStr = 'YYYY-MM-DD HH:mm:ss') { // es6写法，形参默认值
             // date 的值传递给 value
-            console.log(value)
-            return moment(value).format(format)
+            console.log(date)
+            return moment(date).format(formatStr)
         })
 
         new Vue({
