@@ -17,9 +17,9 @@
         <p>时分秒：{{date | dateString('HH:mm:ss')}}</p>
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <!-- JavaScript 日期处理类库 -->
-    <script src="../js/moment.js"></script>
+    <script src="../../00_libs/moment-2.22.2/moment.js"></script>
     <script>
         // 自定义过滤器
         Vue.filter('dateString', function (value, format = 'YYYY-MM-DD HH:mm:ss') { // es6写法，形参默认值
