@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>01.过滤器</title>
+<title>01_过滤器</title>
 </head>
 <body>
     <!--
-        需求：对当前时间进行指定格式显示
+        理解过滤器
+            1. 功能 : 对要显示的数据进行特定格式化后再显示
+            2. 注意 : 并没有改变原本的数据, 可是产生新的对应的数据
     -->
 
     <div id="demo">
@@ -22,11 +24,7 @@
     <script src="../../00_libs/moment-2.22.2/moment.js"></script>
     <script>
         // 自定义过滤器
-        Vue.filter('date-format', function (date, formatStr = 'YYYY-MM-DD HH:mm:ss') { // es6写法，形参默认值
-            // date 的值传递给 value
-            console.log(date)
-            return moment(date).format(formatStr)
-        })
+        Vue.filter('date-format', (date, formatStr = 'YYYY-MM-DD HH:mm:ss') => moment(date).format(formatStr))
 
         new Vue({
             el: '#demo',

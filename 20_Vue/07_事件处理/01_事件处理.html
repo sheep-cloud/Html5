@@ -2,7 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>01.事件处理</title>
+<title>01_事件处理</title>
+<style>
+    .red_div {
+        width: 200px;
+        height: 200px;
+        background: red;
+    }
+    .blue_div {
+        width: 100px;
+        height: 100px;
+        background: blue;
+    }
+</style>
 </head>
 <body>
     <!--
@@ -15,21 +27,24 @@
         <button @click="test1">test1</button>
         <button @click="test2('colg')">test2</button>
         <button @click="test3">test3</button>
+        <button @click="test3_1">test3_1</button>
         <button @click="test4(123, $event)">test4</button>
 
         <h2>2. 事件修饰符</h2>
-        <div style="width: 200px; height: 200px; background: red" @click="test5">
-            <div style="width: 100px; height: 100px; background: blue" @click.stop="test6"></div>
+        <div class="red_div" @click="test5">
+            <div class="blue_div" @click.stop="test6"></div>
         </div>
 
         <a href="http://www.baidu.com" @click.prevent="test7">去百度</a>
 
         <h2>3. 按键修饰符</h2>
-        <input type="text" @keyup.enter="test8">
-
+        <label>
+            <input type="text" @keyup.13="test8">
+            <input type="text" @keyup.enter="test8">
+        </label>
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
         new Vue({
             el: '#demo',
@@ -40,36 +55,44 @@
                 test2(msg) {
                     alert(msg)
                 },
-                test3(event) { // 没有指定参数，自动传递event
+                /**
+                 * 没有指定参数，自动传递event
+                 *
+                 * @param event
+                 */
+                test3(event) {
                     console.log(event)
                     alert(event.target.innerHTML)
                 },
-                test4(number, event) {
-                    console.log(event)
-                    alert(number + '---' + event.target.innerHTML)
+                test3_1({target}) {
+                    // 解构赋值
+                    console.log(target)
+                    alert(target.innerHTML)
                 },
-
+                test4(number, {target}) {
+                    console.log(target)
+                    alert(number + '---' + target.innerHTML)
+                },
                 test5() {
-                    alert('out')
+                    alert('test5 - out')
                 },
                 test6(event) { // 事件冒泡
                     // event.stopPropagation()
-                    alert('inner')
+                    alert('test6 - inner')
                 },
 
                 test7(event) { // 事件默认行为
                     // event.preventDefault()
-                    alert('点击了')
+                    alert('test7 - 点击了')
                 },
-
-                test8(event) {
+                test8({keyCode, target}) {
                     // 回车
                     /*
-                    if (event.keyCode == 13) {
-                        alert(event.target.value)
+                    if (keyCode === 13) {
+                        alert(target.value)
                     }
                     */
-                    alert(event.target.value)
+                    alert(target.value)
                 }
             }
 

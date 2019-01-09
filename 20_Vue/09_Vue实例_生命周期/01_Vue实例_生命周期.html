@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>01.Vue实例_生命周期</title>
+<title>01_Vue实例_生命周期</title>
 </head>
 <body>
 
@@ -24,15 +24,13 @@
             beforeDestroy()：        做收尾工作，如：清除定时器
     -->
 
-    <div class="container">
-        <div id="demo" class="jumbotron">
-            <button @click="destroyVm" class="btn btn-danger">destroy vm 销毁vm实例</button>
-            <h2 v-show="isShow" class="page-header">colg</h2>
-        </div>
+    <div id="demo">
+        <button @click="destroyVm">destroy vm 销毁vm实例</button>
+        <h2 v-show="isShow">colg</h2>
+        <h3>{{isShow}}</h3>
     </div>
 
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
         new Vue({
             el: '#demo',
@@ -40,9 +38,10 @@
                 isShow: true
             },
             // 1. 初始化阶段
-            beforeCreated() {
+            beforeCreate() {
+                console.log('---------------------------------------- 初始化阶段 ----------------------------------------')
                 // 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
-                console.log('beforeCreated()')
+                console.log('beforeCreate()')
             },
             created() {
                 // 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。挂载阶段还未开始
@@ -50,22 +49,18 @@
             },
             beforeMount() {
                 // 在挂载开始之前被调用：相关的 render 函数首次被调用。
-                console.log('beforeCreated()')
+                console.log('beforeMount()')
             },
             mounted() {
                 // 初始化显示之后立即调用（1次）
                 console.log('mounted()')
-                this.intervalId = setInterval(() => {
-                    // 更新数据
-                    // 箭头函数的 this 是外部函数的this
-                    this.isShow = !this.isShow
-                }, 10000)
+                this.intervalId = setInterval(() => this.isShow = !this.isShow, 1000)
             },
 
             // 2. 更新阶段
             beforeUpdate() {
+                console.log('---------------------------------------- 更新阶段 ----------------------------------------')
                 // 数据更新时调用，发生在虚拟 DOM 打补丁之前。
-                console.log('----------------------------------------------------------------------------------------------------')
                 console.log('beforeUpdate()')
             },
             updated() {
@@ -75,8 +70,8 @@
 
             // 3. 死亡阶段
             beforeDestroy() {
+                console.log('---------------------------------------- 死亡阶段 ----------------------------------------')
                 // 实例销毁之前调用（1次）。
-                console.log('----------------------------------------------------------------------------------------------------')
                 console.log('beforeDestroy()')
                 // 清除定时器
                 clearInterval(this.intervalId)
@@ -87,7 +82,7 @@
             },
             methods: {
                 destroyVm() {
-                    // 干掉vm
+                    // 完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
                     this.$destroy()
                 }
             }

@@ -1,9 +1,9 @@
 /*
-*   vue 的插件库
-* */
+    vue的插件库
+ */
 
 // 匿名函数自调用
-(function () {
+;(function () {
 
     // 需要向外暴露的插件对象
     const MyPlugin = {}
@@ -13,7 +13,7 @@
         // 1. 添加全局方法或属性
         Vue.myGlobalMethod = function () {
             // 逻辑...
-            console.log('Vue 函数对象的方法myGlobalMethod()')
+            console.log('Vue 函数对象的方法 myGlobalMethod()')
         }
 
         // 2. 添加全局资源
@@ -25,9 +25,7 @@
             ...
         })
         */
-        Vue.directive('my-directive', function (el, binding) {
-            el.textContent = binding.value.toUpperCase()
-        })
+        Vue.directive('my-directive', (el, binding) => el.textContent = binding.value.toUpperCase())
 
         // 3. 注入组件
         /*

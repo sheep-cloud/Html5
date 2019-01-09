@@ -2,45 +2,46 @@
 
 ## 1. Vue核心
 
-### 1.1.Vue的基本认识
+### 1.1. Vue的基本认识
 
-#### 1.1.1.介绍描述
+#### 1.1.1. 介绍描述
 
 - 渐进式JavaScript框架
-- 作用：动态构建用户界面
+- 作者 : 尤雨溪
+- 作用 : 动态构建用户界面
 
-####  1.1.1.Vue的特点
+####  1.1.1. Vue的特点
 
 - 遵循MVVM模式
-- 编码简洁，体积小，运行效率高，适合移动/pc端开发
-- 它本身只关注UI，可以轻松引入vue插件或第三方库开发项目
+- 编码简洁, 体积小, 运行效率高, 适合移动/pc端开发
+- 它本身只关注UI, 可以轻松引入vue插件或第三方库开发项目
 
 #### 1.1.3.与其他前端JS框架的关联
 
 - 借鉴angular的**模版**和**数据绑定**技术
 - 借鉴react的**组件化**和**虚拟DOM**技术
 
-#### 1.1.4.Vue扩展插件
+#### 1.1.4. Vue扩展插件
 
-- vue-cli：vue脚手架
-- vue-resource(axios)：ajax请求
-- vue-router：路由
-- vuex：状态管理
-- vue-lazyload：图片懒加载
-- vue-scroller：页面滑动相关
-- mint-ui：基于vue的UI组件库（移动端）
-- element-ui：基于vue的UI组件库（pc端）
+- vue-cli : vue脚手架
+- vue-resource(axios) : ajax请求
+- vue-router : 路由
+- vuex : 状态管理
+- vue-lazyload : 图片懒加载
+- vue-scroller : 页面滑动相关
+- mint-ui : 基于vue的UI组件库（移动端）
+- element-ui : 基于vue的UI组件库（pc端）
 
-### 1.2.Vue的基本使用
+### 1.2. Vue的基本使用
 
-#### 1.2.1.编码
+#### 1.2.1. 编码
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>helloworld</title>
+<title>01_HelloWorld</title>
 </head>
 <body>
     <!--
@@ -52,18 +53,117 @@
         4. 显示数据：{{xxx}}
         5. 理解vue的mvvm实现
     -->
-    <div id="app">  <!--view-->
-        <input type="text" v-model="username">
+    <!--view 视图，模版页面-->
+    <div id="app">
+        <label>
+            <input type="text" v-model="username">
+        </label>
         <p>Hello {{username}}</p>
+        <p v-text="'Hello ' + username"></p>
     </div>
 
-    <script type="text/javascript" src="../../00_dist/vue-2.5.17/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
-        // 创建vue实例
-        const vm = new Vue({    // 配置对象
-            el: '#app',         // element: 选择器
-            data: {             // 数据（model）
-                username: 'Jack'
+        // viewModel 创建vue实例
+        // 配置对象
+        const vm = new Vue({
+            // element: 选择器
+            el: '#app',
+            // model 模型，数据对象（data）
+            data: {
+                username: 'Jack ' + new Date().toLocaleTimeString()
+            }
+        })
+        vm.name = 'Rose'
+        console.log(vm.name)
+    </script>
+
+    <!--
+        MVVM:
+            model:      模型, 数据对象（data）
+            view:       视图, 模版页面
+            viewModel:  视图模型, Vue的实例
+    -->
+</body>
+</html>
+```
+
+#### 1.2.2. 使用vue开发者工具调试
+
+- https://github.com/vuejs/vue-devtools#vue-devtools
+
+#### 1.2.3. 理解vue的MVVM
+
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1frsr3aaeydj30f1076t99.jpg)
+
+### 1.3. 模版语法
+
+```vue
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>01.模版语法</title>
+</head>
+<body>
+    <!--
+        1. 模版的理解：
+            动态的html页面
+            包含了一些JS语法代码
+                双大括号表达式
+                指令（以v-开头的自定义标签属性）
+        2. 双大括号表达式
+            语法：{{exp}}
+            功能：向页面输出数据，可以调用对象的方法
+        3. 指令一：强制数据绑定
+            功能：指定变化的属性值
+            完整写法：v-bind:xxx='yyy'   yyy会作为表达式解析执行
+            简洁写法：:xxx='yyy'
+        4. 指令二：绑定事件监听
+            功能：绑定指定事件名的回调函数
+            完整写法：v-on:click='xxx'
+            简洁写法：@click='xxx'
+    -->
+
+    <div id="app">
+        <h2>1. 双大括号表达式</h2>
+        <p>{{msg}}</p>
+        <p>{{msg.toUpperCase()}}</p>
+        <p v-html="msg2"></p>
+        <p v-text="msg2"></p>
+
+        <h2>2. 指令一：强制数据绑定</h2>
+        <!--<p><img v-bind:src="imgUrl" alt=""></p>-->
+        <p><img :src="imgUrl" alt=""></p>
+
+        <h2>3. 指令三：绑定事件监听</h2>
+        <p>
+            <button v-on:click="test">test</button>
+        </p>
+        <p>
+            <button @click="test">test1</button>
+        </p>
+        <p>
+            <button @click="test2(msg)">test2</button>
+        </p>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'I Will Back',
+                msg2: '<a href="https://cn.vuejs.org/v2/guide/syntax.html">Vue.js</a>',
+                imgUrl: 'http://ww1.sinaimg.cn/large/005PjuVtgy1frsr3aaeydj30f1076t99.jpg'
+            },
+            methods: {
+                test() {
+                    alert('test!')
+                },
+                test2(content) {
+                    alert(content)
+                }
             }
         })
     </script>
@@ -71,19 +171,1051 @@
 </html>
 ```
 
-#### 1.2.2.使用vue开发者工具调试
+### 1.4. 计算属性和监视
 
-- https://github.com/vuejs/vue-devtools#vue-devtools
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01.计算属性和监视</title>
+</head>
+<body>
+    <!--
+        1. 计算属性
+            1.1. 在computed属性对象中定义计算属性的方法
+            1.2. 在页面中使用{{方法名}}来显示计算的结果
+        2. 监视属性
+            2.1. 通过watch配置或vm对象的$watch()来监视指定的属性
+            2.2. 当属性变化时, 回调函数自动调用, 在函数内部进行计算
+        3. 计算属性高级
+            3.1. 在computed属性对象中定义计算属性的对象
+            3.2. 通过getter/setter实现对属性数据的显示和监视
+            3.3. 计算属性存在缓存, 多次读取只执行一次getter计算
+    -->
 
-#### 1.2.3.理解vue的MVVM
+    <div id="demo">
+        姓：<input type="text" placeholder="First Name" v-model="firstName"><br>
+        名：<input type="text" placeholder="Last Name" v-model="lastName"><br>
+        姓名1（计算属性 - 单向） : <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
+        姓名2（监视属性 - 单向） : <input type="text" placeholder="Full Name2" v-model="fullName2"><br>
+        姓名3（计算属性高级 - 双向） : <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1frsr3aaeydj30f1076t99.jpg)
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+        <p>{{fullName1}}</p>
+    </div>
 
-### 1.3.模版语法
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#demo',
+            data: {
+                firstName: 'A',
+                lastName: 'B',
+                // fullName1: 'A B'
+                fullName2: ''
+            },
+            /**
+             * 计算属性
+             */
+            computed: {
+                /**
+                 * 计算属性的一个方法, 方法的返回值作为属性值;
+                 *
+                 * 回调函数 : 初始化显示/相关的data属性数据发生改变回调,
+                 *
+                 * @return {string}
+                 */
+                fullName1() {
+                    // 计算属性存在缓存，多次读取只执行一次getter计算
+                    console.log('fullName1()')
+                    return this.firstName + ' ' + this.lastName
+                },
+                /**
+                 * 计算属性的一个对象
+                 */
+                fullName3: {
+                    /**
+                     * 读取当前属性值
+                     *
+                     * 回调函数 : 当需要读取当前属性值时回调, 根据相关的数据计算并返回当前属性的值
+                     *
+                     * @return {string}
+                     */
+                    get() {
+                        return this.firstName + ' ' + this.lastName
+                    },
+                    /**
+                     * 监视当前属性值的变化
+                     *
+                     * 回调函数 : 当属性值发生改变时回调, 更新相关的属性数据
+                     * 
+                     * @param newValue fullName3的最新属性值
+                     */
+                    set(newValue) {
+                        const fullName = newValue.split(' ')
+                        this.firstName = fullName[0]
+                        this.lastName = fullName[1]
+                    }
+                }
+            },
+            /**
+             * 监视属性 - 配置监视
+             */
+            watch: {
+                /**
+                 * 监视firstName
+                 *
+                 * @param newValue 新值
+                 * @param oldValue 旧值
+                 */
+                firstName(newValue, oldValue) {
+                    this.fullName2 = newValue + ' ' + this.lastName
+                }
+            }
+        })
+
+        /**
+         * 监视属性 - 实例方法
+         *
+         * @param {string | Function} expOrFn   监视lastName
+         * @param {Function | Object} callback  回调函数
+         * @param {Object} [options]            配置选项
+         */
+        vm.$watch('lastName', function (newValue) {
+            this.fullName2 = this.firstName + ' ' + newValue
+        }, {
+            immediate: true                     // 立即以表达式的当前值触发回调
+        })
+    </script>
+</body>
+</html>
+```
+
+### 1.5. class和style绑定
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_class与style绑定</title>
+<style type="text/css">
+    .aClass {
+        color: red;
+    }
+    .bClass {
+        color: blue;
+    }
+    .cClass {
+        font-size: 30px;
+    }
+</style>
+</head>
+<body>
+    <!--
+        1. 理解
+            在应用界面中，某个（些）元素的样式是变化的
+            class/sytle绑定就是专门用来实现动态样式效果的技术
+        2. class绑定： :class='xxx'
+            xxx 是字符串
+            xxx 是对象
+            xxx 是数组
+        3. style绑定
+            :style="{color: activeColor, fontSize: fontSize + 'px'}"
+            其中activeColor/fontSize 是 data 属性
+    -->
+    <div id="demo">
+        <h2>1. class绑定: :class='xxx'</h2>
+        <p class="cClass" :class="a">xxx是字符串</p>
+        <p :class="{cClass : true, aClass: isA, bClass: isB}">xxx是对象</p>
+        <p :class="['cClass', a]">xxx是数组</p>
+
+        <h2>2. style绑定</h2>
+        <button @click="updateToBlue">更新为蓝色</button>
+        <button @click="updateToRed">更新为红色</button>
+        <p :style="{color: activeColor, fontSize: fontSize + 'px'}">:style="{color: {{activeColor}}, fontSize: {{fontSize}} + 'px'}"</p>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                a: 'aClass',
+                isA: true,
+                isB: false,
+                activeColor: 'red',
+                fontSize: 20
+            },
+            methods: {
+                updateToBlue() {
+                    this.a = 'bClass'
+                    this.isA = false
+                    this.isB = true
+                    this.activeColor = 'blue'
+                    this.fontSize = 26
+                },
+                updateToRed() {
+                    this.a = 'aClass'
+                    this.isA = true
+                    this.isB = false
+                    this.activeColor = 'red'
+                    this.fontSize = 20
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 1.6. 条件渲染
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_条件渲染</title>
+</head>
+<body>
+    <!--
+        1. 条件渲染指令
+            v-if
+            v-else
+            v-show
+        2. 比较v-if与v-show
+            v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+            v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+            相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+
+            一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。
+            因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+    -->
+
+    <div id="demo">
+        <p v-if="ok">v-if - 成功</p>
+        <p v-else>v- else - 失败</p>
+
+        <p v-show="ok">v-show - 成功</p>
+        <p v-show="!ok">v-show - 失败</p>
+
+        <button @click="ok = !ok">切换</button>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                ok: true
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 1.7. 列表渲染
+
+#### 1.7.1. 列表渲染
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_列表渲染</title>
+</head>
+<body>
+    <!--
+        1. 列表显示
+            数组：v-for / index
+            对象：v-for / key
+        2. 列表的更新显示
+            删除item
+            替换item
+    -->
+
+    <div id="demo">
+        <h2>测试：v-for 遍历数组</h2>
+        <ul>
+            <li v-for="(p, index) in persons" :key="index">
+                {{index}} --- {{p.name}} --- {{p.age}}
+                ---
+                <button @click="deleteP(index)">删除</button>
+                ---
+                <button @click="updateP(index, {name: 'Cat', age: 20})">更新</button>
+            </li>
+        </ul>
+
+        <h2>测试：v-for 遍历对象</h2>
+        <ul>
+            <li v-for="(value, key) in persons[1]" :key="key">
+                {{key}} --- {{value}}
+            </li>
+        </ul>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                persons: [
+                    {name: 'Tom', age: 18},
+                    {name: 'Jack', age: 25},
+                    {name: 'Rose', age: 20},
+                    {name: 'Bob', age: 60}
+                ]
+            },
+            methods: {
+                deleteP(index) {
+                    // 删除persons中指定index的p
+                    this.persons.splice(index, 1)
+                },
+                /**
+                 * vue本身只是监视了persons的改变，并没有监视数组内部数据的改变
+                 *
+                 * vue重写了数组中的一系列改变数组内部数据的方法（先调用原生，更新界面） ---> 数组内部改变，界面自动变化
+                 *
+                 * @param index
+                 * @param newP
+                 */
+                updateP(index, newP) {
+                    // 改变persons本身
+                    // this.persons = []
+
+                    // 改变persons数组内部
+                    // this.persons[index] = newP
+
+                    // vue 本身只是监视了数组的改变, 没有监视数组内部数据的改变
+
+                    // 数组更新检测 : Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新
+                    this.persons.splice(index, 1, newP)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+#### 1.7.2. 显示过滤_排序结果_
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_显示过滤_排序结果</title>
+</head>
+<body>
+    <!--
+        1. 列表过滤
+        2. 列表排序
+    -->
+    <div id="demo">
+        <label>
+            <input type="text" v-model.trim="searchName">
+        </label>
+        <ul>
+            <li v-for="(p, index) in filterPersons">
+                {{index}} ---- {{p.name}} --- {{p.age}}
+            </li>
+        </ul>
+
+        <button @click="setOrderType(1)">年龄升序</button>
+        <button @click="setOrderType(2)">年龄降序</button>
+        <button @click="setOrderType(0)">原本顺序</button>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                searchName: '',
+                orderType: 0, // 0代表原本，1代表升序，2代表降序
+                persons: [
+                    {name: 'Tom', age: 18},
+                    {name: 'Jack', age: 25},
+                    {name: 'Rose', age: 20},
+                    {name: 'Bob', age: 60}
+                ]
+            },
+            computed: {
+                filterPersons() {
+                    // 取出相关的数据
+                    const {searchName, persons, orderType} = this
+                    // 最终显示的数组
+                    let fPersons
+                    // 对persons进行过滤
+                    fPersons = persons.filter(p => p.name.indexOf(searchName) !== -1)
+
+                    // 对persons进行排序
+                    if (orderType !== 0) {
+                        /*
+                            条件
+                                orderType === 1 升序; p2在前
+                                orderType === 2 降序; p1在前
+                         */
+                        // 返回负数, p1在前; 返回整数, p2在前
+                        fPersons.sort((p1, p2) => orderType === 1 ? p1.age - p2.age : p2.age - p1.age)
+                    }
+
+                    return fPersons
+                }
+            },
+            methods: {
+                setOrderType(orderType) {
+                    this.orderType = orderType
+                    console.log(this.orderType)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 1.8. 事件处理
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_事件处理</title>
+<style>
+    .red_div {
+        width: 200px;
+        height: 200px;
+        background: red;
+    }
+    .blue_div {
+        width: 100px;
+        height: 100px;
+        background: blue;
+    }
+</style>
+</head>
+<body>
+    <!--
+        1. 绑定监听
+        2. 事件修饰符
+    -->
+
+    <div id="demo">
+        <h2>1. 绑定监听</h2>
+        <button @click="test1">test1</button>
+        <button @click="test2('colg')">test2</button>
+        <button @click="test3">test3</button>
+        <button @click="test3_1">test3_1</button>
+        <button @click="test4(123, $event)">test4</button>
+
+        <h2>2. 事件修饰符</h2>
+        <div class="red_div" @click="test5">
+            <div class="blue_div" @click.stop="test6"></div>
+        </div>
+
+        <a href="http://www.baidu.com" @click.prevent="test7">去百度</a>
+
+        <h2>3. 按键修饰符</h2>
+        <label>
+            <input type="text" @keyup.enter="test8">
+        </label>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                test1() {
+                    alert('test1')
+                },
+                test2(msg) {
+                    alert(msg)
+                },
+                /**
+                 * 没有指定参数，自动传递event
+                 *
+                 * @param event
+                 */
+                test3(event) {
+                    console.log(event)
+                    alert(event.target.innerHTML)
+                },
+                test3_1({target}) {
+                    // 解构赋值
+                    console.log(target)
+                    alert(target.innerHTML)
+                },
+                test4(number, {target}) {
+                    console.log(target)
+                    alert(number + '---' + target.innerHTML)
+                },
+                test5() {
+                    alert('test5 - out')
+                },
+                test6(event) { // 事件冒泡
+                    // event.stopPropagation()
+                    alert('test6 - inner')
+                },
+
+                test7(event) { // 事件默认行为
+                    // event.preventDefault()
+                    alert('test7 - 点击了')
+                },
+
+                test8({keyCode, target}) {
+                    // 回车
+                    /*
+                    if (keyCode === 13) {
+                        alert(target.value)
+                    }
+                    */
+                    alert(target.value)
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
+```
+
+### 1.9. 表单输入绑定
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_表单输入绑定</title>
+</head>
+<body>
+    <!--
+        1. 使用v-model（双向绑定数据）自动收集数据
+            text/textarea
+            checkbox
+            radio
+            select
+    -->
+
+    <div id="demo">
+        <form action="" @submit.prevent="handleSubmit">
+            <span>用户名：</span>
+            <label>
+                <input type="text" v-model="username">
+            </label>
+            <br>
+
+            <span>密码：</span>
+            <label>
+                <input type="password" v-model="pwd">
+            </label>
+            <br>
+
+            <span>性别：</span>
+            <input type="radio" id="female" value="女" v-model="sex">
+            <label for="female">女</label>
+            <input type="radio" id="male" value="男" v-model="sex">
+            <label for="male">男</label> <br>
+
+            <span>爱好：</span>
+            <input type="checkbox" id="basket" value="basket" v-model="likes">
+            <label for="basket">篮球</label>
+            <input type="checkbox" id="foot" value="foot" v-model="likes">
+            <label for="foot">足球</label>
+            <br>
+
+            <span>城市：</span>
+            <label>
+                <select v-model="cityId">
+                    <option value="">未选择</option>
+                    <option :value="city.id" v-for="(city, index) in allCitys" :key="index">{{city.name}}</option>
+                </select>
+            </label>
+            <br>
+
+            <span>介绍:</span>
+            <label>
+                <textarea cols="30" rows="10" v-model="desc"></textarea>
+            </label>
+            <br>
+
+            <input type="submit" value="注册">
+        </form>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                username: '',
+                pwd: '',
+                sex: '女',
+                likes: ['foot'],
+                allCitys: [
+                    {id: 1, name: '北京'},
+                    {id: 2, name: '上海'},
+                    {id: 3, name: '广东'}
+                ],
+                cityId: 3,
+                desc: ''
+            },
+            methods: {
+                handleSubmit() {
+                    console.log(this.username, this.pwd, this.sex, JSON.stringify(this.likes), this.cityId, this.desc)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 2.0. Vue实例生命周期
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_Vue实例_生命周期</title>
+</head>
+<body>
+
+    <!--
+        1. vue 对象的生命周期
+            1). 初始化显示
+                * beforeCreate()
+                * created()
+                * beforeMount()
+                * mounted()
+            2). 更新显示： this.xxx = value
+                * beforeUpdate()
+                * updated()
+            3). 销毁vue实例： vm.$destroy()
+                * beforeDestroy()
+                * destroyed()
+        2. 常用的生命周期方法
+            mounted()：              发送ajax请求，启动定时器等异步任务
+            beforeDestroy()：        做收尾工作，如：清除定时器
+    -->
+
+    <div id="demo">
+        <button @click="destroyVm">destroy vm 销毁vm实例</button>
+        <h2 v-show="isShow">colg</h2>
+        <h3>{{isShow}}</h3>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data: {
+                isShow: true
+            },
+            // 1. 初始化阶段
+            beforeCreate() {
+                console.log('---------------------------------------- 初始化阶段 ----------------------------------------')
+                // 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+                console.log('beforeCreate()')
+            },
+            created() {
+                // 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。挂载阶段还未开始
+                console.log('created()')
+            },
+            beforeMount() {
+                // 在挂载开始之前被调用：相关的 render 函数首次被调用。
+                console.log('beforeMount()')
+            },
+            mounted() {
+                // 初始化显示之后立即调用（1次）
+                console.log('mounted()')
+                this.intervalId = setInterval(() => this.isShow = !this.isShow, 1000)
+            },
+
+            // 2. 更新阶段
+            beforeUpdate() {
+                console.log('---------------------------------------- 更新阶段 ----------------------------------------')
+                // 数据更新时调用，发生在虚拟 DOM 打补丁之前。
+                console.log('beforeUpdate()')
+            },
+            updated() {
+                // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+                console.log('updated()')
+            },
+
+            // 3. 死亡阶段
+            beforeDestroy() {
+                console.log('---------------------------------------- 死亡阶段 ----------------------------------------')
+                // 实例销毁之前调用（1次）。
+                console.log('beforeDestroy()')
+                // 清除定时器
+                clearInterval(this.intervalId)
+            },
+            destroyed() {
+                // Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+                console.log('destroyed()')
+            },
+            methods: {
+                destroyVm() {
+                    // 完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
+                    this.$destroy()
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 2.1. 过渡与动画
+
+#### 2.1.1. 过度与动画 - transition
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_过度与动画 - transition</title>
+<style>
+    /*显示/隐藏的过渡效果*/
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    /*隐藏时的样式*/
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
+    }
+    /*显示的过渡效果*/
+    .move-enter-active {
+        transition: all 1s;
+    }
+    /*隐藏的过渡效果*/
+    .move-leave-active {
+        transition: all 3s;
+    }
+    /*隐藏时的样式*/
+    .move-enter, .move-leave-to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+</style>
+</head>
+<body>
+
+    <!--
+        1. Vue动画的理解
+            操作css的transition或animation
+            vue会给目标元素添加/移除特定的class
+        2. 基本过渡动画的编码
+            1). 在目标元素外包裹<transition name="xxx">
+            2). 定义class样式
+                1>. 指定过渡样式：transition
+                2>. 指定隐藏时的样式：opacity/其它
+        3. 过渡的类名
+            xxx-enter-active:   指定显示的transition
+            xxx-leave-active:   指定隐藏的transition
+            xxx-enter:          指定隐藏时的样式
+    -->
+
+    <div id="demo">
+        <button @click="isShow = !isShow">toggle</button>
+        <transition name="fade">
+            <p v-show="isShow">hello</p>
+        </transition>
+    </div>
+
+    <div id="demo2">
+        <button @click="isShow = !isShow">toggle</button>
+        <transition name="move">
+            <p v-show="isShow">colg</p>
+        </transition>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#demo',
+            data() {
+                return {
+                    isShow: true
+                }
+            }
+        })
+
+        new Vue({
+            el: '#demo2',
+            data() {
+                return {
+                    isShow: true
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+#### 2.1.2. 过渡与动画 - animationend
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_过渡与动画 - animationend</title>
+<style type="text/css">
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+        animation: bounce-in .5s reverse;
+    }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div id="example-2">
+        <button @click="isShow = !isShow">Toggle show</button>
+        <br>
+        <transition name="bounce">
+            <p v-if="isShow">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris facilisis enim libero, at lacinia diam fermentum id.
+                Pellentesque habitant morbi tristique senectus et netus.
+            </p>
+        </transition>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#example-2',
+            data: {
+                isShow: true
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 2.2. 过滤器
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_过滤器</title>
+</head>
+<body>
+    <!--
+        理解过滤器
+            1. 功能 : 对要显示的数据进行特定格式化后再显示
+            2. 注意 : 并没有改变原本的数据, 可是产生新的对应的数据
+    -->
+
+    <div id="demo">
+        <h2>显示格式化的日期时间</h2>
+        <p>{{date}}</p>
+        <p>完整版：{{date | date-format}}</p>
+        <p>年月日：{{date | date-format('YYYY-MM-DD')}}</p>
+        <p>时分秒：{{date | date-format('HH:mm:ss')}}</p>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <!-- JavaScript 日期处理类库 -->
+    <script src="../../00_libs/moment-2.22.2/moment.js"></script>
+    <script>
+        // 自定义过滤器
+        Vue.filter('date-format', (date, formatStr = 'YYYY-MM-DD HH:mm:ss') => moment(date).format(formatStr))
+
+        new Vue({
+            el: '#demo',
+            data: {
+                date: new Date()
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 2.3. 指令
+
+#### 2.3.1. 内置指令
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_内置指令</title>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+    <!--
+        常用内置指令
+            v-text：     更新元素的 textContent
+            v-html：     更新元素的 innerHTML
+            v-if：       如果为true，当前标签才会输出到页面
+            v-else：     如果为false，当前标签才会输出到页面
+            v-show：     通过控制display样式来控制显示/隐藏
+            v-for：      遍历数组/对象
+            v-on：       绑定事件监听，一般简写为@
+            v-bind：     强制绑定解析表达式，可以省略v-bind
+            v-model：    双向数据绑定
+            ref：        为某个元素注册一个唯一标识，vue对象通过$els属性访问这个元素对象
+            v-cloak：    使用它防止闪现表达式，与css配合：[v-cloak] {display: none}
+            v-once：     只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
+    -->
+
+    <div id="demo">
+        <p ref="content">colg</p>
+        <button @click="hint">提示</button>
+        <!--<p v-text="msg"></p>-->
+        <p v-cloak>{{msg}}</p>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        alert('闪现表达式')
+
+        new Vue({
+            el: '#demo',
+            data: {
+                msg: 'Vue 内置指令'
+            },
+            methods: {
+                hint() {
+                    let result = this.$refs.content.textContent
+                    alert(result)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+#### 2.3.2. 自定义指令
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_自定义指令</title>
+</head>
+<body>
+
+    <!--
+        1. 注册全局指令
+            Vue.directive('my-directive', function(el, binding) {
+                el.innerHTML = binding.value.toupperCase()
+            })
+        2. 注册局部指令
+            directive: {
+                'my-directive': {
+                    bind(el, binding) {
+                        el.innerHTML = binding.value.toupperCase()
+                    }
+                }
+            }
+        3. 使用指令
+            v-my-directive='xxx'
+    -->
+    <!--
+        需求：定义两个指令
+            1. 功能类型于v-text, 但转换为全大写 v-upper-text
+            2. 功能类型于v-text, 但转换为全小写 v-lower-text
+    -->
+
+    <div id="demo1">
+        <p v-upper-text="msg1"></p>
+        <p v-lower-text="msg1"></p>
+    </div>
+
+    <div id="demo2">
+        <p v-upper-text="msg2"></p>
+        <!--<p v-lower-text="msg2"></p>-->
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        /**
+         * 定义全局指令对象
+         *
+         * @param {string} id 指令名，不包括 v- 前缀
+         * @param {Function | Object} [definition]
+         *      el : 指令所绑定的元素，可以用来直接操作 DOM;
+         *      binding : 一个对象(包含rawName指令名, value绑定的值)
+         */
+        Vue.directive('upper-text', (el, binding) => {
+            console.log(el, binding)
+            el.textContent = binding.value.toUpperCase()
+        })
+
+        new Vue({
+            el: '#demo1',
+            data: {
+                msg1: 'NBA I Love This Game!'
+            },
+            /**
+             * 注册局部指令, 只在当前vm管理范围内有效
+             */
+            directives: {
+                // es6 写法
+                'lower-text': (el, binding) => el.textContent = binding.value.toLowerCase()
+            }
+
+        })
+
+        new Vue({
+            el: '#demo2',
+            data: {
+                msg2: 'Just Do It!'
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+### 2.4. 插件
+
+
 
 ## 2. Vue的组件化编码
 
-### 2.1. 使用vue-cli创建模版项目
+2.1. 使用vue-cli创建模版项目
 
 #### 2.1.1. 说明
 

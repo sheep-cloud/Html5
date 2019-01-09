@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>01.表单输入绑定</title>
+<title>01_表单输入绑定</title>
 </head>
 <body>
     <!--
@@ -14,12 +14,18 @@
     -->
 
     <div id="demo">
-        <form action="/xxx" @submit.prevent="handleSubmit">
+        <form action="" @submit.prevent="handleSubmit">
             <span>用户名：</span>
-            <input type="text" v-model="username"><br>
+            <label>
+                <input type="text" v-model="username">
+            </label>
+            <br>
 
             <span>密码：</span>
-            <input type="password" v-model="pwd"><br>
+            <label>
+                <input type="password" v-model="pwd">
+            </label>
+            <br>
 
             <span>性别：</span>
             <input type="radio" id="female" value="女" v-model="sex">
@@ -32,23 +38,28 @@
             <label for="basket">篮球</label>
             <input type="checkbox" id="foot" value="foot" v-model="likes">
             <label for="foot">足球</label>
-            <input type="checkbox" id="pingpang" value="pingpang" v-model="likes">
-            <label for="pingpang">乒乓</label> <br>
+            <br>
 
             <span>城市：</span>
-            <select v-model="cityId">
-                <option value="">未选择</option>
-                <option :value="city.id" v-for="(city, index) in allCitys" :key="index">{{city.name}}</option>
-            </select> <br>
+            <label>
+                <select v-model="cityId">
+                    <option value="">未选择</option>
+                    <option :value="city.id" v-for="(city, index) in allCitys" :key="index">{{city.name}}</option>
+                </select>
+            </label>
+            <br>
 
             <span>介绍:</span>
-            <textarea cols="30" rows="10" v-model="desc"></textarea> <br>
+            <label>
+                <textarea cols="30" rows="10" v-model="desc"></textarea>
+            </label>
+            <br>
 
             <input type="submit" value="注册">
         </form>
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
         new Vue({
             el: '#demo',
@@ -67,7 +78,7 @@
             },
             methods: {
                 handleSubmit() {
-                    console.log(this.username, this.pwd, this.sex, this.likes, this.cityId, this.desc)
+                    console.log(this.username, this.pwd, this.sex, JSON.stringify(this.likes), this.cityId, this.desc)
                 }
             }
         })

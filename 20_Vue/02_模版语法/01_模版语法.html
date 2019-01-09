@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>01.模版语法</title>
+<title>01_模版语法</title>
 </head>
 <body>
     <!--
@@ -10,9 +10,9 @@
             动态的html页面
             包含了一些JS语法代码
                 双大括号表达式
-                指定（以v-开头的自定义标签属性）
+                指令（以v-开头的自定义标签属性）
         2. 双大括号表达式
-            语法：{{exp}}或{{{exp}}}
+            语法：{{exp}}
             功能：向页面输出数据，可以调用对象的方法
         3. 指令一：强制数据绑定
             功能：指定变化的属性值
@@ -36,7 +36,9 @@
         <p><img :src="imgUrl" alt=""></p>
 
         <h2>3. 指令三：绑定事件监听</h2>
-        <p><button v-on:click="test">test0</button></p>
+        <p>
+            <button v-on:click="test">test</button>
+        </p>
         <p>
             <button @click="test">test1</button>
         </p>
@@ -45,7 +47,7 @@
         </p>
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
         new Vue({
             el: '#app',
@@ -56,7 +58,7 @@
             },
             methods: {
                 test() {
-                    alert('hehe!')
+                    alert('test!')
                 },
                 test2(content) {
                     alert(content)

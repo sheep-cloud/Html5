@@ -20,9 +20,10 @@
             <input type="text" v-model="username">
         </label>
         <p>Hello {{username}}</p>
+        <p v-text="'Hello ' + username"></p>
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
         // viewModel 创建vue实例
         // 配置对象
@@ -40,9 +41,9 @@
 
     <!--
         MVVM:
-            model:      模型，数据对象（data）
-            view:       视图，模版页面
-            viewModel： 视图模型（vue的实例）
+            model:      模型, 数据对象（data）
+            view:       视图, 模版页面
+            viewModel:  视图模型, Vue的实例
     -->
 </body>
 </html>

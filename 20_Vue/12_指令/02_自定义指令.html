@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>02.自定义指令</title>
+<title>02_自定义指令</title>
 </head>
 <body>
 
@@ -35,15 +35,20 @@
 
     <div id="demo2">
         <p v-upper-text="msg2"></p>
-        <p v-lower-text="msg2"></p>
+        <!--<p v-lower-text="msg2"></p>-->
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
-        // 定义全局指令
-        // el: 指令属性所在的标签对象
-        // binding: 包含指令相关信息数据的对象
-        Vue.directive('upper-text', function (el, binding) {
+        /**
+         * 定义全局指令对象
+         *
+         * @param {string} id 指令名，不包括 v- 前缀
+         * @param {Function | Object} [definition]
+         *      el : 指令所绑定的元素，可以用来直接操作 DOM;
+         *      binding : 一个对象(包含rawName指令名, value绑定的值)
+         */
+        Vue.directive('upper-text', (el, binding) => {
             console.log(el, binding)
             el.textContent = binding.value.toUpperCase()
         })
@@ -53,18 +58,12 @@
             data: {
                 msg1: 'NBA I Love This Game!'
             },
-            directives: { // 注册局部指令
-                /*
-                'lower-text': {
-                    bind(el, binding) {
-                        el.textContent = binding.value.toLowerCase()
-                    }
-                }
-                */
+            /**
+             * 注册局部指令, 只在当前vm管理范围内有效
+             */
+            directives: {
                 // es6 写法
-                'lower-text'(el, binding) {
-                    el.textContent = binding.value.toLowerCase()
-                }
+                'lower-text': (el, binding) => el.textContent = binding.value.toLowerCase()
             }
 
         })

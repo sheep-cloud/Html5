@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>02.过渡&动画animationend</title>
+<title>02_过渡与动画 - animationend</title>
 <style type="text/css">
-    p {
-        display: inline-block;
-    }
     .bounce-enter-active {
-        animation: bounce-in 1s;
+        animation: bounce-in .5s;
     }
     .bounce-leave-active {
-        animation: bounce-in 1s reverse;
+        animation: bounce-in .5s reverse;
     }
     @keyframes bounce-in {
         0% {
@@ -29,9 +26,10 @@
 <body>
 
     <div id="example-2">
-        <button @click="show = !show">Toggle show</button>
+        <button @click="isShow = !isShow">Toggle show</button>
+        <br>
         <transition name="bounce">
-            <p v-if="show">
+            <p v-if="isShow">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Mauris facilisis enim libero, at lacinia diam fermentum id.
                 Pellentesque habitant morbi tristique senectus et netus.
@@ -39,12 +37,12 @@
         </transition>
     </div>
 
-    <script type="text/javascript" src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
     <script>
         new Vue({
             el: '#example-2',
             data: {
-                show: true
+                isShow: true
             }
         })
     </script>
