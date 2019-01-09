@@ -17,7 +17,7 @@
           相对路径使用.或..开头
  */
 let md = require('./02.module')
-let math = require('./04.math')
+let math = require('./03.math')
 let fs = require('fs')
 
 console.log(md)
