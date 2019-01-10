@@ -15,7 +15,6 @@ import Order from '../views/Order/Order'
 import Profile from '../views/Profile/Profile'
 */
 
-
 /*
   路由组件懒加载；
     返回的都是路由组件的函数，只有执行此函数才会加载路由组件，这个函数在请求对应的路由路径时才会执行
@@ -56,27 +55,25 @@ const meta = {
   showFooter: true
 }
 
-// 所有路由
-const routes = [
-  {path: '/', redirect: '/msite'},
-  {path: '/msite', component: Msite, meta},
-  {path: '/search', component: Search, meta},
-  {path: '/order', component: Order, meta},
-  {path: '/profile', component: Profile, meta},
-  {path: '/userInfo', component: UserInfo},
-  {path: '/login', component: Login},
-  {
-    path: '/shop', component: Shop, children: [
-      {path: '', redirect: '/shop/goods'},
-      {path: '/shop/goods', component: ShopGoods},
-      {path: '/shop/ratings', component: ShopRatings},
-      {path: '/shop/info', component: ShopInfo}
-    ]
-  },
-  {path: '/test', component: Test},
-  {path: '/switch', component: Switch}
-]
-
 export default new VueRouter({
-  routes
+  // 所有路由
+  routes: [
+    {path: '/', redirect: '/msite'},
+    {path: '/msite', component: Msite, meta},
+    {path: '/search', component: Search, meta},
+    {path: '/order', component: Order, meta},
+    {path: '/profile', component: Profile, meta},
+    {path: '/userInfo', component: UserInfo},
+    {path: '/login', component: Login},
+    {
+      path: '/shop', component: Shop, children: [
+        {path: '', redirect: '/shop/goods'},
+        {path: '/shop/goods', component: ShopGoods},
+        {path: '/shop/ratings', component: ShopRatings},
+        {path: '/shop/info', component: ShopInfo}
+      ]
+    },
+    {path: '/test', component: Test},
+    {path: '/switch', component: Switch}
+  ]
 })
