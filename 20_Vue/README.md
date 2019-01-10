@@ -1207,7 +1207,173 @@
 
 ### 2.4. 插件
 
+```js
+/*
+    vue的插件库
+ */
 
+// 匿名函数自调用
+;(function () {
+
+    // 需要向外暴露的插件对象
+    const MyPlugin = {}
+
+    // 插件对象必须有一个install()
+    MyPlugin.install = function (Vue, options) {
+        // 1. 添加全局方法或属性
+        Vue.myGlobalMethod = function () {
+            // 逻辑...
+            console.log('Vue 函数对象的方法 myGlobalMethod()')
+        }
+
+        // 2. 添加全局资源
+        /*
+        Vue.directive('my-directive', {
+            bind(el, binding, vnode, oldVnode) {
+                // 逻辑...
+            }
+            ...
+        })
+        */
+        Vue.directive('my-directive', (el, binding) => el.textContent = binding.value.toUpperCase())
+
+        // 3. 注入组件
+        /*
+        Vue.mixin({
+            created: function () {
+                // 逻辑...
+            }
+            ...
+        })
+        */
+
+        // 4. 添加实例方法
+        Vue.prototype.$myMethod = function (methodOptions) {
+            // 逻辑...
+            console.log('Vue 实例对象的方法 $myMethod()')
+        }
+    }
+
+    // 向外暴露
+    window.MyPlugin = MyPlugin
+})()
+```
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_插件</title>
+</head>
+<body>
+    <div id="demo">
+        <p v-my-directive="msg"></p>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script src="./vue-myPlugin.js"></script>
+    <script>
+        // 声明使用插件
+        Vue.use(MyPlugin) // 内部会执行 MyPlugin.install(Vue)
+
+        Vue.myGlobalMethod()
+
+        const vm = new Vue({
+            el: '#demo',
+            data: {
+                msg: 'I Love You'
+            }
+        })
+
+        vm.$myMethod()
+    </script>
+</body>
+</html>
+```
+
+### 2.5. 混入
+
+#### 2.5.1. 混入_选项合并
+
+```vue
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_混入_选项合并</title>
+</head>
+<body>
+    <!--
+        选项合并
+            当组件和混入对象含有同名选项时，这些选项将以恰当的方式混合。
+                1. 数据对象在内部会进行浅合并 (一层属性深度)，在和组件的数据发生冲突时以组件数据优先。
+                2. 同名钩子函数将混合为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。
+                3. 值为对象的选项，例如 methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+    -->
+    <div id="demo">
+        <p>{{message}}</p>
+        <p>{{bar}}</p>
+        <p>{{foo}}</p>
+    </div>
+
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        /**
+         * 定义混入对象
+         * @type {{data(): *, created(): void}}
+         */
+        const mixin = {
+            data() {
+                return {
+                    foo: 'data => mixin - foo',
+                    message: 'data => mixin - hello'
+                }
+            },
+            created() {
+                console.log('created => mixin - 混入对象的钩子被调用')
+            },
+            methods: {
+                a() {
+                    console.log('methods => mixin - a()')
+                },
+                conflicting() {
+                    console.log('methods => tmixin - conflicting()')
+                }
+            }
+        }
+
+        const vm = new Vue({
+            mixins: [mixin],
+            el: '#demo',
+            data() {
+                return {
+                    bar: 'data => bar',
+                    message: 'data => goodbye'
+                }
+            },
+            created() {
+                console.log('created => ' + JSON.stringify(this.$data))
+                console.log('created => 组件钩子被调用')
+            },
+            methods: {
+                b() {
+                    console.log('methods => b')
+                },
+                conflicting() {
+                    console.log('methods => conflicting()')
+                }
+            }
+        })
+
+        console.log('----------------------------------------------------------------------------------------------------')
+        vm.a()
+        vm.b()
+        vm.conflicting()
+    </script>
+</body>
+</html>
+```
 
 ## 2. Vue的组件化编码
 
