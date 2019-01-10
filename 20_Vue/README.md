@@ -1388,8 +1388,8 @@
 
 #### 2.1.2. 创建vue项目
 
-```properties
-cd D:\workspace-all\atguigu\Html5\20_Vue
+```ini
+cd D:\workspace-all\atguigu\Html5\21_Vue-Cli
 
 npm install -g vue-cli
 
@@ -1560,7 +1560,7 @@ serve dist
   ```vue
   <template>
     <div>
-      <h2 class="msg">{{msg}}</h2>
+      <h2>{{msg}}</h2>
     </div>
   </template>
   
@@ -1575,7 +1575,7 @@ serve dist
   </script>
   
   <style scoped>
-    .msg {
+    h2 {
       color: red;
     }
   </style>
@@ -1588,17 +1588,17 @@ serve dist
     <div>
       <img src="./assets/img/logo.png" alt="logo">
       <!--3. 使用组件标签-->
-      <HelloWolrd/>
+      <HelloWorld></HelloWorld>
     </div>
   </template>
   
   <script>
     // 1. 引入HelloWorld组件
-    import HelloWolrd from './components/HelloWorld'
+    import HelloWorld from './components/HelloWorld'
   
     export default {
       // 2. 映射组件标签
-      components: {HelloWolrd}
+      components: {HelloWorld}
     }
   </script>
   
@@ -1638,35 +1638,45 @@ serve dist
         <List :comments="comments" :deleteComment="deleteComment"/>
 ```
 
-#### 2.6.2. 自定义MyComponent时
+#### 2.6.2. 自定义组件
 
 - 在组件内声明所有的props
-- 方式一：只指定名称
 
-```properties
-props: ['comments', 'deleteComment'], // 只指定属性名
-```
+  - 方式一 :  只指定属性名
 
-- 方式二：指定名称和类型
+    ```ini
+        /**
+         * 声明接收属性，这个属性就会成为组件对象的属性
+         */
+        props: ['comments', 'deleteComment'],
+    ```
 
-```properties
-    props: { // 指定属性名和属性值的类型
-      comment: Object,
-      deleteComment: Function,
-      index: Number
-    },
-```
+  - 方式二 : 指定属性名, 值的类型
 
-- 方式三：指定名称/类型/必要性/默认值
+    ```ini
+        /**
+         * 指定属性名, 值的类型
+         */
+        props: {
+          comment: Object,
+          deleteComment: Function,
+          index: Number
+        },
+    ```
 
-```properties
-    props: {
-      addComment: { // 指定了属性名/属性值的类型/必要性
-        type: Function,
-        required: true
-      }
-    },
-```
+  - 方式三 : 指定属性名, 值的类型, 必要性, 默认值
+
+    ```ini
+        /**
+         * 指定属性名, 值的类型, 必要性, 默认值
+         */
+        props: {
+          addComment: {
+            type: Function,
+            required: true
+          }
+        },
+    ```
 
 #### 2.6.3. 注意
 
@@ -1684,30 +1694,24 @@ props: ['comments', 'deleteComment'], // 只指定属性名
 
 ```vue
       <!--给todo-header标签对象绑定addTodo事件监听-->
-      <todo-header @addTodo="addTodo"/>
-
-        // 触发自定义事件：addTodo
-        this.$emit('addTodo', todo)
+      <TodoHeader @addTodo="addTodo"></TodoHeader>
 ```
 
 - 方式二：通过$on()
 
 ```vue
-<todo-header ref="header"/>
+	<todo-header ref="header"></TodoHeader>
 
     mounted() { // 执行异步代码
       // 给<todo-header/>绑定addTodo事件监听
       // this.$on('addTodo', this.addTodo) // 给app绑定监听
       this.$refs.header.$on('addTodo', this.addTodo)
     },
-
-        // 触发自定义事件：addTodo
-        this.$emit('addTodo', todo)
 ```
 
 #### 2.7.2. 触发事件
 
-```vue
+```js
         // 触发自定义事件：addTodo
         this.$emit('addTodo', todo)
 ```
@@ -1745,8 +1749,8 @@ import PubSub from 'pubsub-js'
       // 删除
       deleteItem() {
         let {layer, todo, index} = this
-        layer.confirm(`确认删除${todo.title}吗？`, function () {
-          layer.close(this.id)
+        this.layerId = layer.confirm(`确认删除${todo.title}吗？`, () => {
+          layer.close(this.layerId)
           // 触发事件        发布消息
           PubSub.publish('deleteTodo', index)
         })
@@ -1784,69 +1788,141 @@ import PubSub from 'pubsub-js'
 ### 3.2. vue-resource的使用
 
 - Github：https://github.com/pagekit/vue-resource
+
 - 下载：
 
-```properties
-npm install vue-resource --save
-```
+  ```ini
+  npm install vue-resource --save
+  ```
 
 - 编码：
 
-```js
-// 引入模块
-import vueResource from 'vue-resource'
+  - `src\main.js`
 
-// 声明使用插件
-Vue.use(vueResource) // 内部会给vm独享和组件对象添加一个属性：$http
+    ```js
+    import Vue from 'vue'
+    import App from './App'
+    
+    import layer from 'vue-layer'
+    import VueResource from 'vue-resource'
+    
+    Vue.prototype.layer = layer(Vue)
+    // 声明使用插件，内部会给vm对象和组件对象添加一个属性：$http
+    Vue.use(VueResource)
+    
+    new Vue({
+      el: '#app',
+      components: {App},
+      template: '<App/>'
+    })
+    ```
 
-// 通过vue组件对象发送ajax请求
-const url = `https://api.github.com/search/repositories?q=vue-source&sort=stars`
-this.$http.get(url).then(
-    // 成功响应
-    response => {
-        // 成功
-        const result = response.data
-        // 得到最受欢迎的repo
-        const mostRepo = result.items[0]
-        this.repoUrl = mostRepo.html_url
-        this.repoName = mostRepo.name
-    },
-    // 失败响应
-    response => {
-        alert('请求失败')
-    }
-)
-```
+  - `src\App.vue`
 
-
+    ```vue
+    <template>
+      <div>
+        <div v-if="!repoUrl">loading...</div>
+        <div v-else>most star repo is <a :href="repoUrl">{{repoName}}</a></div>
+      </div>
+    </template>
+    
+    <script>
+      export default {
+        data() {
+          return {
+            repoUrl: '',
+            repoName: ''
+          }
+        },
+        mounted() {
+          // 发ajax请求获取数据
+          const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
+          this.$http.get(url).then(response => {
+            // 成功了
+            let result = response.data
+            // 得到最受欢迎的repo
+            let mostRepo = result.items[0]
+            this.repoUrl = mostRepo.html_url
+            this.repoName = mostRepo.name
+          }, () => this.layer.alert('请求失败'))
+        }
+      }
+    </script>
+    
+    <style scoped>
+    
+    </style>
+    ```
 
 ### 3.3. axios的使用
 
 - Github：https://github.com/axios/axios
+
 - 下载：
 
-```shell
-npm install axios --save
-```
+  ```ini
+  npm install axios --save
+  ```
 
 - 编码：
 
-```js
-  // 引入组件
-  import axios from 'axios'
+  - `src\main.js`
 
-// 使用axios发送ajax请求
-axios.get(url).then(response => {
-    // 成功
-    const result = response.data
-    // 得到最受欢迎的repo
-    const mostRepo = result.items[0]
-    this.repoUrl = mostRepo.html_url
-    this.repoName = mostRepo.name
-}).catch(error => {
-    alert('请求失败')
-})
-```
+    ```js
+    import Vue from 'vue'
+    import App from './App'
+    
+    import layer from 'vue-layer'
+    import axios from 'axios'
+    
+    Vue.prototype.layer = layer(Vue)
+    Vue.prototype.axios = axios
+    
+    new Vue({
+      el: '#app',
+      components: {App},
+      template: '<App/>'
+    })
+    ```
+
+  - `src\App.vue`
+
+    ```vue
+    <template>
+      <div>
+        <div v-if="!repoUrl">loading...</div>
+        <div v-else>most star repo is <a :href="repoUrl">{{repoName}}</a></div>
+      </div>
+    </template>
+    
+    <script>
+      export default {
+        data() {
+          return {
+            repoUrl: '',
+            repoName: ''
+          }
+        },
+        mounted() {
+          // 发ajax请求获取数据
+          const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
+          this.axios.get(url).then(response => {
+            // 成功了
+            let result = response.data
+            // 得到最受欢迎的repo
+            let mostRepo = result.items[0]
+            this.repoUrl = mostRepo.html_url
+            this.repoName = mostRepo.name
+          }).catch(() => this.layer.alert('请求失败'))
+        }
+      }
+    </script>
+    
+    <style scoped>
+    
+    </style>
+    ```
 
 ### 3.4. 测试接口
 
@@ -1855,38 +1931,50 @@ axios.get(url).then(response => {
 
 ### 3.5. demo3：github users
 
-```js
+```vue
+<script>
+  import PubSub from 'pubsub-js'
+
+  export default {
+    data() {
+      return {
+        firstView: true,
+        loading: false,
+        users: null,
+        errorMsg: ''
+      }
+    },
     mounted() {
-      // 是否再次发ajax请求，不是，而是在点击之后
       // 订阅搜索的消息
       PubSub.subscribe('search', (msg, searchName) => {
-        // 说明需要发ajax请求进行搜索
-        const url = `http://api.github.com/search/users?q=${searchName}`
+        // 需要发ajax请求进行搜索
+        const url = `https://api.github.com/search/users?q=${searchName}`
         // 更新状态（请求中）
         this.firstView = false
         this.loading = true
         this.users = null
         this.errorMsg = ''
-
         // 发ajax请求
-        axios.get(url).then(response => {
-          const result = response.data
-          const users = result.items.map(item => ({
-            url: item.html_url,
+        this.axios.get(url).then(response => {
+          let result = response.data
+          let users = result.items.map(item => ({
+            html_url: item.html_url,
             avatar_url: item.avatar_url,
-            name: item.login
+            score: item.score,
+            login: item.login
           }))
-          console.log(users)
           // 成功，更新状态（成功）
           this.loading = false
           this.users = users
-        }).catch(error => {
-            // 失败，更新状态（失败）
-            this.loading = false
-            this.errorMsg = url + ': ' + error.response.statusText
-          }
-        )
+        }).catch(response => {
+          // 失败，更新状态（失败）
+          this.loading = false
+          this.errorMsg = response.message
+        })
       })
+    }
+  }
+</script>
 ```
 
 ## 4. Vue UI组件库
@@ -2119,7 +2207,7 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 - About.vue
 - Home.vue
 
-#### 5.2.3. 应用组件：App.vue
+#### 5.2.3. 应用组件：`src\App.vue`
 
 ```vue
 <!-- 字符串 -->
@@ -2127,26 +2215,39 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
 <!-- 渲染结果 -->
 <a href="home">Home</a>    
 
-	<div class="row">
-      <div class="col-xs-2 col-xs-offset-2">
+<template>
+  <div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+        <div class="page-header">
+          <h2>Router Basic - 01</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-1 col-xs-offset-2">
         <div class="list-group">
           <!-- 使用 router-link 组件来导航. -->
           <!-- 通过传入 `to` 属性指定链接. -->
           <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
-          <router-link to="/about" class="list-group-item">About</router-link>
-          <router-link to="/home" class="list-group-item">Home</router-link>
+          <router-link to="/about" class="list-group-item">About 组件</router-link>
+          <router-link to="/home" class="list-group-item">Home 组件</router-link>
           <!--
           <a href="#/about" class="list-group-item router-link-exact-active active">About</a>
           <a href="#/home" class="list-group-item">Home</a>
           -->
         </div>
       </div>
-      <div class="col-xs-8">
+      <div class="col-xs-9">
         <div class="panel">
           <div class="panel-body">
             <!-- 路由出口 -->
             <!-- 路由匹配到的组件将渲染在这里 -->
-            <router-view></router-view>
+            <keep-alive>
+              <!--路由传递数据-->
+              <router-view msg="渐进式 JavaScript 框架 - 路由传递数据"></router-view>
+            </keep-alive>
             <!--
             <div class="col-md-5">
               <h2>About组件</h2>
@@ -2158,9 +2259,11 @@ new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便�
         </div>
       </div>
     </div>
+  </div>
+</template>
 ```
 
-#### 5.2.4. 路由器模块：src/router/index.js
+#### 5.2.4. 路由器模块：`src\router\index.js`
 
 ```js
 /*
@@ -2174,31 +2277,34 @@ import About from '../views/About'
 import Home from '../views/Home'
 import News from '../views/News'
 import Message from '../views/Message'
+import MessageDetail from '../views/MessageDetail'
 
 // 声明使用插件
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  // n个路由
   routes: [
+    // 自动跳转路由
+    {path: '/', redirect: '/about'},
     {path: '/about', component: About},
     {
-      path: '/home', component: Home,
-      children: [
+      path: '/home', component: Home, children: [
+        {path: '', redirect: '/home/news'},
         // path 最左侧的/永远代表根路径
         {path: '/home/news', component: News},
-        // 简化写法
-        {path: 'message', component: Message},
-        {path: '', redirect: '/home/news'},
+        {
+          // 简化写法
+          path: 'message', component: Message, children: [
+            // 动态路径参数 以冒号开头
+            {path: '/home/message/detail/:id', component: MessageDetail}
+          ]
+        }
       ]
-    },
-    // 自动跳转路由
-    {path: '/', redirect: '/about'}
+    }
   ],
   // 当前路由的 class router-link-active 修改 为 active
   linkActiveClass: 'active'
 })
-
 ```
 
 #### 5.2.5. 注册路由器：main.js
@@ -2210,6 +2316,8 @@ import App from './App'
 // 引入路由器
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
+
+import './filters'
 
 new Vue({
   // 配置对象的属性名都是一些固定的名称，不能随便修改
@@ -2347,7 +2455,7 @@ this.$router.replace(`url`)
 this.$router.push(`/home/message/detail/12345`)
 ```
 
-- url：  `http://xxx/id=12345`
+- url：  `http://xxx/12345`
 - 接收参数
 
 ```js
@@ -2385,7 +2493,7 @@ this.$route.query.id
 - **路由配置（必须配置name）**
 
 ```js
-{path: '/home/message/detail', name: 'detail', component: MessageDetail}
+{path: '/home/message/detail', name: 'MessageDetail', component: MessageDetail}
 ```
 
 - 传递参数
@@ -2393,7 +2501,7 @@ this.$route.query.id
 ```js
         this.$router.push(
           {
-            name: 'detail',
+            name: 'MessageDetail',
             params: {id: 12345}
           }
         )
@@ -2407,6 +2515,22 @@ this.$route.params.id
 ```
 
 ## 6. Vuex
+
+### 6.1. 理解
+
+#### 6.1.1. vuex 是什么?
+
+- 简单来说 : **对vue应用中组件的状态进行集中式的管理(读/写)**
+
+#### 6.1.2. 状态自管理应用
+
+- **state**，驱动应用的数据源；
+- **view**，以声明方式将 **state** 映射到视图；
+- **actions**，响应在 **view** 上的用户输入导致的状态变化(包含n个更新状态的方法)。
+
+#### 6.1.3. 多组件共享状态的问题
+
+### 6.2. 核心概念和API
 
 ## 7. Vue源码分析
 
