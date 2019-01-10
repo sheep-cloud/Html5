@@ -9,19 +9,17 @@ import Cart from '../views/Cart'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/goods/:goodsId/user/:name', component: GoodsList, name: 'GoodsList',
-    children: [
-      {path: '/goods/:goodsId/user/:name/title', component: Title, name: 'Title'},
-      {path: '/goods/:goodsId/user/:name/image', component: Image, name: 'Image'}
-    ]
-  },
-  {path: '/cart', component: Cart, name: 'Cart'}
-]
-
 export default new VueRouter({
-  routes,
+  routes: [
+    {
+      path: '/goods/:goodsId/user/:name', component: GoodsList, name: 'GoodsList',
+      children: [
+        {path: '/goods/:goodsId/user/:name/title', component: Title, name: 'Title'},
+        {path: '/goods/:goodsId/user/:name/image', component: Image, name: 'Image'}
+      ]
+    },
+    {path: '/cart', component: Cart, name: 'Cart'}
+  ],
   mode: 'history',
   linkActiveClass: 'active'
 })
