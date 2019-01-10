@@ -946,19 +946,15 @@
     <script>
         new Vue({
             el: '#demo',
-            data() {
-                return {
-                    isShow: true
-                }
+            data: {
+                isShow: true
             }
         })
 
         new Vue({
             el: '#demo2',
-            data() {
-                return {
-                    isShow: true
-                }
+            data: {
+                isShow: true
             }
         })
     </script>

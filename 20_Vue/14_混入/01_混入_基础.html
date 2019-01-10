@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_混入_基础</title>
+</head>
+<body>
+    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+    <script>
+        // 定义一个混入对象
+        let myMixin = {
+            created() {
+                this.hello()
+            },
+            methods: {
+                hello() {
+                    console.log('hello from mixin!')
+                }
+            }
+        }
+
+        // 定义一个使用混入对象的组件
+        let Component = Vue.extend({
+            mixins: [myMixin]
+        })
+
+        let component = new Component() // => "hello from mixin!"
+        console.log(component)
+    </script>
+</body>
+</html>
