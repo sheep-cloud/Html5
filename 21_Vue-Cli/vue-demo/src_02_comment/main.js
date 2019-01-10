@@ -9,10 +9,8 @@ Vue.prototype.ValidUtil = ValidUtil
 
 // 引入 vue-layer(弹层），moment（日期处理） 组件
 import layer from 'vue-layer'
-import moment from 'moment'
 
 Vue.prototype.layer = layer(Vue)
-Vue.prototype.moment = moment()
 
 new Vue({
   el: '#app',
