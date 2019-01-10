@@ -3,14 +3,18 @@ import App from './App'
 
 // 引入 bootstrap.css 样式库
 import 'bootstrap/dist/css/bootstrap.css'
-import ValidUtil from './util/ValidUtil'
 
-Vue.prototype.ValidUtil = ValidUtil
+import validUtil from './util/validUtil'
 
-// 引入 vue-layer(弹层），moment（日期处理） 组件
+Vue.prototype.validUtil = validUtil
+
+// 引入 vue-layer(弹层）
 import layer from 'vue-layer'
 
 Vue.prototype.layer = layer(Vue)
+
+// 加载过滤器
+import './filters'
 
 new Vue({
   el: '#app',

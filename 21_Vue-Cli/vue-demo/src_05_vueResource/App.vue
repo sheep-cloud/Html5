@@ -15,7 +15,7 @@
     },
     mounted() {
       // 发ajax请求获取数据
-      let url = `https://api.github.com/search/repositories?q=vue&sort=stars`
+      const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
       this.$http.get(url).then(response => {
         // 成功了
         let result = response.data
@@ -23,9 +23,7 @@
         let mostRepo = result.items[0]
         this.repoUrl = mostRepo.html_url
         this.repoName = mostRepo.name
-      }, response => {
-        this.layer.alert('请求失败')
-      })
+      }, () => this.layer.alert('请求失败'))
     }
   }
 </script>

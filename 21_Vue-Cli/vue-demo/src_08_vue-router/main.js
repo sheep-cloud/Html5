@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
 
+import './filters'
+
 new Vue({
   // 配置对象的属性名都是一些固定的名称，不能随便修改
   el: '#app',

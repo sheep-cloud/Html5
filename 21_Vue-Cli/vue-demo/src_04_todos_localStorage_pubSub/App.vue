@@ -2,9 +2,9 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <!--给 TodoHeader 标签对象绑定addTodo事件监听（自定义事件）-->
-      <TodoHeader @addTodo="addTodo"/>
-      <TodoMain :todos="todos"/>
-      <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :selectAllTodos="selectAllTodos"/>
+      <TodoHeader @addTodo="addTodo"></TodoHeader>
+      <TodoMain :todos="todos"></TodoMain>
+      <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :selectAllTodos="selectAllTodos"></TodoFooter>
     </div>
   </div>
 </template>
@@ -41,48 +41,42 @@
       // 添加todo
       addTodo(todo) {
         this.todos.unshift(todo)
-      }
-      ,
+      },
       // 删除todo
       deleteTodo(index) {
         this.todos.splice(index, 1)
-      }
-      ,
+      },
       // 删除已完成任务（选中的）
       deleteCompleteTodos() {
-        let self = this
-        let {layer, todos} = self
-        layer.confirm('确定清除已完成任务吗？', function () {
-          layer.close(this.id)
+        let {layer, todos} = this
+        this.layerId = layer.confirm('确定清除已完成任务吗？', () => {
+          layer.close(this.layerId)
           // 过滤 complete 为 false 的（保留为false的）
-          self.todos = todos.filter(todo => !todo.complete)
+          this.todos = todos.filter(todo => !todo.complete)
         })
-      }
-      ,
+      },
       // 全选/全不选
       selectAllTodos(isCheck) {
         this.todos.forEach(todo => todo.complete = isCheck)
       }
-    }
-    ,
+    },
     // 监视
     watch: {
       todos: {
         // 深度监视
         deep: true,
         /*
-        handler:
-          function (newValue) {
-            // 将todos最新的值的json数据，保存到localStorage
-            storageUtil.saveTodos(newValue)
-          }
-          */
-        /*
-        handler: (todos) => {
-          window.localStorage.setItem('todos_key', JSON.stringify(todos))
+        handler(newValue) {
+          // 将todos最新的值的json数据，保存到localStorage
+          storageUtil.saveTodos(newValue)
         }
         */
-        // 简写，相当于 handler直接掉saveTodos这个函数
+        /*
+        handler: newValue => {
+          storageUtil.saveTodos(newValue)
+        }
+        */
+        // 简写，相当于 handler 直接调saveTodos这个函数
         handler: storageUtil.saveTodos
       }
     }

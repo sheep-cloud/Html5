@@ -6,17 +6,17 @@
 
 <script>
   export default {
-    props: {
-      addTodo: Function
-    },
     data() {
       return {
         title: ''
       }
     },
+    props: {
+      addTodo: Function
+    },
     methods: {
       addItem() {
-        let {layer, moment, addTodo, title} = this
+        let {layer, addTodo, title} = this
         // 1. 检查输入的合法性
         if (!title) {
           layer.alert('请输入任务名称')
@@ -26,7 +26,7 @@
         let todo = {
           title,
           complete: false,
-          createTime: moment.format('YYYY-MM-DD HH:mm:ss')
+          createTime: new Date()
         }
         // 3. 添加到todos
         addTodo(todo)

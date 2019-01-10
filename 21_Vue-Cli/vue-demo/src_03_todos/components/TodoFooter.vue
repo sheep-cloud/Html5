@@ -23,7 +23,7 @@
       },
       isAllCheck: {
         get() {
-          return this.completeSize === this.todos.length && this.completeSize > 0
+          return this.completeSize && this.completeSize === this.todos.length
         },
         // value 是当前 checkBox 最新的值
         set(value) {

@@ -5,7 +5,7 @@
       <span>{{todo.title}}</span>
     </label>
     <button class="btn btn-danger" :style="{display: isShow}" @click="deleteItem">删除</button>
-    <span class="pull-right small text-gray" style="margin-right: 15px;">{{todo.createTime}}</span>
+    <span class="pull-right small text-gray mr-10">{{todo.createTime | date-format}}</span>
   </li>
 </template>
 
@@ -13,10 +13,6 @@
   import PubSub from 'pubsub-js'
 
   export default {
-    props: {
-      todo: Object,
-      index: Number,
-    },
     data() {
       return {
         // 默认背景颜色
@@ -24,6 +20,10 @@
         // 按钮默认是否显示
         isShow: 'none'
       }
+    },
+    props: {
+      todo: Object,
+      index: Number
     },
     methods: {
       // 鼠标移入移出
@@ -39,8 +39,8 @@
       // 删除
       deleteItem() {
         let {layer, todo, index} = this
-        layer.confirm(`确认删除${todo.title}吗？`, function () {
-          layer.close(this.id)
+        this.layerId = layer.confirm(`确认删除${todo.title}吗？`, () => {
+          layer.close(this.layerId)
           // 触发事件        发布消息
           PubSub.publish('deleteTodo', index)
         })
@@ -79,5 +79,8 @@
   }
   li:last-child {
     border-bottom: none;
+  }
+  .mr-10 {
+    margin-right: 10px;
   }
 </style>

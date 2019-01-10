@@ -12,9 +12,9 @@
     <div class="container">
       <div class="row">
         <!-- :addComment 传递方法 -->
-        <Add :addComment="addComment"/>
+        <Add :addComment="addComment"></Add>
         <!-- :comments 传递数据 :deleteComment 逐层传递到 Item -->
-        <List :comments="comments" :deleteComment="deleteComment"/>
+        <List :comments="comments" :deleteComment="deleteComment"></List>
       </div>
     </div>
   </div>
@@ -26,20 +26,20 @@
   import List from './components/List'
 
   export default {
-    // 映射成标签
-    components: {Add, List},
     data() {
       return {
         comments: [
           // 数据在哪个组件，更新数据的行为（方法）就应该定义在哪个组件
-          {username: 'Jack', content: 'Vue 还不错', createTime: '2018-08-02 04:34:11'},
-          {username: 'Rose', content: 'Vue So Easy', createTime: '2018-08-02 04:34:11'},
-          {username: 'Tom', content: 'Vue So So', createTime: '2018-08-02 04:34:11'},
-          {username: 'ClearLove', content: 'Vue 都不会，不如回家去养猪！', createTime: '2018-08-02 04:34:11'},
-          {username: 'Faker', content: 'Vue Is Supper Carry !', createTime: '2018-08-02 04:34:11'}
+          {username: 'Jack', content: 'Vue 还不错', createTime: new Date()},
+          {username: 'Rose', content: 'Vue So Easy', createTime: new Date()},
+          {username: 'Tom', content: 'Vue So So', createTime: new Date()},
+          {username: 'ClearLove', content: 'Vue 都不会，不如回家去养猪！', createTime: new Date()},
+          {username: 'Faker', content: 'Vue Is Supper Carry !', createTime: new Date()}
         ]
       }
     },
+    // 映射成标签
+    components: {Add, List},
     methods: {
       // 添加评论
       addComment(comment) {

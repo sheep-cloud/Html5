@@ -1,9 +1,9 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHeader :addTodo="addTodo"/>
-      <TodoMain :todos="todos" :deleteTodo="deleteTodo"/>
-      <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :selectAllTodos="selectAllTodos"/>
+      <TodoHeader :addTodo="addTodo"></TodoHeader>
+      <TodoMain :todos="todos" :deleteTodo="deleteTodo"></TodoMain>
+      <TodoFooter :todos="todos" :deleteCompleteTodos="deleteCompleteTodos" :selectAllTodos="selectAllTodos"></TodoFooter>
     </div>
   </div>
 </template>
@@ -17,7 +17,6 @@
   const TODOS_KEY = 'todos_key'
 
   export default {
-    components: {TodoHeader, TodoMain, TodoFooter},
     data() {
       return {
         // 从 localStorage 读取todos
@@ -25,6 +24,7 @@
         todos: JSON.parse(window.localStorage.getItem(TODOS_KEY) || '[]')
       }
     },
+    components: {TodoHeader, TodoMain, TodoFooter},
     methods: {
       // 添加todo
       addTodo(todo) {
@@ -36,12 +36,11 @@
       },
       // 删除已完成任务（选中的）
       deleteCompleteTodos() {
-        let self = this
-        let {layer, todos} = self
-        layer.confirm('确定清除已完成任务吗？', function () {
-          layer.close(this.id)
+        let {layer, todos} = this
+        this.layerId = layer.confirm('确定清除已完成任务吗？', () => {
+          layer.close(this.layerId)
           // 过滤 complete 为 false 的（保留为false的）
-          self.todos = todos.filter(todo => !todo.complete)
+          this.todos = todos.filter(todo => !todo.complete)
         })
       },
       // 全选/全不选
@@ -54,7 +53,7 @@
       todos: {
         // 深度监视
         deep: true,
-        handler: function (newValue) {
+        handler(newValue) {
           // 将todos最新的值的json数据，保存到localStorage
           window.localStorage.setItem(TODOS_KEY, JSON.stringify(newValue))
         }

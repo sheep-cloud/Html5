@@ -42,7 +42,7 @@ const
   /** 中国车牌号码 */
   PLATE_NUMBER = new RegExp('^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$')
 
-export default class ValidUtil {
+export default class validUtil {
   /**
    * 通过正则表达式校验
    *

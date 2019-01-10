@@ -29,7 +29,7 @@
             <!-- 路由匹配到的组件将渲染在这里 -->
             <keep-alive>
               <!--路由传递数据-->
-              <router-view msg="渐进式 JavaScript 框架"></router-view>
+              <router-view msg="渐进式 JavaScript 框架 - 路由传递数据"></router-view>
             </keep-alive>
             <!--
             <div class="col-md-5">

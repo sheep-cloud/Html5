@@ -20,29 +20,31 @@
 
 <script>
   export default {
-    props: {
-      addComment: {
-        // 指定属性名/属性值的类型/必要性
-        type: Function,
-        required: true
-      }
-    },
     data() {
       return {
         username: '',
         content: ''
       }
     },
+    /**
+     * 指定属性名, 值的类型, 必要性, 默认值
+     */
+    props: {
+      addComment: {
+        type: Function,
+        required: true
+      }
+    },
     methods: {
       add() {
         // 解构赋值
-        let {layer, moment, username, content, addComment} = this
+        let {layer, validUtil, username, content, addComment} = this
         // 1. 检查输入的合法性
         if (!username) {
           layer.alert('请输入用户名')
           return
         }
-        if (this.ValidUtil.isNotAccount(username)) {
+        if (validUtil.isNotAccount(username)) {
           layer.alert('请输入合法的用户名：3-16位任意字符')
           return
         }
@@ -54,7 +56,7 @@
         let comment = {
           username,
           content,
-          createTime: moment.format('YYYY-MM-DD HH:mm:ss')
+          createTime: new Date()
         }
         // 3. 添加到comments中
         addComment(comment)

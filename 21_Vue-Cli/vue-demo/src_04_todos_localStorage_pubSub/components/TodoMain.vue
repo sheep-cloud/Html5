@@ -1,20 +1,17 @@
 <template>
   <ul class="todo-main" :class="todos.length === 0 ? 'todo-empty' : ''">
-    <TodoItem v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index"/>
+    <TodoItem v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index"></TodoItem>
   </ul>
 </template>
 
 <script>
-
   import TodoItem from './TodoItem'
 
   export default {
-    components: {
-      TodoItem
-    },
     props: {
-      todos: Array,
-    }
+      todos: Array
+    },
+    components: {TodoItem}
   }
 </script>
 

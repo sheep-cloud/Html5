@@ -14,30 +14,26 @@ import MessageDetail from '../views/MessageDetail'
 // 声明使用插件
 Vue.use(VueRouter)
 
-let routes = [
-  // 自动跳转路由
-  {path: '/', redirect: '/about'},
-  {path: '/about', component: About},
-  {
-    path: '/home', component: Home,
-    children: [
-      {path: '', redirect: '/home/news'},
-      // path 最左侧的/永远代表根路径
-      {path: '/home/news', component: News},
-      {
-        // 简化写法
-        path: 'message', component: Message,
-        children: [
-          // 动态路径参数 以冒号开头
-          {path: '/home/message/detail/:id', component: MessageDetail}
-        ]
-      }
-    ]
-  }
-]
-
 export default new VueRouter({
-  routes,
+  routes: [
+    // 自动跳转路由
+    {path: '/', redirect: '/about'},
+    {path: '/about', component: About},
+    {
+      path: '/home', component: Home, children: [
+        {path: '', redirect: '/home/news'},
+        // path 最左侧的/永远代表根路径
+        {path: '/home/news', component: News},
+        {
+          // 简化写法
+          path: 'message', component: Message, children: [
+            // 动态路径参数 以冒号开头
+            {path: '/home/message/detail/:id', component: MessageDetail}
+          ]
+        }
+      ]
+    }
+  ],
   // 当前路由的 class router-link-active 修改 为 active
   linkActiveClass: 'active'
 })

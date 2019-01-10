@@ -2,7 +2,7 @@
   <section class="jumbotron">
     <h3 class="jumbotron-heading">Search Github Users</h3>
     <div class="form-inline">
-      <input type="text" placeholder="enter the name you search" class="form-control" v-model="searchName"/>
+      <input type="text" placeholder="enter the name you search" class="form-control" v-model.trim="searchName"/>
       <button class="btn btn-primary glyphicon glyphicon-search" @click="search"> Search</button>
     </div>
   </section>

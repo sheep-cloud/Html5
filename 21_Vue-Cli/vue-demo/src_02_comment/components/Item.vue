@@ -6,27 +6,28 @@
     </div>
     <div class="row">
       <p class="col-md-9 col-xs-6 text-info">{{comment.content}}</p>
-      <p class="col-md-3 col-xs-6 small text-muted text-right">{{comment.createTime}}</p>
+      <p class="col-md-3 col-xs-6 small text-muted text-right">{{comment.createTime | date-format}}</p>
     </div>
   </li>
 </template>
 
 <script>
   export default {
+    /**
+     * 指定属性名, 值的类型
+     */
     props: {
-      // 指定属性名和属性值的类型
       comment: Object,
       deleteComment: Function,
       index: Number
     },
     methods: {
       deleteItem() {
-        let self = this
         // 解构赋值
-        let {layer, comment, deleteComment, index} = self
-        layer.confirm(`确定删除${comment.username}的评论吗？`, function () {
+        let {layer, comment, deleteComment, index} = this
+        this.layerId = layer.confirm(`确定删除${comment.username}的评论吗？`, () => {
           // 关闭提示框
-          layer.close(this.id)
+          layer.close(this.layerId)
           deleteComment(index)
         })
       }

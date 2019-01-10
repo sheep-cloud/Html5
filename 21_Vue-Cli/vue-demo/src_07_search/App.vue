@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Search/>
-    <Row/>
+    <Search></Search>
+    <Row></Row>
   </div>
 </template>
 
@@ -10,9 +10,7 @@
   import Row from './components/Row'
 
   export default {
-    components: {
-      Search, Row
-    }
+    components: {Search, Row}
   }
 </script>
 
