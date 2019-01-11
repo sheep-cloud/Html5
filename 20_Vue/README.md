@@ -1748,7 +1748,7 @@ import PubSub from 'pubsub-js'
 ```js
       // 删除
       deleteItem() {
-        let {layer, todo, index} = this
+        const {layer, todo, index} = this
         this.layerId = layer.confirm(`确认删除${todo.title}吗？`, () => {
           layer.close(this.layerId)
           // 触发事件        发布消息
@@ -1836,13 +1836,14 @@ import PubSub from 'pubsub-js'
           }
         },
         mounted() {
-          // 发ajax请求获取数据
           const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
+    
+          // 发ajax请求获取数据
           this.$http.get(url).then(response => {
             // 成功了
-            let result = response.data
+            const result = response.data
             // 得到最受欢迎的repo
-            let mostRepo = result.items[0]
+            const mostRepo = result.items[0]
             this.repoUrl = mostRepo.html_url
             this.repoName = mostRepo.name
           }, () => this.layer.alert('请求失败'))
@@ -1905,13 +1906,14 @@ import PubSub from 'pubsub-js'
           }
         },
         mounted() {
-          // 发ajax请求获取数据
           const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
+    
+          // 发ajax请求获取数据
           this.axios.get(url).then(response => {
             // 成功了
-            let result = response.data
+            const result = response.data
             // 得到最受欢迎的repo
-            let mostRepo = result.items[0]
+            const mostRepo = result.items[0]
             this.repoUrl = mostRepo.html_url
             this.repoName = mostRepo.name
           }).catch(() => this.layer.alert('请求失败'))
@@ -1940,7 +1942,7 @@ import PubSub from 'pubsub-js'
       return {
         firstView: true,
         loading: false,
-        users: null,
+        users: [],
         errorMsg: ''
       }
     },
@@ -1952,12 +1954,12 @@ import PubSub from 'pubsub-js'
         // 更新状态（请求中）
         this.firstView = false
         this.loading = true
-        this.users = null
+        this.users = []
         this.errorMsg = ''
         // 发ajax请求
         this.axios.get(url).then(response => {
-          let result = response.data
-          let users = result.items.map(item => ({
+          const result = response.data
+          const users = result.items.map(item => ({
             html_url: item.html_url,
             avatar_url: item.avatar_url,
             score: item.score,
@@ -2445,74 +2447,94 @@ this.$router.replace(`url`)
 
 - 路由配置
 
-```js
-{path: '/home/message/detail/:id', component: MessageDetail}
-```
+  ```js
+  {path: '/home/message/detail/:id', component: MessageDetail}
+  ```
 
 - 传递参数
 
-```js
-this.$router.push(`/home/message/detail/12345`)
-```
+  ```js
+  this.$router.push(`/home/message/detail/12345`)
+  ```
 
-- url：  `http://xxx/12345`
+- url
+
+  ```ini
+  http://ip:port/home/message/detail/12345
+  ```
+
 - 接收参数
 
-```js
-this.$route.params.id
-```
+  ```js
+  this.$route.params.id
+  ```
 
 #### 5.7.2. 显式传参
 
 - 路由配置
 
-```js
-{path: '/home/message/detail', component: MessageDetail}
-```
+  ```is
+  {path: '/home/message/detail', component: MessageDetail}
+  ```
 
 - 传递参数
 
-```js
-        this.$router.push(
-          {
-            path: `/home/message/detail`,
-            query: {id: 12345}
-          }
-        )
-```
+  ```js
+  this.$router.push(
+      {
+          path: `/home/message/detail`,
+          query: {id: 12345}
+      }
+  )
+  ```
 
-- url： `http://xxx?id=12345`
+  ```js
+  this.$router.push(`/home/message/detail?id=12345`)
+  ```
+
+- url
+
+  ```ini
+  http://ip:port/home/message/detail?id=12345
+  ```
+
 - 接收参数
 
-```js
-this.$route.query.id
-```
+  ```js
+  this.$route.query.id
+  ```
 
 #### 5.7.3. 隐式传参
 
 - **路由配置（必须配置name）**
 
-```js
-{path: '/home/message/detail', name: 'MessageDetail', component: MessageDetail}
-```
+  ```js
+  {path: '/home/message/detail', name: 'MessageDetail', component: MessageDetail}
+  ```
 
 - 传递参数
 
-```js
-        this.$router.push(
-          {
-            name: 'MessageDetail',
-            params: {id: 12345}
-          }
-        )
-```
+  ```js
+  this.$router.push(
+      {
+          name: 'MessageDetail',
+          params: {id: 12345}
+      }
+  )
+  ```
 
-- url：`http://xxx` 参数隐式传递
+- url
+
+  ```ini
+  # 参数隐式传递
+  http://ip:port/home/message/detail
+  ```
+
 - 接收参数
 
-```js
-this.$route.params.id
-```
+  ```js
+  this.$route.params.id
+  ```
 
 ## 6. Vuex
 
