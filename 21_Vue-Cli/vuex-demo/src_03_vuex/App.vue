@@ -8,17 +8,13 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations, mapActions} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     computed: {
       ...mapGetters(['name', 'age', 'other'])
     },
     methods: {
-      ...mapMutations({
-        setName: 'SET_NAME',
-        setAge: 'SET_AGE'
-      }),
       ...mapActions(['nameAsyn'])
     }
   }

@@ -1,6 +1,6 @@
 <template>
-  <ul class="todo-main" :class="todos.length === 0 ? 'todo-empty' : ''">
-    <TodoItem v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index"/>
+  <ul class="todo-main" :class="{'todo-empty' : !todos.length}">
+    <TodoItem v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index"></TodoItem>
   </ul>
 </template>
 
@@ -10,9 +10,7 @@
   import storageUtil from './../util/storageUtil'
 
   export default {
-    components: {
-      TodoItem
-    },
+    components: {TodoItem},
     computed: {
       ...mapState(['todos'])
     },

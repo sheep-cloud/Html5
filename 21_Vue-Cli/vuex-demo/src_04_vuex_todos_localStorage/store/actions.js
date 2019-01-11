@@ -24,9 +24,9 @@ export default {
     // 模拟
     setTimeout(() => {
       // 读取数据
-      let todos = storageUtil.readTodos()
+      const todos = storageUtil.readTodos()
       // 更新状态，提交mutations
       commit(types.GET_TODOS, {todos})
-    }, 1000)
+    }, 300)
   }
 }

@@ -13,17 +13,17 @@
     },
     methods: {
       addItem() {
-        let {layer, moment, title} = this
+        const {layer, title} = this
         // 1. 检查输入的合法性
         if (!title) {
           layer.alert('请输入任务名称')
           return
         }
         // 2. 根据输入生成一个todo对象
-        let todo = {
+        const todo = {
           title,
           complete: false,
-          createTime: moment.format('YYYY-MM-DD HH:mm:ss')
+          createTime: new Date()
         }
         // 3. 添加到todos
         this.$store.dispatch('addTodo', todo)

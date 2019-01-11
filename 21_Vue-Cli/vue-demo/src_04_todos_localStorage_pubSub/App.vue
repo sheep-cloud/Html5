@@ -63,17 +63,28 @@
       todos: {
         // 深度监视 - 发现对象内部值的变化
         deep: true,
+
+        // 原始方式
+        /*
+        handler: function (newValue) {
+          // 将todos最新的值的json数据，保存到localStorage
+          storageUtil.saveTodos(newValue)
+        }
+        */
+
+        // es6 方式
         /*
         handler(newValue) {
           // 将todos最新的值的json数据，保存到localStorage
           storageUtil.saveTodos(newValue)
         }
         */
+
+        // 箭头函数 方式 (不推荐使用箭头函数来定义watcher函数, 理由是箭头函数绑定了父级作用域的上下文，所以 this 将不会按照期望指向 Vue 实例)
         /*
-        handler: newValue => {
-          storageUtil.saveTodos(newValue)
-        }
+        handler: newValue => storageUtil.saveTodos(newValue)
         */
+
         // 简写，相当于 handler 直接调saveTodos这个函数
         handler: storageUtil.saveTodos
       }

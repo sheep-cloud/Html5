@@ -8,8 +8,11 @@
 <script>
   export default {
     watch: {
-      $route(route) {
-        console.log(route)
+      $route: {
+        immediate: true,
+        handler(route) {
+          console.log(route)
+        }
       }
     }
   }

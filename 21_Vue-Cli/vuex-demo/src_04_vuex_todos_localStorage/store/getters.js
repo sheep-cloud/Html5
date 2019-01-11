@@ -8,12 +8,10 @@ export default {
   },
   // 完成的数量
   completeCount(state) {
-    return state.todos.reduce((total, todo) => {
-      return total + (todo.complete ? 1 : 0)
-    }, 0)
+    return state.todos.reduce((total, todo) => total + (todo.complete ? 1 : 0), 0)
   },
   // 判断是否全部选中
   isAllCheck(state, getters) {
-    return getters.totalCount === getters.completeCount && getters.totalCount > 0
+    return getters.totalCount && getters.totalCount === getters.completeCount
   }
 }

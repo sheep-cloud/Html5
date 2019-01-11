@@ -17,7 +17,7 @@
     },
     computed: {
       evenOrOdd() {
-        return this.count % 2 === 0 ? '偶数' : '奇数'
+        return this.count % 2 ? '奇数' : '偶数'
       }
     },
     methods: {
@@ -31,15 +31,15 @@
       },
       // 如果是奇数才增加
       incrementIfOdd() {
-        if (this.count % 2 === 1) {
-          this.count++
+        if (this.count % 2) {
+          this.increment()
         }
       },
       // 过一秒才增加
       incrementAsync() {
         setTimeout(() => {
-          this.count++
-        }, 500)
+          this.decrement()
+        }, 1000)
       }
     }
   }

@@ -1,9 +1,9 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHeader/>
-      <TodoMain/>
-      <TodoFooter/>
+      <TodoHeader></TodoHeader>
+      <TodoMain></TodoMain>
+      <TodoFooter></TodoFooter>
     </div>
   </div>
 </template>
@@ -14,13 +14,11 @@
   import TodoFooter from './components/TodoFooter'
 
   export default {
-    components: {
-      TodoHeader, TodoMain, TodoFooter
-    },
     mounted() {
       // 发送命令给action：异步获取保存todos数据并显示
       this.$store.dispatch('selectTodoos')
-    }
+    },
+    components: {TodoHeader, TodoMain, TodoFooter}
   }
 </script>
 

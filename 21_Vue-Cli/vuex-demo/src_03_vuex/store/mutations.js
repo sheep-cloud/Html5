@@ -1,6 +1,11 @@
 import types from './mutations-types'
 
-export default {
+/**
+ * 直接更新state的多个方法的对象
+ *
+ * @type {{[p: string]: *}}
+ */
+const mutations = {
   [types.SET_NAME](state, name) {
     state.name = name
   },
@@ -8,3 +13,5 @@ export default {
     state.age = age
   }
 }
+
+export default mutations
