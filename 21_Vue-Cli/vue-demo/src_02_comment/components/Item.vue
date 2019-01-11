@@ -24,7 +24,7 @@
     methods: {
       deleteItem() {
         // 解构赋值
-        let {layer, comment, deleteComment, index} = this
+        const {layer, comment, deleteComment, index} = this
         this.layerId = layer.confirm(`确定删除${comment.username}的评论吗？`, () => {
           // 关闭提示框
           layer.close(this.layerId)

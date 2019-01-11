@@ -21,9 +21,6 @@
   import TodoFooter from './components/TodoFooter'
 
   export default {
-    components: {
-      TodoHeader, TodoMain, TodoFooter
-    },
     data() {
       return {
         // 从 localStorage 读取todos
@@ -37,6 +34,7 @@
         this.deleteTodo(index)
       })
     },
+    components: {TodoHeader, TodoMain, TodoFooter},
     methods: {
       // 添加todo
       addTodo(todo) {
@@ -48,7 +46,7 @@
       },
       // 删除已完成任务（选中的）
       deleteCompleteTodos() {
-        let {layer, todos} = this
+        const {layer, todos} = this
         this.layerId = layer.confirm('确定清除已完成任务吗？', () => {
           layer.close(this.layerId)
           // 过滤 complete 为 false 的（保留为false的）
@@ -63,7 +61,7 @@
     // 监视
     watch: {
       todos: {
-        // 深度监视
+        // 深度监视 - 发现对象内部值的变化
         deep: true,
         /*
         handler(newValue) {

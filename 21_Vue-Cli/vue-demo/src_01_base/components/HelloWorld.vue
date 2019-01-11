@@ -8,7 +8,7 @@
   export default {        // 向外暴露一个配置对象（与Vue一致）
     data() {              // 必须写函数
       return {
-        msg: 'Hello Vue Components'
+        msg: 'Hello Vue Components !'
       }
     }
   }

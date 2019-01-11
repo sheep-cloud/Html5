@@ -19,7 +19,7 @@
     },
     methods: {
       search() {
-        let {searchName} = this
+        const {searchName} = this
         if (searchName) {
           // 发布搜索的消息
           PubSub.publish('search', searchName)

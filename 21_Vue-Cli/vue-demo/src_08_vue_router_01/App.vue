@@ -6,7 +6,13 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    watch: {
+      $route(route) {
+        console.log(route)
+      }
+    }
+  }
 </script>
 
 <style scoped>

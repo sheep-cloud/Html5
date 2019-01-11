@@ -37,7 +37,7 @@
       },
       // 删除
       deleteItem() {
-        let {layer, todo, index, deleteTodo} = this
+        const {layer, todo, index, deleteTodo} = this
         this.layerId = layer.confirm(`确认删除${todo.title}吗？`, () => {
           layer.close(this.layerId)
           deleteTodo(index)

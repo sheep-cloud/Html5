@@ -1,5 +1,5 @@
 <template>
-  <ul class="todo-main" :class="todos.length === 0 ? 'todo-empty' : ''">
+  <ul class="todo-main" :class="{'todo-empty' : !todos.length}">
     <TodoItem v-for="(todo, index) in todos" :key="index" :todo="todo" :index="index"></TodoItem>
   </ul>
 </template>

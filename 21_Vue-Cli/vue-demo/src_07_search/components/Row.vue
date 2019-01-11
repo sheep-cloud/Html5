@@ -8,8 +8,8 @@
         <a :href="user.html_url" target="_blank">
           <img :src="user.avatar_url" class="img-rounded"/>
         </a>
-        <p class="card-text"><i class="glyphicon glyphicon-star"></i>：{{user.score}}</p>
-        <p class="card-text"><i class="glyphicon glyphicon-user"></i>：{{user.login}}</p>
+        <p class="card-text"><i class="glyphicon glyphicon-star"></i> : {{user.score}}</p>
+        <p class="card-text"><i class="glyphicon glyphicon-user"></i> : {{user.login}}</p>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
       return {
         firstView: true,
         loading: false,
-        users: null,
+        users: [],
         errorMsg: ''
       }
     },
@@ -35,13 +35,12 @@
         // 更新状态（请求中）
         this.firstView = false
         this.loading = true
-        this.users = null
+        this.users = []
         this.errorMsg = ''
         // 发ajax请求
         this.axios.get(url).then(response => {
-          let result = response.data
-          console.log(result)
-          let users = result.items.map(item => ({
+          const result = response.data
+          const users = result.items.map(item => ({
             html_url: item.html_url,
             avatar_url: item.avatar_url,
             score: item.score,

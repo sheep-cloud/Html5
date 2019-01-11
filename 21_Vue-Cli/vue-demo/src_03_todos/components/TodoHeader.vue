@@ -1,6 +1,6 @@
 <template>
   <div class="todo-header">
-    <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="title" @keyup.enter="addItem"/>
+    <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model.trim="title" @keyup.enter="addItem"/>
   </div>
 </template>
 
@@ -16,14 +16,14 @@
     },
     methods: {
       addItem() {
-        let {layer, addTodo, title} = this
+        const {layer, addTodo, title} = this
         // 1. 检查输入的合法性
         if (!title) {
           layer.alert('请输入任务名称')
           return
         }
         // 2. 根据输入生成一个todo对象
-        let todo = {
+        const todo = {
           title,
           complete: false,
           createTime: new Date()

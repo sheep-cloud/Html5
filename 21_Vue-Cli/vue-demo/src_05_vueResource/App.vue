@@ -14,13 +14,14 @@
       }
     },
     mounted() {
-      // 发ajax请求获取数据
       const url = `https://api.github.com/search/repositories?q=vue&sort=stars`
+
+      // 发ajax请求获取数据
       this.$http.get(url).then(response => {
         // 成功了
-        let result = response.data
+        const result = response.data
         // 得到最受欢迎的repo
-        let mostRepo = result.items[0]
+        const mostRepo = result.items[0]
         this.repoUrl = mostRepo.html_url
         this.repoName = mostRepo.name
       }, () => this.layer.alert('请求失败'))

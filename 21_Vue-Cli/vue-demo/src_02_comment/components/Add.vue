@@ -38,7 +38,7 @@
     methods: {
       add() {
         // 解构赋值
-        let {layer, validUtil, username, content, addComment} = this
+        const {layer, validUtil, username, content, addComment} = this
         // 1. 检查输入的合法性
         if (!username) {
           layer.alert('请输入用户名')
@@ -53,7 +53,7 @@
           return
         }
         // 2. 根据输入的数据，封装成一个comment对象
-        let comment = {
+        const comment = {
           username,
           content,
           createTime: new Date()

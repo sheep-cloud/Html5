@@ -37,7 +37,7 @@
     mounted() {
       setTimeout(() => {
         // 防止是文本
-        let id = this.$route.params.id * 1
+        const id = this.$route.params.id * 1
         this.messageDetail = allMessageDetails.find(detail => detail.id === id)
       }, 500)
     },
@@ -45,7 +45,7 @@
       // 路由（params）发生了变化
       $route(router) {
         console.log(router)
-        let id = router.params.id * 1
+        const id = router.params.id * 1
         if (id) {
           this.messageDetail = allMessageDetails.find(detail => detail.id === id)
         }

@@ -36,7 +36,7 @@
       },
       // 删除已完成任务（选中的）
       deleteCompleteTodos() {
-        let {layer, todos} = this
+        const {layer, todos} = this
         this.layerId = layer.confirm('确定清除已完成任务吗？', () => {
           layer.close(this.layerId)
           // 过滤 complete 为 false 的（保留为false的）
