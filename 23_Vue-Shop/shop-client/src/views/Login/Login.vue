@@ -30,15 +30,15 @@
           <div :class="{on : !loginWay}">
             <section>
               <section class="login_message">
-                <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名" v-model="name">
+                <input type="tel" maxlength="16" placeholder="手机/邮箱/用户名" v-model="name">
               </section>
               <section class="login_verification">
                 <!--<input :type="showPwd ? 'text' : 'password'" maxlength="8" placeholder="密码" v-model="pwd">-->
-                <input type="text" maxlength="8" placeholder="密码" v-model="pwd" v-if="showPwd">
-                <input type="password" maxlength="8" placeholder="密码" v-model="pwd" v-else>
+                <input type="text" maxlength="18" placeholder="密码" v-model="pwd" v-if="showPwd">
+                <input type="password" maxlength="18" placeholder="密码" v-model="pwd" v-else>
                 <div class="switch_button" :class="showPwd ? 'on' : 'off'" @click="showPwd = !showPwd">
                   <div class="switch_circle" :class="{on: showPwd}"></div>
-                  <span class="switch_text">{{showPwd ? 'abc' : '...'}}</span>
+                  <span class="switch_text">{{showPwd ? '显' : '隐'}}</span>
                 </div>
               </section>
               <section class="login_message">
@@ -64,6 +64,7 @@
 <script>
   import AlertTip from '../../components/AlertTip/AlertTip'
   import api from '../../api'
+  import validUtil from '../../util/validUtil'
 
   export default {
     components: {AlertTip},
@@ -84,7 +85,7 @@
     },
     computed: {
       isPhone() {
-        return /^134[0-8]\d{7}$|^13[^4]\d{8}$|^14[5-9]\d{8}$|^15[^4]\d{8}$|^16[6]\d{8}$|^17[0-8]\d{8}$|^18[\d]{9}$|^19[8,9]\d{8}$/.test(this.phone)
+        return validUtil.isMoblePhone(this.phone)
       }
     },
     methods: {
@@ -148,7 +149,7 @@
             this.showTip('手机号不正确')
             return
           }
-          if (!/^\d{6}$/.test(code)) {
+          if (!validUtil.isInteger6(code)) {
             // 验证码必须是6位数字
             this.showTip('验证码必须是6位数字')
             return
@@ -162,9 +163,17 @@
             this.showTip('必须指定用户名')
             return
           }
+          if (!validUtil.isAccount(name)) {
+            this.showTip('请输入合法的用户名 : 3-16位')
+            return
+          }
           if (!pwd) {
             // 密码必须指定
             this.showTip('密码必须指定')
+            return
+          }
+          if (!validUtil.isPassword(pwd)) {
+            this.showTip('请输入合法的密码 : 6-18位')
             return
           }
           if (!captcha) {

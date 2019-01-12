@@ -20,6 +20,7 @@
       */
       this.getAddress()
       this.getUserInfo()
+      console.log(window.document.cookie)
     },
     methods: {
       ...mapActions(['getAddress', 'getUserInfo'])

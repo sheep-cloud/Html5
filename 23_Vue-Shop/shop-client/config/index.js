@@ -4,6 +4,13 @@
 
 const path = require('path')
 
+/**
+ * 代理目标的基础路径
+ * @type {string}
+ */
+const target = 'http://localhost:3000'
+// const target = 'http://193.112.72.47:3000'
+
 module.exports = {
   dev: {
 
@@ -13,7 +20,7 @@ module.exports = {
     // 配置代理
     proxyTable: {
       '/api': {                           // 匹配所有以 '/api' 开头的请求路径
-        target: 'http://localhost:3000',  // 代理目标的基础路径
+        target,                           // 代理目标的基础路径
         changeOrigin: true,               // 是否跨域
         pathRewrite: {                    // 重写路径: 去掉路径中开头的 '/api'
           '^/api': ''

@@ -13,7 +13,7 @@
           <div class="desc">另需配送费￥{{shopInfo.deliveryPrice}} 元</div>
         </div>
         <div class="content-right">
-          <div class="pay" :class="payClass" @click="pay">
+          <div class="pay" :class="payClass" @click="payMent">
             {{payText}}
           </div>
         </div>
@@ -63,12 +63,12 @@
       payClass() {
         const {totalPrice} = this
         const {minPrice} = this.shopInfo
-        return totalPrice >= minPrice ? 'enough' : 'not-enough'
+        return totalPrice < minPrice ? 'not-enough' : 'enough'
       },
       payText() {
         const {totalPrice} = this
         const {minPrice} = this.shopInfo
-        if (totalPrice === 0) {
+        if (totalPrice) {
           return `￥${minPrice} 元起送`
         } else if (totalPrice < minPrice) {
           return `还差￥${minPrice - totalPrice} 元起送`
@@ -149,7 +149,10 @@
           Toast('清空成功')
         }, () => console.log())
       },
-      pay() {
+      payMent() {
+        if (this.totalPrice < this.shopInfo.minPrice) {
+          return
+        }
         MessageBox.confirm('结算？').then(() => {
           Toast('结算成功')
         }, () => console.log())

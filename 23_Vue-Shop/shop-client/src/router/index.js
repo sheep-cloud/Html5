@@ -41,11 +41,6 @@ import ShopGoods from '../views/Shop/ShopGoods/ShopGoods'
 import ShopRatings from '../views/Shop/ShopRatings/ShopRatings'
 // 信息
 import ShopInfo from '../views/Shop/ShopInfo/ShopInfo'
-// 测试
-import Test from '../views/Test/Test'
-// 滑块
-import Switch from '../components/Switch/Switch'
-
 
 // 声明使用插件
 Vue.use(VueRouter)
@@ -72,8 +67,6 @@ export default new VueRouter({
         {path: '/shop/ratings', component: ShopRatings},
         {path: '/shop/info', component: ShopInfo}
       ]
-    },
-    {path: '/test', component: Test},
-    {path: '/switch', component: Switch}
+    }
   ]
 })

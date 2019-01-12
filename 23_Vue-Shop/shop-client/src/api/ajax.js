@@ -12,6 +12,9 @@ import axios from 'axios'
  */
 function ajax(url = '', data = {}, type = 'GET') {
   return new Promise((resolve, reject) => {
+    // 跨域访问携带凭证
+    axios.defaults.withCredentials = true
+
     // 执行异步ajax请求
     let promise
     if (type === 'GET') {

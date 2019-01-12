@@ -18,7 +18,6 @@ Vue.use(VueLazyload, { // 内部自定义了一个指令v-lazy
   loading
 })
 
-
 Vue.config.productionTip = false
 
 new Vue({
