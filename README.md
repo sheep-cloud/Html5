@@ -13,4 +13,5 @@
 - [Vue源码分析](https://github.com/colg-cloud/Html5/tree/master/22_Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
 - [Vue-Shop](https://github.com/colg-cloud/Html5/tree/master/23_Vue-Shop)
 - [JavaScript设计模式与开发实践](https://github.com/colg-cloud/Html5/tree/master/40_JavaScript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5)
+- [Layui](https://github.com/colg-cloud/Html5/tree/master/50_Layui)
 
