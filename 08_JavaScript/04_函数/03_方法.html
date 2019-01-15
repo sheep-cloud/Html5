@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_方法</title>
+<script>
+    // 对象的属性值可以是任何的数据类型, 也可以是个函数
+    var obj = {
+        name: 'Jack',
+        sayName: function () {
+            console.log(this.name)
+        }
+    }
+    console.log(obj)
+    obj.sayName()
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    /*
+        函数也可以称为对象的属性
+            如果一个函数作为一个对象的属性保存, 那么我们称这个函数是这个对象的方法, 调用函数就是调用对象的方法
+     */
+</script>
+</head>
+<body>
+
+</body>
+</html>

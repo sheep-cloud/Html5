@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_函数的参数</title>
+<script>
+
+    /**
+     * 定义一个用来求两个数和的函数
+     *
+     * @param a
+     * @param b
+     */
+    function sum(a, b) {
+        console.log(a + b)
+    }
+
+    // 调用函数时, 实参将会赋值给函数中对应的形参
+    sum(1, 2) // 3
+
+    // 调用函数时解析器不会检查实参的类型
+    sum(true, 'hello') // truehello
+
+    // 调用函数时解析器也不会检查实参的数量
+    sum(1, 2, 3) // 3
+
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    /**
+     * 定义一个用来求两个数和的函数
+     *
+     * @param a
+     * @param b
+     * @return {*} 函数返回值
+     */
+    function fun2(a, b) {
+        return a + b
+    }
+
+    var a = fun2(1, 2)
+    console.log(a)
+</script>
+</head>
+<body>
+
+</body>
+</html>

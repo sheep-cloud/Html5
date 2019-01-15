@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_正则表达式</title>
+<script src="js/ValidUtil.js"></script>
+<script>
+
+    var reg = new RegExp('a')
+    console.log(reg) // /a/
+    console.log(typeof reg) // object
+
+    /*
+        正则表达式的方法
+            test()
+                - 使用这个方法可以用来检查一个字符串是否符合正则表达式的规则
+                  如果符合则返回true, 否则返回false
+     */
+
+    var str = 'a'
+    var result = reg.test(str)
+    console.log(result) // true
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    /*
+        使用字面量的方式创建正则表达式: 方便
+            var 变量 = /正则表达式/匹配模式
+            变量.test(值)
+        使用构造函数创建正则表达式: 灵活
+            var 变量 = new RegExp('正则表达式', '匹配模式')
+            变量.test(值)
+     */
+    // 使用字面量的方式创建
+    var reg2 = /a/
+    console.log(reg2.test('a'))
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 使用构造函数创建
+    var numbers = new RegExp('^.{6,18}$')
+    console.log(numbers.test('132423'))
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    console.log(window)
+    console.log(window.validUtil)
+    console.log(validUtil.isNumbers('123456'))
+    console.log(validUtil.isAccount('123'))
+    console.log(validUtil.isPassword('123456'))
+</script>
+</head>
+<body>
+
+</body>
+</html>

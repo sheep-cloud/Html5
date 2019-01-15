@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_数组字面量</title>
+<script>
+    // 创建一个数组
+    // var arr = new Array()
+
+    /*
+        使用字面量来创建数组
+            语法: var arr = []
+     */
+    var arr = []
+
+    console.log(typeof arr)
+
+    // 使用字面量创建数组时, 可以在创建时就指定数组中的元素
+    var arr1 = [1, 2, 3, 4, 5, 10]
+    console.log(arr1)
+    console.log(arr1.length)
+    console.log(arr1[0])
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 使用构造函数创建数组时, 也可以同时添加元素, 将要添加的元素作为构造函数的参数传递
+    // 元素之间, 隔开
+    var arr2 = new Array(10, 20, 30)
+    console.log(arr2)
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 创建一个数组, 数组中只有一个元素10
+    var arr3 = [10]
+    console.log(arr3)
+
+    // 只传一个整数时, 创建一个长度为 10 的数组
+    var arr4 = new Array(10)
+    console.log(arr4) // [empty × 10]
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 数组中元素可以是任意类型
+    var obj = {
+        name: 'Jack',
+        age: 18
+    }
+    var fun = function () {
+        console.log('fun函数')
+    }
+
+    function fun2() {
+        console.log('fun2函数')
+    }
+
+    var arr5 = ['hello', 1, true, null, undefined, obj, fun, fun2]
+    console.log(arr5)
+    arr5[6]()
+    arr5[7]()
+</script>
+</head>
+<body>
+
+</body>
+</html>
