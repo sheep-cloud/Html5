@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_数据类型</title>
+</head>
+<body>
+    <!--
+        1. 分类
+            * 基本（值）类型
+                * String:       任意字符串
+                * Number:       任意的数字
+                * boolean:      true/false
+                * undefined:    undefined
+                * null:         null
+            * 对象（引用）类型
+                * Object:       任意对象
+                * Function:     一种特别的对象(可以执行)
+                * Array:        一种特别的对象(数值下标, 内部数据是有序的)
+        2. 判断
+            * typeof
+                * 可以判断:     undefined / 数值 / 字符串 / 布尔值 / function
+                * 不能判断:     null与object object与array
+            * instanceof
+                * 判断对象的具体类型
+            * ===
+                * 可以判断:     undefined
+    -->
+
+    <script>
+        // 1. 基本数据类型
+        // typeof 返回数据类型的字符串表达
+        var a
+        console.log(a, typeof a, typeof a === 'undefined', a === undefined) // undefined "undefined" true true
+        console.log(undefined === 'undefined') // false
+
+        a = 3
+        console.log(typeof a === 'number')
+        a = 'colg'
+        console.log(typeof a === 'string')
+        a = true
+        console.log(typeof a === 'boolean')
+        a = null
+        console.log(typeof a === 'object', a === null)
+        console.log('----------------------------------------------------------------------------------------------------')
+
+        // 2. 对象
+        var b1 = {
+            b2: [1, 'abc', console.log],
+            b3: function () {
+                console.log('b3')
+                return function () {
+                    return 'Jack'
+                }
+            },
+            b4: null
+        }
+
+        console.log(b1 instanceof Object, b1 instanceof Array) // true false
+        console.log(b1.b2 instanceof Array, b1.b2 instanceof Object) // true true
+        console.log(b1.b3 instanceof Function, b1.b3 instanceof Object) // true true
+
+        console.log(typeof b1.b2, typeof b1.b4) // object object => typeof 不能判断null与array
+
+        console.log(typeof b1.b3 === 'function') // true
+
+        console.log(typeof b1.b2[2] === 'function') // true
+        b1.b2[2]('colg') // colg => 调用函数
+        console.log(typeof b1.b3() === 'function') // b3 true
+        console.log(b1.b3()()) // b3 jack => 调用函数
+    </script>
+</body>
+</html>

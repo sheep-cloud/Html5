@@ -6,9 +6,9 @@
 </head>
 <body>
     <!--
-        1. instanceof 是如何判断的？
-            * 表达式： A instanceof B
-            * 如果B函数的显示原型对象在A对象的原型链上，返回 true， 否则返回 false
+        1. instanceof 是如何判断的?
+            * 表达式: A instanceof B
+            * 如果B函数的显式原型对象在A对象的原型链上, 返回 true, 否则返回 false
         2. Function是通过new自己产生的实例
     -->
     <script>
@@ -19,7 +19,7 @@
 
         }
 
-        let f1 = new Foo()
+        var f1 = new Foo()
         console.log(f1 instanceof Foo) // true
         console.log(f1 instanceof Object) // true
         console.log(Foo instanceof Object) // true

@@ -30,13 +30,13 @@
 
     get
     this.$http.get($END$).then(response => {
-    let result = response.body
+      const result = response.body
     }, response => console.log(response))
 
 
     post
     this.$http.post($END$, {}).then(response => {
-    let result = response.body
+      const result = response.body
     }, response => console.log(response))
 
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_对象字面量模式</title>
+</head>
+<body>
+    <!--
+        方式二: 对象字面量模式
+            * 套路: 使用{}创建对象, 同时指定属性/方法
+            * 适用场景: 起始时对象内部数据是确定的
+            * 问题: 如果创建多个对象, 有重复代码
+    -->
+    <script>
+        var p = {
+            name: 'Tom',
+            age: 12,
+            setName: function (name) {
+                this.name = name
+            },
+            getName: function () {
+                return this.name
+            }
+        }
+
+        // 测试
+        p.setName("Jack")
+        console.log(p) // {name: "Jack", age: 12, setName: ƒ, getName: ƒ}
+    </script>
+</body>
+</html>

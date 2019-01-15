@@ -10,38 +10,40 @@
     <button>测试3</button>
 
     <!--
-        需求：点击某个按钮，提示"点击的是第n个按钮"
+        需求: 点击某个按钮, 提示"点击的是第n个按钮"
     -->
     <script>
-        let btns = document.getElementsByTagName('button')
+        var btns = document.getElementsByTagName('button')
+        console.log(btns)
 
-        // 遍历加监听，var i 是全局变量
+        // 遍历加监听，var i 是全局变量, 异常
         /*
-        for (var i = 0, length = btns.length; i < length; i++) {
+        for (var i = 0, len = btns.length; i < len; i++) {
             var btn = btns[i]
             btn.onclick = function () {
-                alert('你点击的是第' + (i + 1) + '个按钮')
+                console.log('你点击的是第' + (i + 1) + '个按钮') // 你点击的是第4个按钮
             }
         }
         */
 
+        // 遍历加监听, 保存下标
         /*
-        for (var i = 0, length = btns.length; i < length; i++) {
+        for (var i = 0, len = btns.length; i < len; i++) {
             var btn = btns[i]
             // 将btn所对应的下标保存在btn上
             btn.index = i
             btn.onclick = function () {
-                alert('你点击的是第' + (this.index + 1) + '个按钮')
+                console.log('你点击的是第' + (this.index + 1) + '个按钮')
             }
         }
         */
 
         // 利用闭包实现遍历加监听
-        for (var i = 0, length = btns.length; i < length; i++) {
+        for (var i = 0, len = btns.length; i < len; i++) {
             (function (index) {
                 var btn = btns[index]
                 btn.onclick = function () {
-                    alert('你点击的是第' + (index + 1) + '个按钮')
+                    console.log('你点击的是第' + (index + 1) + '个按钮')
                 }
             })(i)
         }
