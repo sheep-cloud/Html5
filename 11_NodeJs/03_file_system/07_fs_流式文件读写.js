@@ -8,7 +8,7 @@ var fs = require('fs')
 var rs = fs.createReadStream('../README.md')
 
 // 创建一个可写流
-var ws = fs.createWriteStream('./file/README.png')
+var ws = fs.createWriteStream('./file/NodeJS.md')
 
 // 将可读流中的内容，直接输出到可写流中
 rs.pipe(ws)
