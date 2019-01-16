@@ -13,7 +13,7 @@
           <div class="desc">另需配送费￥{{shopInfo.deliveryPrice}} 元</div>
         </div>
         <div class="content-right">
-          <div class="pay" :class="payClass" @click="payMent">
+          <div class="pay" :class="payClass" @click="payMent" v-show="shopInfo.minPrice !== undefined">
             {{payText}}
           </div>
         </div>
@@ -68,7 +68,7 @@
       payText() {
         // 嵌套对象的解构赋值
         const {totalPrice, shopInfo: {minPrice}} = this
-        if (totalPrice) {
+        if (totalPrice === 0) {
           return `￥${minPrice} 元起送`
         } else if (totalPrice < minPrice) {
           return `还差￥${minPrice - totalPrice} 元起送`

@@ -35,7 +35,7 @@
               <section class="login_verification">
                 <!--<input :type="showPwd ? 'text' : 'password'" maxlength="8" placeholder="密码" v-model="pwd">-->
                 <input type="text" maxlength="18" placeholder="密码" v-model="pwd" v-if="showPwd">
-                <input type="password" maxlength="18" placeholder="密码" v-model="pwd" v-else>
+                <input type="password" autocomplete="new-password" maxlength="18" placeholder="密码" v-model="pwd" v-else>
                 <div class="switch_button" :class="showPwd ? 'on' : 'off'" @click="showPwd = !showPwd">
                   <div class="switch_circle" :class="{on: showPwd}"></div>
                   <span class="switch_text">{{showPwd ? '显' : '隐'}}</span>
@@ -159,10 +159,14 @@
         let result
         // 前台表单验证
         if (this.loginWay) { // 短信登录
-          const {isPhone, phone, code} = this
+          const {isPhone, phone, code, computeTime} = this
           if (!isPhone) {
             // 手机号不正确
             this.showTip('手机号不正确')
+            return
+          }
+          if (computeTime === 0) {
+            this.showTip('输入验证码超时')
             return
           }
           if (!validUtil.isInteger6(code)) {
