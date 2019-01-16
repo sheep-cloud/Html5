@@ -14,9 +14,10 @@ let users = {}
  * 用户名密码登陆
  */
 router.post('/login_pwd', (req, res) => {
-    const name = req.body.name
-    const pwd = md5(req.body.pwd)
-    const captcha = req.body.captcha.toUpperCase()
+    const {name} = req.body
+    let {pwd, captcha} = req.body
+    pwd = md5(pwd)
+    captcha = captcha.toUpperCase()
     console.log(`/login_pwd; req: ${JSON.stringify(req.body)}`)
 
     // 可以对用户名/密码格式进行检查, 如果非法, 返回提示信息
@@ -74,7 +75,7 @@ router.get('/captcha', (req, res) => {
  */
 router.get('/sendcode', (req, res) => {
     // 1. 获取请求参数数据
-    const phone = req.query.phone
+    const {phone} = req.query
     // 2. 处理数据
     // 生成验证码(6位随机数)
     const code = sms_util.randomCode(6)
@@ -98,9 +99,8 @@ router.get('/sendcode', (req, res) => {
  * 手机号验证码登陆
  */
 router.post('/login_sms', (req, res, next) => {
-    const phone = req.body.phone
-    const code = req.body.code
     console.log(`/login_sms; req: ${JSON.stringify(req.body)}`)
+    const {phone, code} = req.body
     if (users[code] !== code) {
         res.send({code: 1, msg: '手机号或验证码不正确！'})
         return
@@ -129,7 +129,7 @@ router.post('/login_sms', (req, res, next) => {
 router.get('/userinfo', function (req, res) {
     console.log(`/userinfo; sessionId: ${req.session.id}`)
     // 取出userid
-    const userid = req.session.userid
+    const {userid} = req.session
     if (!userid) {
         res.send({code: 1, msg: '请先登录！'})
         return
