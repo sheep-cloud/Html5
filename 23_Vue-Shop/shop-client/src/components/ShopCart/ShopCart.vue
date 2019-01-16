@@ -47,8 +47,8 @@
 <script>
   import BScroll from 'better-scroll'
   import {mapState, mapGetters} from 'vuex'
-  import CartControl from '../CartControl/CartControl'
   import {MessageBox, Toast} from 'mint-ui'
+  import CartControl from '../CartControl/CartControl'
 
   export default {
     data() {
@@ -61,13 +61,13 @@
       ...mapState(['cartFoods', 'shopInfo']),
       ...mapGetters(['totalCount', 'totalPrice']),
       payClass() {
-        const {totalPrice} = this
-        const {minPrice} = this.shopInfo
+        // 嵌套对象的解构赋值
+        const {totalPrice, shopInfo: {minPrice}} = this
         return totalPrice < minPrice ? 'not-enough' : 'enough'
       },
       payText() {
-        const {totalPrice} = this
-        const {minPrice} = this.shopInfo
+        // 嵌套对象的解构赋值
+        const {totalPrice, shopInfo: {minPrice}} = this
         if (totalPrice) {
           return `￥${minPrice} 元起送`
         } else if (totalPrice < minPrice) {
@@ -128,7 +128,9 @@
           this.$nextTick(() => {
             // 实现BScroll的实例是一个单例
             if (!this.scroll) {
-              this.scroll = new BScroll('.list-content', {click: true})
+              this.scroll = new BScroll('.list-content', {
+                click: true
+              })
             } else {
               this.scroll.refresh() // 让滚动条刷新一下：重新统计内容的高度，形成滚动条
             }
@@ -137,25 +139,37 @@
       }
     },
     methods: {
+      /**
+       * 显示隐藏购物车
+       */
       toggleShow() {
         if (this.totalCount) {
           // 只有当总数量大于0时才切换
           this.isShow = !this.isShow
         }
       },
+      /**
+       * 清空购物车
+       */
       clearCart() {
         MessageBox.confirm('确定清空购物车吗？').then(() => {
           this.$store.dispatch('clearCart')
           Toast('清空成功')
-        }, () => console.log())
+        }, () => {
+        })
       },
+      /**
+       * 结算
+       */
       payMent() {
         if (this.totalPrice < this.shopInfo.minPrice) {
           return
         }
         MessageBox.confirm('结算？').then(() => {
+          // TODO: colg [购物车 - 结算]
           Toast('结算成功')
-        }, () => console.log())
+        }, () => {
+        })
       }
     }
   }

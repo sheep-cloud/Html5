@@ -8,22 +8,13 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
   import FooterGuide from './components/FooterGuide/FooterGuide'
 
   export default {
     components: {FooterGuide},
     mounted() {
-      /*
       this.$store.dispatch('getAddress')
       this.$store.dispatch('getUserInfo')
-      */
-      this.getAddress()
-      this.getUserInfo()
-      console.log(window.document.cookie)
-    },
-    methods: {
-      ...mapActions(['getAddress', 'getUserInfo'])
     }
   }
 </script>

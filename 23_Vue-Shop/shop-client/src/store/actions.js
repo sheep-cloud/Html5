@@ -5,7 +5,12 @@ import types from './mutation-types'
 import api from '../api'
 
 export default {
-  // 异步获取地址相关信息
+  /**
+   * 异步获取地址相关信息
+   * @param commit
+   * @param state
+   * @return {Promise<void>}
+   */
   async getAddress({commit, state}) {
     // 发送异步ajax请求
     const geohash = state.latitude + ',' + state.longitude
@@ -17,7 +22,11 @@ export default {
     }
   },
 
-  // 异步获取食品分类列表
+  /**
+   * 异步获取食品分类列表
+   * @param commit
+   * @return {Promise<void>}
+   */
   async getCategorys({commit}) {
     // 发送异步ajax请求
     const result = await api.reqCategorys()
@@ -28,7 +37,12 @@ export default {
     }
   },
 
-  // 异步获取商铺列表
+  /**
+   * 异步获取商铺列表
+   * @param commit
+   * @param state
+   * @return {Promise<void>}
+   */
   async getShops({commit, state}) {
     // 发送异步ajax请求
     const {longitude, latitude} = state
@@ -40,12 +54,20 @@ export default {
     }
   },
 
-  // 同步记录用户信息
+  /**
+   * 同步记录用户信息
+   * @param commit
+   * @param userInfo
+   */
   recordUser({commit}, userInfo) {
     commit(types.RECEIVE_USERINFO, {userInfo})
   },
 
-  // 异步获取用户信息
+  /**
+   * 异步获取用户信息
+   * @param commit
+   * @return {Promise<void>}
+   */
   async getUserInfo({commit}) {
     const result = await api.reqUserInfo()
     if (result.code === 0) {
@@ -54,7 +76,11 @@ export default {
     }
   },
 
-  // 异步登出
+  /**
+   * 异步登出
+   * @param commit
+   * @return {Promise<void>}
+   */
   async logout({commit}) {
     const result = await api.reqLogout()
     if (result.code === 0) {
@@ -62,7 +88,12 @@ export default {
     }
   },
 
-  // 异步获取商品列表
+  /**
+   * 异步获取商品列表
+   * @param commit
+   * @param callback
+   * @return {Promise<void>}
+   */
   async getShopGoods({commit}, callback) {
     const result = await api.reqShopGoods()
     if (result.code === 0) {
@@ -73,7 +104,12 @@ export default {
     }
   },
 
-  // 异步获取商家评价列表
+  /**
+   * 异步获取商家评价列表
+   * @param commit
+   * @param callback
+   * @return {Promise<void>}
+   */
   async getShopRatings({commit}, callback) {
     const result = await api.reqShopRatings()
     if (result.code === 0) {
@@ -84,7 +120,11 @@ export default {
     }
   },
 
-  // 异步获取商家信息
+  /**
+   * 异步获取商家信息
+   * @param commit
+   * @return {Promise<void>}
+   */
   async getShopInfo({commit}) {
     const result = await api.reqShopInfo()
     if (result.code === 0) {
@@ -93,7 +133,12 @@ export default {
     }
   },
 
-  // 同步更新food中的count数量
+  /**
+   * 同步更新food中的count数量
+   * @param commit
+   * @param isAdd
+   * @param food
+   */
   updateFoodCount({commit}, {isAdd, food}) {
     if (isAdd) {
       commit(types.INCREMENT_FOOT_COUNT, {food})
@@ -102,12 +147,21 @@ export default {
     }
   },
 
-  // 同步清空购物车
+  /**
+   * 同步清空购物车
+   * @param commit
+   */
   clearCart({commit}) {
     commit(types.CLEAR_CART)
   },
 
-  // 异步获取搜索得到的商家数组
+  /**
+   * 异步获取搜索得到的商家数组
+   * @param commit
+   * @param state
+   * @param keyword
+   * @return {Promise<void>}
+   */
   async searchShops({commit, state}, keyword) {
     const geohash = state.latitude + ',' + state.longitude
     const result = await api.reqSearchShops(geohash, keyword)

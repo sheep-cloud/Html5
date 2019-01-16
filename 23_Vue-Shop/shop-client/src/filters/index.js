@@ -5,4 +5,5 @@ import Vue from 'vue'
 import format from 'date-fns/format'
 
 // 自定义过滤器
-Vue.filter('date-format', (date, formatStr = 'YYYY-MM-DD HH:mm:ss') => /*moment(date).format(formatStr)*/ format(date, formatStr))
+// Vue.filter('date-format', (date, formatStr = 'YYYY-MM-DD HH:mm:ss') => moment(date).format(formatStr))
+Vue.filter('date-format', (date, formatStr = 'YYYY-MM-DD HH:mm:ss') => format(date, formatStr))

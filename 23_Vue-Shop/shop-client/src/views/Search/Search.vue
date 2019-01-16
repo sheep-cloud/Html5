@@ -11,17 +11,17 @@
     <section class="list" v-if="isSearchShops">
       <ul class="list_container">
         <!--:to="{path:'/shop', query:{id:item.id}}" -->
-        <router-link :to="`/shop?id=${item.id}`" tag="li" class="list_li" v-for="(item, index) in searchShops" :key="index">
+        <router-link :to="`/shop?id=${searchShop.id}`" tag="li" class="list_li" v-for="(searchShop, index) in searchShops" :key="index">
           <section class="item_left">
-            <img :src="baseImageUrl + item.image_path" class="restaurant_img">
+            <img :src="baseImageUrl + searchShop.image_path" class="restaurant_img">
           </section>
           <section class="item_right">
             <div class="item_right_text">
               <p>
-                <span>{{item.name}}</span>
+                <span>{{searchShop.name}}</span>
               </p>
-              <p>月售 {{item.month_sales || item.rating_count}} 单</p>
-              <p>{{item.delivery_fee || item.float_minimum_order_amount}} 元起送 / 距离{{item.distance}}</p>
+              <p>月售 {{searchShop.month_sales || searchShop.rating_count}} 单</p>
+              <p>{{searchShop.delivery_fee || searchShop.float_minimum_order_amount}} 元起送 / 距离{{searchShop.distance}}</p>
             </div>
           </section>
         </router-link>
@@ -54,6 +54,9 @@
       }
     },
     methods: {
+      /**
+       * 搜索
+       */
       search() {
         // 得到搜索关键字进行搜索
         const keyword = this.keyword.trim()

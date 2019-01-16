@@ -15,14 +15,15 @@
       size: Number
     },
     computed: {
-      /*
-        评分算法：
-          3.2：3 + 0 + 2
-          3.5: 3 + 1 + 1
+      /**
+       * 评分算法:
+       *  3.2：3 + 0 + 2
+       *  3.5: 3 + 1 + 1
+       * @return {Array}
        */
       starClasses() {
         const {score} = this
-        const scs = []
+        let scs = []
         // 向scs中添加n个CLASS_ON
         const scoreInteger = Math.floor(score) // 向下取整
         while (scs.length < scoreInteger) {

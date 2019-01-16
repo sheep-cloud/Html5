@@ -16,9 +16,9 @@ import Profile from '../views/Profile/Profile'
 */
 
 /*
-  路由组件懒加载；
-    返回的都是路由组件的函数，只有执行此函数才会加载路由组件，这个函数在请求对应的路由路径时才会执行
-    推荐顶级路由使用懒加载
+  路由组件懒加载:
+    返回的都是路由组件的函数, 只有执行此函数才会加载路由组件, 这个函数在请求对应的路由路径时才会执行
+    => 推荐顶级路由使用懒加载
  */
 // 首页
 const Msite = () => import('../views/Msite/Msite')
@@ -46,9 +46,7 @@ import ShopInfo from '../views/Shop/ShopInfo/ShopInfo'
 Vue.use(VueRouter)
 
 // 是否显示组件
-const meta = {
-  showFooter: true
-}
+const meta = {showFooter: true}
 
 export default new VueRouter({
   // 所有路由

@@ -16,7 +16,7 @@
     methods: {
       /**
        * 更新foodCount
-       * @param isAdd true：添加；false：减少
+       * @param isAdd true: 添加; false: 减少
        */
       updateFoodCount(isAdd) {
         this.$store.dispatch('updateFoodCount', {isAdd, food: this.food})

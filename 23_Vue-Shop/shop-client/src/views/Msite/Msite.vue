@@ -74,17 +74,17 @@
         小数组中的元素个数最大是8
        */
       categorysArr() {
-        // 准备空的二维数组
+        // 准备空的二维数组, 存放每个小数组
         let arr = []
         // 准备一个小数组（最大长度为8）
         let minArr = []
         // 遍历categorys
         this.categorys.forEach(c => {
-          // 如果当前小数组已经满了，创建一个新的
+          // 如果当前小数组已经满了, 创建一个新的小数组
           if (minArr.length === 8) {
             minArr = []
           }
-          // 如果minArr是空的，将小数组保存到大数组中
+          // 如果minArr是空的, 将小数组保存到大数组中
           if (minArr.length === 0) {
             arr.push(minArr)
           }
@@ -99,10 +99,10 @@
       ...mapActions(['getCategorys', 'getShops'])
     },
     watch: {
-      categorys(value) { // categorys数组中有数据了，在异步更新界面之前执行
+      categorys() { // categorys数组中有数据了, 在异步更新界面之前执行
         // 界面更新就立即创建Swiper对象
-        this.$nextTick(() => { // 一旦完成界面更新，就立即调用（此条语句要写在数据更新之后）
-          // 创建一个Swiper实例对象，实现轮播
+        this.$nextTick(() => { // 一旦完成界面更新, 就立即调用（此条语句要写在数据更新之后）
+          // 创建一个Swiper实例对象, 实现轮播
           new Swiper('.swiper-container', {
             loop: true, // 循环模式选项
             pagination: {// 如果需要分页器

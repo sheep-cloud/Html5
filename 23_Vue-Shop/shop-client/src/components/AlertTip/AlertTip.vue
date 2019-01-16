@@ -18,7 +18,7 @@
     },
     methods: {
       closeTip() {
-        // 分发自定义事件（事件名：closeTip）
+        // 触发自定义事件(事件名: closeTip)
         this.$emit('closeTip')
       }
     }

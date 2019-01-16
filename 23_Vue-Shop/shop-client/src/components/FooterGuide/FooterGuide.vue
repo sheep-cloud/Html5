@@ -39,7 +39,10 @@
       }
     },
     methods: {
-      // 编程式的导航 - 跳转页面
+      /**
+       * 跳转页面 - 编程式的导航
+       * @param path
+       */
       goTo(path) {
         // 跟 router.push 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
         this.$router.replace(path)

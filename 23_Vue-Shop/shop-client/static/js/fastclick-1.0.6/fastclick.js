@@ -443,7 +443,14 @@
 
 		// Prevent phantom clicks on fast double-tap (issue #36)
 		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
-			event.preventDefault();
+		  // 判断默认行为是否可以被禁用
+      if (event.cancelable) {
+        // 判断默认行为是否已经被禁用
+        if (!event.defaultPrevented) {
+          // 禁用浏览器默认行为
+    			event.preventDefault();
+        }
+      }
 		}
 
 		return true;

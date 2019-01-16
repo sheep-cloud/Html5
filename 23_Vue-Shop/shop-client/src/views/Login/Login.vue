@@ -62,15 +62,15 @@
 </template>
 
 <script>
-  import AlertTip from '../../components/AlertTip/AlertTip'
   import api from '../../api'
   import validUtil from '../../util/validUtil'
+  import AlertTip from '../../components/AlertTip/AlertTip'
 
   export default {
     components: {AlertTip},
     data() {
       return {
-        loginWay: true, // true：短信登录；false：密码登录
+        loginWay: true, // true: 短信登录; false: 密码登录
         computeTime: 0, // 计时的时间
         showPwd: false, // 是否显示密码
         phone: '', // 手机号
@@ -89,15 +89,19 @@
       }
     },
     methods: {
-      // 异步获取短信验证码
+      /**
+       * 异步获取短信验证码
+       * @return {Promise<void>}
+       */
       async getCode() {
         // 如果当前没有计时
-        if (!this.computeTime) { // this.computeTime === 0
-          // 启动倒计时，默认60s
+        if (this.computeTime === 0) {
+          // 启动倒计时, 默认60s
           this.computeTime = 60
           this.intervalId = setInterval(() => {
             this.computeTime--
-            if (!this.computeTime) {
+            // 到0s, 关闭定时器
+            if (this.computeTime === 0) {
               clearInterval(this.intervalId)
             }
           }, 1000)
@@ -108,7 +112,7 @@
             // 显示提示
             this.showTip(result.msg)
             // 停止倒计时
-            if (this.computeTime) {
+            if (this.computeTime !== 0) {
               this.computeTime = 0
               clearInterval(this.intervalId)
               // 重置为0
@@ -117,28 +121,40 @@
           }
         }
       },
-      // 显示AlertTip
+      /**
+       * 显示AlertTip
+       * @param alertText
+       */
       showTip(alertText) {
         this.alertShow = true
         this.alertText = alertText
       },
-      // 关闭AlertTip
+      /**
+       * 关闭AlertTip
+       */
       closeTip() {
         this.alertShow = false
         this.alertText = ''
       },
-      // 获取一个新的图片验证码
-      /*getCaptcha(event) {
-        // 每次指定的src要不一样，此方式其他方法调用不了
-        event.target.src = this.reqCaptcha + '?time=' + Date.now()
-      },*/
+      /**
+       * 获取一个新的图片验证码
+       */
+      /*
+      getCaptcha(event) {
+        // 每次指定的src要不一样, 此方式其他方法调用不了
+        event.target.src = this.reqCaptcha + `?time=${Date.now()}`
+      },
+      */
       getCaptcha() {
         // 每次指定的src要不一样
         this.$refs.captcha.src = this.reqCaptcha + `?time=${Date.now()}`
         // 清空验证码
         this.captcha = ''
       },
-      // 异步登录
+      /**
+       * 异步登录
+       * @return {Promise<void>}
+       */
       async login() {
         let result
         // 前台表单验证
@@ -186,7 +202,7 @@
         }
 
         // 停止倒计时
-        if (this.computeTime) {
+        if (this.computeTime !== 0) {
           this.computeTime = 0
           clearInterval(this.intervalId)
           // 重置为0

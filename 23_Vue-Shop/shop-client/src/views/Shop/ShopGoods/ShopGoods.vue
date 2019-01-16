@@ -49,17 +49,17 @@
 </template>
 
 <script>
-  import BScroll from 'better-scroll'
   import {mapState} from 'vuex'
-  import CartControl from '../../../components/CartControl/CartControl'
+  import BScroll from 'better-scroll'
   import Food from '../../../components/Food/Food'
   import ShopCart from '../../../components/ShopCart/ShopCart'
+  import CartControl from '../../../components/CartControl/CartControl'
 
   export default {
     data() {
       return {
-        scrollY: 0,   // 右侧滑动的Y轴坐标（滑动过程中实时变化）
-        tops: [],     // 所有右侧分类li的top组成的数组（列表第一次显示后就不再变化）
+        scrollY: 0,   // 右侧滑动的Y轴坐标(滑动过程中实时变化)
+        tops: [],     // 所有右侧分类li的top组成的数组(列表第一次显示后就不再变化)
         food: {}      // 需要显示的food
       }
     },
@@ -82,30 +82,28 @@
         /*
           当前坐标计算
             实现列表滑动
-            类名：current 标识当前分类
-            设计一个计算属性：currentIndex
-            根据哪些数据计算？
-              scrollY: 右侧滑动的Y轴坐标（滑动过程中实时变化）
-              tops: 所有右侧分类li的top组成的数组（列表第一次显示后就不再变化）
+            类名: current 标识当前分类
+            设计一个计算属性: currentIndex
+            根据哪些数据计算?
+              scrollY:  右侧滑动的Y轴坐标(滑动过程中实时变化)
+              tops:     所有右侧分类li的top组成的数组(列表第一次显示后就不再变化)
 
-            1. 在滑动过程中，实时收集scrollY
-            2. 列表第一次显示后，收集tops
+            1. 在滑动过程中, 实时收集scrollY
+            2. 列表第一次显示后, 收集tops
             3. 实现currentIndex的计算逻辑
          */
 
         // 得到条件数据
         const {scrollY, tops} = this
 
-        // 根据条件计算产生一个结果
-        return tops.findIndex((top, index) => {
-          // scrollY >= 当前top && scrolly < 下一个top
-          return scrollY >= top && scrollY < tops[index + 1]
-        })
+        // 根据条件计算产生一个结果: scrollY >= 当前top && scrollY < 下一个top
+        return tops.findIndex((top, index) => scrollY >= top && scrollY < tops[index + 1])
       }
     },
     methods: {
       /**
        * 初始化滚动条
+       * @private
        */
       _initScroll() {
         // 列表显示之后创建
@@ -113,7 +111,7 @@
           click: true
         })
         this.foodsScroll = new BScroll('.foods-wrapper', {
-          probeType: 2,    // 惯性滑动不会触发
+          probeType: 2, // 惯性滑动不会触发
           click: true
         })
         // 给右侧列表绑定scroll监听
@@ -127,23 +125,34 @@
       },
       /**
        * 初始化列表
+       * @private
        */
       _initTops() {
         // 1. 初始化tops
-        const tops = []
+        let tops = []
         let top = 0
         tops.push(top)
         // 2. 收集
         // 找到所有分类的li
         // const lis = this.$refs.foodsUl.getElementsByClassName('food-list-hook')
         const lis = this.$refs.foodsUl.children
-        console.log(lis)
-        // 伪数组转为真数组，遍历
-        Array.prototype.slice.call(lis).forEach(li => {
+
+        /*
+        // 伪数组转为真数组, 遍历
+        // let realLis = Array.prototype.slice.call(lis)  // 伪数组转为真数组 => 原生
+        let realLis = Array.from(lis)                     // 伪数组转为真数组 => ES6
+        // 遍历
+        realLis.forEach(li => {
           top += li.clientHeight
           tops.push(top)
         })
-        console.log(tops)
+        */
+
+        // 遍历伪数组 => ES6
+        for (let li of lis) {
+          top += li.clientHeight
+          tops.push(top)
+        }
         // 3. 更新数据
         this.tops = tops
       },
@@ -166,7 +175,7 @@
       showFood(food) {
         // 设置food
         this.food = food
-        // 显示food组件（调用子组件对象的方法）
+        // 显示food组件(调用子组件对象的方法)
         this.$refs.food.toggleShow()
       }
     }
