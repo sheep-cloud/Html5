@@ -598,7 +598,7 @@ module.exports = StuModel
 
 #### 4.3.3. 操作数据库
 
-- `05.index.js`
+- `05_index.js`
 
 ```js
 require('./util/conn_mongo')
