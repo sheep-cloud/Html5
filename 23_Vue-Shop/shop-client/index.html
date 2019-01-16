@@ -15,7 +15,9 @@
 <script src="./static/js/fastclick-1.0.6/fastclick.js"></script>
 <script>
   if ('addEventListener' in document) {
-    document.addEventListener('DOMContentLoaded', () => FastClick.attach(document.body), false)
+    document.addEventListener('DOMContentLoaded', () => {
+      FastClick.attach(document.body)
+    }, false)
   }
   if (!window.Promise) {
     document.writeln('<script src="./static/js/es6-promise-min-2.0.1/es6-promise.min.js"' + '>' + '<' + '/' + 'script>')
