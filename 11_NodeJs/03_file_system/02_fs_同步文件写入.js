@@ -24,11 +24,11 @@
                 fs.closeSync(fd)
                     - fd        要关闭文件的描述符
  */
-const fs = require('fs')
+var fs = require('fs')
 
 // 打开文件，相对路径
-let fd = fs.openSync('hello.txt', 'w')
+var fd = fs.openSync('./file/02_fs_同步文件写入.txt', 'w')
 // 向文件中写入内容
-fs.writeSync(fd, 'node.js 文件系统-同步文件写入')
+fs.writeSync(fd, 'node.js 文件系统 - 同步文件写入')
 // 关闭文件
 fs.closeSync(fd)

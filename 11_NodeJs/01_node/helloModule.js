@@ -7,7 +7,7 @@ module.exports.sayName = function () {
 */
 
 
-// exports = modeul.exports
+// exports = module.exports
 module.exports = {
     name: 'Jack',
     age: 28,
@@ -16,16 +16,15 @@ module.exports = {
     }
 }
 
-let obj = {}
+var obj = {}
 obj.a = {}
-let a = obj.a
+var a = obj.a
 // a 和 obj.a 指向的是同一个对象
 console.log(a === obj.a)
 
 a.name = 'Tom'
-console.log(obj.a.name)
+console.log(obj)
 
 a = {}
-console.log(obj.a)
-console.log(obj.a.name)
-console.log(a.name)
+console.log(obj)
+console.log(a)

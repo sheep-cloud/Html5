@@ -8,10 +8,11 @@
 
 const fs = require('fs')
 fs.readFile('qq.png', function (err, data) {
+    console.log(arguments)
     if (!err) {
         console.log(data)
         // 将data写入到文件中
-        fs.writeFile('hello.jpg', data, function (err) {
+        fs.writeFile('./file/qq.jpg', data, function (err) {
             if (!err) {
                 console.log('文件写入成功')
             }

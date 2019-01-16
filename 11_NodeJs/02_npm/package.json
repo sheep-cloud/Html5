@@ -10,7 +10,7 @@
     "type": "git",
     "url": "null"
   },
-  "author": "",
+  "author": "colg",
   "license": "ISC",
   "dependencies": {
     "math": "0.0.3"

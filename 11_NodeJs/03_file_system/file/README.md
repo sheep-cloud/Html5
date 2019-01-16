@@ -196,7 +196,7 @@ npm install npm@<version> -g
 
 ## 6. File_System 文件系统
 
-### 6.1. Buffer(缓冲区)
+### 6.1. Buffer（缓冲区）
 
 ```js
 /*
@@ -216,51 +216,21 @@ npm install npm@<version> -g
 
 ### 6.2. File_System(文件系统)
 
-- 流式文件写入
+#### 6.2.1. 流式文件读取
 
-  ```js
-  /*
-      同步、异步、简单文件的写入都不适合大文件的写入，性能较差，容易导致内存溢出
-   */
-  
-  var fs = require('fs')
-  
-  // 流式文件写入
-  // 创建一个可写流
-  /*
-      fs.createWriteStream(path[, options])
-   */
-  var ws = fs.createWriteStream('./file/05_fs_流式文件写入.txt')
-  
-  // 通过监听流的open和close事件来监听流的打开和关闭
-  ws.once('open', function () {
-      console.log('流打开了')
-  })
-  
-  // 通过ws向文件中输出内容
-  ws.write('node.js 文件系统 - 流式文件写入_1\n')
-  ws.write('node.js 文件系统 - 流式文件写入_2\n')
-  ws.write('node.js 文件系统 - 流式文件写入_3\n')
-  
-  // 关闭流
-  ws.end()
-  ```
+```js
+/*
+    流式文件读取也适用于一些比较大的文件，可以分多次将文件读取到内存中
+ */
 
-- 流式文件读写
+const fs = require('fs')
 
-  ```js
-  /*
-      流式文件读取也适用于一些比较大的文件，可以分多次将文件读取到内存中
-   */
-  
-  var fs = require('fs')
-  
-  // 创建一个可读流
-  var rs = fs.createReadStream('../README.md')
-  
-  // 创建一个可写流
-  var ws = fs.createWriteStream('./file/README.png')
-  
-  // 将可读流中的内容，直接输出到可写流中
-  rs.pipe(ws)
-  ```
+// 创建一个可读流
+let rs = fs.createReadStream('基础_fs模块的其他方法.avi')
+
+// 创建一个可写流
+let ws = fs.createWriteStream('20.尚硅谷_node基础_fs模块的其他方法.avi')
+
+// 将可读流中的内容，直接输出到可写流中
+rs.pipe(ws)
+```

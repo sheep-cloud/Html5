@@ -9,15 +9,15 @@
  */
 
 // 引入fs模块
-let fs = require('fs')
+var fs = require('fs')
 
 // 打开文件
-fs.open('hello2.txt', 'w', function (err, fd) {
+fs.open('./file/03_fs_异步文件写入.txt', 'w', function (err, fd) {
     // 查看回调函数的参数
     console.log(arguments)
     // 判断是否出错
     if (!err) {
-        fs.write(fd, 'node.js 文件系统-异步文件写入', function (err) {
+        fs.write(fd, 'node.js 文件系统 - 异步文件写入', function (err) {
             if (!err) {
                 console.log('写入成功')
             }
