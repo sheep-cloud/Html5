@@ -1,196 +1,225 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express')
+const router = express.Router()
 const md5 = require('blueimp-md5')
 const models = require('../db/models')
 const UserModel = models.getModel('user')
-const _filter = {'pwd': 0, '__v': 0} // 查询时过滤掉
 const sms_util = require('../util/sms_util')
-const users = {}
 const ajax = require('../api/ajax')
-var svgCaptcha = require('svg-captcha')
+const svgCaptcha = require('svg-captcha')
+const _filter = {'pwd': 0, '__v': 0} // 查询时过滤掉
+let users = {}
 
-/*
-密码登陆
+
+/**
+ * 用户名密码登陆
  */
-router.post('/login_pwd', function (req, res) {
-  const name = req.body.name
-  const pwd = md5(req.body.pwd)
-  const captcha = req.body.captcha.toLowerCase()
-  console.log('/login_pwd', req.body, req.session)
+router.post('/login_pwd', (req, res) => {
+    const name = req.body.name
+    const pwd = md5(req.body.pwd)
+    const captcha = req.body.captcha.toUpperCase()
+    console.log(`/login_pwd; req: ${JSON.stringify(req.body)}`)
 
-  // 可以对用户名/密码格式进行检查, 如果非法, 返回提示信息
-  if(captcha !== req.session.captcha) {
-    return res.send({code: 1, msg: '验证码不正确'})
-  }
-  // 删除保存的验证码
-  delete req.session.captcha
-
-  UserModel.findOne({name}, function (err, user) {
-    if (user) {
-      console.log('findUser', user)
-      if (user.pwd !== pwd) {
-        res.send({code: 1, msg: '用户名或密码不正确!'})
-      } else {
-        req.session.userid = user._id
-        res.send({code: 0, data: {_id: user._id, name: user.name}})
-      }
-    } else {
-      const userModel = new UserModel({name, pwd})
-      userModel.save(function (err, user) {
-        // 向浏览器端返回cookie(key=value)
-        // res.cookie('userid', user._id, {maxAge: 1000*60*60*24*7})
-        req.session.userid = user._id
-        const data = {_id: user._id, name: user.name}
-        // 3.2. 返回数据(新的user)
-        res.send({code: 0, data})
-      })
+    // 可以对用户名/密码格式进行检查, 如果非法, 返回提示信息
+    if (captcha !== req.session.captcha) {
+        return res.send({code: 1, msg: '验证码不正确'})
     }
-  })
+    // 删除保存的验证码
+    delete req.session.captcha
+
+    UserModel.findOne({name}, (err, user) => {
+        if (user) {
+            if (user.pwd !== pwd) {
+                res.send({code: 1, msg: '用户名或密码不正确!'})
+            } else {
+                const {_id} = user
+                req.session.userid = _id
+                res.send({code: 0, data: {_id, name: user.name}})
+            }
+        } else {
+            const userModel = new UserModel({name, pwd})
+            userModel.save((err, user) => {
+                // 向浏览器端返回cookie(key=value)
+                // res.cookie('userid', user._id, {maxAge: 1000*60*60*24*7})
+                const {_id} = user
+                req.session.userid = _id
+                const data = {_id, name: user.name}
+                // 3.2. 返回数据(新的user)
+                res.send({code: 0, data})
+            })
+        }
+    })
 })
 
-/*
-一次性图形验证码
+
+/**
+ * 获取一次性图形验证码
  */
-router.get('/captcha', function (req, res) {
-  var captcha = svgCaptcha.create({
-    size: 4,              // 验证码长度
-    ignoreChars: '0o1l',  // 验证码字符中排除0o1l
-    noise: 2,             // 干扰线的数量
-    color: true           // 验证码的字符是否有颜色
-  });
-  // 保存到session
-  req.session.captcha = captcha.text.toLowerCase();
-  console.log(`/captcha, 验证码：${req.session.captcha}`)
-  res.type('svg')
-     .status(200)
-     .send(captcha.data);
-});
-
-/*
-发送验证码短信
-*/
-router.get('/sendcode', function (req, res) {
-  //1. 获取请求参数数据
-  var phone = req.query.phone;
-  //2. 处理数据
-  //生成验证码(6位随机数)
-  var code = sms_util.randomCode(6);
-  //发送给指定的手机号
-  console.log(`向${phone}发送验证码短信: ${code}`);
-  sms_util.sendCode(phone, code, function (success) {//success表示是否成功
-    if (success) {
-      users[code] = code
-      console.log('保存验证码: ', phone, code)
-      res.send({code: 0, data: code})
-    } else {
-      //3. 返回响应数据
-      res.send({code: 1, msg: '短信验证码发送失败！'})
-    }
-  })
+router.get('/captcha', (req, res) => {
+    const captcha = svgCaptcha.create({
+        size: 4,              // 验证码长度
+        ignoreChars: '0o1l',  // 验证码字符中排除0o1l
+        noise: 2,             // 干扰线的数量
+        color: true           // 验证码的字符是否有颜色
+    })
+    // 保存到session
+    req.session.captcha = captcha.text.toUpperCase()
+    console.log(`/captcha; captcha: ${req.session.captcha}`)
+    res.type('svg')
+       .status(200)
+       .send(captcha.data)
 })
 
-/*
-短信登陆
-*/
-router.post('/login_sms', function (req, res, next) {
-  var phone = req.body.phone;
-  var code = req.body.code;
-  console.log('/login_sms', req.body);
-  if (users[code] !== code) {
-    res.send({code: 1, msg: '手机号或验证码不正确！'});
-    return;
-  }
-  //删除保存的code
-  delete users[code];
-
-  UserModel.findOne({phone}, function (err, user) {
-    if (user) {
-      req.session.userid = user._id
-      res.send({code: 0, data: user})
-    } else {
-      //存储数据
-      const userModel = new UserModel({phone})
-      userModel.save(function (err, user) {
-        req.session.userid = user._id
-        res.send({code: 0, data: user})
-      })
-    }
-  })
+/**
+ * 发送短信验证码
+ */
+router.get('/sendcode', (req, res) => {
+    // 1. 获取请求参数数据
+    const phone = req.query.phone
+    // 2. 处理数据
+    // 生成验证码(6位随机数)
+    const code = sms_util.randomCode(6)
+    console.log(`/sendcode; phone: ${phone}, code: ${code}`)
+    // 发送给指定的手机号
+    sms_util.sendCode(phone, code, success => {
+        // success表示是否成功
+        if (success) {
+            users[code] = code
+            // 3.1 返回成功响应数据
+            res.send({code: 0, data: code})
+        } else {
+            // 3.2 返回失败响应数据
+            res.send({code: 1, msg: '短信验证码发送失败！'})
+        }
+    })
 })
 
-/*
-根据sesion中的userid, 查询对应的user
+
+/**
+ * 手机号验证码登陆
+ */
+router.post('/login_sms', (req, res, next) => {
+    const phone = req.body.phone
+    const code = req.body.code
+    console.log(`/login_sms; req: ${JSON.stringify(req.body)}`)
+    if (users[code] !== code) {
+        res.send({code: 1, msg: '手机号或验证码不正确！'})
+        return
+    }
+    //删除保存的code
+    delete users[code]
+
+    UserModel.findOne({phone}, (err, user) => {
+        if (user) {
+            req.session.userid = user._id
+            res.send({code: 0, data: user})
+        } else {
+            //存储数据
+            const userModel = new UserModel({phone})
+            userModel.save((err, user) => {
+                req.session.userid = user._id
+                res.send({code: 0, data: user})
+            })
+        }
+    })
+})
+
+/**
+ * 根据会话获取用户信息(根据sesion中的userid, 查询对应的user)
  */
 router.get('/userinfo', function (req, res) {
-  // 取出userid
-  const userid = req.session.userid
-  console.log('/userinfo', req.session.userid)
-  // 查询
-  UserModel.findOne({_id: userid}, _filter, function (err, user) {
-    // 如果没有, 返回错误提示
-    if (!user) {
-      // 清除浏览器保存的userid的cookie
-      delete req.session.userid
-
-      res.send({code: 1, msg: '请先登录！'})
-    } else {
-      // 如果有, 返回user
-      res.send({code: 0, data: user})
+    console.log(`/userinfo; sessionId: ${req.session.id}`)
+    // 取出userid
+    const userid = req.session.userid
+    if (!userid) {
+        res.send({code: 1, msg: '请先登录！'})
+        return
     }
-  })
+    console.log(`/userinfo; userid: ${userid}`)
+
+    // 查询
+    UserModel.findOne({_id: userid}, _filter, (err, user) => {
+        // 如果没有, 返回错误提示
+        if (!user) {
+            // 清除浏览器保存的userid的cookie
+            delete req.session.userid
+
+            res.send({code: 1, msg: '请先登录！'})
+        } else {
+            // 如果有, 返回user
+            res.send({code: 0, data: user})
+        }
+    })
 })
 
-
-router.get('/logout', function (req, res) {
-  // 清除浏览器保存的userid的cookie
-  delete req.session.userid
-  console.log('/logout', new Date().toLocaleString())
-  // 返回数据
-  res.send({code: 0})
-})
-
-/*
-根据经纬度获取位置详情
+/**
+ * 用户登出
  */
-router.get('/position/:geohash', function (req, res) {
-  const {geohash} = req.params
-  ajax(`http://cangdu.org:8001/v2/pois/${geohash}`).then(data => res.send({code: 0, data}))
+router.get('/logout', (req, res) => {
+    console.log(`/logout; ${new Date().toLocaleString()}`)
+    // 清除浏览器保存的userid的cookie
+    delete req.session.userid
+    // 返回数据
+    res.send({code: 0})
 })
 
-/*
-获取首页分类列表
+/**
+ * 根据经纬度获取位置详情
  */
-router.get('/index_category', function (req, res) {
-  setTimeout(function () {
+router.get('/position/:geohash', (req, res) => {
+    const {geohash} = req.params
+    console.log(`/position/:geohash; geohash: ${geohash}`)
+    ajax(`http://cangdu.org:8001/v2/pois/${geohash}`).then(data => res.send({code: 0, data}))
+})
+
+/**
+ * 获取首页食品分类列表
+ */
+router.get('/index_category', (req, res) => {
+    // 模拟ajax请求
+    /*
+    setTimeout(function () {
+        const data = require('../data/index_category.json')
+        res.send({code: 0, data})
+    }, 30)
+    */
+
     const data = require('../data/index_category.json')
     res.send({code: 0, data})
-  }, 30)
 })
 
-/*
-根据经纬度获取商铺列表
-?latitude=40.10038&longitude=116.36867
+/**
+ * 根据经纬度获取商铺列表?latitude=40.10038&longitude=116.36867
  */
-router.get('/shops', function (req, res) {
-  const latitude = req.query.latitude
-  const longitude = req.query.longitude
-  console.log(`/shops, longitude：${longitude}, latitude：${latitude}`)
-  setTimeout(function () {
+router.get('/shops', (req, res) => {
+    const {latitude, longitude} = req.query
+    console.log(`/shops; latitude: ${latitude}, longitude: ${longitude}`)
+    // 模拟ajax请求
+    /*
+    setTimeout(function () {
+        const data = require('../data/shops.json')
+        res.send({code: 0, data})
+    }, 30)
+    */
     const data = require('../data/shops.json')
     res.send({code: 0, data})
-  }, 30)
 })
 
-router.get('/search_shops', function (req, res) {
-  const {geohash, keyword} = req.query
-  ajax('http://cangdu.org:8001/v4/restaurants', {
-    'extras[]': 'restaurant_activity',
-    geohash,
-    keyword,
-    type: 'search'
-  }).then(data => {
-    res.send({code: 0, data})
-  })
+/**
+ * 根据经纬度和关键字搜索商铺列表
+ */
+router.get('/search_shops', (req, res) => {
+    const {geohash, keyword} = req.query
+    console.log(`/search_shops; geohash: ${geohash}, keyword: ${keyword}`)
+    /*
+    const data = {
+        'extras[]': 'restaurant_activity',
+        type: 'search',
+        geohash,
+        keyword
+    }
+    */
+    const data = {geohash, keyword}
+    ajax('http://cangdu.org:8001/v4/restaurants', data).then(data => res.send({code: 0, data}))
 })
 
-module.exports = router;
+module.exports = router
