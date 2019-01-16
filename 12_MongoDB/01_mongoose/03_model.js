@@ -1,20 +1,21 @@
-const mongoose = require('mongoose')
+var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test', {useNewUrlParser: true})
-mongoose.connection.once('open', () => console.log('数据库连接成功: ' + new Date().toLocaleString()))
+mongoose.connection.once('open', function () {
+    console.log('数据库连接成功: ' + new Date().toLocaleString())
+})
 
 // 将mongoose.Schema 赋值给一个变量
-let Schema = mongoose.Schema
+var Schema = mongoose.Schema
 
 // 创建Schema（模式）对象
-let stuSchema = new Schema({
+var stuSchema = new Schema({
     name: String,
     age: Number,
     gender: {type: String, default: '女'},
     address: String
 })
 
-let StuModel = mongoose.model('students', stuSchema)
-console.log(StuModel)
+var StuModel = mongoose.model('students', stuSchema)
 
 /*
     - 有了Model，就可以对数据库进行增删改查的操作

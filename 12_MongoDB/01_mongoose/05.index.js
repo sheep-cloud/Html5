@@ -1,5 +1,5 @@
 require('./util/conn_mongo')
-let Student = require('./models/student')
+var Student = require('./models/student')
 
 Student.find(
     {gender: '男'},

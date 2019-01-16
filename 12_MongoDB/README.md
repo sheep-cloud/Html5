@@ -3,8 +3,8 @@
 ## 1. MongoDB简介
 
 - MongoDB是为快速开发互联网Web应用而设计的数据库系统
-- MongoDB的设计目标是极简、灵活、作为Web应用栈的一部分
-- MongoDB的数据模型是面向文档的，所谓文档是一种类似于JSON的结构，简单理解MongoDB这个数据库中存的是各种各样的JSON（BSON）
+- MongoDB的设计目标是极简, 灵活, 作为Web应用栈的一部分
+- MongoDB的数据模型是面向文档的, 所谓文档是一种类似于JSON的结构, 简单理解MongoDB这个数据库中存的是各种各样的JSON（BSON）
 
 ## 2. 安装 MongoDB
 
@@ -70,10 +70,14 @@ mongoexport -h 127.0.0.1 -d rams -c bu_device_data -o demo.json
 ### 3.1. 数据库的使用
 
 ```ini
-查看所有数据库列表: show dbs;
-查看当前连接在哪个数据库下面: db;
-切换数据库: use 数据库名;
-查看数据库下有哪些collection: show collections;
+# 查看所有数据库列表
+show dbs;
+# 查看当前连接在哪个数据库下面
+db;
+# 切换数据库
+use 数据库名;
+# 查看数据库下有哪些collection
+show collections;
 ```
 
 ### 3.2 CRUD操作
@@ -485,8 +489,8 @@ db.emp.find(
 
 - Mongoose 简介
   - Mongoose是一个通过Node来操作MongoDB的模块
-  - Mongoose是一个对象文档模型（ODM）库，它对Node原生的MongoDB模块进行了进一步的优化封装，并提供了很多功能
-  - 在大多数情况下，它被用来把结构化的模式应用到一个MongoDB集合，并提供了验证和类型转换等好处
+  - Mongoose是一个对象文档模型（ODM）库, 它对Node原生的MongoDB模块进行了进一步的优化封装, 并提供了很多功能
+  - 在大多数情况下, 它被用来把结构化的模式应用到一个MongoDB集合, 并提供了验证和类型转换等好处
 - Mongoose 好处
   - 可以为文档创建一个模式结构（Schema
     ）
@@ -498,66 +502,53 @@ db.emp.find(
   - Schema（模式对象）
     - Schema对象定义约束了数据库中的文档结构
   - Model
-    - Model对象作为集合中的所有文档的表示，相当于MongoDB数据库中的集合collection
+    - Model对象作为集合中的所有文档的表示, 相当于MongoDB数据库中的集合collection
   - Document
-    - Document表示集合中的具体文档，相当于集合中的一个具体的文档
+    - Document表示集合中的具体文档, 相当于集合中的一个具体的文档
 
 ### 4.2. Mongoose 连接数据库
 
-#### 4.2.1. 下载安装Mongoose
-
-```ini
-npm i mongoose --save
-```
-
-#### 4.2.2. 引入mongoose模块
-
-```javascript
-const mongoose = require('mongoose')
-```
-
-#### 4.2.3. 连接MongoDB数据库
-
-```ini
-mongoose.connect('mongodb://数据库的ip地址:端口号/数据库名', {useNewUrlParser: true})
-- 如果端口号是默认端口号（27017），则可以省略不写
-```
-
-#### 4.2.4. 监听、断开连接
-
-- 断开数据库连接（一般不需要调用）
-
-```ini
-- MongoDB数据库，一般情况下，只需要连接一次，连接一次以后，除非项目停止，服务器关闭，否则连接一般不会断开
-mongoose.disconnect()
-```
-
-- 数据库连接成功的事件
-
-```javascript
-mongoose.connection.once('open', () => console.log('数据库连接成功'))
-```
-
-- 数据库断开的事件
-
-```javascript
-mongoose.connection.once('close', () => console.log('数据库连接已经断开'))
-```
-
-	
-
-#### 4.2.5 代码
-
 ```js
-// 引入
-const mongoose = require('mongoose')
+/*
+    1. 下载安装Mongoose
+        npm i mongoose --save
 
-// 连接数据库
+    2. 在项目中引用mongoose
+        var mongoose = require('mongoose')
+
+    3. 连接MongoDB数据库
+        mongoose.connect('mongodb://数据库的ip地址:端口号/数据库名', {useNewUrlParser: true})
+            - 如果端口号是默认端口号（27017）, 则可以省略不写
+
+    4. 断开数据库连接（一般不需要调用）
+        - MongoDB数据库, 一般情况下, 只需要连接一次, 连接一次以后, 除非项目停止, 服务器关闭, 否则连接一般不会断开
+        mongoose.disconnect()
+
+    - 监听MongoDB数据库的连接状态
+        - 在mongoose对象中, 有一个属性叫做connection, 该对象表示的就是数据库连接
+            通过监视该对象的状态, 可以来监听数据库的连接与断开
+
+        - 数据库连接成功的事件
+        mongoose.connection.once('open', function () {})
+
+        - 数据库断开的事件
+        mongoose.connection.once('close', function () {})
+ */
+
+// 在项目中引用mongoose
+var mongoose = require('mongoose')
+
+// 连接MongoDB数据库
 mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test', {useNewUrlParser: true})
 
-mongoose.connection.once('open', () => console.log('数据库连接成功'))
+// 监听MongoDB数据库的连接状态
+mongoose.connection.once('open', function () {
+    console.log('数据库连接成功')
+})
 
-mongoose.connection.once('close', () => console.log('数据库连接已经断开'))
+mongoose.connection.once('close', function () {
+    console.log('数据库连接已经断开')
+})
 
 // 断开数据库连接
 mongoose.disconnect()
@@ -573,10 +564,10 @@ mongoose.disconnect()
 /*
     定义一个模块，用来连接MongoDB数据库
  */
-const mongoose = require('mongoose')
+var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test', {useNewUrlParser: true})
 mongoose.connection.once('open', function () {
-    return console.log('数据库连接成功: ' + new Date().toLocaleString())
+    console.log('数据库连接成功: ' + new Date().toLocaleString())
 })
 ```
 
@@ -588,11 +579,11 @@ mongoose.connection.once('open', function () {
 /*
     用来定义student的模型
  */
-const mongoose = require('mongoose')
+var mongoose = require('mongoose')
 
 // 创建Schema（模式）对象
-let Schema = mongoose.Schema
-let stuSchema = new Schema({
+var Schema = mongoose.Schema
+var stuSchema = new Schema({
     name: String,
     age: Number,
     gender: {type: String, default: '女'},
@@ -600,7 +591,7 @@ let stuSchema = new Schema({
 })
 
 // 定义模型
-let StuModel = mongoose.model('students', stuSchema)
+var StuModel = mongoose.model('students', stuSchema)
 
 module.exports = StuModel
 ```
@@ -611,11 +602,11 @@ module.exports = StuModel
 
 ```js
 require('./util/conn_mongo')
-let Student = require('./models/student')
+var Student = require('./models/student')
 
 Student.find(
     {gender: '男'},
-    -- 投影，两种方式
+    // 投影，两种方式
     'name age -_id',
     {skip: 2, limit: 2},
     function (err, docs) {
@@ -626,7 +617,8 @@ Student.find(
     }
 )
 
-/* 输出
+/* 运行输出
+数据库连接成功: 2019-1-16 11:59:28
 [ { name: '唐僧', age: 16 }, { name: '沙和尚', age: 38 } ]
 true
 */
