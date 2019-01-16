@@ -190,7 +190,7 @@ npm install npm@<version> -g
   ```ini
   # 默认
   npm xxx
-  # cnpm, 宝宝镜像, 使用cnpm会生成@version的文件和官方的文件
+  # cnpm, 淘宝镜像, 使用cnpm会生成@version的文件和官方的文件
   cnpm xxx
   ```
 
