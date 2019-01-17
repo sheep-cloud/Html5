@@ -4,43 +4,42 @@
 <meta charset="UTF-8">
 <title>07.属性选择器</title>
 <style type="text/css">
-    /*
-        为所有具有title属性的p元素，设置一个背景颜色为黄色
-            属性选择器
-                - 作用：可以根据元素中的title属性或属性值
-                - 语法：
-                    [属性名] 选取含有指定属性的颜色
-                    [属性名='值'] 选取含有指定属性值的元素
-     */
-    p[title] {
-        background-color: yellow;
-    }
-
-    /*
-        为title属性值是hello的原色设置一个背景颜色为黄色
-     */
-    p[title='hello'] {
-        background-color: yellowgreen;
-    }
-    /*
-        为title属性值以a开拓的元素设置一个背景颜色
-     */
-    p[title^='a'] {
-        background-color: darkgreen;
-    }
+  /*
+      为所有具有title属性的p元素，设置一个背景颜色为黄色
+          属性选择器
+              - 作用：可以根据元素中的title属性或属性值
+              - 语法：
+                  [属性名] 选取含有指定属性的颜色
+                  [属性名='值'] 选取含有指定属性值的元素
+   */
+  p[title] {
+    background-color: yellow;
+  }
+  /*
+      为title属性值是hello的原色设置一个背景颜色为黄色
+   */
+  p[title='hello'] {
+    background-color: yellowgreen;
+  }
+  /*
+      为title属性值以a开拓的元素设置一个背景颜色
+   */
+  p[title^='a'] {
+    background-color: darkgreen;
+  }
 </style>
 </head>
 <body>
-    <!--
-        title属性，这个属性可以给任何标签指定
-            当鼠标移入到元素上时，元素中的title属性的只将会作为提示文字提示
-    -->
-    <p title="我是title中的文字">我是一个段落</p>
-    <p>我是一个段落</p>
-    <p title="hello">我是一个段落</p>
-    <p title="ab">我是一个段落</p>
-    <p title="ac">我是一个段落</p>
-    <p>我是一个段落</p>
-    <p title="abc">我是一个段落</p>
+  <!--
+      title属性，这个属性可以给任何标签指定
+          当鼠标移入到元素上时，元素中的title属性的只将会作为提示文字提示
+  -->
+  <p title="我是title中的文字">我是一个段落</p>
+  <p>我是一个段落</p>
+  <p title="hello">我是一个段落</p>
+  <p title="ab">我是一个段落</p>
+  <p title="ac">我是一个段落</p>
+  <p>我是一个段落</p>
+  <p title="abc">我是一个段落</p>
 </body>
 </html>

@@ -4,39 +4,38 @@
 <meta charset="UTF-8">
 <title>09.overflow</title>
 <style type="text/css">
-    .box1 {
-        width: 200px;
-        height: 200px;
-        background-color: #BFA;
+  .box1 {
+    width: 200px;
+    height: 200px;
+    background-color: #BFA;
 
-        /*
-            子元素默认是存在于父元素的内容区中
-                理论上讲子元素的最大可以等于父元素内容区大小
+    /*
+        子元素默认是存在于父元素的内容区中
+            理论上讲子元素的最大可以等于父元素内容区大小
 
-            如果子元素的大小超过了父元素的内部，则超过的大小会在父元素意外的位置显示
-                超出父元素的内容，我们成为溢出的内容
+        如果子元素的大小超过了父元素的内部，则超过的大小会在父元素意外的位置显示
+            超出父元素的内容，我们成为溢出的内容
 
-            父元素默认是将溢出内容，在父元素外面显示
-            通过overflow可以设置父元素如何处理溢出内容
-                可选值：
-                    - visible：  默认值，不会对溢出内容做处理，元素会在父元素意外的位置显示
-                    - hidden：   溢出的内容，会被修剪，不会显示
-                    - scroll：   会为父元素添加滚动条，通过滚动条来查看完整内容，该属性不论内容是否溢出，都会添加水平和垂直双方向的滚动条
-                    - auto：     会根据需求自动添加滚动条，需要水平就添加水平，需要垂直就添加垂直，都不需要就不加
-        */
-        overflow: auto;
-    }
-
-    .box2 {
-        width: 100px;
-        height: 500px;
-        background-color: red;
-    }
+        父元素默认是将溢出内容，在父元素外面显示
+        通过overflow可以设置父元素如何处理溢出内容
+            可选值：
+                - visible：  默认值，不会对溢出内容做处理，元素会在父元素意外的位置显示
+                - hidden：   溢出的内容，会被修剪，不会显示
+                - scroll：   会为父元素添加滚动条，通过滚动条来查看完整内容，该属性不论内容是否溢出，都会添加水平和垂直双方向的滚动条
+                - auto：     会根据需求自动添加滚动条，需要水平就添加水平，需要垂直就添加垂直，都不需要就不加
+    */
+    overflow: auto;
+  }
+  .box2 {
+    width: 100px;
+    height: 500px;
+    background-color: red;
+  }
 </style>
 </head>
 <body>
-    <div class="box1">
-        <div class="box2"></div>
-    </div>
+  <div class="box1">
+    <div class="box2"></div>
+  </div>
 </body>
 </html>
