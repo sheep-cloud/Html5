@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_两列布局</title>
+<style>
+  /*
+    1. 左列固定, 右列自适应
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    min-width: 600px;
+  }
+  div {
+    height: 200px;
+  }
+  #left {
+    float: left;
+    width: 200px;
+    background: pink;
+  }
+  #right {
+    /* 开启BFC */
+    overflow: hidden;
+    background: deeppink;
+  }
+</style>
+</head>
+<body>
+  <div id="left">left</div>
+  <div id="right">right</div>
+</body>
+</html>

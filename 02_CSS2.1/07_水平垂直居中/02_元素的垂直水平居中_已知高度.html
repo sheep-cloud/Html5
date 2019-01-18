@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_元素的垂直水平居中_已知高度</title>
+<style>
+  /*
+    已知高宽的元素水平垂直居中方案
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background: pink;
+  }
+  #wrap #inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    background: deeppink;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="inner">
+      test
+    </div>
+  </div>
+</body>
+</html>

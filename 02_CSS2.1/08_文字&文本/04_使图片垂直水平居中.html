@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_使图片垂直水平居中</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    width: 1500px;
+    height: 800px;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid;
+  }
+  #wrap:after {
+    content: '';
+    display: inline-block;
+    /*width: 2px;*/
+    height: 100%;
+    vertical-align: middle;
+    /*background: pink;*/
+  }
+  #wrap img {
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <img src="../img/css.jpg">
+  </div>
+</body>
+</html>

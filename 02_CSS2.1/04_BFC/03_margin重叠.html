@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_margin重叠</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #up, #down {
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+    background: pink;
+  }
+</style>
+</head>
+<body>
+  <div id="up">up</div>
+  <!--<div style="height: 1px;"></div>-->
+  <!--<br>-->
+  <div style="overflow: hidden;">
+    <div id="down">down</div>
+  </div>
+</body>
+</html>

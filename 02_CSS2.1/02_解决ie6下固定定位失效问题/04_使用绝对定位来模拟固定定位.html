@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_使用绝对定位来模拟固定定位</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  body {
+    overflow: auto;
+    height: 100%;
+  }
+  #test {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    width: 100px;
+    height: 100px;
+    background: pink;
+  }
+  #test2 {
+    height: 2000px;
+  }
+</style>
+</head>
+<body>
+  <div id="test"></div>
+  <div id="test2"></div>
+</body>
+</html>

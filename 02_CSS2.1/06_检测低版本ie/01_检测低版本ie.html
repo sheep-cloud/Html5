@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_检测低版本ie</title>
+</head>
+<body>
+  <!--[if IE 8]>
+  <p>这段文字只在IE 8浏览器显示</p>
+  <![endif]-->
+  <script>
+    console.log(isIE(8))
+
+    /**
+     * 自定义检测低版本ie的函数
+     *
+     * @param version ie版本
+     * @return {boolean}
+     */
+    function isIE(version) {
+      var b = document.createElement('b')
+      b.innerHTML = '<!--[if IE ' + version + ']><i></i><![endif]-->'
+      return b.getElementsByTagName('i').length === 1
+    }
+  </script>
+</body>
+</html>

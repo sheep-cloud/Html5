@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_清除浮动_给父级加高度</title>
+<style>
+  /*
+    清除浮动:
+      让浮动的子元素可以撑开父级的高度
+        01. 直接给父级加高度
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    height: 300px;
+    border: 1px solid;
+  }
+  #wrap #inner {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background: pink;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="inner"></div>
+  </div>
+</body>
+</html>

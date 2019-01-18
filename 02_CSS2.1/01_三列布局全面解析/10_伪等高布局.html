@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10_伪等高布局</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    overflow: hidden;
+    width: 750px;
+    margin: 0 auto;
+    border: 1px solid;
+  }
+  #wrap .left {
+    float: left;
+    width: 200px;
+    padding-bottom: 1000px;
+    margin-bottom: -1000px;
+    background: pink;
+  }
+  #wrap .right {
+    float: left;
+    width: 500px;
+    padding-bottom: 1000px;
+    margin-bottom: -1000px;
+    background: deeppink;
+  }
+  .clearfix {
+    *zoom: 1;
+  }
+  .clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="clearfix">
+    <div class="left">
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+      left <br>
+    </div>
+    <div class="right">
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+      right <br>
+    </div>
+  </div>
+</body>
+</html>

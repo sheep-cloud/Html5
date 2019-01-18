@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_垂直居中</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    background-color: deeppink;
+  }
+  #wrap span {
+    background: pink;
+  }
+  #wrap span:nth-child(1) {
+    font-size: 30px;
+    line-height: 1.5;
+    vertical-align: bottom;
+  }
+  #wrap span:nth-child(2) {
+    font-size: 40px;
+    line-height: 1.5;
+  }
+  #wrap span:nth-child(3) {
+    font-size: 50px;
+    line-height: 3;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <span>CSS世界</span>
+    <span>CSS世界</span>
+    <span>CSS世界</span>
+  </div>
+</body>
+</html>

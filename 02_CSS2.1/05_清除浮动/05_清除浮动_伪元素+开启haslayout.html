@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>05_清除浮动_伪元素+开启haslayout</title>
+<style>
+  /*
+    清除浮动:
+      让浮动的子元素可以撑开父级的高度
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    border: 1px solid;
+  }
+  #wrap #inner {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background: pink;
+  }
+  /* 开启hasLayout */
+  .clearfix {
+    *zoom: 1;
+  }
+  /* ie6, 7不支持伪元素 */
+  .clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="clearfix">
+    <div id="inner"></div>
+  </div>
+</body>
+</html>

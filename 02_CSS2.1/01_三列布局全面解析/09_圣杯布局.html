@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>09_圣杯布局</title>
+<style>
+  /*
+    1. 两边固定, 中间自适应
+    2. 中间列要完整显示
+    3. 中间列要优先加载
+  */
+
+  /*
+    浮动:           搭建完整的布局框架
+    margin 为负值:  调整旁边两列的位置(使三列布局到一行上)
+    相对定位:       调整旁边两列的位置(使两列位置调整到两头)
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    min-width: 600px;
+  }
+  #header, #footer {
+    text-align: center;
+    background: gray;
+  }
+  #content {
+    padding: 0 200px;
+  }
+  #content .middle {
+    float: left;
+    width: 100%;
+    background: deeppink;
+  }
+  #content .left {
+    position: relative;
+    left: -200px;
+    float: left;
+    width: 200px;
+    margin-left: -100%;
+    background: pink;
+  }
+  #content .right {
+    position: relative;
+    right: -200px;
+    float: left;
+    width: 200px;
+    margin-left: -200px;
+    background: pink;
+  }
+  .clearfix {
+    *zoom: 1;
+  }
+  .clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+</style>
+</head>
+<body>
+  <div id="header">
+    <h4>header</h4>
+  </div>
+  <div id="content" class="clearfix">
+    <div class="middle">middle</div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+  </div>
+  <div id="footer">
+    <h4>footer</h4>
+  </div>
+</body>
+</html>

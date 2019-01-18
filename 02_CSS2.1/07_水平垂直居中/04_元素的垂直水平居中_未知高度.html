@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_元素的垂直水平居中_未知高度</title>
+<style>
+  /*
+    未知高宽的元素水平垂直居中方案
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background: pink;
+  }
+  #wrap #inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    background: deeppink;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="inner">
+      test, test, test, test, test, test, test, test, <br>
+      test, test, test, test, test, test, test, test, <br>
+      test, test, test, test, test, test, test, test, <br>
+      test, test, test, test, test, test, test, test, <br>
+      test, test, test, test, test, test, test, test, <br>
+      test, test, test, test, test, test, test, test, <br>
+    </div>
+  </div>
+</body>
+</html>

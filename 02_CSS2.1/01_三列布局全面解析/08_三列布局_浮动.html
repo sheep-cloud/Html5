@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>08_三列布局_浮动</title>
+<style>
+  /*
+    1. 两边固定, 中间自适应
+    2. 中间列要完整显示
+    3. 中间列要优先加载
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    /* 2 * left + right */
+    min-width: 600px;
+  }
+  #left, #right {
+    width: 200px;
+    background: pink;
+  }
+  #left {
+    float: left;
+  }
+  #right {
+    float: right;
+  }
+  #middle {
+    background: deeppink;
+  }
+</style>
+</head>
+<body>
+  <div id="left">left</div>
+  <div id="right">right</div>
+  <div id="middle">middle</div>
+</body>
+</html>

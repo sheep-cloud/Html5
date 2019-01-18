@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_商品列</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid;
+  }
+  #wrap #left {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: url("../img/css.jpg") no-repeat -350px -150px;
+  }
+  #wrap #des {
+    overflow: hidden;
+    padding-left: 10px;
+  }
+  /* 溢出显示省略号 */
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="left"></div>
+    <div id="des" class="ellipsis">
+      为你的生活加点料，万千好书每满100减50限时狂欢抢购！<br>
+      为你的生活加点料，万千好书每满100减50限时狂欢抢购！<br>
+      为你的生活加点料，万千好书每满100减50限时狂欢抢购！<br>
+      为你的生活加点料，万千好书每满100减50限时狂欢抢购！<br>
+      为你的生活加点料，万千好书每满100减50限时狂欢抢购！<br>
+      为你的生活加点料，万千好书每满100减50限时狂欢抢购！<br>
+    </div>
+  </div>
+</body>
+</html>
