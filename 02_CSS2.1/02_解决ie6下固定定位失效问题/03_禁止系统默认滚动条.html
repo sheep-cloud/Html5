@@ -4,16 +4,22 @@
 <meta charset="UTF-8">
 <title>03_禁止系统默认滚动条</title>
 <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
   html, body {
     overflow: hidden;
     height: 100%;
   }
-  #test {
+  #wrap {
+    width: 2000px;
     height: 2000px;
+    border: 1px solid;
   }
 </style>
 </head>
 <body>
-  <div id="test"></div>
+  <div id="wrap"></div>
 </body>
 </html>

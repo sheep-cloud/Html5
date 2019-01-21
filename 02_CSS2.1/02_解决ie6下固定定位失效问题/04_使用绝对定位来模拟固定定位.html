@@ -8,29 +8,30 @@
     margin: 0;
     padding: 0;
   }
+  /* 禁用系统滚动条 */
   html, body {
     overflow: hidden;
     height: 100%;
   }
+  /* 将滚动条加给body, 让body的尺寸变为视口的尺寸 */
   body {
     overflow: auto;
     height: 100%;
   }
-  #test {
+  #wrap {
     position: absolute;
-    left: 50px;
-    top: 50px;
     width: 100px;
     height: 100px;
     background: pink;
   }
-  #test2 {
+  #footer {
+    width: 2000px;
     height: 2000px;
   }
 </style>
 </head>
 <body>
-  <div id="test"></div>
-  <div id="test2"></div>
+  <div id="wrap"></div>
+  <div id="footer"></div>
 </body>
 </html>

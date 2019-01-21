@@ -16,18 +16,23 @@
     margin: 30px;
     border: 1px solid yellow;
   }
-  #test {
+  #wrap {
+    /*
+      position: absolute;
+        参照于包含块;
+          如果最近的祖先元素中存在定位元素, 则这个定位元素就是包含块;
+          如果没有, 包含块为初始包含块
+    */
     position: absolute;
     left: 0;
     top: 0;
     width: 100px;
     height: 100px;
     background: pink;
-    /*margin: 100px 100px;*/
   }
 </style>
 </head>
 <body>
-  <div id="test"></div>
+  <div id="wrap"></div>
 </body>
 </html>

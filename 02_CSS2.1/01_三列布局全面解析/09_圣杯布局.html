@@ -35,26 +35,29 @@
     background: deeppink;
   }
   #content .left {
+    float: left;
     position: relative;
     left: -200px;
-    float: left;
     width: 200px;
     margin-left: -100%;
     background: pink;
   }
   #content .right {
+    float: left;
     position: relative;
     right: -200px;
-    float: left;
     width: 200px;
     margin-left: -200px;
     background: pink;
   }
+  /*
+    清除浮动
+  */
   .clearfix {
     *zoom: 1;
   }
   .clearfix:after {
-    content: '';
+    content: "";
     display: block;
     clear: both;
   }

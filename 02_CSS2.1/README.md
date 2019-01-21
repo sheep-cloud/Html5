@@ -3,7 +3,7 @@
 ## 1. 复习
 
 ```ini
-1. 定位参照与谁来定位?
+1. 定位参照于谁来定位?
 	没有定位: 包含块
 	相对定位: 元素本来的位置
 	绝对定位: 包含块; 
@@ -75,7 +75,7 @@
 		2. float属性不为none
 		3. position为absolute或fixed
 		4. overflow不为visible
-		5. display为inline-block,table-cell, table-caption,flex, inline-flex.
+		5. display为inline-block, table-cell, table-caption, flex, inline-flex.
 		
 12. 清除浮动: 让浮动的子元素可以撑开父级的高度
 	1. 给父级加高度: 扩展性不好
