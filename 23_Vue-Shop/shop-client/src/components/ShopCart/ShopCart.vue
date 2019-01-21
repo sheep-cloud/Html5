@@ -166,7 +166,6 @@
           return
         }
         MessageBox.confirm('结算？').then(() => {
-          // TODO: colg [购物车 - 结算]
           Toast('结算成功')
         }, () => {
         })

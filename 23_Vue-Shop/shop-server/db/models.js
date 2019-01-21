@@ -17,9 +17,9 @@ mongoose.connection.on('connected', () => console.log(`数据库连接成功：$
 
 // 2. 得到对应特定集合的Model: UserModel
 const userSchema = mongoose.Schema({
-    name: String, // 用户名
-    pwd: String, // 密码
-    phone: {type: String} // 手机号码
+  name: String, // 用户名
+  pwd: String, // 密码
+  phone: {type: String} // 手机号码
 })
 
 mongoose.model('user', userSchema)
