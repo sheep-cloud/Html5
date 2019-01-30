@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <title>04_枚举对象中的属性</title>
 <script>
-    var obj = {
-        name: '孙悟空',
-        gender: '男',
-        address: '花果山'
-    }
-    console.log(obj)
-    console.log('----------------------------------------------------------------------------------------------------')
+  var obj = {
+    name: '孙悟空',
+    gender: '男',
+    address: '花果山'
+  }
+  console.log(obj)
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    // 枚举对象中的属性
-    for (var key in obj) {
-        console.log(key, obj[key])
-    }
-    console.log('----------------------------------------------------------------------------------------------------')
+  // 枚举对象中的属性
+  for (var key in obj) {
+    console.log(key, obj[key])
+  }
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    console.log(Object.keys(obj)) // ["name", "gender", "address"]
-    console.log(Object.values(obj)) // ["孙悟空", "男", "花果山"]
+  console.log(Object.keys(obj)) // ["name", "gender", "address"]
+  console.log(Object.values(obj)) // ["孙悟空", "男", "花果山"]
 </script>
 </head>
 <body>

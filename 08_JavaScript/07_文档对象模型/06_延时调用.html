@@ -4,24 +4,24 @@
 <meta charset="UTF-8">
 <title>06_延时调用</title>
 <script>
-    window.onload = function () {
-        /*
-            延时调用
-                一个函数不马上执行, 而是隔一段时间以后在执行, 而且只会执行一次
+  window.onload = function () {
+    /*
+      延时调用
+        一个函数不马上执行, 而是隔一段时间以后在执行, 而且只会执行一次
 
-            延时调用和定时调用的区别, 定时调用会执行多次, 延时调用只会执行一次
+      延时调用和定时调用的区别, 定时调用会执行多次, 延时调用只会执行一次
 
-            延时调用和定时调用实际上是可以互相代替的, 在开发中可以根据需要选择
-         */
-        var count = document.getElementById('count')
-        var timer = setTimeout(function () {
-            count.innerHTML++
-            clearTimeout(timer)
-        }, 100)
-    }
+      延时调用和定时调用实际上是可以互相代替的, 在开发中可以根据需要选择
+     */
+    var count = document.getElementById('count')
+    var timer = setTimeout(function () {
+      count.innerHTML++
+      clearTimeout(timer)
+    }, 100)
+  }
 </script>
 </head>
 <body>
-    <h1 id="count">1</h1>
+  <h1 id="count">1</h1>
 </body>
 </html>

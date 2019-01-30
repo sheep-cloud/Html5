@@ -4,31 +4,31 @@
 <meta charset="UTF-8">
 <title>07_this</title>
 <script>
-    /*
-        解析器在调用函数每次都会向函数内部传递一个隐含的参数,
-            这个隐含的参数就是this, this指向的是一个对象, 这个对象我们称为函数执行的上下文对象,
-            根据函数的调用方式的不同, this会指向不同的对象
-                1. 以函数的形式调用时, this永远都是window
-                2. 以方法的形式调用时, this就是调用方法的那个对象
-     */
-    function fun() {
-        console.log(this)
-    }
+  /*
+    解析器在调用函数每次都会向函数内部传递一个隐含的参数,
+      这个隐含的参数就是this, this指向的是一个对象, 这个对象我们称为函数执行的上下文对象,
+      根据函数的调用方式的不同, this会指向不同的对象
+        1. 以函数的形式调用时, this永远都是window
+        2. 以方法的形式调用时, this就是调用方法的那个对象
+   */
+  function fun() {
+    console.log(this)
+  }
 
-    fun() // window
+  fun() // window
 
-    var fun2 = function () {
-        console.log(this)
-    }
-    fun2() // window
+  var fun2 = function () {
+    console.log(this)
+  }
+  fun2() // window
 
-    var obj = {
-        sayName: function () {
-            console.log(this)
-        }
+  var obj = {
+    sayName: function () {
+      console.log(this)
     }
-    obj.sayName() // {sayName: ƒ}
-    console.log(obj) // {sayName: ƒ}
+  }
+  obj.sayName() // {sayName: ƒ}
+  console.log(obj) // {sayName: ƒ}
 </script>
 </head>
 <body>

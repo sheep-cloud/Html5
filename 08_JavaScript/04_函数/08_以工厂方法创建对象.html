@@ -4,54 +4,54 @@
 <meta charset="UTF-8">
 <title>08_以工厂方法创建对象</title>
 <script>
-    var obj = {
-        name: '孙悟空',
-        gender: '男',
-        sayName: function () {
-            console.log(this.name)
-        }
+  var obj = {
+    name: '孙悟空',
+    gender: '男',
+    sayName: function () {
+      console.log(this.name)
     }
-    console.log(obj)
+  }
+  console.log(obj)
 
-    var obj2 = {
-        name: 'Jack',
-        gender: '男',
-        sayName: function () {
-            console.log(this.name)
-        }
+  var obj2 = {
+    name: 'Jack',
+    gender: '男',
+    sayName: function () {
+      console.log(this.name)
     }
-    console.log(obj2)
+  }
+  console.log(obj2)
 
-    var obj3 = {
-        name: 'Rose',
-        gender: '女',
-        sayName: function () {
-            console.log(this.name)
-        }
+  var obj3 = {
+    name: 'Rose',
+    gender: '女',
+    sayName: function () {
+      console.log(this.name)
     }
-    console.log(obj3)
-    console.log('----------------------------------------------------------------------------------------------------')
+  }
+  console.log(obj3)
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    /*
-        使用工厂方法创建对象
-            通过该方法可以大批量的创建对象
-     */
-    function createPerson(name, age) {
-        return {
-            name: name,
-            age: age,
-            sayName: function () {
-                console.log(this.name)
-            }
-        }
+  /*
+      使用工厂方法创建对象
+          通过该方法可以大批量的创建对象
+   */
+  function createPerson(name, age) {
+    return {
+      name: name,
+      age: age,
+      sayName: function () {
+        console.log(this.name)
+      }
     }
+  }
 
-    var obj4 = createPerson('孙悟空', '男')
-    var obj5 = createPerson('Jack', '男')
-    var obj6 = createPerson('Rose', '女')
-    console.log(obj4)
-    console.log(obj5)
-    console.log(obj6)
+  var obj4 = createPerson('孙悟空', '男')
+  var obj5 = createPerson('Jack', '男')
+  var obj6 = createPerson('Rose', '女')
+  console.log(obj4)
+  console.log(obj5)
+  console.log(obj6)
 </script>
 </head>
 <body>

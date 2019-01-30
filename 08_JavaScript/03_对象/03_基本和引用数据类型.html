@@ -4,56 +4,56 @@
 <meta charset="UTF-8">
 <title>03_基本和引用数据类型</title>
 <script>
-    /*
-        基本数据类型
-            String Number Boolean Null Undefined
+  /*
+    基本数据类型
+      String Number Boolean Null Undefined
 
-        引用数据类型
-            Object
+    引用数据类型
+      Object
 
-        JS中的变量都是保存到栈内存中的
-            基本数据类型的值直接在栈内存中存储
-            值与值之间是独立存在的, 修改一个变量不会影响其他的变量
+    JS中的变量都是保存到栈内存中的
+      基本数据类型的值直接在栈内存中存储
+      值与值之间是独立存在的, 修改一个变量不会影响其他的变量
 
-            对象是保存到堆内存中, 每创建一个新的对象, 就会在堆内存中开辟出一个新的空间
-            而变量保存的是对象的内存地址(对象的引用) 如果两个对象保存的是同一个对象引用
-            当一个变量修改属性时, 另一个也会受到影响
-            当一个变量设置为null时, 不会影响另一个
-     */
+      对象是保存到堆内存中, 每创建一个新的对象, 就会在堆内存中开辟出一个新的空间
+      而变量保存的是对象的内存地址(对象的引用) 如果两个对象保存的是同一个对象引用
+      当一个变量修改属性时, 另一个也会受到影响
+      当一个变量设置为null时, 不会影响另一个
+   */
 
-    // a 和 b 是完全独立的，一个值的变化，不会影响其他值
-    var a = 123
-    var b = a
-    a++
-    console.log('a = ' + a)
-    console.log('b = ' + b)
-    console.log('----------------------------------------------------------------------------------------------------')
+  // a 和 b 是完全独立的，一个值的变化，不会影响其他值
+  var a = 123
+  var b = a
+  a++
+  console.log('a = ' + a)
+  console.log('b = ' + b)
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    var obj = new Object()
-    obj.name = '孙悟空'
-    var obj2 = obj
-    // 修改obj.name的属性值
-    obj.name = 'Jack'
-    console.log(obj) // {name: "Jack"}
-    console.log(obj2) // {name: "Jack"}
-    console.log('----------------------------------------------------------------------------------------------------')
+  var obj = new Object()
+  obj.name = '孙悟空'
+  var obj2 = obj
+  // 修改obj.name的属性值
+  obj.name = 'Jack'
+  console.log(obj) // {name: "Jack"}
+  console.log(obj2) // {name: "Jack"}
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    // 设置obj2为null，不会影响
-    obj2 = null
-    console.log(obj) // {name: "Jack"}
-    console.log(obj2) // null
-    console.log('----------------------------------------------------------------------------------------------------')
+  // 设置obj2为null，不会影响
+  obj2 = null
+  console.log(obj) // {name: "Jack"}
+  console.log(obj2) // null
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    /*
-        当比较两个基本数据类型时, 就是比较值
-        当比较两个引用数据类型时, 就是比较对象的内存地址
-            如果两个对象是一模一样的, 但是地址不同, 也会返回 false
-     */
-    var obj3 = new Object()
-    var obj4 = new Object()
-    obj3.name = 'Rose'
-    obj4.name = "Rose"
-    console.log(obj3 === obj4) // false
+  /*
+      当比较两个基本数据类型时, 就是比较值
+      当比较两个引用数据类型时, 就是比较对象的内存地址
+          如果两个对象是一模一样的, 但是地址不同, 也会返回 false
+   */
+  var obj3 = new Object()
+  var obj4 = new Object()
+  obj3.name = 'Rose'
+  obj4.name = 'Rose'
+  console.log(obj3 === obj4) // false
 </script>
 </head>
 <body>

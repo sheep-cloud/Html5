@@ -4,58 +4,58 @@
 <meta charset="UTF-8">
 <title>15_函数的方法call_apply</title>
 <script>
-    /*
-        call() 和 apply()
-            - 这两个方法都是函数对象的方法, 需要通过函数对象来调用
-            - 当对函数调用call()和apply()都会调用函数执行
-            - 在调用call()和apply()可以将一个对象指定为第一个参数
-                此时这个对象将会成为函数执行时的this
+  /*
+      call() 和 apply()
+        - 这两个方法都是函数对象的方法, 需要通过函数对象来调用
+        - 当对函数调用call()和apply()都会调用函数执行
+        - 在调用call()和apply()可以将一个对象指定为第一个参数
+          此时这个对象将会成为函数执行时的this
 
-            - call() 方法可以将实参在对象之后依次传递
+        - call() 方法可以将实参在对象之后依次传递
 
-            - this的情况:
-                1. 以函数的形式调用时, this永远都是window
-                2. 以方法的形式调用时, this是调用方法的对象
-                3. 以构造函数的形式调用时, this是新创建的那个对象
-                4. 使用call()和apply()调用时, this是指定的那个对象
-     */
+        - this的情况:
+          1. 以函数的形式调用时, this永远都是window
+          2. 以方法的形式调用时, this是调用方法的对象
+          3. 以构造函数的形式调用时, this是新创建的那个对象
+          4. 使用call()和apply()调用时, this是指定的那个对象
+   */
 
-    function fun() {
-        console.log(this)
+  function fun() {
+    console.log(this)
+  }
+
+  fun()
+  fun.call()
+  fun.apply()
+  console.log('----------------------------------------------------------------------------------------------------')
+
+  var obj = {
+    name: 'obj',
+    sayName: function () {
+      console.log(this)
+      console.log(this.name)
     }
+  }
+  var obj2 = {
+    name: 'obj2'
+  }
+  fun.call(obj)
+  fun.call(obj2)
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    fun()
-    fun.call()
-    fun.apply()
-    console.log('----------------------------------------------------------------------------------------------------')
+  obj.sayName.apply(obj2)
+  console.log('----------------------------------------------------------------------------------------------------')
 
-    var obj = {
-        name: 'obj',
-        sayName: function () {
-            console.log(this)
-            console.log(this.name)
-        }
-    }
-    var obj2 = {
-        name: 'obj2'
-    }
-    fun.call(obj)
-    fun.call(obj2)
-    console.log('----------------------------------------------------------------------------------------------------')
+  function fun2(a, b) {
+    console.log('a = ' + a)
+    console.log('b = ' + b)
+  }
 
-    obj.sayName.apply(obj2)
-    console.log('----------------------------------------------------------------------------------------------------')
-
-    function fun2(a, b) {
-        console.log('a = ' + a)
-        console.log('b = ' + b)
-    }
-
-    // 实参, 可变参数
-    fun2.call(obj, 2, 3)
-    console.log('----------------------------------------------------------------------------------------------------')
-    // 实参, 数组
-    fun2.apply(obj, [2, 3])
+  // 实参, 可变参数
+  fun2.call(obj, 2, 3)
+  console.log('----------------------------------------------------------------------------------------------------')
+  // 实参, 数组
+  fun2.apply(obj, [2, 3])
 </script>
 </head>
 <body>

@@ -5,24 +5,23 @@
 <title>02_eval</title>
 </head>
 <body>
-    <script>
-        /*
-            eval()
-                - 这个函数可以用来执行一段字符串形式的JS代码, 并将执行结果返回
-                    - 如果参数是一个表达式，eval() 函数将执行表达式。
-                    - 如果参数是Javascript语句，eval()将执行 Javascript 语句。
-                - 如果使用eval()执行的字符串中含有{}, 它会将{}当成是代码块, 需要使用()包裹
+  <script>
+    /*
+        eval()
+          - 这个函数可以用来执行一段字符串形式的JS代码, 并将执行结果返回
+            - 如果参数是一个表达式，eval() 函数将执行表达式。
+            - 如果参数是Javascript语句，eval()将执行 Javascript 语句。
+          - 如果使用eval()执行的字符串中含有{}, 它会将{}当成是代码块, 需要使用()包裹
 
-                - eval()这个函数的功能很强大, 可以直接执行一个字符串中的js代码,
-                    但是在开发中尽量不要使用, 首先它的执行性能比较差, 然后它还具有安全隐患
-         */
-        var jsonStr = '{"name": "孙悟空", "gender": "男", "age": 18}'
+          - eval()这个函数的功能很强大, 可以直接执行一个字符串中的js代码,
+            但是在开发中尽量不要使用, 首先它的执行性能比较差, 然后它还具有安全隐患
+     */
+    var str2 = 'console.log("hello")'
+    eval(str2) // hello
 
-        var str2 = 'console.log("hello")'
-        eval(str2) // hello
-
-        var obj = eval('(' + jsonStr + ')')
-        console.log(obj) // {name: "孙悟空", gender: "男", age: 18}
-    </script>
+    var jsonStr = '{"name": "孙悟空", "gender": "男", "age": 18}'
+    var obj = eval('(' + jsonStr + ')')
+    console.log(obj) // {name: "孙悟空", gender: "男", age: 18}
+  </script>
 </body>
 </html>

@@ -4,29 +4,29 @@
 <meta charset="UTF-8">
 <title>05_定时调用</title>
 <script>
-    window.onload = function () {
-        /*
-            setInterval()
-                定时调用, 可以将一个函数, 每隔一段时间执行一次
-                参数：
-                    1. 回调函数, 该函数每隔一段时间被调用一次
-                    2. 每次调用间隔的时间, 单位是毫秒
-                返回值：
-                    返回一个Number类型的数据, 这个数字用来作为定时器的唯一标识
-         */
-        var count = document.getElementById('count')
-        var timer = setInterval(function () {
-            count.innerHTML++
+  window.onload = function () {
+    /*
+      setInterval()
+        定时调用, 可以将一个函数, 每隔一段时间执行一次
+        参数：
+          1. 回调函数, 该函数每隔一段时间被调用一次
+          2. 每次调用间隔的时间, 单位是毫秒
+        返回值：
+          返回一个Number类型的数据, 这个数字用来作为定时器的唯一标识
+     */
+    var count = document.getElementById('count')
+    var timer = setInterval(function () {
+      count.innerHTML++
 
-            // 关闭定时器, 如果timer不是一个有效的标识, 则什么都不做
-            if (count.innerHTML === '10') {
-                clearInterval(timer)
-            }
-        }, 100)
-    }
+      // 关闭定时器, 如果timer不是一个有效的标识, 则什么都不做
+      if (count.innerHTML === '10') {
+        clearInterval(timer)
+      }
+    }, 100)
+  }
 </script>
 </head>
 <body>
-    <h1 id="count">1</h1>
+  <h1 id="count">1</h1>
 </body>
 </html>

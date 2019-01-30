@@ -4,35 +4,35 @@
 <meta charset="UTF-8">
 <title>03_文档的加载</title>
 <script>
-    /*
-        浏览器在加载一个页面时, 是按照自上向下的顺序加载的,
-            读取到一行就运行一行, 如果将js代码写到页面的上面, 在代码执行时, 页面还没有加载
+  /*
+    浏览器在加载一个页面时, 是按照自上向下的顺序加载的,
+      读取到一行就运行一行, 如果将js代码写到页面的上面, 在代码执行时, 页面还没有加载
 
-        将js代码编写在页面的下部就是为了, 可以在页面加载完毕以后在执行js代码
-     */
+    将js代码编写在页面的下部就是为了, 可以在页面加载完毕以后在执行js代码
+   */
 
-    // 获取id为btn的按钮
-    // var btn = document.getElementById('btn')
-    // 为按钮绑定一个单击响应函数
-    // btn.onclick = function () {
-    //     alert('hello')
-    // }
+  // 获取id为btn的按钮
+  // var btn = document.getElementById('btn')
+  // 为按钮绑定一个单击响应函数
+  // btn.onclick = function () {
+  //     alert('hello')
+  // }
 
-    /*
-        onload 事件会在整个页面加载完成后才会触发
-        为window绑定一个onload事件
-     */
+  /*
+    onload 事件会在整个页面加载完成后才会触发
+    为window绑定一个onload事件
+   */
 
-    window.onload = function () {
-        var btn = document.getElementById('btn')
-        btn.onclick = function () {
-            alert('onclick')
-        }
-        alert('onload')
+  window.onload = function () {
+    var btn = document.getElementById('btn')
+    btn.onclick = function () {
+      alert('onclick')
     }
+    alert('onload')
+  }
 </script>
 </head>
 <body>
-    <button id="btn">点我一下</button>
+  <button id="btn">点我一下</button>
 </body>
 </html>
