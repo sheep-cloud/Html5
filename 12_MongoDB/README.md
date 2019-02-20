@@ -4,7 +4,7 @@
 
 - MongoDB是为快速开发互联网Web应用而设计的数据库系统
 - MongoDB的设计目标是极简, 灵活, 作为Web应用栈的一部分
-- MongoDB的数据模型是面向文档的, 所谓文档是一种类似于JSON的结构, 简单理解MongoDB这个数据库中存的是各种各样的JSON（BSON）
+- MongoDB的数据模型是面向文档的, 所谓文档是一种类似于JSON的结构, 简单理解MongoDB这个数据库中存的是各种各样的JSON(BSON)
 
 ## 2. 安装 MongoDB
 
@@ -52,9 +52,12 @@
   - 服务命令
 
     ```ini
-    启动: net start MongoDB
-    停止: net stop MongoDB
-    删除服务: sc.exe delete MongoDB
+    # 启动
+    net start MongoDB
+    # 停止
+    net stop MongoDB
+    # 删除服务
+    sc.exe delete MongoDB
     ```
 
 ### 2.2. MongoDB 导出命令
@@ -62,7 +65,10 @@
 - 进入 `D:\Sybase\MongoDB\Server\3.2\bin` 目录
 
 ```ini
-mongoexport -h 127.0.0.1 -d rams -c bu_device_data -o demo.json
+cd D:\Sybase\MongoDB\Server\3.2\bin
+
+# mongoexport -h 主机地址 -d 数据库名称 -c 集合名称 --csv --field 字段列表 -o 输出地址
+mongoexport -h 127.0.0.1 -d local -c startup_log -o D:/startup_log.json
 ```
 
 ## 3. MongoDB 操作
@@ -77,7 +83,7 @@ db;
 # 切换数据库
 use 数据库名;
 # 查看数据库下有哪些collection
-show collections;
+show 集合名;
 ```
 
 ### 3.2 CRUD操作
@@ -216,7 +222,7 @@ db.stus.find({}).count();
         一对一（one to one）
             - 在MongoDB可以通过内嵌文档的形式来体现出一对一的关系
             
-        一对多（one to many）/多对伊（many to one）
+        一对多（one to many）/多对一（many to one）
             - 也可以通过内嵌文档来映射一对多的关系
             
         多对多（many to many）
