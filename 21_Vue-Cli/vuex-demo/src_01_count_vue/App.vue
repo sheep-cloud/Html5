@@ -1,3 +1,4 @@
+<!-- view: 以声明方式将 state 映射到视图 -->
 <template>
   <div class="modal-header">
     <h3>click <span class="text-primary">{{count}}</span> times, count is <span class="text-danger">{{evenOrOdd}}</span></h3>
@@ -10,6 +11,7 @@
 
 <script>
   export default {
+    // state: 驱动应用的数据源
     data() {
       return {
         count: 0
@@ -17,28 +19,25 @@
     },
     computed: {
       evenOrOdd() {
-        return this.count % 2 ? '奇数' : '偶数'
+        return this.count % 2 === 0 ? '偶数' : '奇数'
       }
     },
+    // actions: 响应在 view 上的用户输入导致的状态变化
     methods: {
-      // 增加
       increment() {
         this.count++
       },
-      // 减少
       decrement() {
         this.count--
       },
-      // 如果是奇数才增加
       incrementIfOdd() {
         if (this.count % 2) {
-          this.increment()
+          this.count++
         }
       },
-      // 过一秒才增加
       incrementAsync() {
         setTimeout(() => {
-          this.decrement()
+          this.count--
         }, 1000)
       }
     }

@@ -24,6 +24,8 @@
   import {mapState, mapGetters, mapActions} from 'vuex'
 
   export default {
+    mounted() {
+    },
     computed: {
       ...mapState(['count']),
       // ...mapGetters({evenOrOdd: 'evenOrOdd'}) // key：事件，value：store

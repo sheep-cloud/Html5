@@ -26,7 +26,7 @@
           createTime: new Date()
         }
         // 3. 添加到todos
-        // 触发自定义事件; 事件名: addTodo, 参数: todo
+        // 触发自定义事件; 事件名: addTodo, 参数: tod o
         this.$emit('addTodo', todo)
         // 4. 清除输入
         this.title = ''
