@@ -5,34 +5,34 @@
 <title>12_Generator函数</title>
 </head>
 <body>
-    <!--
-        Generator函数
-            概念：
-                1. ES6提供的解决异步编程的方案之一
-                2. Generator函数是一个状态机，内部封装了不同状态的数据
-                3. 用来生成遍历器对象
-                4. 可暂停函数（惰性求值），yield可暂停，next方法可启动，每次返回的是yield后的表达式结果
-            特点：
-                1. function与函数名之间有一个星号
-                2. 内部用yield表达式来定义不同的状态
-    -->
-    <script>
-        // 小试牛刀
-        function* myGenerator() {
-            console.log('开始执行')
-            yield 'hello'
-            console.log('暂停后，再次执行')
-            yield 'generator'
-            console.log('遍历完毕')
-            return '返回的结果'
-        }
+  <!--
+      Generator函数
+          概念：
+              1. ES6提供的解决异步编程的方案之一
+              2. Generator函数是一个状态机，内部封装了不同状态的数据
+              3. 用来生成遍历器对象
+              4. 可暂停函数（惰性求值），yield可暂停，next方法可启动，每次返回的是yield后的表达式结果
+          特点：
+              1. function与函数名之间有一个星号
+              2. 内部用yield表达式来定义不同的状态
+  -->
+  <script>
+    // 小试牛刀
+    function* myGenerator() {
+      console.log('开始执行')
+      yield 'hello'
+      console.log('暂停后，再次执行')
+      yield 'generator'
+      console.log('遍历完毕')
+      return '返回的结果'
+    }
 
-        let MG = myGenerator() // 返回的是指针对象
-        console.log(MG.next())
-        console.log(MG.next())
-        console.log(MG.next())
+    const MG = myGenerator() // 返回的是指针对象
+    console.log(MG.next())
+    console.log(MG.next())
+    console.log(MG.next())
 
-        // TODO: colg [Generator函数]
-    </script>
+    // TODO: colg [Generator函数]
+  </script>
 </body>
 </html>

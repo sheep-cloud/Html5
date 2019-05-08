@@ -5,47 +5,47 @@
 <title>05_简化的对象写法</title>
 </head>
 <body>
-    <!--
-        简化的对象写法
-            省略同名的属性值
-            省略方法的function
-            例如：
-                let x = 1
-                let y = 2
-                let point = {
-                    x,
-                    y,
-                    setX(x) {
-                        this.x = x
-                    }
-                }
-    -->
-    <script>
-        let username = 'jack'
-        let age = 39
-        let obj = {
-            username: username,
-            age: age,
-            getName: function () {
-                return this.username
-            }
-        }
-        console.log(obj)
-        console.log(obj.getName())
-        console.log('----------------------------------------------------------------------------------------------------')
+  <!--
+      简化的对象写法
+          省略同名的属性值
+          省略方法的function
+          例如：
+              let x = 1
+              let y = 2
+              let point = {
+                  x,
+                  y,
+                  setX(x) {
+                      this.x = x
+                  }
+              }
+  -->
+  <script>
+    let username = 'jack'
+    let age = 39
+    let obj = {
+      username: username,
+      age: age,
+      getName: function () {
+        return this.username
+      }
+    }
+    console.log(obj)
+    console.log(obj.getName())
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 简化的对象写法
-        obj = {
-            // 同名的属性可以省略不写
-            username,
-            age,
-            // 可以省略函数的 : function
-            getName() {
-                return this.username
-            }
-        }
-        console.log(obj)
-        console.log(obj.getName())
-    </script>
+    // 简化的对象写法
+    obj = {
+      // 同名的属性可以省略不写
+      username,
+      age,
+      // 可以省略函数的 : function
+      getName() {
+        return this.username
+      }
+    }
+    console.log(obj)
+    console.log(obj.getName())
+  </script>
 </body>
 </html>

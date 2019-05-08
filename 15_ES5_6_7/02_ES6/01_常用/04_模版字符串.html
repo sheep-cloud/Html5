@@ -5,20 +5,28 @@
 <title>04_模版字符串</title>
 </head>
 <body>
-    <!--
-        1. 模版字符串：简化字符串的拼接
-            模版字符串必须用 `` 包含
-            变化的部分使用${xxx}定义
-    -->
-    <script>
-        let obj = {username: 'jack', age: 39}
-        let str = '我的名字叫：' + obj.username + ', 我的年龄是：' + obj.age
-        console.log(str)
-        console.log('----------------------------------------------------------------------------------------------------')
+  <!--
+      1. 模版字符串：简化字符串的拼接
+          模版字符串必须用 `` 包含
+          变化的部分使用${xxx}定义
+  -->
+  <script>
+    let obj = {username: 'jack', age: 39}
+    let str = '我的名字叫：' + obj.username + ', 我的年龄是：' + obj.age
+    console.log(str)
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 模版字符串
-        str = `我的名字叫：${obj.username}, 我的年龄是：${obj.age}`
-        console.log(str)
-    </script>
+    // 模版字符串
+    str = `我的名字叫：${obj.username}, 我的年龄是：${obj.age}`
+    console.log(str)
+    console.log('----------------------------------------------------------------------------------------------------')
+
+    // 模版字符串调用函数
+    function fn() {
+      return 'Hello World'
+    }
+
+    console.log(`foo ${fn()} bar`) // foo Hello World bar
+  </script>
 </body>
 </html>

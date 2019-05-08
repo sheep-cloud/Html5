@@ -5,42 +5,44 @@
 <title>13_async函数</title>
 </head>
 <body>
-    <!--
-        async函数（源自2017）
-            概念：真正意义上去解决异步回调的问题，同步流程表达异步操作
-            本质：Generator的语法糖
-            语法：
-                async function foo() {
-                    await 异步操作
-                    await 异步操作
-                }
-            特点：
-                1. 不需要像Generator去调用next方法，遇到await等待，当前的异步操作完成就往下执行
-                2. 返回的总是Peomise对象，可以用then方法进行下一步操作
-                3. async取代Generator函数的星号*，await取代Generator的yield
-                4. 语义上更为明确，使用简单，经临床验证，暂时没有任何副作用以及不良反应
-    -->
-    <script>
-        // async 基本使用
-        async function foo() {
-            /*
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve()
-                }, 2000)
-            })*/
-            return new Promise(resolve => setTimeout(resolve, 2000))
-        }
+  <!--
+      async函数（源自2017）
+          概念：真正意义上去解决异步回调的问题，同步流程表达异步操作
+          本质：Generator的语法糖
+          语法：
+              async function foo() {
+                  await 异步操作
+                  await 异步操作
+              }
+          特点：
+              1. 不需要像Generator去调用next方法，遇到await等待，当前的异步操作完成就往下执行
+              2. 返回的总是Promise对象，可以用then方法进行下一步操作
+              3. async取代Generator函数的星号*，await取代Generator的yield
+              4. 语义上更为明确，使用简单，经临床验证，暂时没有任何副作用以及不良反应
+  -->
+  <script>
+    // async 基本使用
+    async function foo(ms) {
+      /*
+      return new Promise(function (resolve) {
+          setTimeout(function () {
+              resolve()
+          }, 2000)
+      })*/
+      return new Promise(resolve => {
+        setTimeout(resolve, ms)
+      })
+    }
 
-        async function test() {
-            console.log('开始执行', new Date().toLocaleString())
-            await foo()
-            console.log('执行完毕', new Date().toLocaleString())
-        }
+    async function test(ms) {
+      console.log('开始执行', new Date().toLocaleString())
+      await foo(ms)
+      console.log('执行完毕', new Date().toLocaleString())
+    }
 
-        test()
+    test(5000)
 
-        // TODO: colg [async函数]
-    </script>
+    // TODO: colg [async函数]
+  </script>
 </body>
 </html>

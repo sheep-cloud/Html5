@@ -5,43 +5,46 @@
 <title>03_变量的结构赋值</title>
 </head>
 <body>
-    <!--
-        1. 理解
-            从对象或数组中提取数据，并赋值给变量（多个）
-        2. 对象的解构赋值
-            let{n, a} = {n: 'tom', a: 12}
-        3. 数组的解构赋值
-            let [a, b] = [1, 'tom']
-        4. 用途
-            给多个形参赋值
-    -->
-    <script>
-        let obj = {username: 'jack', age: 39}
-        let username = obj.username
-        let age = obj.age
-        console.log(username, age)
-        console.log('----------------------------------------------------------------------------------------------------')
+  <!--
+      1. 理解
+          从对象或数组中提取数据, 并赋值给变量(多个)
+      2. 对象的解构赋值
+          2.1. 普通对象的解构赋值
+              const {username, age} = {username: 'Jack', age: 18}
+          2.2. 嵌套对象的解构赋值
+              const {name, info: {a}} = {name: 'Jack', info: {a: 18}}
+      3. 数组的解构赋值
+          let [a, b] = [1, 'tom']
+      4. 用途
+          给多个形参赋值
+  -->
+  <script>
+    // 对象的解构赋值
+    const {username, age} = {username: 'Jack', age: 18}
+    console.log(username, age) // Jack 18
 
-        // 对象的解构赋值
-        let obj1 = {username1: 'jack', age1: 39}
-        let {username1, age1} = obj1
-        console.log(username1, age1)
-        console.log('----------------------------------------------------------------------------------------------------')
+    const {username: user_name} = {username: 'Jack'}
+    console.log(user_name) // Jack
 
-        // 数组的解构赋值
-        let arr = [1, 3, 5, 'abc', true]
-        // let[索引]
-        let [, xxx, b, c] = arr
-        console.log(xxx, b, c)
-        console.log('----------------------------------------------------------------------------------------------------')
+    const {name, info: {a}} = {name: 'Jack', info: {a: 18}}
+    console.log(name, a) // Jack 18
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 给多个形参赋值
-        function foo({username, age}) { // {username, age} = obj
-            console.log(username, age)
-        }
+    // 数组的解构赋值
+    let arr = [1, 3, 5, 'abc', true]
+    // let[索引]
+    let [, xxx, b, c] = arr
+    console.log(xxx, b, c) // 3 5 "abc"
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        foo(obj)
+    // 给多个形参赋值
+    function foo({username, age}) { // {username, age} = obj
+      console.log(username, age)
+    }
 
-    </script>
+    const obj = {username: 'Jack', age: 18}
+    foo(obj)
+
+  </script>
 </body>
 </html>
