@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_resize</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    height: 100%;
+  }
+  /* 元素垂直水平居中, 这种方式只推荐在img标签使用 */
+  body {
+    text-align: center;
+  }
+  body:after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  div {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    vertical-align: middle;
+    border: 5px solid;
+    background: url("../../img/css.jpg");
+    /* 必须配合 overflow: hidden; 使用*/
+    overflow: hidden;
+    resize: both;
+  }
+</style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

@@ -11,8 +11,8 @@
 const fs = require('fs')
 
 fs.writeFile('./file/04_fs_简单文件写入.txt', 'node.js 文件系统 - 简单文件写入', {flag: 'w'}, function (err) {
-    console.log(arguments)
-    if (!err) {
-        console.log('写入成功')
-    }
+  console.log(arguments)
+  if (!err) {
+    console.log('写入成功')
+  }
 })

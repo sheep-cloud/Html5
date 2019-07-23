@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_边框图片</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    border: 10px solid;
+    border-image-source: url("../../img/border-image.png");
+    border-image-slice: 33%;
+    border-image-repeat: round;
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto"></div>
+</body>
+</html>

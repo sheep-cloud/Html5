@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_字体图标</title>
+<style>
+  /*
+    阿里巴巴矢量图标库: https://www.iconfont.cn/help/detail?spm=a313x.7781069.1998910419.d8cf4382a&helptype=code
+  */
+  @font-face {
+    font-family: colg;  /* project id 1023597 */
+    src: url('//at.alicdn.com/t/font_1023597_g7jq3bse8tf.eot');
+    src: url('//at.alicdn.com/t/font_1023597_g7jq3bse8tf.eot?#iefix') format('embedded-opentype'),
+         url('//at.alicdn.com/t/font_1023597_g7jq3bse8tf.woff2') format('woff2'),
+         url('//at.alicdn.com/t/font_1023597_g7jq3bse8tf.woff') format('woff'),
+         url('//at.alicdn.com/t/font_1023597_g7jq3bse8tf.ttf') format('truetype'),
+         url('//at.alicdn.com/t/font_1023597_g7jq3bse8tf.svg#iconfont') format('svg');
+  }
+  #test {
+    font: 32px colg;
+  }
+  #test span:before {
+    content: "\e60f";
+  }
+</style>
+</head>
+<body>
+  <div id="test">
+    &#xe60d; &#xe61c; &#xe60f; &#xe61b; &#xe610;
+    <br>
+    <span></span>
+  </div>
+</body>
+</html>

@@ -85,7 +85,7 @@
         <el-collapse-item title="1. NavMenu 导航菜单"></el-collapse-item>
         <el-collapse-item title="2. Tags 标签页">
           <div>分隔内容上有关联但属于不同类别的数据集合。</div>
-          <router-link to="/tabs_01">基础用法</router-link>
+          <router-link to="/tabs_01" target="_blank">基础用法</router-link>
         </el-collapse-item>
         <el-collapse-item title="3. Breadcrumb 面包屑"></el-collapse-item>
         <el-collapse-item title="4. Dropdown 下拉菜单"></el-collapse-item>

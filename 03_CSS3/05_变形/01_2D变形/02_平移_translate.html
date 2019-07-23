@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_平移_translate</title>
+<style>
+  /*
+    X方向平移:transform:  translateX(tx)
+    Y方向平移:transform:  translateY(ty)
+    二维平移：transform:  translate(tx[, ty])； 如果ty没有指定，它的值默认为0。
+
+    可设单值，也可设双值。
+           正数表示XY轴正向位移，负数为反向位移。设单值表示只X轴位移，Y轴坐标不变，
+           例如transform: translate(100px);等价于transform: translate(100px,0);
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    background: pink;
+    transition: 2s;
+  }
+  #wrap:hover {
+    transform: translate(300px);
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto">
+    CSS
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_过渡的简写属性</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    position: relative;
+    height: 60%;
+    border: 1px solid;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    font: 64px/128px "microsoft yahei";
+    line-height: 200px;
+    text-align: center;
+    border-radius: 50%;
+    background: pink;
+    /*
+    transition-property: width;
+    transition-duration: 3s;
+    transition-timing-function: ease-out;
+    transition-delay: 300ms;
+    */
+    transition: 3s 300ms width ease-out;
+  }
+  #wrap:hover {
+    width: 500px;
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto">
+    CSS
+  </div>
+</body>
+</html>

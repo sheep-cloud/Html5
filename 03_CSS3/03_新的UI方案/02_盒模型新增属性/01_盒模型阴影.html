@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_盒模型阴影</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    width: 100px;
+    height: 100px;
+    background: pink;
+    /* 盒模型阴影 */
+    box-shadow: 10px 10px 10px 0 black, 20px 20px 10px 10px deeppink;
+  }
+  /* 元素垂直水平居中 */
+  .ma-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="ma-auto"></div>
+</body>
+</html>

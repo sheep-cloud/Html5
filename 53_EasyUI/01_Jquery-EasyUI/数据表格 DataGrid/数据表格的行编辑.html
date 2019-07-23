@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数据表格的行编辑</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic DataGrid</h2>
+  <p>The DataGrid is created from markup, no JavaScript code needed.</p>
+
+  <table id="dg" style="width: 700px; height: auto"
+         data-options="title:'Basic DataGrid', singleSelect:true, idField:'productId'">
+  </table>
+
+  <script>
+    let $dg = $('#dg')
+    // 当前编辑行
+    let editIndex = undefined
+
+    /**
+     * 取消编辑行
+     * @returns {boolean}
+     */
+    function endEditing() {
+      if (editIndex === undefined) {
+        return true
+      }
+      let validateRow = $dg.datagrid('validateRow', editIndex)
+      if (validateRow) {
+        $dg.datagrid('endEdit', editIndex)
+        editIndex = undefined
+        return true
+      } else {
+        return false
+      }
+    }
+
+    $dg.datagrid({
+      url: 'datagrid_data1.json',
+      columns: [[
+        {field: 'productId', title: 'Product', width: 80},
+        {field: 'productName', title: 'Product Name', width: 100, editor: 'text'},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right', editor: {type: 'numberbox', options: {required: true, precision: 2}}},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right', editor: {type: 'numberbox', options: {required: true}}},
+        {field: 'attr1', title: 'Attribute', width: 250, editor: 'text'},
+        {field: 'status', title: 'Status', width: 60, align: 'center', editor: {type: 'checkbox', options: {on: 'P', off: 'T'}}}
+      ]],
+      toolbar: [
+        {
+          text: 'Add', iconCls: 'icon-add', handler: () => {
+            if (endEditing()) {
+              $dg.datagrid('appendRow', {status: 'P'})
+              editIndex = $dg.datagrid('getRows').length - 1
+              $dg.datagrid('selectRow', editIndex).datagrid('beginEdit', editIndex)
+            }
+          }
+        },
+        {
+          text: 'Remove', iconCls: 'icon-remove', handler: () => {
+            if (editIndex === undefined) {
+              return
+            }
+            $dg.datagrid('cancelEdit', editIndex).datagrid('deleteRow', editIndex)
+            editIndex = undefined
+          }
+        },
+        {
+          text: 'Save', iconCls: 'icon-save', handler: () => {
+            if (endEditing()) {
+              const inserted = $dg.datagrid('getChanges', 'inserted')
+              if (inserted.length) {
+                console.log('inserted')
+                console.log(inserted)
+              }
+              let updated = $dg.datagrid('getChanges', 'updated')
+              if (updated.length) {
+                console.log('updated')
+                console.log(updated)
+              }
+              let deleted = $dg.datagrid('getChanges', 'deleted')
+              if (deleted.length) {
+                console.log('deleted')
+                console.log(deleted)
+                console.log(deleted.map(e => e['productId']).join(','))
+              }
+              $dg.datagrid('acceptChanges')
+            }
+          }
+        },
+        {
+          text: 'Undo', iconCls: 'icon-undo', handler: () => {
+            $dg.datagrid('rejectChanges')
+            editIndex = undefined
+          }
+        },
+        {
+          text: 'Reload', iconCls: 'icon-reload', handler: () => {
+            $dg.datagrid('reload')
+            editIndex = undefined
+          }
+        }
+      ],
+      onClickRow: index => {
+        if (editIndex !== index) {
+          if (endEditing()) {
+            $dg.datagrid('selectRow', index).datagrid('beginEdit', index)
+            editIndex = index
+          } else {
+            $dg.datagrid('selectRow', editIndex)
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

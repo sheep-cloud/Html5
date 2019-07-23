@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>10_溢出显示省略号</title>
+<style>
+  div {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border: 1px solid;
+  }
+  /*
+    溢出显示省略号: 包裹区域必须不能让子元素撑开
+  */
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="ellipsis">colg, colg, colg, colg, colg, colg, colg, colg, colg, colg, colg, colg, colg, colg,</div>
+</body>
+</html>

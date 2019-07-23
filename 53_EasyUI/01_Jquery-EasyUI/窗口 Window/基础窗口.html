@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基础窗口</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic Window</h2>
+  <p>Window can be dragged freely on screen.</p>
+
+  <div>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#w').dialog('open')">Open</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#w').dialog('close')">Close</a>
+  </div>
+
+  <div id="w" class="easyui-window" style="padding: 10px; width: 500px; height: 200px;"
+       data-options="title:'Basic Window', iconCls:'icon-save'">
+    The window content.
+  </div>
+</body>
+</html>

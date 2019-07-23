@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_通用兄弟选择器</title>
+<style>
+  /* 通用兄弟选择器( ~ ) */
+  #wrap > #first ~ .inner {
+    /* 属性继承 */
+    /*color: pink;*/
+    border: 1px solid;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="inner">inner</div>
+    <div id="first">first</div>
+    <div class="inner">inner
+      <div class="inner" style="margin-left: 50px;">inner2</div>
+    </div>
+    <div class="inner">inner</div>
+    <div class="inner">inner</div>
+    <div class="inner">inner</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_旋转_rotate</title>
+<style>
+  /*
+    transform:rotate(angle);
+       正值:顺时针旋转  rotate(360deg)
+       负值:逆时针旋转  rotate(-360deg)
+       只能设单值。正数表示顺时针旋转，负数表示逆时针旋转
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    background: pink;
+    transition: 2s;
+  }
+  #wrap:hover {
+    transform: rotate(360deg);
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto">
+    CSS
+  </div>
+</body>
+</html>

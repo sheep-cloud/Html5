@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>工具栏和按钮组</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Toolbar and Buttons</h2>
+  <p>The toolbar and buttons can be added to dialog.</p>
+
+  <div>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('open')">Open</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('close')">Close</a>
+  </div>
+
+  <div id="dlg" style="padding: 10px; width: 400px; height: 200px;"
+       data-options="title:'Toolbar and Buttons', iconCls:'icon-save'">
+    The dialog content.
+  </div>
+
+  <script>
+    $('#dlg').dialog({
+      toolbar: [
+        {
+          text: 'Add', iconCls: 'icon-add', handler: () => {
+            $.messager.alert('Msg', 'add', 'info')
+          }
+        },
+        {
+          text: 'Save', iconCls: 'icon-save', handler: () => {
+            $.messager.alert('Msg', 'save', 'info')
+          }
+        }
+      ],
+      buttons: [
+        {
+          text: 'Ok', iconCls: 'icon-ok', handler: () => {
+            $.messager.alert('Msg', 'ok', 'info')
+          }
+        },
+        {
+          text: 'Cancel', iconCls: 'icon-cancel', handler: () => {
+            $.messager.alert('Msg', 'cancel', 'info')
+          }
+        }
+      ]
+    })
+  </script>
+</body>
+</html>

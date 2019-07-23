@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>07_模糊背景</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #header {
+    position: relative;
+    height: 100px;
+    background: rgba(0, 0, 0, .5);
+  }
+  #header > img {
+    width: 64px;
+    height: 64px;
+    margin: 24px 0 0 24px;
+  }
+  #header #bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* 降低优先级 */
+    z-index: -1;
+    /* 模糊元素 */
+    filter: blur(10px);
+    background: url("../../img/avatar.jpg") no-repeat;
+    background-size: 100% 100%;
+  }
+</style>
+</head>
+<body>
+  <div id="header">
+    <img src="../../img/avatar.jpg">
+    <div id="bg"></div>
+  </div>
+</body>
+</html>

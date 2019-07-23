@@ -2552,7 +2552,78 @@ this.$router.replace(`url`)
 
 #### 6.1.3. 多组件共享状态的问题
 
+- 多个视图依赖于同一状态
+- 来自不同视图的行为需要变更为同一状态
+- 以前的解决办法
+  - 将数据以及操作数据的行为都定义在父组件
+  - 将数据以及操作数据的行为传递给各个需要的子组件(有可能需要多级传递)
+- 现在的解决办法
+  - 把组件的共享状态抽取出来, 以一个全局单例模式管理. 在这种模式下, 组件树构成了一个巨大的"视图", 不管在树的哪个位置, 任何组件都能获取状态或者触发行为
+  - 通过定义和隔离状态管理中的各种概念并强制遵守一定的规则, 代码将会变得更结构化且易维护
+
 ### 6.2. 核心概念和API
+
+#### 6.2.1. `state.js`
+
+- vuex 管理的状态对象
+
+- 它是唯一的
+
+  ```js
+  const state = {xxx: initValue}
+  ```
+
+#### 6.2.2. `mutations.js`
+
+- 包含多个直接更新state的方法(回调函数)的对象
+
+- 谁来触发: `actions` 中的 `commit('mutation 名称')`
+
+- 只能包含同步的代码, 不能写异步代码
+
+  ```js
+  const mutations = {
+      yyy(state, {data}) {
+          // 更新state的某个属性
+      }
+  }
+  ```
+
+#### 6.2.3. `actions.js`
+
+- 包含多个事件回调函数的对象
+
+- 通过执行`commit()`来触发`mutation`的调用, 间接更新`state`
+
+- 谁来触发: 组件中 `$store.dispatch('action 名称', data1)` // zzz
+
+- 可以包含异步代码(定时器, ajax)
+
+  ```js
+  const actions = {
+      zzz({commit, state}, data) {
+          commit('yyy', {data})
+      }
+  }
+  ```
+
+#### 6.2.4. `getters`
+
+- 包含多个计算属性(get)的对象
+
+- 谁来读取: 组件中 `$store.getters.xxx`
+
+  ```js
+  const getters = {
+      mmm(state) {
+          return ...
+      }
+  }
+  ```
+
+  
+
+#### 6.2.5. `modules`
 
 ## 7. Vue源码分析
 

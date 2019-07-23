@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_过渡运动形式_timing_function&过渡延迟_delay</title>
+<style>
+  /*
+    transition-timing-function:
+      属性值：
+        1、ease：（加速然后减速）默认值，ease函数等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0).
+        2、linear：（匀速），linear 函数等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0).
+        3、ease-in：(加速)，ease-in 函数等同于贝塞尔曲线(0.42, 0, 1.0, 1.0).
+        4、ease-out：（减速），ease-out 函数等同于贝塞尔曲线(0, 0, 0.58, 1.0).
+        5、ease-in-out：（加速然后减速），ease-in-out 函数等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)
+        6、cubic-bezier： 贝塞尔曲线
+        7、step-start：等同于steps(1,start)
+            step-end：等同于steps(1,end)
+             steps(<integer>,[,[start|end]]?)
+                    第一个参数：必须为正整数，指定函数的步数
+                    第二个参数：指定每一步的值发生变化的时间点（默认值end）
+
+      CSS属性受到 transition的影响，会产生不断变化的中间值，而 CSS transition-timing-function 属性用来描述这个中间值是怎样计算的。
+
+
+    transition-delay: 规定了在过渡效果开始作用之前需要等待的时间
+      默认值：0s
+        值以秒（s）或毫秒（ms）为单位，表明动画过渡效果将在何时开始。
+        取值为正时会延迟一段时间来响应过渡效果；取值为负时会导致过渡立即开始。
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    position: relative;
+    height: 60%;
+    border: 1px solid;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    font: 64px/128px "microsoft yahei";
+    line-height: 200px;
+    text-align: center;
+    border-radius: 50%;
+    background: pink;
+    transition-property: width;
+    transition-duration: 3s;
+    transition-timing-function: ease-out;
+    transition-delay: 300ms;
+  }
+  #wrap:hover {
+    width: 400px;
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto">
+    CSS
+  </div>
+</body>
+</html>

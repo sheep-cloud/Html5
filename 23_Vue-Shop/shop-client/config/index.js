@@ -9,7 +9,7 @@ const path = require('path')
  * @type {string}
  */
 const target = 'http://localhost:3000'
-// const target = 'http://193.112.72.47:3000'
+// const target = 'http://193.112.72.47:9001'
 
 module.exports = {
   dev: {

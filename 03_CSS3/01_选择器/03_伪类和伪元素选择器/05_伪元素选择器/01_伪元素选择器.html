@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_伪元素选择器</title>
+<style>
+  div:before {
+    content: "我在内容的前面";
+  }
+  div:after {
+    content: "我在内容的后面";
+  }
+  div::first-letter {
+    color: pink;
+  }
+  div::selection {
+    background: deeppink;
+  }
+</style>
+</head>
+<body>
+  <div> 伪元素 </div>
+</body>
+</html>

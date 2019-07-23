@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_目标伪类</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    width: 200px;
+    margin: 0 auto;
+    border: 1px solid;
+  }
+  #wrap a {
+    text-decoration: none;
+    color: deeppink;
+  }
+  #wrap div {
+    display: none;
+    text-align: center;
+    background: pink;
+  }
+  #wrap :target {
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <a href="#tab1">tab1</a>
+    <a href="#tab2">tab2</a>
+    <a href="#tab3">tab3</a>
+    <div id="tab1">
+      tab1 - CSS世界 <br>
+      tab1 - CSS世界 <br>
+      tab1 - CSS世界 <br>
+    </div>
+    <div id="tab2">
+      tab2 - CSS世界 <br>
+      tab2 - CSS世界 <br>
+      tab2 - CSS世界 <br>
+    </div>
+    <div id="tab3">
+      tab3 - CSS世界 <br>
+      tab3 - CSS世界 <br>
+      tab3 - CSS世界 <br>
+    </div>
+  </div>
+</body>
+</html>

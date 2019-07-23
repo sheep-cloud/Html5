@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>05_基点的变换</title>
+<style>
+  /*
+    transform-origin
+     transform-origin CSS属性让你更改一个元素变形的基点。
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    background: pink;
+    transition: 2s;
+    transform-origin: 50px 50px;
+  }
+  #wrap:hover {
+    transform: rotate(360deg);
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto">
+    CSS
+  </div>
+</body>
+</html>

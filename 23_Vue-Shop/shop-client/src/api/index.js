@@ -8,13 +8,13 @@ import ajax from './ajax'
 const POST = 'POST'
 
 // 代理目标 - 请求前缀
-const BASE_URL = '/api'
+// const BASE_URL = '/api'
 
 // 后台跨域 - localhost
-// const BASE_URL = 'http://localhost:3000'
+// const BASE_URL = 'http://localhost:9001'
 
 // 后台跨域 - colg
-// const BASE_URL = 'http://193.112.72.47:3000'
+const BASE_URL = 'http://193.112.72.47:9001'
 
 
 export default {

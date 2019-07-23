@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_过渡完成事件</title>
+<style>
+  /*
+    当过渡完成时触发一个事件，在符合标准的浏览器下，这个事件是 transitionend, 在 WebKit 下是 webkitTransitionEnd
+    （每一个拥有过渡的属性在其完成过渡时都会触发一次transitionend事件）
+
+    在transition完成前设置 display: none，事件同样不会被触发
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    position: relative;
+    height: 60%;
+    border: 1px solid;
+  }
+  #wrap {
+    width: 200px;
+    height: 200px;
+    font: 64px/128px "microsoft yahei";
+    line-height: 200px;
+    text-align: center;
+    border-radius: 50%;
+    background: pink;
+    transition-property: width;
+    transition-duration: 3s;
+    transition-timing-function: ease-out;
+    transition-delay: 300ms;
+  }
+  .mt-auto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="mt-auto">
+    CSS
+  </div>
+
+  <script>
+    window.onload = function () {
+      var wrapNode = document.querySelector('#wrap')
+      var bodyNode = document.querySelector('body')
+      // dom0 事件
+      bodyNode.onmouseover = function () {
+        wrapNode.style.width = '300px'
+      }
+
+      // dom2
+      bodyNode.addEventListener('transitionend', function () {
+        alert('over')
+      })
+    }
+  </script>
+</body>
+</html>

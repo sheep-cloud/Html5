@@ -13,7 +13,7 @@ var ws = fs.createWriteStream('./file/05_fs_流式文件写入.txt')
 
 // 通过监听流的open和close事件来监听流的打开和关闭
 ws.once('open', function () {
-    console.log('流打开了')
+  console.log('流打开了')
 })
 
 // 通过ws向文件中输出内容

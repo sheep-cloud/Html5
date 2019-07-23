@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-width: 600px;
+}
+#header,
+#footer {
+  text-align: center;
+  background: gray;
+}
+#content {
+  overflow: hidden;
+}
+#content .middle,
+#content .left,
+#content .right {
+  /* 伪等高布局 */
+  float: left;
+  padding-bottom: 10000px;
+  margin-bottom: -10000px;
+}
+#content .middle {
+  width: 100%;
+  background: deeppink;
+}
+#content .middle > .m_inner {
+  padding: 0 200px;
+}
+#content .left,
+#content .right {
+  width: 200px;
+  background: pink;
+}
+#content .left {
+  position: relative;
+  margin-left: -100%;
+}
+#content .right {
+  position: relative;
+  margin-left: -200px;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>07_线性渐变_发廊灯</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  /* 禁用系统滚动条 */
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  #wrap {
+    overflow: hidden;
+    width: 50px;
+    height: 300px;
+    border: 1px solid;
+    margin: 100px auto;
+  }
+  #wrap > .inner {
+    height: 600px;
+    background: repeating-linear-gradient(135deg, red 0, red 20px, white 20px, white 40px, blue 40px, blue 60px);
+    /*transition: 3s;*/
+  }
+  /*
+  #wrap > .inner:hover {
+    margin-top: -300px;
+  }
+  */
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="inner"></div>
+  </div>
+
+  <script>
+    /*
+    * 使用js, 控制发廊灯一直循环
+    * */
+    // querySelector() 方法返回文档中匹配指定 CSS 选择器的一个元素.
+    var inner = document.querySelector('#wrap > .inner')
+    var flag = 0
+    setInterval(function () {
+      flag++
+      if (flag === 300) {
+        flag = 0
+      }
+      inner.style.marginTop = -flag + 'px'
+    }, 1000 / 60)
+  </script>
+</body>
+</html>

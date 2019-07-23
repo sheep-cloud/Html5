@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>08_线性渐变_光斑动画</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    overflow: hidden;
+    height: 100%;
+    background: #000;
+    text-align: center;
+  }
+  h1 {
+    /* 控制文字居中, 如果不加 display: inline-block;, 是元素居中*/
+    display: inline-block;
+    margin-top: 50px;
+    color: rgba(255, 255, 255, .3);
+    font: bold 96px "microsoft yahei";
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0) 100px, rgba(255, 255, 255, 1) 180px, rgba(255, 255, 255, 0) 270px) no-repeat;
+    -webkit-background-clip: text;
+    /*transition: 3s;*/
+  }
+  /*
+  h1:hover {
+    background-position: 1000px 0;
+  }
+  */
+</style>
+</head>
+<body>
+  <h1>colg 08_线性渐变_光斑动画</h1>
+
+  <script>
+    var h1 = document.querySelector('h1')
+    var flag = -300
+    setInterval(function () {
+      flag += 5
+      if (flag > 1000) {
+        flag = 0
+      }
+      h1.style.backgroundPosition = flag + 'px'
+    }, 1000 / 60)
+  </script>
+</body>
+</html>

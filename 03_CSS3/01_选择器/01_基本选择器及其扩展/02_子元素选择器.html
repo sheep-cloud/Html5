@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_子元素选择器</title>
+<style>
+  /* 子元素选择器/直接后代选择器(>) */
+  #wrap > .inner {
+    /* 属性可继承 */
+    /*color: pink;*/
+    border: 1px solid;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="inner">
+      wrap下一层
+      <div class="inner" style="margin-left: 50px;">最里层</div>
+    </div>
+    <div class="inner">wrap下一层</div>
+    <div class="inner">wrap下一层</div>
+    <div class="inner">wrap下一层</div>
+  </div>
+</body>
+</html>

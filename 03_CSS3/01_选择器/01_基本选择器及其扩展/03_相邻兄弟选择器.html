@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_相邻兄弟选择器</title>
+<style>
+  /* 相邻兄弟选择器/紧跟( + ) */
+  #wrap > #first + .inner {
+    color: pink;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="inner">inner</div>
+    <div id="first">first</div>
+    <div class="inner">inner</div>
+    <div class="inner">inner</div>
+    <div class="inner">inner</div>
+    <div class="inner">inner</div>
+  </div>
+</body>
+</html>

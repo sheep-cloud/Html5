@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_倒影</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    height: 100%;
+  }
+  /* 图片垂直水平居中 */
+  body {
+    text-align: center;
+  }
+  body:after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  img {
+    vertical-align: middle;
+    /* 倒影 */
+    -webkit-box-reflect: below;
+  }
+</style>
+</head>
+<body class="a">
+  <img src="../../img/css.jpg">
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数据表格复杂工具栏</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>DataGrid Complex Toolbar</h2>
+  <p>The DataGrid toolbar can be defined from a markup, so you can define the layout of toolbar easily.</p>
+
+  <table id="d" style="padding: 10px; width: 700px;"
+         data-options="title:'Basic DataGrid', height:'auto', singleSelect:true">
+  </table>
+
+  <div id="tb">
+    <div>
+      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'add', 'info')"
+         data-options="iconCls:'icon-add', plain:true">Add
+      </a>
+      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'edit', 'info')"
+         data-options="iconCls:'icon-edit', plain:true">Edit
+      </a>
+      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'save', 'info')"
+         data-options="iconCls:'icon-save', plain:true">Save
+      </a>
+      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'cut', 'info')"
+         data-options="iconCls:'icon-cut', plain:true">Cut
+      </a>
+      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'remove', 'info')"
+         data-options="iconCls:'icon-remove', plain:true">Remove
+      </a>
+    </div>
+    <div>
+      Date From: <input class="easyui-datebox" style="width: 150px">
+      To: <input class="easyui-datebox" style="width: 150px">
+      Language:
+      <select id="cc" style="width: 100px"
+              data-options="panelHeight:120">
+      </select>
+      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'search', 'info')"
+         data-options="iconCls:'icon-search'">Search
+      </a>
+    </div>
+  </div>
+
+  <script>
+    $('#d').datagrid({
+      url: 'datagrid_data1.json',
+      columns: [[
+        {field: 'itemId', title: 'Item ID', width: 80},
+        {field: 'productId', title: 'Product', width: 100},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right'},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right'},
+        {field: 'attr1', title: 'Attribute', width: 250},
+        {field: 'status', title: 'Status', width: 60, align: 'center'}
+      ]],
+      toolbar: $('#tb')
+    })
+
+    $('#cc').combobox({
+      url: '../组合框 ComboBox/combobox_data.json',
+      valueField: 'id',
+      textField: 'text',
+      onChange: (newValue, oldValue) => {
+        console.log(newValue, oldValue)
+      }
+    })
+  </script>
+</body>
+</html>

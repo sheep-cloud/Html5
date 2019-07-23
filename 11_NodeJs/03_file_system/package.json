@@ -1,0 +1,19 @@
+{
+  "name": "03_file_system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "null"
+  },
+  "author": "colg",
+  "license": "ISC",
+  "dependencies": {
+    "fs-readfile-promise": "^3.0.1",
+    "fs-writefile-promise": "^3.0.1"
+  }
+}

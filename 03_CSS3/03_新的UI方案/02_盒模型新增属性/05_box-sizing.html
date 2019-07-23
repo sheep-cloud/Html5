@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>04_box-sizing</title>
+<style>
+  /*
+    box-sizing: 怪异盒子模型
+  */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  input {
+    width: 200px;
+    padding: 0 50px;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+  <label>
+    <input type="text">
+  </label>
+</body>
+</html>

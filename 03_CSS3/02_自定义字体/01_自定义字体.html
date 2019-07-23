@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_自定义字体</title>
+<style>
+  /*
+    @font-face: 允许网页开发者为其网页指定在线字体. 通过这种作者自备字体的方式, 可以消除对用户电脑字体的依赖
+      font-family: 所指定的自提明将会被用于font的font-family属性
+      src: 字体资源
+  */
+  @font-face {
+    font-family: colg;
+    src: url("./font/AxureHandwriting.otf");
+  }
+  #test {
+    font: 32px colg;
+  }
+</style>
+</head>
+<body>
+  <div id="test">
+    圆滚滚 colg
+  </div>
+</body>
+</html>

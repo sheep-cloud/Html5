@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>02_子串值属性选择器</title>
+<style>
+  /*
+   [attr|=val]: 选择attr属性的值以val(包括val)或val-开头的元素
+   [attr^=val]: 选择attr属性的值以val开头(包括val)的元素。
+   [attr$=val]: 选择attr属性的值以val结尾(包括val)的元素。
+   [attr*=val]: 选择attr属性的值中包含字符串val的元素。
+  */
+  #wrap [name*="colg"] {
+    background: pink;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    <div name="colg_jack">jack</div>
+    <div name="colg_rose">rose</div>
+    <div name="colg_tom">tom</div>
+    <div name="colg jax">jax</div>
+    <div>CSS世界</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_基本选择器</title>
+<style>
+  /* 通配符选择器(*) */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  /* 元素选择器(元素名) */
+  body {
+    background: pink;
+  }
+  /* 类选择器(.) */
+  .wrap {
+    border: 1px solid;
+  }
+  /* ID选择器(#) */
+  #wrap {
+    margin-left: 50px;
+  }
+  /* 后代选择器( ) */
+  #wrap h3 {
+    color: deeppink;
+  }
+  /* 分组选择器(, 结合符) */
+  .first, .second {
+    color: yellow;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap" class="wrap">
+    <h1 class="first">1-1</h1>
+    <h2 class="second">2-1</h2>
+    <h3>3-1</h3>
+  </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>01_表单状态</title>
+<style>
+  input {
+    width: 100px;
+    height: 30px;
+  }
+  input:enabled {
+    color: green;
+  }
+  input:disabled {
+    color: red;
+  }
+  input:checked {
+    margin-left: -35px;
+  }
+  input:focus {
+    background: pink;
+  }
+</style>
+</head>
+<body>
+  <label>
+    <input type="text" value="colg">
+  </label>
+  <label>
+    <input type="text" value="colg" disabled>
+  </label>
+  <br>
+  <label>
+    <input type="checkbox">
+  </label>
+</body>
+</html>

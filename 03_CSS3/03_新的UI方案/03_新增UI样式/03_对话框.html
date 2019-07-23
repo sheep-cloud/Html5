@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>03_对话框</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #wrap {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    font: 30px Consolas bold;
+    text-align: center;
+    line-height: 300px;
+    border: 2px solid;
+    border-radius: 50%;
+  }
+  #wrap:after {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    content: "";
+    display: block;
+    width: 60px;
+    height: 60px;
+    border: 1px solid;
+    border-radius: 50%;
+  }
+  #wrap:before {
+    position: absolute;
+    right: -40px;
+    bottom: -40px;
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+  <div id="wrap">
+    复习css3, 发现了好多新东东!
+  </div>
+</body>
+</html>
