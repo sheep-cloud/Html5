@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>按钮组</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Button Group</h2>
+  <p>In a button group only one button can be selected.</p>
+
+  <div class="easyui-panel">
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'">Button 1</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1', selected:true, select: ac()">Button 2</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'">Button 3</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'">Button 4</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g1'">Button 5</a>
+  </div>
+  <div class="easyui-panel">
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true, group:'g2', plain:true">Button 1</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true, group:'g2', plain:true, selected:true">Button 2</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true, group:'g2', plain:true">Button 3</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true, group:'g2', plain:true">Button 4</a>
+    <a href="#" class="easyui-linkbutton" data-options="toggle:true, group:'g2', plain:true">Button 5</a>
+  </div>
+</body>
+</html>

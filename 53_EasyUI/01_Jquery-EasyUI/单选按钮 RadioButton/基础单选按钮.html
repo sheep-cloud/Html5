@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>基本对话框</title>
+<title>基础单选按钮</title>
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
@@ -11,18 +11,22 @@
 <script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-  <h2>Basic Dialog</h2>
-  <p>Click below button to open or close dialog.</p>
+  <h2>Basic RadioButton</h2>
 
-  <div>
-    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('open')">Open</a>
-    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('close')">Close</a>
-  </div>
+  <form id="ff">
+    <div>
+      <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
+    </div>
+    <div>
+      <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
+    </div>
+    <div>
+      <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
+    </div>
+  </form>
 
-  <div id="dlg" class="easyui-dialog" style="padding: 10px; width: 400px; height: 200px;"
-       data-options="title:'Basic Dialog', iconCls:'icon-save'">
-    The dialog content.
-  </div>
+  <script>
 
+  </script>
 </body>
 </html>
