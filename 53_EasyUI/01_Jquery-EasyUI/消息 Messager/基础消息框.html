@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基础消息框</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic Messager</h2>
+  <p>Click on each button to see a distinct message box.</p>
+
+  <div>
+    <a href="javascript:" class="easyui-linkbutton" onclick="show()">Show</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="slide()">Slide</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="fade()">Fade</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="progress()">Progress</a>
+  </div>
+
+  <script>
+    function show() {
+      $.messager.show({
+        title: 'My Title',
+        msg: 'Message will be closed after 4 seconds.',
+        showType: 'show'
+      })
+    }
+
+    function slide() {
+      $.messager.show({
+        title: 'My Title',
+        msg: 'Message will be closed after 5 seconds.',
+        timeout: 5000,
+        showType: 'slide'
+      })
+    }
+
+    function fade() {
+      $.messager.show({
+        title: 'My Title',
+        msg: 'Message never be closed.',
+        timeout: 0,
+        showType: 'fade'
+      })
+    }
+
+    function progress() {
+      let win = $.messager.progress({
+        title: 'Please waiting',
+        msg: 'Loading data...'
+      })
+      console.log(win)
+
+      setTimeout(() => {
+        $.messager.progress('close')
+      }, 3000)
+    }
+  </script>
+</body>
+</html>

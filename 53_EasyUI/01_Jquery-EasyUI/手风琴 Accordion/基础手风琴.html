@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基础手风琴</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic Accordion</h2>
+  <p>Click on panel header to show its content.</p>
+
+  <div class="easyui-accordion" style="width: 500px; height: 300px;">
+    <div style="padding: 10px;"
+         data-options="title:'About', iconCls:'icon-ok'">
+      <h3 style="color: #0099FF;">Accordion for jQuery</h3>
+      <p>Accordion is a part of easyui framework for jQuery. It lets you define your accordion component on web page more easily.</p>
+    </div>
+    <div style="padding: 10px;"
+         data-options="title:'Help', iconCls:'icon-help'">
+      <p>
+        The accordion allows you to provide multiple panels and display one or more at a time. Each panel has built-in support for expanding and collapsing. Clicking on a panel header to expand or
+        collapse that panel body. The panel content can be loaded via ajax by specifying a 'href' property. Users can define a panel to be selected. If it is not specified, then the first panel is
+        taken by default.
+      </p>
+    </div>
+    <div style="padding: 10px;"
+         data-options="title:'TreeMenu', iconCls:'icon-search'">
+      <ul class="easyui-tree">
+        <li>
+          <span>Foods</span>
+          <ul>
+            <li>
+              <span>Fruits</span>
+              <ul>
+                <li>apple</li>
+                <li>orange</li>
+              </ul>
+            </li>
+            <li>
+              <span>Vegetables</span>
+              <ul>
+                <li>tomato</li>
+                <li>carrot</li>
+                <li>cabbage</li>
+                <li>potato</li>
+                <li>lettuce</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

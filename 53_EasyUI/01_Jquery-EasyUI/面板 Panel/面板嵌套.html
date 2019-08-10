@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>面板嵌套</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Nested Panel</h2>
+  <p>The panel can be placed inside containers and can contain other components.</p>
+
+  <div class="easyui-panel" style="padding: 10px; width: 700px; height: 200px;"
+       data-options="title:'Nested Panel'">
+    <div class="easyui-layout"
+         data-options="fit:true">
+      <div style="padding: 10px; width: 100px;"
+           data-options="region:'west', split:true">
+        Left Content
+      </div>
+      <div style="padding: 10px; width: 100px;"
+           data-options="region:'east'">
+        Right Content
+      </div>
+      <div style="padding: 10px"
+           data-options="region:'center'">
+        Center Content
+      </div>
+    </div>
+  </div>
+</body>
+</html>

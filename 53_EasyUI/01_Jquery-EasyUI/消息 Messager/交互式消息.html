@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>基础单选按钮</title>
+<title>交互式消息</title>
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
@@ -11,19 +11,26 @@
 <script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-  <h2>Basic RadioButton</h2>
+  <h2>Interactive Messager</h2>
+  <p>Click on each button to display interactive message box.</p>
 
-  <form id="ff">
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
-    </div>
-  </form>
+  <div>
+    <a href="javascript:" class="easyui-linkbutton" onclick="confirm()">Confirm</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="prompt()">Prompt</a>
+  </div>
 
+  <script>
+    function confirm() {
+      $.messager.confirm('My Title', 'Are you confirm this?', r => {
+        console.log(r)
+      })
+    }
+
+    function prompt() {
+      $.messager.prompt('My Title', 'Please type something', r => {
+        console.log(r)
+      })
+    }
+  </script>
 </body>
 </html>

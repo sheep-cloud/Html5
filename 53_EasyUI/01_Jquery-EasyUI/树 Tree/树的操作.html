@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>树的操作</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Tree Actions</h2>
+  <p>Click the buttons below to perform actions.</p>
+
+  <div style="margin-bottom: 10px;">
+    <a href="javascript:" class="easyui-linkbutton" onclick="collapseAll()">CollapseAll</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="expandAll()">ExpandAll</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="expandTo()">ExpandTo</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="getSelected()">GetSelected</a>
+  </div>
+
+  <div class="easyui-panel" style="padding:5px">
+    <ul id="tt"></ul>
+  </div>
+
+  <script>
+    let $tt = $('#tt')
+    $tt.tree({
+      url: 'tree_data1.json',
+      animate: true
+    })
+
+    function collapseAll() {
+      $tt.tree('collapseAll')
+    }
+
+    function expandAll() {
+      $tt.tree('expandAll')
+    }
+
+    function expandTo() {
+      let node = $tt.tree('find', 12)
+      $tt.tree('expandTo', node.target).tree('select', node.target)
+    }
+
+    function getSelected() {
+      let node = $tt.tree('getSelected')
+      if (node) {
+        let s = node.text
+        if (node.attributes) {
+          s += ',' + node.attributes.p1 + ',' + node.attributes.p2
+        }
+        alert(s)
+      }
+    }
+
+  </script>
+</body>
+</html>

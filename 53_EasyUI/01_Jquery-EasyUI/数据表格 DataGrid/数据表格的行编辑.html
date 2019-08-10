@@ -14,7 +14,7 @@
   <h2>Basic DataGrid</h2>
   <p>The DataGrid is created from markup, no JavaScript code needed.</p>
 
-  <table id="dg" style="width: 700px; height: auto"
+  <table id="dg" style="width: 750px; height: auto"
          data-options="title:'Basic DataGrid', singleSelect:true, idField:'productId'">
   </table>
 
@@ -49,7 +49,8 @@
         {field: 'listPrice', title: 'List Price', width: 80, align: 'right', editor: {type: 'numberbox', options: {required: true, precision: 2}}},
         {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right', editor: {type: 'numberbox', options: {required: true}}},
         {field: 'attr1', title: 'Attribute', width: 250, editor: 'text'},
-        {field: 'status', title: 'Status', width: 60, align: 'center', editor: {type: 'checkbox', options: {on: 'P', off: 'T'}}}
+        {field: 'status', title: 'Status', width: 60, align: 'center', editor: {type: 'checkbox', options: {on: 'P', off: 'T'}}},
+        {field: 'learn', title: 'Learn', width: 80, editor: {type: 'combobox', options: {url: '../组合框 ComboBox/combobox_data.json', valueField: 'id', textField: 'text'}}}
       ]],
       toolbar: [
         {

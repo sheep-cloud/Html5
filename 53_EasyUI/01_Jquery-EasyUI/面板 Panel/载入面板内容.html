@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>基础单选按钮</title>
+<title>载入面板内容</title>
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
@@ -11,19 +11,24 @@
 <script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-  <h2>Basic RadioButton</h2>
+  <h2>Load Panel Content</h2>
+  <p>Click the refresh button on top right of panel to load content.</p>
 
-  <form id="ff">
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
-    </div>
-  </form>
+  <div id="p" class="easyui-panel" style="width: 700px; height: 200px; padding: 10px;"
+       data-options="title:'Load Panel Content'">
+  </div>
 
+  <script>
+    $('#p').panel({
+      tools: [
+        {
+          iconCls: 'icon-reload',
+          handler: () => {
+            $('#p').panel('refresh', '../消息 Messager/提示消息.html')
+          }
+        }
+      ]
+    })
+  </script>
 </body>
 </html>

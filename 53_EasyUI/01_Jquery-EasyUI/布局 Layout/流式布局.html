@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>基础单选按钮</title>
+<title>流式布局</title>
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
@@ -11,19 +11,18 @@
 <script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-  <h2>Basic RadioButton</h2>
+  <h2>Fluid Layout</h2>
+  <p>Percentage width of region panel in a layout.</p>
 
-  <form id="ff">
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
+  <div></div>
+  <div class="easyui-layout" style="width: 700px; height: 350px;">
+    <div id="p" style="width: 30%; padding: 10px"
+         data-options="title:'West', region:'west'">
+      <p>width: 30%</p>
     </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
+    <div data-options="title:'Center', region:'center'">
+      中央
     </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
-    </div>
-  </form>
-
+  </div>
 </body>
 </html>

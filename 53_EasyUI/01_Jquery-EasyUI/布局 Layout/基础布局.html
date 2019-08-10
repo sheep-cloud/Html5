@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基础布局</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic Layout</h2>
+  <p>The layout contains north,south,west,east and center regions.</p>
+
+  <!--
+    north:  北
+    south:  南
+    west:   西
+    east:   东
+    center: 中央
+  -->
+  <div class="easyui-layout" style="width: 700px; height: 350px;">
+    <div style="height: 50px;"
+         data-options="region:'north'">
+    </div>
+    <div style="height: 50px;"
+         data-options="region:'south',split:true">
+    </div>
+    <div style="width: 100px;"
+         data-options="title:'West', region:'west', split:true">
+    </div>
+    <div style="width:100px;"
+         data-options="title:'East', region:'east', split:true">
+    </div>
+    <div style="width: 200px;"
+         data-options="title:'Main Title', region:'center', iconCls:'icon-ok'">
+      <table id="d"
+             data-options="border:false, singleSelect:true, fit:true, fitColumns:true">
+      </table>
+    </div>
+
+
+  </div>
+
+  <script>
+    $('#d').datagrid({
+      url: '../数据表格 DataGrid/datagrid_data1.json',
+      columns: [[
+        {field: 'itemId', title: 'Item ID', width: 80},
+        {field: 'productId', title: 'Product', width: 100},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right'},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right'},
+        {field: 'attr1', title: 'Attribute', width: 250},
+        {field: 'status', title: 'Status', width: 60, align: 'center'}
+      ]]
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基本文本框</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic TextBox</h2>
+  <p>The textbox allows a user to enter information.</p>
+
+  <div class="easyui-panel" style="width: 400px; padding: 32px"
+       data-options="title:'Register'">
+    <div style="margin-bottom: 20px">
+      <div>Email:</div>
+      <input class="easyui-textbox" style="width: 100%; height: 32px"
+             data-options="prompt:'Enter a email address...', validType:'email'">
+    </div>
+    <div style="margin-bottom: 20px">
+      <div>First Name:</div>
+      <input class="easyui-textbox" style="width: 100%; height: 32px">
+    </div>
+    <div style="margin-bottom: 20px">
+      <div>Last Name:</div>
+      <input class="easyui-textbox" style="width: 100%; height: 32px">
+    </div>
+    <div style="margin-bottom: 20px">
+      <div>Company:</div>
+      <input class="easyui-textbox" style="width: 100%; height: 32px">
+    </div>
+
+    <div>
+      <a href="javascript:" class="easyui-linkbutton" style="width: 100%; height: 32px"
+         data-options="iconCls:'icon-ok'">Register
+      </a>
+    </div>
+  </div>
+</body>
+</html>

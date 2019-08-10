@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>基础单选按钮</title>
+<title>流式面板</title>
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
@@ -11,19 +11,13 @@
 <script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-  <h2>Basic RadioButton</h2>
+  <h2>Fluid Panel</h2>
+  <p>This example shows how to set the width of Panel to a percentage of its parent container.</p>
 
-  <form id="ff">
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
-    </div>
-  </form>
+  <div id="p" class="easyui-panel" style="padding: 10px; width: 100%; height: 200px;"
+       data-options="title:'Fluid Panel'">
+    <p>The panel has a width of 100%.</p>
+  </div>
 
 </body>
 </html>

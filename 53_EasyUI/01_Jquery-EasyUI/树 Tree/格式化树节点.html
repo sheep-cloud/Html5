@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>基础单选按钮</title>
+<title>格式化树节点</title>
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
 <link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
@@ -11,19 +11,26 @@
 <script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-  <h2>Basic RadioButton</h2>
+  <h2>Formatting Tree Nodes</h2>
+  <p>This example shows how to display extra information on nodes.</p>
 
-  <form id="ff">
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
-    </div>
-    <div>
-      <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
-    </div>
-  </form>
 
+  <div class="easyui-panel" style="padding: 5px">
+    <ul id="tt"></ul>
+  </div>
+
+  <script>
+    $('#tt').tree({
+      url: 'tree_data1.json',
+      animate: true,
+      formatter: node => {
+        let s = node.text
+        if (node.children && node.children.length) {
+          s += `<span style="color: blue">(${node.children.length})</span>`
+        }
+        return s
+      }
+    })
+  </script>
 </body>
 </html>
