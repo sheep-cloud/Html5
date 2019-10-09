@@ -1,0 +1,17 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "微信公众号示例",
+  "main": "01_验证服务器的有效性/01_验证服务器的有效性.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "colg <121529654@qq.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "sha1": "^1.1.1"
+  }
+}
