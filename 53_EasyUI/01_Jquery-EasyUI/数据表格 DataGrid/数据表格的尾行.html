@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数据表格的尾行</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Footer Rows in DataGrid</h2>
+  <p>The summary informations can be displayed in footer rows.</p>
+
+  <table id="d" style="padding: 10px; width: 700px;"
+         data-options="title:'Footer Rows in DataGrid', height:'auto', rownumbers:true, singleSelect:true, showFooter:true">
+  </table>
+
+  <script>
+    $('#d').datagrid({
+      url: 'datagrid_data2.json',
+      columns: [[
+        {field: 'itemId', title: 'Item ID', width: 80},
+        {field: 'productId', title: 'Product', width: 100},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right', formatter: value => value > 30 ? `<span style="color: red;">(${value})</span>` : value},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right'},
+        {field: 'attr1', title: 'Attribute', width: 250},
+        {field: 'status', title: 'Status', width: 60, align: 'center'}
+      ]]
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基础表单</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic Form</h2>
+  <p>Fill the form and submit it.</p>
+
+  <div class="easyui-panel" style="width: 400px;"
+       data-options="title:'New Topic'">
+    <div style="padding: 10px 60px 20px 60px;">
+      <form id="ff" method="post">
+        <table>
+          <tr>
+            <td>Name:</td>
+            <td><input type="text" class="easyui-textbox" name="name" required></td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td><input type="text" class="easyui-textbox" name="email" required data-options="validType:'email'"></td>
+          </tr>
+          <tr>
+            <td>Subject:</td>
+            <td><input type="text" class="easyui-textbox" name="subject" required></td>
+          </tr>
+          <tr>
+            <td>Message:</td>
+            <td><input type="text" class="easyui-textbox" name="message" style="height: 60px;" data-options="multiline:true"></td>
+          </tr>
+          <tr>
+            <td>Language:</td>
+            <td><input name="language" required></td>
+          </tr>
+        </table>
+      </form>
+      <div style="text-align: center; padding: 5px;">
+        <a href="javascript:" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-ok'">Submit</a>
+        <a href="javascript:" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-cancel'">Clear</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('[name="language"]').combobox({
+      url: '../组合框 ComboBox/combobox_data2.json',
+      valueField: 'value',
+      textField: 'text',
+      groupField: 'group'
+    })
+
+    function submitForm() {
+      $('#ff').form('submit')
+    }
+
+    function clearForm() {
+      $('#ff').form('clear')
+    }
+  </script>
+</body>
+</html>

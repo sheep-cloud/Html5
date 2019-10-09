@@ -38,14 +38,14 @@
     </div>
     <div>
       Date From:
-      <input class="easyui-datebox" style="width: 150px">
+      <input name="beginDate" class="easyui-datebox" style="width: 150px">
       To:
-      <input class="easyui-datebox" style="width: 150px">
+      <input name="endDate" class="easyui-datebox" style="width: 150px">
       Language:
       <select id="cc" style="width: 100px"
               data-options="panelHeight:120">
       </select>
-      <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'search', 'info')"
+      <a href="javascript:" class="easyui-linkbutton" onclick="searchData()"
          data-options="iconCls:'icon-search'">Search
       </a>
     </div>
@@ -65,14 +65,29 @@
       toolbar: $('#tb')
     })
 
-    $('#cc').combobox({
+    const $cc = $('#cc')
+
+    $cc.combobox({
       url: '../组合框 ComboBox/combobox_data.json',
       valueField: 'id',
       textField: 'text',
       onChange: (newValue, oldValue) => {
         console.log(newValue, oldValue)
+      },
+      onSelect: record => {
+        console.log(record)
       }
     })
+
+    function searchData() {
+      const searchParams = {
+        beginDate: $(':input[name="beginDate"]').val(),
+        endDate: $(':input[name="endDate"]').val(),
+        id: $cc.combobox('getValue')
+      }
+      console.log(searchParams)
+      $.messager.alert('Msg', `search: ${JSON.stringify(searchParams)}`, 'info')
+    }
   </script>
 </body>
 </html>

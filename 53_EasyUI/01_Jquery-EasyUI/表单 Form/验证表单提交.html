@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>验证表单提交</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Validate Form on Submit</h2>
+  <p>The form does not perform validation before being submitted.</p>
+
+  <div class="easyui-panel" style="width: 400px;"
+       data-options="title:'New Topic'">
+    <div style="padding: 10px 60px 20px 60px;">
+      <form id="ff" method="post">
+        <table>
+          <tr>
+            <td>Name:</td>
+            <td><input type="text" class="easyui-textbox" name="name" required></td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td><input type="text" class="easyui-textbox" name="email" required data-options="validType:'email'"></td>
+          </tr>
+          <tr>
+            <td>Subject:</td>
+            <td><input type="text" class="easyui-textbox" name="subject" required></td>
+          </tr>
+          <tr>
+            <td>Message:</td>
+            <td><input type="text" class="easyui-textbox" name="message" style="height: 60px;" data-options="multiline:true"></td>
+          </tr>
+          <tr>
+            <td>Language:</td>
+            <td><input name="language" required></td>
+          </tr>
+        </table>
+      </form>
+      <div style="text-align: center; padding: 5px;">
+        <a href="javascript:" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-ok'">Submit</a>
+        <a href="javascript:" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-cancel'">Clear</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('[name="language"]').combobox({
+      url: '../组合框 ComboBox/combobox_data2.json',
+      valueField: 'value',
+      textField: 'text',
+      groupField: 'group'
+    })
+
+    function submitForm() {
+      // 做提交动作
+      $('#ff').form('submit', {
+        url: 'www.baidu.com',                 // 动作的 URL
+        onSubmit: function () {               // 提交之前的回调函数
+          let isValid = $(this).form('enableValidation').form('validate')
+          console.log(isValid)
+          return isValid
+        },
+        success: () => {                      // 提交成功之后的回调函数
+          window.location.href = 'https://www.baidu.com/'
+        }
+      })
+    }
+
+    function clearForm() {
+      $('#ff').form('clear')
+    }
+  </script>
+</body>
+</html>

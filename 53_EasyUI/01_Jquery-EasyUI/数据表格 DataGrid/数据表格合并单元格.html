@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数据表格合并单元格</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Merge Cells for DataGrid</h2>
+  <p>Cells in DataGrid body can be merged.</p>
+
+  <table id="d" style="padding: 10px; width: 700px;"
+         data-options="title:'Merge Cells for DataGrid', height:'auto', rownumbers:true, singleSelect:true">
+  </table>
+
+  <script>
+    $('#d').datagrid({
+      url: 'datagrid_data1.json',
+      columns: [[
+        {field: 'itemId', title: 'Item ID', width: 80},
+        {field: 'productId', title: 'Product', width: 100},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right'},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right'},
+        {field: 'attr1', title: 'Attribute', width: 250},
+        {field: 'status', title: 'Status', width: 60, align: 'center'}
+      ]],
+      /**
+       * 当数据加载成功时触发
+       * @param data
+       */
+      onLoadSuccess: data => {
+        const {rows} = data
+        // 计算每次需要合并的格子数
+        let mark = 1
+        // 合并的列名
+        const field = 'productId'
+        for (let i = 0, len = rows.length; i < len; i++) {
+          // 后一行的值与前一行的值做比较, 相同就需要合并
+          if (rows[i - 1] && rows[i][field] === rows[i - 1][field]) {
+            mark++
+            $('#d').datagrid('mergeCells', {
+              // 列的索引, 从第几行开始合并
+              index: i + 1 - mark,
+              // 字段名
+              field,
+              // 合并跨越的行数
+              rowspan: mark
+            })
+          } else {
+            // 重新计算合并的格子
+            mark = 1
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -102,5 +102,17 @@
       "itemId": "EST-18",
       "learn": "Python"
     }
+  ],
+  "footer": [
+    {
+      "unitCost": 19.80,
+      "listPrice": 60.40,
+      "productId": "Average:"
+    },
+    {
+      "unitCost": 198.00,
+      "listPrice": 604.00,
+      "productId": "Total:"
+    }
   ]
 }
