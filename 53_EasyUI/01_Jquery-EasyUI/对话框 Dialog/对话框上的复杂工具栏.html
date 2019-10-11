@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>工具栏和按钮组</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Complex Toolbar on Dialog</h2>
+  <p>This sample shows how to create complex toolbar on dialog.</p>
+
+  <div>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('open')">Open</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('close')">Close</a>
+  </div>
+
+  <div id="dlg" style="padding: 10px; width: 400px; height: 200px;"
+       data-options="title:'Complex Toolbar on Dialog', iconCls:'icon-save'">
+    The dialog content.
+  </div>
+
+  <div id="dlg-toolbar" style="padding: 2px 0;">
+    <table style="width: 100%;">
+      <tr>
+        <td style="padding-left: 2px;">
+          <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'edit', 'info')"
+             data-options="iconCls:'icon-edit', plain:true">Edit</a>
+          <a href="javascript:" class="easyui-linkbutton" onclick="$.messager.alert('Msg', 'help', 'info')"
+             data-options="iconCls:'icon-help', plain:true">Help</a>
+        </td>
+        <td style="text-align:right; padding-right: 2px;">
+          <input id="sb" name="searchKey" style="width: 150px;"
+                 data-options="prompt:'Please input somthing'">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    $('#dlg').dialog({
+      toolbar: $('#dlg-toolbar'),
+      buttons: [
+        {
+          text: 'Ok', iconCls: 'icon-ok', handler: () => {
+            $.messager.alert('Msg', 'ok', 'info')
+          }
+        },
+        {
+          text: 'Cancel', iconCls: 'icon-cancel', handler: () => {
+            $.messager.alert('Msg', 'cancel', 'info')
+          }
+        }
+      ]
+    })
+
+    $('#sb').searchbox({
+      searcher: (value, name) => $.messager.alert('Msg', `文本内容: ${value}; 搜索框名称: ${name}`, 'info')
+    })
+  </script>
+</body>
+</html>

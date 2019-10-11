@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>流式对话框</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Fluid Dialog</h2>
+  <p>This example shows how to set the width of Dialog to a percentage of its parent container.</p>
+
+  <div>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('open')">Open</a>
+    <a href="javascript:" class="easyui-linkbutton" onclick="$('#dlg').dialog('close')">Close</a>
+  </div>
+
+  <div id="dlg" style="padding: 10px; max-width: 800px; width: 80%; height: 200px;"
+       data-options="title:'Fluid Dialog', iconCls:'icon-save'">
+    <p>width: 80%; height: 200px</p>
+  </div>
+
+  <script>
+    $('#dlg').dialog({
+      onResize: function () {
+        $(this).dialog('center')
+      }
+    })
+  </script>
+
+</body>
+</html>

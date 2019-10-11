@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>搜索框类别</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Search Category</h2>
+  <p>Select a category and click search button or press enter key in input box to do searching.</p>
+
+  <input id="sb" name="searchKey" style="width: 300px;"
+         data-options="prompt:'Please Input Value'">
+  <div id="mm">
+    <div data-options="name:'all', iconCls:'icon-ok'">All News</div>
+    <div data-options="name:'sports', iconCls:'icon-cancel'">Sports News</div>
+  </div>
+
+  <script>
+    $('#sb').searchbox({
+      searcher: (value, name) => $.messager.alert('Msg', `文本内容: ${value}; 搜索框名称: ${name}`, 'info'),
+      menu: $('#mm')
+    })
+  </script>
+</body>
+</html>

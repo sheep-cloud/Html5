@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基本搜索框</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic SearchBox</h2>
+  <p>Click search button or press enter key in input box to do searching.</p>
+
+  <input class="easyui-searchbox" name="searchKey"
+         data-options="prompt:'Please Input Value', searcher:doSearch">
+
+  <script>
+    function doSearch(value, name) {
+      $.messager.alert('Msg', `文本内容: ${value}; 搜索框名称: ${name}`, 'info')
+    }
+
+  </script>
+</body>
+</html>
