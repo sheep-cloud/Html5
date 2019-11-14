@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>基础数据表格</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Basic DataGrid Detail</h2>
+  <p>The DataGrid is created from markup, no JavaScript code needed.</p>
+
+  <table id="d" style="padding: 10px; width: 700px; height: 250px;"
+         data-options="title:'Basic DataGrid', singleSelect:true">
+  </table>
+
+  <script>
+    $('#d').datagrid({
+      // 属性
+      url: 'datagrid_data1.json',                                                                 // 从远程站点请求数据的 URL
+      columns: [[                                                                                 // 数据网格（datagrid）的列（column）的配置对象
+        /*
+          列（Column）属性
+            title:        列的标题文本
+            field:        列的字段名
+            width:        列的宽度。如果未定义，则宽度会自动扩展以适应它的内容。没有定义宽度将会降低性能
+            align:        指示如何对齐该列的数据，可以用 'left'、'right'、'center'
+            hidden:       设置为 true，则隐藏该列
+            formatter:    单元格的格式化函数，需要三个参数：value, rowData, rowIndex
+            styler:       单元格的样式函数，返回样式字符串来自定义该单元格的样式，例如 'background:red'
+         */
+        {field: 'itemId', title: 'Item ID', width: 80},
+        {field: 'productId', title: 'Product', width: 100},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right'},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right'},
+        {field: 'attr1', title: 'Attribute', width: 250},
+        {field: 'status', title: 'Status', width: 60, align: 'center', formatter: value => value === 'P' ? `<span style="color: green">正常</span>` : `<span style="color: grey;">暂停</span>`}
+      ]]
+    })
+  </script>
+</body>
+</html>
