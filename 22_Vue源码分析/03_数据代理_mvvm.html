@@ -6,24 +6,24 @@
 <link rel="stylesheet" href="../00_libs/bootstrap-3.3.7/dist/css/bootstrap.css">
 </head>
 <body>
-    <div class="container">
-        <div class="lead" id="test">{{name}}</div>
-    </div>
+  <div class="container">
+    <div class="lead" id="test">{{name}}</div>
+  </div>
 
-    <script src="../00_libs/mvvm-master/js/compile.js"></script>
-    <script src="../00_libs/mvvm-master/js/observer.js"></script>
-    <script src="../00_libs/mvvm-master/js/watcher.js"></script>
-    <script src="../00_libs/mvvm-master/js/mvvm.js"></script>
-    <script>
-        const vm = new MVVM({
-            el: '#test',
-            data: {
-                name: 'perpare 准备'
-            }
-        })
-        console.log(vm.name, vm)                // vm 代理对data数据的读操作
-        vm.name = '数据代理'                    // vm 代理对data数据的写操作
-        console.log(vm._data.name, vm.name)
-    </script>
+  <script src="../00_libs/mvvm-master/js/compile.js"></script>
+  <script src="../00_libs/mvvm-master/js/observer.js"></script>
+  <script src="../00_libs/mvvm-master/js/watcher.js"></script>
+  <script src="../00_libs/mvvm-master/js/mvvm.js"></script>
+  <script>
+    const vm = new MVVM({
+      el: '#test',
+      data: {
+        name: 'perpare 准备'
+      }
+    })
+    console.log(vm.name, vm)                // vm 代理对data数据的读操作
+    vm.name = '数据代理'                    // vm 代理对data数据的写操作
+    console.log(vm._data.name, vm.name)
+  </script>
 </body>
 </html>

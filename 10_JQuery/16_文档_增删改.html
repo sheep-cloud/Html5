@@ -5,74 +5,74 @@
 <title>16_文档_增删改</title>
 </head>
 <body>
-    <ul id="ul1">
-        <li>AAAAA</li>
+  <ul id="ul1">
+    <li>AAAAA</li>
 
-        <li title="hello">BBBBB</li>
-        <li class="box">CCCCC</li>
+    <li title="hello">BBBBB</li>
+    <li class="box">CCCCC</li>
 
-        <li title="hello">DDDDDD</li>
-        <li title="two">EEEEE</li>
-        <li>FFFFF</li>
+    <li title="hello">DDDDDD</li>
+    <li title="two">EEEEE</li>
+    <li>FFFFF</li>
 
-    </ul>
-    <br>
-    <br>
-    <ul id="ul2">
-        <li>aaa</li>
-        <li title="hello">bbb</li>
-        <li class="box">ccc</li>
-        <li title="hello">ddd</li>
-        <li title="two">eee</li>
-    </ul>
+  </ul>
+  <br>
+  <br>
+  <ul id="ul2">
+    <li>aaa</li>
+    <li title="hello">bbb</li>
+    <li class="box">ccc</li>
+    <li title="hello">ddd</li>
+    <li title="two">eee</li>
+  </ul>
 
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            文档处理
-                1. 添加元素
-                    append(content)：向当前匹配的所有元素内部的最后插入指定内容
-                    prepend(content)：向当前匹配的所有元素内部的最前面插入指定内容
-                    before(content)：将指定内容插入到当前所有匹配元素的前面
-                    after(content)：将指定内容插入到当前所有匹配元素的后面
-                2. 替换元素
-                    replaceWith(content)：用指定内容替换所有匹配的标签
-                3. 删除元素
-                    empty()：删除所有匹配元素的子元素
-                    remove()：删除所有匹配的元素
-         */
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      文档处理
+        1. 添加元素
+          append(content): 向当前匹配的所有元素内部的最后插入指定内容
+          prepend(content): 向当前匹配的所有元素内部的最前面插入指定内容
+          before(content): 将指定内容插入到当前所有匹配元素的前面
+          after(content): 将指定内容插入到当前所有匹配元素的后面
+        2. 替换元素
+          replaceWith(content): 用指定内容替换所有匹配的标签
+        3. 删除元素
+          empty(): 删除所有匹配元素的子元素
+          remove(): 删除所有匹配的元素
+     */
 
-        /*
-            需求：
-                1. 向id为ul1的ul下添加一个span(最后)
-                2. 向id为ul1的ul下添加一个span(最前)
-                3. 在id为ul1的ul下的li(title为hello)的前面添加span
-                4. 在id为ul1的ul下的li(title为hello)的后面添加span
-                5. 将在id为ul2的ul下的li(title为hello)全部替换为p
-                6. 移除id为ul2的ul下的所有li
-         */
+    /*
+      需求:
+        1. 向id为ul1的ul下添加一个span(最后)
+        2. 向id为ul1的ul下添加一个span(最前)
+        3. 在id为ul1的ul下的li(title为hello)的前面添加span
+        4. 在id为ul1的ul下的li(title为hello)的后面添加span
+        5. 将在id为ul2的ul下的li(title为hello)全部替换为p
+        6. 移除id为ul2的ul下的所有li
+     */
 
-        var $ul1 = $('#ul1')
-        // 1. 向id为ul1的ul下添加一个span(最后)
-        // $ul1.append(`<span>append()添加的span</span>`)
-        $(`<span>append()添加的span</span>`).appendTo($ul1)
+    var $ul1 = $('#ul1')
+    // 1. 向id为ul1的ul下添加一个span(最后)
+    // $ul1.append(`<span>append()添加的span</span>`)
+    $(`<span>append()添加的span</span>`).appendTo($ul1)
 
-        // 2. 向id为ul1的ul下添加一个span(最前)
-        // $ul1.prepend(`<span>prepend()添加的span</span>`)
-        $(`<span>prepend()添加的span</span>`).prependTo($ul1)
+    // 2. 向id为ul1的ul下添加一个span(最前)
+    // $ul1.prepend(`<span>prepend()添加的span</span>`)
+    $(`<span>prepend()添加的span</span>`).prependTo($ul1)
 
-        // 3. 在id为ul1的ul下的li(title为hello)的前面添加span
-        $ul1.children('li[title=hello]').before(`<span>before()添加的span</span>`)
+    // 3. 在id为ul1的ul下的li(title为hello)的前面添加span
+    $ul1.children('li[title=hello]').before(`<span>before()添加的span</span>`)
 
-        // 4. 在id为ul1的ul下的li(title为hello)的后面添加span
-        $ul1.children('li[title=hello]').after(`<span>after()添加的span</span>`)
+    // 4. 在id为ul1的ul下的li(title为hello)的后面添加span
+    $ul1.children('li[title=hello]').after(`<span>after()添加的span</span>`)
 
-        var $ul2 = $('#ul2')
-        // 5. 将在id为ul2的ul下的li(title为hello)全部替换为p
-        $ul2.children('li[title=hello]').replaceWith(`<p>replaceWith()替换的p</p>`)
+    var $ul2 = $('#ul2')
+    // 5. 将在id为ul2的ul下的li(title为hello)全部替换为p
+    $ul2.children('li[title=hello]').replaceWith(`<p>replaceWith()替换的p</p>`)
 
-        // 6. 移除id为ul2的ul下的所有li
-        $('#ul2 > li').remove()
-    </script>
+    // 6. 移除id为ul2的ul下的所有li
+    $('#ul2 > li').remove()
+  </script>
 </body>
 </html>

@@ -5,45 +5,45 @@
 <title>01_HelloWorld</title>
 </head>
 <body>
-    <!--
-        1. 引入vue.js
-        2. 创建vue对象
-            el: 指定根element（选择器）
-            data：初始化数据（页面可以访问）
-        3. 双向数据绑定：v-model
-        4. 显示数据：{{xxx}}
-        5. 理解vue的mvvm实现
-    -->
-    <!--view 视图，模版页面-->
-    <div id="app">
-        <label>
-            <input type="text" v-model="username">
-        </label>
-        <p>Hello {{username}}</p>
-        <p v-text="'Hello ' + username"></p>
-    </div>
+  <!--
+    1. 引入vue.js
+    2. 创建vue对象
+      el: 指定根element（选择器）
+      data：初始化数据（页面可以访问）
+    3. 双向数据绑定：v-model
+    4. 显示数据：{{xxx}}
+    5. 理解vue的mvvm实现
+  -->
+  <!--view 视图, 模版页面-->
+  <div id="app">
+    <label>
+      <input type="text" v-model="username">
+    </label>
+    <p>Hello {{username}}</p>
+    <p v-text="'Hello ' + username"></p>
+  </div>
 
-    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
-    <script>
-        // viewModel 创建vue实例
-        // 配置对象
-        const vm = new Vue({
-            // element: 选择器
-            el: '#app',
-            // model 模型，数据对象（data）
-            data: {
-                username: 'Jack ' + new Date().toLocaleTimeString()
-            }
-        })
-        vm.name = 'Rose'
-        console.log(vm.name)
-    </script>
+  <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+  <script>
+    // viewModel 创建vue实例
+    // 配置对象
+    const vm = new Vue({
+      // element: 选择器
+      el: '#app',
+      // model 模型, 数据对象（data）
+      data: {
+        username: 'Jack ' + new Date().toLocaleTimeString()
+      }
+    })
+    vm.name = 'Rose'
+    console.log(vm.name)
+  </script>
 
-    <!--
-        MVVM:
-            model:      模型, 数据对象（data）
-            view:       视图, 模版页面
-            viewModel:  视图模型, Vue的实例
-    -->
+  <!--
+    MVVM:
+      model:      模型, 数据对象（data）
+      view:       视图, 模版页面
+      viewModel:  视图模型, Vue的实例
+  -->
 </body>
 </html>

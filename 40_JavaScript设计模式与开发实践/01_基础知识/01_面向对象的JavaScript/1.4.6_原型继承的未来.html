@@ -5,38 +5,38 @@
 <title>1.4.6_原型继承的未来</title>
 </head>
 <body>
-    <script>
-        /*
-            ES6中带来了新的Class语法。
-            这让JavaScript看起来像是一门基于类的语言，但其背后仍是通过原型机制来创建对象。
-         */
-        class Animal {
-            constructor(name) {
-                this.name = name
-            }
+  <script>
+    /*
+      ES6中带来了新的Class语法.
+      这让JavaScript看起来像是一门基于类的语言, 但其背后仍是通过原型机制来创建对象.
+     */
+    class Animal {
+      constructor(name) {
+        this.name = name
+      }
 
-            getName() {
-                return this.name
-            }
+      getName() {
+        return this.name
+      }
 
-            speak() {
-                return 'animal'
-            }
-        }
+      speak() {
+        return 'animal'
+      }
+    }
 
-        class Dog extends Animal {
-            constructor(name) {
-                super(name)
-            }
+    class Dog extends Animal {
+      constructor(name) {
+        super(name)
+      }
 
-            speak() {
-                return 'dog'
-            }
-        }
+      speak() {
+        return 'dog'
+      }
+    }
 
-        var dog = new Dog('Scamp')
-        console.log(dog)
-        console.log(dog.getName() + ' says ' + dog.speak()) // Scamp says dog
-    </script>
+    var dog = new Dog('Scamp')
+    console.log(dog)
+    console.log(dog.getName() + ' says ' + dog.speak()) // Scamp says dog
+  </script>
 </body>
 </html>

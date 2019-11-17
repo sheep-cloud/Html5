@@ -1,9 +1,9 @@
 /*
-    1. 同步文件读取
-    2. 异步文件读取
-    3. 简单文件读取
-    4. 流式文件读取
-        fs.readFile(path[, options], callback)
+  1. 同步文件读取
+  2. 异步文件读取
+  3. 简单文件读取
+  4. 流式文件读取
+    fs.readFile(path[, options], callback)
  */
 
 const fs = require('fs')

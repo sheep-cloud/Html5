@@ -17,15 +17,18 @@
   <input name="browser" style="width: 280px;">
 
   <script>
-    $('[name="browser"]').combobox({
+    $(':input[name="browser"]').combobox({
       url: 'combobox_data2.json',
       valueField: 'value',
       textField: 'text',
       groupField: 'group',
+      // 当用户选择一个列表项时触发
       onSelect: record => {
         console.log(record)
       }
     })
   </script>
+
+
 </body>
 </html>

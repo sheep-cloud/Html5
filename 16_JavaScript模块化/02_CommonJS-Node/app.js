@@ -1,9 +1,9 @@
 /*
-    1. 定义暴露模块
-        module.exports = value
-    2. 引入模块
-        let module = require(模块名或模块路径)
-        第三方放在前面，自定义的放在后面
+  1. 定义暴露模块
+    module.exports = value
+  2. 引入模块
+    let module = require(模块名或模块路径)
+    第三方放在前面，自定义的放在后面
  */
 
 // 将其他的模块汇集到主模块

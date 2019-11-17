@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/mongoose_test', {useNewUrlParser: true})
 mongoose.connection.once('open', function () {
-    console.log('数据库连接成功')
+  console.log('数据库连接成功')
 })
 
 // 将mongoose.Schema 赋值给一个变量
@@ -9,10 +9,10 @@ var Schema = mongoose.Schema
 
 // 创建Schema（模式）对象
 var stuSchema = new Schema({
-    name: String,
-    age: Number,
-    gender: {type: String, default: '女'},
-    address: String
+  name: String,
+  age: Number,
+  gender: {type: String, default: '女'},
+  address: String
 })
 
 // 通过Schema来创建Model
@@ -25,7 +25,7 @@ var StuModel = mongoose.model('students', stuSchema)
 // StuModel.create(doc, function(err){})
 var stu = {name: '孙悟空', age: 18, gender: '男', address: '花果山'}
 StuModel.create(stu, function (err) {
-    if (!err) {
-        console.log('插入成功')
-    }
+  if (!err) {
+    console.log('插入成功')
+  }
 })

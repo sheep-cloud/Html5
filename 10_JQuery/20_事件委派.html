@@ -5,60 +5,60 @@
 <title>20_事件委派</title>
 </head>
 <body>
-    <ul>
-        <li>1111</li>
-        <li>2222</li>
-        <li>3333</li>
-        <li>4444</li>
-    </ul>
+  <ul>
+    <li>1111</li>
+    <li>2222</li>
+    <li>3333</li>
+    <li>4444</li>
+  </ul>
 
-    <li>22222</li>
-    <br>
-    <button id="btn1">添加新的li</button>
-    <button id="btn2">删除ul上的事件委派的监听器</button>
+  <li>22222</li>
+  <br>
+  <button id="btn1">添加新的li</button>
+  <button id="btn2">删除ul上的事件委派的监听器</button>
 
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            1. 事件委派（委托/代理）
-                将多个子元素（li）的事件监听委托给父辈元素（ul）处理
-                监听回调是加载了父辈元素上
-                当操作任何一个子元素（li）时，事件会冒泡到父辈元素（ul）
-                父辈元素不会直接处理事件，而是根据event.target得到发生事件的子元素（li），通过这个子元素调用事件回调函数
-            2. 事件委派的2方
-                委派方：业主 li
-                被委派方：中介 ul
-            3. 使用事件委派的好处
-                添加新的子元素，自动有事件响应处理
-                减少事件监听的数量：n ==> 1
-            4. jQuery的事件委派API
-                设置事件委派：$(parentSelector).delegate(childrenSelector, eventName, callback) // 回调函数中的this是子元素
-                移除事件委派：$(parentSelector).undelegate(eventName)
-         */
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      1. 事件委派（委托/代理）
+        将多个子元素（li）的事件监听委托给父辈元素（ul）处理
+        监听回调是加载了父辈元素上
+        当操作任何一个子元素（li）时, 事件会冒泡到父辈元素（ul）
+        父辈元素不会直接处理事件, 而是根据event.target得到发生事件的子元素（li）, 通过这个子元素调用事件回调函数
+      2. 事件委派的2方
+        委派方: 业主 li
+        被委派方: 中介 ul
+      3. 使用事件委派的好处
+        添加新的子元素, 自动有事件响应处理
+        减少事件监听的数量: n ==> 1
+      4. jQuery的事件委派API
+        设置事件委派: $(parentSelector).delegate(childrenSelector, eventName, callback) // 回调函数中的this是子元素
+        移除事件委派: $(parentSelector).undelegate(eventName)
+     */
 
-        /*
-            需求：
-                1. 点击 li 背景就会变为红色
-                2. 点击 btn 就添加一个 li
-                3. 删除ul上的事件委派的监听器
-         */
+    /*
+      需求:
+        1. 点击 li 背景就会变为红色
+        2. 点击 btn 就添加一个 li
+        3. 删除ul上的事件委派的监听器
+     */
 
-        // 1. 点击 li 背景就会变为红色，设置事件委派
-        $('ul').delegate('li', 'click', function () {
-            // console.log(this) // 发生事件的li元素
-            this.style.background = 'red'
-        })
+    // 1. 点击 li 背景就会变为红色, 设置事件委派
+    $('ul').delegate('li', 'click', function () {
+      // console.log(this) // 发生事件的li元素
+      this.style.background = 'red'
+    })
 
-        // 2. 点击 btn 就添加一个 li
-        $('#btn1').click(function () {
-            $('ul').append(`<li>新增的li</li>`)
-        })
+    // 2. 点击 btn 就添加一个 li
+    $('#btn1').click(function () {
+      $('ul').append(`<li>新增的li</li>`)
+    })
 
-        // 3. 删除ul上的事件委派的监听器
-        $('#btn2').click(function () {
-            $('ul').undelegate('click')
-        })
+    // 3. 删除ul上的事件委派的监听器
+    $('#btn2').click(function () {
+      $('ul').undelegate('click')
+    })
 
-    </script>
+  </script>
 </body>
 </html>

@@ -5,26 +5,26 @@
 <title>25_多库共存</title>
 </head>
 <body>
-    <script src="js/myLib.js"></script>
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            问题：如果2个库都有$，就存在冲突
-            解决：jQuery库可以释放$的使用权，让另一个库可以正常是哟过户你，此时jQuery库只能使用jQuery了
-            API：jQuery.noConflict()
-         */
+  <script src="js/myLib.js"></script>
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      问题: 如果2个库都有$, 就存在冲突
+      解决: jQuery库可以释放$的使用权, 让另一个库可以正常是哟过户你, 此时jQuery库只能使用jQuery了
+      API: jQuery.noConflict()
+     */
 
-        // 使用$的使用权
-        jQuery.noConflict()
+    // 使用$的使用权
+    jQuery.noConflict()
 
-        // 调用myLib库中的$()
-        $()
+    // 调用myLib库中的$()
+    $()
 
-        // 要想使用jQuery的功能，只能使用jQuery
-        jQuery(function () {
-            console.log('文档加载完成')
-        })
-        console.log('----------------------------------------------------------------------------------------------------')
-    </script>
+    // 要想使用jQuery的功能, 只能使用jQuery
+    jQuery(function () {
+      console.log('文档加载完成')
+    })
+    console.log('----------------------------------------------------------------------------------------------------')
+  </script>
 </body>
 </html>

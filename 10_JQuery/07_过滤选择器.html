@@ -4,74 +4,74 @@
 <meta charset="UTF-8">
 <title>07_过滤选择器</title>
 <style>
-    a {
-        color: pink;
-    }
+  a {
+    color: pink;
+  }
 </style>
 </head>
 <body>
-    <div id="div1" class="box">class为box的div1</div>
-    <div id="div2" class="box">class为box的div2</div>
-    <div id="div3">div3</div>
-    <span class="box">class为box的span</span>
-    <br>
-    <ul>
-        <li>AAAA</li>
-        <li title="hello">BBBB(title="hello")</li>
-        <li class="box">CCCC(class="box")</li>
-        <li title="hello">DDDD(title="hello")</li>
-        <li title="two">BBBBB(title="two")</li>
-        <li style="display: none">我本来是隐藏的</li>
-    </ul>
+  <div id="div1" class="box">class为box的div1</div>
+  <div id="div2" class="box">class为box的div2</div>
+  <div id="div3">div3</div>
+  <span class="box">class为box的span</span>
+  <br>
+  <ul>
+    <li>AAAA</li>
+    <li title="hello">BBBB(title="hello")</li>
+    <li class="box">CCCC(class="box")</li>
+    <li title="hello">DDDD(title="hello")</li>
+    <li title="two">BBBBB(title="two")</li>
+    <li style="display: none">我本来是隐藏的</li>
+  </ul>
 
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            过滤选择器：在原有选择器匹配的元素中进一步进行过滤的选择器
-                1. 基本
-                2. 内容
-                3. 可见性
-                4. 属性
-         */
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      过滤选择器: 在原有选择器匹配的元素中进一步进行过滤的选择器
+        1. 基本
+        2. 内容
+        3. 可见性
+        4. 属性
+     */
 
-        /*
-            需求：
-                1. 选择第一个div
-                2. 选择最后一个class为box的元素
-                3. 选择所有class属性不为box的div
-                4. 选择第二个和第三个li元素
-                5. 选择内容为BBBB的li
-                6. 选择隐藏的li
-                7. 选择有title属性的li元素
-                8. 选择所有属性title为hello的li元素
-         */
+    /*
+      需求:
+        1. 选择第一个div
+        2. 选择最后一个class为box的元素
+        3. 选择所有class属性不为box的div
+        4. 选择第二个和第三个li元素
+        5. 选择内容为BBBB的li
+        6. 选择隐藏的li
+        7. 选择有title属性的li元素
+        8. 选择所有属性title为hello的li元素
+     */
 
-        // 1. 选择第一个div
-        $('div:first').css('background', 'red')
+    // 1. 选择第一个div
+    $('div:first').css('background', 'red')
 
-        // 2. 选择最后一个class为box的元素
-        $('.box:last').css('background', 'yellow')
+    // 2. 选择最后一个class为box的元素
+    $('.box:last').css('background', 'yellow')
 
-        // 3. 选择所有class属性不为box的div
-        $('div:not(.box)').css('background', 'green')
+    // 3. 选择所有class属性不为box的div
+    $('div:not(.box)').css('background', 'green')
 
-        // 4. 选择第二个和第三个li元素
-        $('li:gt(0):lt(2)').css('background', 'blue') // 多个过滤选择器不是同时执行的，而是依次
-        $('li:lt(3):gt(0)').css('background', 'blue')
+    // 4. 选择第二个和第三个li元素
+    $('li:gt(0):lt(2)').css('background', 'blue') // 多个过滤选择器不是同时执行的, 而是依次
+    $('li:lt(3):gt(0)').css('background', 'blue')
 
-        // 5. 选择内容为BBBB的li
-        $('li:contains(BBBB)').css('background', 'gray')
+    // 5. 选择内容为BBBB的li
+    $('li:contains(BBBB)').css('background', 'gray')
 
-        // 6. 选择隐藏的li
-        $('li:hidden').each(function () {
-            console.log(this)
-        })
+    // 6. 选择隐藏的li
+    $('li:hidden').each(function () {
+      console.log(this)
+    })
 
-        // 7. 选择有title属性的li元素
-        $('li[title]').css('background', 'purple')
+    // 7. 选择有title属性的li元素
+    $('li[title]').css('background', 'purple')
 
-        // 8. 选择所有属性title为hello的li元素
-        $('li[title=hello]').css('background', 'pink')
-    </script>
+    // 8. 选择所有属性title为hello的li元素
+    $('li[title=hello]').css('background', 'pink')
+  </script>
 </body>
 </html>

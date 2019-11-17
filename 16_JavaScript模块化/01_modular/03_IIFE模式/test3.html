@@ -5,21 +5,21 @@
 <title>test3</title>
 <script src="module3.js"></script>
 <script>
-    myModule.foo()
-    myModule.bar()
+  myModule.foo()
+  myModule.bar()
 
-    // myModule.otherFun() // myModule.otherFun is not a function
-    console.log(myModule.data) // undefined 不能访问模块内部数据
+  // myModule.otherFun() // myModule.otherFun is not a function
+  console.log(myModule.data) // undefined 不能访问模块内部数据
 
-    myModule.data = 'hello-test' // 不是修改的模块内部的data
-    myModule.foo() // 没有改变
+  myModule.data = 'hello-test' // 不是修改的模块内部的data
+  myModule.foo() // 没有改变
 
-    /*
-        IIFE：匿名函数自调用（闭包）
-        IIFE：immediately-invoked function expression(立即调用函数表达式)
-        作用：数据是私有的，外部只能通过暴露的方法操作
-        问题：如果当前这个模块依赖另一个模块怎么办？
-     */
+  /*
+    IIFE：匿名函数自调用（闭包）
+    IIFE：immediately-invoked function expression(立即调用函数表达式)
+    作用：数据是私有的，外部只能通过暴露的方法操作
+    问题：如果当前这个模块依赖另一个模块怎么办？
+   */
 </script>
 </head>
 <body>

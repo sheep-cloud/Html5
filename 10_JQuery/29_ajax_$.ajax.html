@@ -5,29 +5,29 @@
 <title>29_ajax_$.ajax</title>
 </head>
 <body>
-    <div><h2>通过 AJAX 改变文本</h2></div>
-    <button id="btn" type="button">改变内容</button>
+  <div><h2>通过 AJAX 改变文本</h2></div>
+  <button id="btn" type="button">改变内容</button>
 
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            需求：
-                通过ajax加载一段文本
-         */
-        $('#btn').click(function () {
-            $.ajax({
-                url: 'json/ajax.json',
-                type: 'POST',
-                success: function (data) {
-                    // 遍历回调函数的参数
-                    for (let i = 0, len = arguments.length; i < len; i++) {
-                        console.log(arguments[i])
-                    }
-                    // 改变div下的h2元素内容
-                    $('div > h2').html(JSON.stringify(data))
-                }
-            })
-        })
-    </script>
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      需求:
+        通过ajax加载一段文本
+     */
+    $('#btn').click(function () {
+      $.ajax({
+        url: 'json/ajax.json',
+        type: 'POST',
+        success: function (data) {
+          // 遍历回调函数的参数
+          for (let i = 0, len = arguments.length; i < len; i++) {
+            console.log(arguments[i])
+          }
+          // 改变div下的h2元素内容
+          $('div > h2').html(JSON.stringify(data))
+        }
+      })
+    })
+  </script>
 </body>
 </html>

@@ -115,7 +115,7 @@ ul.detail_list li {
   width: 753px;
 }
 
-/*虚线分隔线，京东分隔线*/
+/*虚线分隔线, 京东分隔线*/
 .dotted_split, .jd_split {
   overflow: hidden;
   width: 100%;
@@ -209,7 +209,7 @@ ul.detail_list li {
   background: #F5FAFE;
 }
 
-/*包装清单，售后保障*/
+/*包装清单, 售后保障*/
 #product_package, #product_saleAfter {
   display: none;
 }

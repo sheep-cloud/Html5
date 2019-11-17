@@ -1,10 +1,10 @@
 /*
-    在这里编辑主页的样式表
+  在这里编辑主页的样式表
 */
 
 /* 设置body 背景*/
 body {
-  /*设置body的背景图片，水平方向重复*/
+  /*设置body的背景图片, 水平方向重复*/
   background: url("../img/bd-bg.png") repeat-x;
   /*height: 3000px;*/
 }
@@ -47,7 +47,7 @@ body {
 .header .nav > li {
   /*设置向左浮动*/
   float: left;
-  /*设置左右内边距，下内边距*/
+  /*设置左右内边距, 下内边距*/
   padding: 0 10px 8px;
   /*设置左边框*/
   border-left: 1px #d6d6d6 dashed;
@@ -78,7 +78,7 @@ body {
 .banner {
   /*开启相对定位*/
   position: relative;
-  /*设置高度，让阴影显示出来*/
+  /*设置高度, 让阴影显示出来*/
   height: 356px;
   /*设置背景*/
   background: /*#bfd*/ url("../img/banner-bd.png") no-repeat bottom center;
@@ -194,7 +194,7 @@ body {
   background: url("../img/line.png") no-repeat top center;
 }
 /*
-    设置联系栏的高度和背景颜色，一会删掉
+    设置联系栏的高度和背景颜色, 一会删掉
 */
 .contact .sc,
 .contact .co,
@@ -205,7 +205,7 @@ body {
   /*background-color: yellow;*/
 }
 /*
-    设置联系栏中的表单项
+  设置联系栏中的表单项
 */
 .contact .txt {
   width: 276px;
@@ -251,7 +251,7 @@ body {
   text-indent: 1em;
 
   /*
-      cursor可以用来设置鼠标指针的样式
+    cursor可以用来设置鼠标指针的样式
   */
   cursor: pointer;
 }
@@ -271,7 +271,7 @@ body {
   font: 12px/1 Helvetica;
 }
 .contact .sc .icon {
-  /*设置字体大小为0，去除空格*/
+  /*设置字体大小为0, 去除空格*/
   font-size: 0;
   /*设置上外边距*/
   margin-top: 6px;
@@ -293,7 +293,7 @@ body {
   margin-bottom: 0;
 }
 /*
-    设置联系栏右侧
+  设置联系栏右侧
 */
 .nu p {
   height: 58px;
@@ -313,7 +313,7 @@ body {
   margin-right: 8px;
 }
 /*
-    设置底部
+  设置底部
 */
 .footer {
   height: 173px;

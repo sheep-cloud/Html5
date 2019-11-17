@@ -5,113 +5,113 @@
 <title>01.计算属性和监视</title>
 </head>
 <body>
-    <!--
-        1. 计算属性
-            1.1. 在computed属性对象中定义计算属性的方法
-            1.2. 在页面中使用{{方法名}}来显示计算的结果
-        2. 监视属性
-            2.1. 通过watch配置或vm对象的$watch()来监视指定的属性
-            2.2. 当属性变化时, 回调函数自动调用, 在函数内部进行计算
-        3. 计算属性高级
-            3.1. 在computed属性对象中定义计算属性的对象
-            3.2. 通过getter/setter实现对属性数据的显示和监视
-            3.3. 计算属性存在缓存, 多次读取只执行一次getter计算
-    -->
+  <!--
+    1. 计算属性
+      1.1. 在computed属性对象中定义计算属性的方法
+      1.2. 在页面中使用{{方法名}}来显示计算的结果
+    2. 监视属性
+      2.1. 通过watch配置或vm对象的$watch()来监视指定的属性
+      2.2. 当属性变化时, 回调函数自动调用, 在函数内部进行计算
+    3. 计算属性高级
+      3.1. 在computed属性对象中定义计算属性的对象
+      3.2. 通过getter/setter实现对属性数据的显示和监视
+      3.3. 计算属性存在缓存, 多次读取只执行一次getter计算
+  -->
 
-    <div id="demo">
-        姓：<input type="text" placeholder="First Name" v-model="firstName"><br>
-        名：<input type="text" placeholder="Last Name" v-model="lastName"><br>
-        姓名1（计算属性 - 单向） : <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
-        姓名2（监视属性 - 单向） : <input type="text" placeholder="Full Name2" v-model="fullName2"><br>
-        姓名3（计算属性高级 - 双向） : <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
+  <div id="demo">
+    姓：<input type="text" placeholder="First Name" v-model="firstName"><br>
+    名：<input type="text" placeholder="Last Name" v-model="lastName"><br>
+    姓名1（计算属性 - 单向） : <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
+    姓名2（监视属性 - 单向） : <input type="text" placeholder="Full Name2" v-model="fullName2"><br>
+    姓名3（计算属性高级 - 双向） : <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
 
-        <p>{{fullName1}}</p>
-        <p>{{fullName1}}</p>
-        <p>{{fullName1}}</p>
-    </div>
+    <p>{{fullName1}}</p>
+    <p>{{fullName1}}</p>
+    <p>{{fullName1}}</p>
+  </div>
 
-    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
-    <script>
-        const vm = new Vue({
-            el: '#demo',
-            data: {
-                firstName: 'A',
-                lastName: 'B',
-                // fullName1: 'A B'
-                fullName2: ''
-            },
-            /**
-             * 计算属性
-             */
-            computed: {
-                /**
-                 * 计算属性的一个方法, 方法的返回值作为属性值;
-                 *
-                 * 回调函数 : 初始化显示/相关的data属性数据发生改变回调,
-                 *
-                 * @return {string}
-                 */
-                fullName1() {
-                    // 计算属性存在缓存，多次读取只执行一次getter计算
-                    console.log('fullName1()')
-                    return this.firstName + ' ' + this.lastName
-                },
-                /**
-                 * 计算属性的一个对象
-                 */
-                fullName3: {
-                    /**
-                     * 读取当前属性值
-                     *
-                     * 回调函数 : 当需要读取当前属性值时回调, 根据相关的数据计算并返回当前属性的值
-                     *
-                     * @return {string}
-                     */
-                    get() {
-                        return this.firstName + ' ' + this.lastName
-                    },
-                    /**
-                     * 监视当前属性值的变化
-                     *
-                     * 回调函数 : 当属性值发生改变时回调, 更新相关的属性数据
-                     * 
-                     * @param newValue fullName3的最新属性值
-                     */
-                    set(newValue) {
-                        const fullName = newValue.split(' ')
-                        this.firstName = fullName[0]
-                        this.lastName = fullName[1]
-                    }
-                }
-            },
-            /**
-             * 监视属性 - 配置监视
-             */
-            watch: {
-                /**
-                 * 监视firstName
-                 *
-                 * @param newValue 新值
-                 * @param oldValue 旧值
-                 */
-                firstName(newValue, oldValue) {
-                    this.fullName2 = newValue + ' ' + this.lastName
-                }
-            }
-        })
-
+  <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#demo',
+      data: {
+        firstName: 'A',
+        lastName: 'B',
+        // fullName1: 'A B'
+        fullName2: ''
+      },
+      /**
+       * 计算属性
+       */
+      computed: {
         /**
-         * 监视属性 - 实例方法
+         * 计算属性的一个方法, 方法的返回值作为属性值;
          *
-         * @param {string | Function} expOrFn   监视lastName
-         * @param {Function | Object} callback  回调函数
-         * @param {Object} [options]            配置选项
+         * 回调函数 : 初始化显示/相关的data属性数据发生改变回调,
+         *
+         * @return {string}
          */
-        vm.$watch('lastName', function (newValue) {
-            this.fullName2 = this.firstName + ' ' + newValue
-        }, {
-            immediate: true                     // 立即以表达式的当前值触发回调
-        })
-    </script>
+        fullName1() {
+          // 计算属性存在缓存, 多次读取只执行一次getter计算
+          console.log('fullName1()')
+          return this.firstName + ' ' + this.lastName
+        },
+        /**
+         * 计算属性的一个对象
+         */
+        fullName3: {
+          /**
+           * 读取当前属性值
+           *
+           * 回调函数 : 当需要读取当前属性值时回调, 根据相关的数据计算并返回当前属性的值
+           *
+           * @return {string}
+           */
+          get() {
+            return this.firstName + ' ' + this.lastName
+          },
+          /**
+           * 监视当前属性值的变化
+           *
+           * 回调函数 : 当属性值发生改变时回调, 更新相关的属性数据
+           *
+           * @param newValue fullName3的最新属性值
+           */
+          set(newValue) {
+            const fullName = newValue.split(' ')
+            this.firstName = fullName[0]
+            this.lastName = fullName[1]
+          }
+        }
+      },
+      /**
+       * 监视属性 - 配置监视
+       */
+      watch: {
+        /**
+         * 监视firstName
+         *
+         * @param newValue 新值
+         * @param oldValue 旧值
+         */
+        firstName(newValue, oldValue) {
+          this.fullName2 = newValue + ' ' + this.lastName
+        }
+      }
+    })
+
+    /**
+     * 监视属性 - 实例方法
+     *
+     * @param {string | Function} expOrFn   监视lastName
+     * @param {Function | Object} callback  回调函数
+     * @param {Object} [options]            配置选项
+     */
+    vm.$watch('lastName', function (newValue) {
+      this.fullName2 = this.firstName + ' ' + newValue
+    }, {
+      immediate: true                     // 立即以表达式的当前值触发回调
+    })
+  </script>
 </body>
 </html>

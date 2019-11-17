@@ -2,18 +2,18 @@
 module.exports.name = 'Rose'
 module.exports.age = 18
 module.exports.sayName = function () {
-    console.log('我是Rose~~~')
+  console.log('我是Rose~~~')
 }
 */
 
 
 // exports = module.exports
 module.exports = {
-    name: 'Jack',
-    age: 28,
-    sayName: function () {
-        console.log('我是Jack')
-    }
+  name: 'Jack',
+  age: 28,
+  sayName: function () {
+    console.log('我是Jack')
+  }
 }
 
 var obj = {}

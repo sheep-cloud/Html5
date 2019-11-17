@@ -19,9 +19,7 @@
   color: #005AA0;
 }
 
-
 /*权利声明*/
-
 #state {
   padding: 10px;
   overflow: hidden;
@@ -38,9 +36,7 @@
   margin-bottom: 10px;
 }
 
-
 /*商品评价*/
-
 #comment {
   border-top: 2px solid #999;
   margin-bottom: 10px;
@@ -176,7 +172,6 @@ div.buyers ul li span {
   background-repeat: no-repeat;
   background-position: -142px -390px;
 }
-
 
 /*评价详细*/
 
@@ -471,7 +466,6 @@ div.corner {
   background-repeat: no-repeat;
 }
 
-
 /*评论的页码*/
 
 #comment_list #pages {
@@ -517,9 +511,7 @@ a.comment_show_all {
   float: left;
 }
 
-
 /*咨询*/
-
 #consult {
   margin-bottom: 10px;
   padding-top: 2px;
@@ -661,7 +653,6 @@ li.consult_answer_time {
   margin-left: 5px;
 }
 
-
 /*讨论*/
 
 #discuss {
@@ -670,9 +661,7 @@ li.consult_answer_time {
   background: url(../images/tab.png) 0 -41px repeat-x;
 }
 
-
 /*表格*/
-
 #discuss-datas {
   width: 990px;
   border-spacing: 2px;
@@ -738,7 +727,6 @@ b.topic {
 .lun {
   background-position: -152px -220px;
 }
-
 
 /*其他讨论*/
 

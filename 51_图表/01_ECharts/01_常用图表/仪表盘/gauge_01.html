@@ -6,47 +6,47 @@
 <script type="text/javascript" src="../../../../00_libs/echarts-4.1.0/echarts.js"></script>
 </head>
 <body>
-    <!--
-        仪表图
-        - 仪表图展示数据的特点
-            - type是gauge
-        - 动态修改仪表图数据
-    -->
-    <div id="main" style="width: 900px; height: 600px;"></div>
+  <!--
+      仪表图
+      - 仪表图展示数据的特点
+          - type是gauge
+      - 动态修改仪表图数据
+  -->
+  <div id="main" style="width: 900px; height: 600px;"></div>
 
-    <script>
-        // 基于准备好的dom，初始化echarts实例
-        const myChart = echarts.init(document.getElementById('main'))
+  <script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.getElementById('main'))
 
-        // 指定图表的配置项和数据
-        const option = {
-            tooltip: {
-                // 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
-                formatter: '{a} <br/>{b} : {c}%'
-            },
-            toolbox: {
-                feature: {
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            series: [
-                {
-                    name: '业务指标',
-                    type: 'gauge',
-                    detail: {formatter: '{value}%'},
-                    data: [{value: 32, name: '完成率'}]
-                }
-            ]
+    // 指定图表的配置项和数据
+    const option = {
+      tooltip: {
+        // 饼图, 仪表盘, 漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+        formatter: '{a} <br/>{b} : {c}%'
+      },
+      toolbox: {
+        feature: {
+          restore: {},
+          saveAsImage: {}
         }
+      },
+      series: [
+        {
+          name: '业务指标',
+          type: 'gauge',
+          detail: {formatter: '{value}%'},
+          data: [{value: 32, name: '完成率'}]
+        }
+      ]
+    }
 
-        // 使用刚指定的配置项和数据显示图表
-        myChart.setOption(option)
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option)
 
-        setInterval(function () {
-            option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0
-            myChart.setOption(option, true)
-        }, 500)
-    </script>
+    setInterval(function () {
+      option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0
+      myChart.setOption(option, true)
+    }, 500)
+  </script>
 </body>
 </html>

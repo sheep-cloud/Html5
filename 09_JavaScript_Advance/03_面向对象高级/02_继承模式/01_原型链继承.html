@@ -5,55 +5,55 @@
 <title>01_原型链继承</title>
 </head>
 <body>
-    <!--
-        方式一: 原型链继承
-            1. 套路
-                1.1. 定义父类型构造函数
-                1.2. 给父类型的原型添加方法
-                1.3. 定义子类型的构造函数
-                1.4. 创建父类型的对象赋值给子类型的原型
-                1.5. 将子类型的原型的构造属性指向子类型
-                1.6. 给子类型的原型添加方法
-                1.7. 创建子类型的对象: 可以调用父类型的方法
-            2. 关键
-                2.1. 子类型的原型为父类型的一个实例对象
-    -->
-    <script>
-        // 1.1. 定义父类型构造函数
-        function Supper() {
-            this.supProp = 'Supper property'
-        }
+  <!--
+    方式一: 原型链继承
+      1. 套路
+        1.1. 定义父类型构造函数
+        1.2. 给父类型的原型添加方法
+        1.3. 定义子类型的构造函数
+        1.4. 创建父类型的对象赋值给子类型的原型
+        1.5. 将子类型的原型的构造属性指向子类型
+        1.6. 给子类型的原型添加方法
+        1.7. 创建子类型的对象: 可以调用父类型的方法
+      2. 关键
+        2.1. 子类型的原型为父类型的一个实例对象
+  -->
+  <script>
+    // 1.1. 定义父类型构造函数
+    function Supper() {
+      this.supProp = 'Supper property'
+    }
 
-        // 1.2. 给父类型的原型添加方法
-        Supper.prototype.showSupperProp = function () {
-            console.log(this.supProp)
-        }
+    // 1.2. 给父类型的原型添加方法
+    Supper.prototype.showSupperProp = function () {
+      console.log(this.supProp)
+    }
 
-        // 1.3. 定义子类型的构造函数
-        function Sub() {
-            this.subProp = 'Sub property'
-        }
+    // 1.3. 定义子类型的构造函数
+    function Sub() {
+      this.subProp = 'Sub property'
+    }
 
-        // 1.4. 创建父类型的对象赋值给子类型的原型
-        Sub.prototype = new Supper() // 关键: 子类型的原型为父类型第一个实例对象
+    // 1.4. 创建父类型的对象赋值给子类型的原型
+    Sub.prototype = new Supper() // 关键: 子类型的原型为父类型第一个实例对象
 
-        // 1.5. 将子类型的原型的构造属性指向子类型
-        Sub.prototype.constructor = Sub // 修正构造属性
+    // 1.5. 将子类型的原型的构造属性指向子类型
+    Sub.prototype.constructor = Sub // 修正构造属性
 
-        // 1.6. 给子类型的原型添加方法
-        Sub.prototype.showSubProp = function () {
-            console.log(this.subProp)
-        }
+    // 1.6. 给子类型的原型添加方法
+    Sub.prototype.showSubProp = function () {
+      console.log(this.subProp)
+    }
 
-        // 1.7. 创建子类型的对象
-        var sub = new Sub()
-        // 调用父类型的方法
-        sub.showSupperProp()
-        // 调用自身的方法
-        sub.showSubProp()
+    // 1.7. 创建子类型的对象
+    var sub = new Sub()
+    // 调用父类型的方法
+    sub.showSupperProp()
+    // 调用自身的方法
+    sub.showSubProp()
 
-        console.log(sub)
-        console.log(sub.constructor)
-    </script>
+    console.log(sub)
+    console.log(sub.constructor)
+  </script>
 </body>
 </html>

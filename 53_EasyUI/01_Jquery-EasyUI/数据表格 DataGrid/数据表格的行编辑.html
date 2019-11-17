@@ -48,9 +48,14 @@
         {field: 'productName', title: 'Product Name', width: 100, editor: 'text'},
         {field: 'listPrice', title: 'List Price', width: 80, align: 'right', editor: {type: 'numberbox', options: {required: true, precision: 2}}},
         {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right', editor: {type: 'numberbox', options: {required: true}}},
-        {field: 'attr1', title: 'Attribute', width: 250, editor: 'text'},
+        {field: 'attr1', title: 'Attribute', width: 250, editor: 'text', formatter: (value, row, index) => {
+            return value
+          }},
         {field: 'status', title: 'Status', width: 60, align: 'center', editor: {type: 'checkbox', options: {on: 'P', off: 'T'}}},
-        {field: 'learn', title: 'Learn', width: 80, editor: {type: 'combobox', options: {url: '../组合框 ComboBox/combobox_data.json', valueField: 'id', textField: 'text'}}}
+        {field: 'learn', title: 'Learn', width: 80, editor: {type: 'combobox', options: {url: '../组合框 ComboBox/combobox_data.json', valueField: 'id', textField: 'text'}}, formatter: (value, row) => {
+          console.log(row)
+            return value
+          }}
       ]],
       toolbar: [
         {
@@ -76,6 +81,10 @@
             if (endEditing()) {
               const inserted = $dg.datagrid('getChanges', 'inserted')
               if (inserted.length) {
+                inserted.forEach(item => {
+                  console.log(item)
+                  item.productId = 'aaa'
+                })
                 console.log('inserted')
                 console.log(inserted)
               }

@@ -4,64 +4,64 @@
 <meta charset="UTF-8">
 <title>index</title>
 <style>
-    .error {
-        color: red;
-    }
+  .error {
+    color: red;
+  }
 </style>
 </head>
 <body>
-    <form id="myForm" action="xxx">
-        <p>用户名（必填，最小6位）：<input type="text" name="username" title="" required minlength="6"></p>
-        <p>密码（必填，6到8位）：<input type="password" name="pwd" title="" required minlength="6" maxlength="8"></p>
-        <p>确认密码（与密码相同）：<input type="password" name="pwd2" title="" equalTo=":password[name=pwd]"></p>
-        <p><input type="submit" value="注册"></p>
-    </form>
+  <form id="myForm" action="xxx">
+    <p>用户名（必填, 最小6位）: <input type="text" name="username" title="" required minlength="6"></p>
+    <p>密码（必填, 6到8位）: <input type="password" name="pwd" title="" required minlength="6" maxlength="8"></p>
+    <p>确认密码（与密码相同）: <input type="password" name="pwd2" title="" equalTo=":password[name=pwd]"></p>
+    <p><input type="submit" value="注册"></p>
+  </form>
 
-    <script src="../../../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script src="jquery.validate.js"></script>
-    <script>
-        /*
-        messages: {
-            required: "This field is required.",
-                remote: "Please fix this field.",
-                email: "Please enter a valid email address.",
-                url: "Please enter a valid URL.",
-                date: "Please enter a valid date.",
-                dateISO: "Please enter a valid date ( ISO ).",
-                number: "Please enter a valid number.",
-                digits: "Please enter only digits.",
-                creditcard: "Please enter a valid credit card number.",
-                equalTo: "Please enter the same value again.",
-                maxlength: $.validator.format( "Please enter no more than {0} characters." ),
-                minlength: $.validator.format( "Please enter at least {0} characters." ),
-                rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
-                range: $.validator.format( "Please enter a value between {0} and {1}." ),
-                max: $.validator.format( "Please enter a value less than or equal to {0}." ),
-                min: $.validator.format( "Please enter a value greater than or equal to {0}." )
+  <script src="../../../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script src="./jquery.validate.js"></script>
+  <script>
+    /*
+    messages: {
+        required: "This field is required.",
+            remote: "Please fix this field.",
+            email: "Please enter a valid email address.",
+            url: "Please enter a valid URL.",
+            date: "Please enter a valid date.",
+            dateISO: "Please enter a valid date ( ISO ).",
+            number: "Please enter a valid number.",
+            digits: "Please enter only digits.",
+            creditcard: "Please enter a valid credit card number.",
+            equalTo: "Please enter the same value again.",
+            maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+            minlength: $.validator.format( "Please enter at least {0} characters." ),
+            rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+            range: $.validator.format( "Please enter a value between {0} and {1}." ),
+            max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+            min: $.validator.format( "Please enter a value greater than or equal to {0}." )
+    },
+    */
+
+    /*
+        声明式验证: 只需要声明各种验证规则, 可以自定义验证错误信息
+     */
+
+    // 对此表单开启验证
+    $('#myForm').validate({
+      messages: {
+        username: {
+          required: '用户名是必须的',
+          minlength: '用户名至少为6位'
         },
-        */
-
-        /*
-            声明式验证：只需要声明各种验证规则，可以自定义验证错误信息
-         */
-
-        // 对此表单开启验证
-        $('#myForm').validate({
-            messages: {
-                username: {
-                    required: '用户名是必须的',
-                    minlength: '用户名至少为6位'
-                },
-                pwd: {
-                    required: '密码是必须的',
-                    minlength: '密码至少为6位',
-                    maxlength: '密码最多为8位'
-                },
-                pwd2: {
-                    equalTo: '必须与密码相同'
-                }
-            }
-        })
-    </script>
+        pwd: {
+          required: '密码是必须的',
+          minlength: '密码至少为6位',
+          maxlength: '密码最多为8位'
+        },
+        pwd2: {
+          equalTo: '必须与密码相同'
+        }
+      }
+    })
+  </script>
 </body>
 </html>

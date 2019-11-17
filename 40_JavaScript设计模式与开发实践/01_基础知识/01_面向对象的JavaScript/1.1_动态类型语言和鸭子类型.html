@@ -5,42 +5,42 @@
 <title>1.1_动态类型语言和鸭子类型</title>
 </head>
 <body>
-    <script>
-        // 鸭子
-        var duck = {
-            duckSinging: function () {
-                console.log('嘎嘎嘎')
-            }
-        }
+  <script>
+    // 鸭子
+    var duck = {
+      duckSinging: function () {
+        console.log('嘎嘎嘎')
+      }
+    }
 
-        // 鸡
-        var chicken = {
-            duckSinging: function () {
-                console.log('嘎嘎嘎')
-            }
-        }
+    // 鸡
+    var chicken = {
+      duckSinging: function () {
+        console.log('嘎嘎嘎')
+      }
+    }
 
-        /**
-         * 合唱团
-         * @type {Array}
-         */
-        var chior = []
+    /**
+     * 合唱团
+     * @type {Array}
+     */
+    var chior = []
 
-        /**
-         * 加入合唱团
-         * @param animal 动物，需要有duckSinging()方法
-         */
-        var joinChoir = function (animal) {
-            if (animal && typeof animal.duckSinging === 'function') {
-                chior.push(animal)
-                console.log('恭喜加入合唱团')
-                console.log('合唱团成员数量: ' + chior.length)
-                console.log('----------------------------------------------------------------------------------------------------')
-            }
-        }
+    /**
+     * 加入合唱团
+     * @param animal 动物, 需要有duckSinging()方法
+     */
+    var joinChoir = function (animal) {
+      if (animal && typeof animal.duckSinging === 'function') {
+        chior.push(animal)
+        console.log('恭喜加入合唱团')
+        console.log('合唱团成员数量: ' + chior.length)
+        console.log('----------------------------------------------------------------------------------------------------')
+      }
+    }
 
-        joinChoir(duck)
-        joinChoir(chicken)
-    </script>
+    joinChoir(duck)
+    joinChoir(chicken)
+  </script>
 </body>
 </html>

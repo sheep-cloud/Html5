@@ -5,116 +5,115 @@
 <title>09_Promise对象</title>
 </head>
 <body>
-    <!--
-        1. 理解：
-            Promise对象：代表了未来某个将要发生的事件（通常是一个异步操作）
-            有了promise对象，可以将异步操作以同步的流程表达出来，避免了层层嵌套的回调函数（俗称“回调地狱”）
-            ES6的Promise是一个构造函数，用来生成promise实例
-        2. 使用promise基本步骤
-            创建promise对象
-                let promise = new Promise((resolve, reject) => {
-                    // 初始化promise状态为pending（进行中）
-                    // 执行异步操作
-                    if (异步操作成功) {
-                        resolve(value)  // 修改promise的状态为fulfilled（已成功）
-                    } else {
-                        reject(errMsg)  // 修改promise的状态为rejected（已失败）
-                    }
-                })
-            调用promise的then()
-                promise.then(function() {
-                    result => console.log(result)
-                    errorMsg => console.log(errorMsg)
-                })
-        3. promise对象的3个状态
-            pending：    进行中
-            fulfilled：  已成功
-            rejected：   已失败
-        4. 应用：
-            使用promise实现超时处理
-            使用promise封装处理ajax请求
-            let result = new XMLHttpRequest()
-            result.onreadystatechange = function() {
-
-            }
-            request.responseType = 'json
-            request.open('GET', url)
-            request.send()
-    -->
-    <script>
-        /*
-        // 创建promise对象
+  <!--
+    1. 理解:
+      Promise对象: 代表了未来某个将要发生的事件(通常是一个异步操作)
+      有了promise对象，可以将异步操作以同步的流程表达出来，避免了层层嵌套的回调函数(俗称“回调地狱”)
+      ES6的Promise是一个构造函数，用来生成promise实例
+    2. 使用promise基本步骤
+      创建promise对象
         let promise = new Promise((resolve, reject) => {
-            // 初始化promise状态 pending：初始化
-            console.log('111')
-            // 执行异步操作，通常是发送ajax请求，开启定时器
-            setTimeout(() => {
-                console.log('333')
-                // 根据异步任务的返回结果去修改promise的状态
-
-                // 异步任务执行成功
-                //resolve('我是成功的数据') // 修改promise的状态为 fulfilled：成功的状态
-
-                // 异步任务执行失败
-                reject('我是失败的数据') // 修改promise的状态为 rejected：失败的状态
-            }, 2000)
+          // 初始化promise状态为pending(进行中)
+          // 执行异步操作
+          if (异步操作成功) {
+            resolve(value)  // 修改promise的状态为fulfilled(已成功)
+          } else {
+            reject(errMsg)  // 修改promise的状态为rejected(已失败)
+          }
         })
-
-        console.log('222')
-
-        promise.then((successData) => {
-            // 成功的回调
-            console.log('成功的回调')
-            console.log(successData)
-        }, (errorData) => {
-            // 失败的回调
-            console.log('失败的回调')
-            console.log(errorData)
+      调用promise的then()
+        promise.then(function() {
+          result => console.log(result)
+          errorMsg => console.log(errorMsg)
         })
-        console.log('----------------------------------------------------------------------------------------------------')
-        */
+    3. promise对象的3个状态
+      pending:     进行中
+      fulfilled:   已成功
+      rejected:    已失败
+    4. 应用:
+      使用promise实现超时处理
+      使用promise封装处理ajax请求
+      let result = new XMLHttpRequest()
+      result.onreadystatechange = function() {
+
+      }
+      request.responseType = 'json
+      request.open('GET', url)
+      request.send()
+  -->
+  <script>
+    // 创建promise对象
+    /*
+    let promise = new Promise((resolve, reject) => {
+      // 初始化promise状态 pending: 初始化
+      console.log('111')
+      // 执行异步操作，通常是发送ajax请求，开启定时器
+      setTimeout(() => {
+        console.log('333')
+        // 根据异步任务的返回结果去修改promise的状态
+
+        // 异步任务执行成功
+        //resolve('我是成功的数据') // 修改promise的状态为 fulfilled: 成功的状态
+
+        // 异步任务执行失败
+        reject('我是失败的数据') // 修改promise的状态为 rejected: 失败的状态
+      }, 2000)
+    })*/
+
+    console.log('222')
+
+    promise.then((successData) => {
+      // 成功的回调
+      console.log('成功的回调')
+      console.log(successData)
+    }, (errorData) => {
+      // 失败的回调
+      console.log('失败的回调')
+      console.log(errorData)
+    })
+    console.log('----------------------------------------------------------------------------------------------------')
 
 
-        // 定义获取新闻的功能函数
-        function getNews(url) {
-            // 返回 promise 对象
-            let promise
-            promise = new Promise((resolve, reject) => {
-                // 状态：初始化
-                // 执行异步任务
+    // 定义获取新闻的功能函数
+    function getNews(url) {
+      // 返回 promise 对象
+      let promise
+      promise = new Promise((resolve, reject) => {
+        // 状态: 初始化
+        // 执行异步任务
 
-                // 创建xmlHttp实例对象
-                let xmlHttp = new XMLHttpRequest()
-                // 绑定监听
-                xmlHttp.onreadystatechange = function () {
-                    if (xmlHttp.readyState === 4) {
-                        if (xmlHttp.status === 200) {
-                            console.log(xmlHttp)
-                            // 请求成功
-                            // 修改promise的状态为成功状态
-                            resolve(xmlHttp.responseText)
-                        } else {
-                            // 请求失败
-                            // 修改promise的状态为失败状态
-                            reject('暂时没有新闻内容')
-                        }
-                    }
-                }
-
-                // open 设置请求的方式以及url，第三个参数 async 为false，同步
-                xmlHttp.open('GET', url)
-                // 发送 ajax 请求
-                xmlHttp.send()
-            })
-            return promise
+        // 创建xmlHttp实例对象
+        let xmlHttp = new XMLHttpRequest()
+        // 绑定监听
+        xmlHttp.onreadystatechange = function () {
+          if (xmlHttp.readyState === 4) {
+            if (xmlHttp.status === 200) {
+              console.log(xmlHttp)
+              // 请求成功
+              // 修改promise的状态为成功状态
+              resolve(xmlHttp.responseText)
+            } else {
+              // 请求失败
+              // 修改promise的状态为失败状态
+              reject('暂时没有新闻内容')
+            }
+          }
         }
 
-        getNews('https://api.github.com/search/users?q=vue').then(data => {
-            console.log(data)
-            console.log(JSON.parse(data))
-        }, error => console.log(error))
+        // open 设置请求的方式以及url，第三个参数 async 为false，同步
+        xmlHttp.open('GET', url)
+        // 发送 ajax 请求
+        xmlHttp.send()
+      })
+      return promise
+    }
 
-        // TODO: colg [Promise对象]
-    </script>
+    getNews('https://api.github.com/search/users?q=vue').then(data => {
+      console.log(data)
+      console.log(JSON.parse(data))
+    }, error => console.log(error))
+
+    // TODO: colg [Promise对象]
+  </script>
 </body>
 </html>

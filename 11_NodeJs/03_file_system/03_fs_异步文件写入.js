@@ -1,11 +1,11 @@
 /*
-    异步文件写入
-        fs.open(path, flags[, mode], callback)
-            - callback  异步调用的方法，结果都是通过回调函数的参数返回的
-            - 回调函数两个参数：
-                err     错误对象，如果没有错误则为null
-                fd      文件的描述符
-        fs.write(fd, string[, position[, encoding]], callback)
+  异步文件写入
+    fs.open(path, flags[, mode], callback)
+      - callback  异步调用的方法, 结果都是通过回调函数的参数返回的
+      - 回调函数两个参数：
+        err     错误对象, 如果没有错误则为null
+        fd      文件的描述符
+    fs.write(fd, string[, position[, encoding]], callback)
  */
 
 // 引入fs模块

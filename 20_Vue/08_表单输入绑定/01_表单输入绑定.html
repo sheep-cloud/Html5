@@ -5,83 +5,83 @@
 <title>01_表单输入绑定</title>
 </head>
 <body>
-    <!--
-        1. 使用v-model（双向绑定数据）自动收集数据
-            text/textarea
-            checkbox
-            radio
-            select
-    -->
+  <!--
+    1. 使用v-model（双向绑定数据）自动收集数据
+      text/textarea
+      checkbox
+      radio
+      select
+  -->
 
-    <div id="demo">
-        <form action="" @submit.prevent="handleSubmit">
-            <span>用户名：</span>
-            <label>
-                <input type="text" v-model="username">
-            </label>
-            <br>
+  <div id="demo">
+    <form action="" @submit.prevent="handleSubmit">
+      <span>用户名：</span>
+      <label>
+        <input type="text" v-model="username">
+      </label>
+      <br>
 
-            <span>密码：</span>
-            <label>
-                <input type="password" v-model="pwd">
-            </label>
-            <br>
+      <span>密码：</span>
+      <label>
+        <input type="password" v-model="pwd">
+      </label>
+      <br>
 
-            <span>性别：</span>
-            <input type="radio" id="female" value="女" v-model="sex">
-            <label for="female">女</label>
-            <input type="radio" id="male" value="男" v-model="sex">
-            <label for="male">男</label> <br>
+      <span>性别：</span>
+      <input type="radio" id="female" value="女" v-model="sex">
+      <label for="female">女</label>
+      <input type="radio" id="male" value="男" v-model="sex">
+      <label for="male">男</label> <br>
 
-            <span>爱好：</span>
-            <input type="checkbox" id="basket" value="basket" v-model="likes">
-            <label for="basket">篮球</label>
-            <input type="checkbox" id="foot" value="foot" v-model="likes">
-            <label for="foot">足球</label>
-            <br>
+      <span>爱好：</span>
+      <input type="checkbox" id="basket" value="basket" v-model="likes">
+      <label for="basket">篮球</label>
+      <input type="checkbox" id="foot" value="foot" v-model="likes">
+      <label for="foot">足球</label>
+      <br>
 
-            <span>城市：</span>
-            <label>
-                <select v-model="cityId">
-                    <option value="">未选择</option>
-                    <option :value="city.id" v-for="(city, index) in allCitys" :key="index">{{city.name}}</option>
-                </select>
-            </label>
-            <br>
+      <span>城市：</span>
+      <label>
+        <select v-model="cityId">
+          <option value="">未选择</option>
+          <option :value="city.id" v-for="(city, index) in allCitys" :key="index">{{city.name}}</option>
+        </select>
+      </label>
+      <br>
 
-            <span>介绍:</span>
-            <label>
-                <textarea cols="30" rows="10" v-model="desc"></textarea>
-            </label>
-            <br>
+      <span>介绍:</span>
+      <label>
+        <textarea cols="30" rows="10" v-model="desc"></textarea>
+      </label>
+      <br>
 
-            <input type="submit" value="注册">
-        </form>
-    </div>
+      <input type="submit" value="注册">
+    </form>
+  </div>
 
-    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
-    <script>
-        new Vue({
-            el: '#demo',
-            data: {
-                username: '',
-                pwd: '',
-                sex: '女',
-                likes: ['foot'],
-                allCitys: [
-                    {id: 1, name: '北京'},
-                    {id: 2, name: '上海'},
-                    {id: 3, name: '广东'}
-                ],
-                cityId: 3,
-                desc: ''
-            },
-            methods: {
-                handleSubmit() {
-                    console.log(this.username, this.pwd, this.sex, JSON.stringify(this.likes), this.cityId, this.desc)
-                }
-            }
-        })
-    </script>
+  <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#demo',
+      data: {
+        username: '',
+        pwd: '',
+        sex: '女',
+        likes: ['foot'],
+        allCitys: [
+          {id: 1, name: '北京'},
+          {id: 2, name: '上海'},
+          {id: 3, name: '广东'}
+        ],
+        cityId: 3,
+        desc: ''
+      },
+      methods: {
+        handleSubmit() {
+          console.log(this.username, this.pwd, this.sex, JSON.stringify(this.likes), this.cityId, this.desc)
+        }
+      }
+    })
+  </script>
 </body>
 </html>

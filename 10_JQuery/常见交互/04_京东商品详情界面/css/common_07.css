@@ -59,7 +59,6 @@ a:hover {
   height: 30px;
 }
 
-/*�������ġ��ղؾ�����*/
 #top_box > img {
   display: block;
   float: left;
@@ -254,7 +253,6 @@ li.app_jd label a:hover, li.service label a:hover, li.site_nav label a:hover {
   position: relative;
 }
 
-
 #search_helper {
   overflow: hidden;
   position: absolute;
@@ -298,7 +296,6 @@ li.app_jd label a:hover, li.service label a:hover, li.site_nav label a:hover {
   color: #C00;
   line-height: 22px;
 }
-
 
 div.search {
   width: 494px;
@@ -466,7 +463,6 @@ div.settle_up_mt:hover {
   border-bottom: 0;
 }
 
-
 #settle_up_items {
   position: absolute;
   top: 30px;
@@ -502,7 +498,6 @@ div.settle_up_mt:hover {
   border: 1px solid red;
   height: 49px;
 }
-
 
 #nav {
   width: 1210px;
@@ -793,7 +788,6 @@ p.special_service {
   background: url(../images/iconlist_2.png) 0 -149px no-repeat;
 }
 
-
 #footer {
   height: 180px;
   text-align: center;
@@ -826,12 +820,10 @@ p.special_service {
   color: #ff0700;
 }
 
-
 #footmark {
   width: 1210px;
   margin: 0 auto;
 }
-
 
 #may_like, #recent_view {
   padding: 0 9px;
@@ -980,7 +972,6 @@ p.special_service {
 #side_panel a.gotop b:hover {
   background-position: -21px -200px;
 }
-
 
 /*����Ч��*/
 @keyframes myfirst {

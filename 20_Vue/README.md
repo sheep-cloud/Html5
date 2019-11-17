@@ -53,7 +53,7 @@
         4. 显示数据：{{xxx}}
         5. 理解vue的mvvm实现
     -->
-    <!--view 视图，模版页面-->
+    <!--view 视图, 模版页面-->
     <div id="app">
         <label>
             <input type="text" v-model="username">
@@ -69,7 +69,7 @@
         const vm = new Vue({
             // element: 选择器
             el: '#app',
-            // model 模型，数据对象（data）
+            // model 模型, 数据对象（data）
             data: {
                 username: 'Jack ' + new Date().toLocaleTimeString()
             }
@@ -114,7 +114,7 @@
                 指令（以v-开头的自定义标签属性）
         2. 双大括号表达式
             语法：{{exp}}
-            功能：向页面输出数据，可以调用对象的方法
+            功能：向页面输出数据, 可以调用对象的方法
         3. 指令一：强制数据绑定
             功能：指定变化的属性值
             完整写法：v-bind:xxx='yyy'   yyy会作为表达式解析执行
@@ -228,7 +228,7 @@
                  * @return {string}
                  */
                 fullName1() {
-                    // 计算属性存在缓存，多次读取只执行一次getter计算
+                    // 计算属性存在缓存, 多次读取只执行一次getter计算
                     console.log('fullName1()')
                     return this.firstName + ' ' + this.lastName
                 },
@@ -316,7 +316,7 @@
 <body>
     <!--
         1. 理解
-            在应用界面中，某个（些）元素的样式是变化的
+            在应用界面中, 某个（些）元素的样式是变化的
             class/sytle绑定就是专门用来实现动态样式效果的技术
         2. class绑定： :class='xxx'
             xxx 是字符串
@@ -387,12 +387,12 @@
             v-else
             v-show
         2. 比较v-if与v-show
-            v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
-            v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
-            相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+            v-if 是"真正"的条件渲染, 因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建. 
+            v-if 也是惰性的：如果在初始渲染时条件为假, 则什么也不做——直到条件第一次变为真时, 才会开始渲染条件块. 
+            相比之下, v-show 就简单得多——不管初始条件是什么, 元素总是会被渲染, 并且只是简单地基于 CSS 进行切换. 
 
-            一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。
-            因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+            一般来说, v-if 有更高的切换开销, 而 v-show 有更高的初始渲染开销. 
+            因此, 如果需要非常频繁地切换, 则使用 v-show 较好; 如果在运行时条件很少改变, 则使用 v-if 较好. 
     -->
 
     <div id="demo">
@@ -477,9 +477,9 @@
                     this.persons.splice(index, 1)
                 },
                 /**
-                 * vue本身只是监视了persons的改变，并没有监视数组内部数据的改变
+                 * vue本身只是监视了persons的改变, 并没有监视数组内部数据的改变
                  *
-                 * vue重写了数组中的一系列改变数组内部数据的方法（先调用原生，更新界面） ---> 数组内部改变，界面自动变化
+                 * vue重写了数组中的一系列改变数组内部数据的方法（先调用原生, 更新界面） ---> 数组内部改变, 界面自动变化
                  *
                  * @param index
                  * @param newP
@@ -493,7 +493,7 @@
 
                     // vue 本身只是监视了数组的改变, 没有监视数组内部数据的改变
 
-                    // 数组更新检测 : Vue 包含一组观察数组的变异方法，所以它们也将会触发视图更新
+                    // 数组更新检测 : Vue 包含一组观察数组的变异方法, 所以它们也将会触发视图更新
                     this.persons.splice(index, 1, newP)
                 }
             }
@@ -538,7 +538,7 @@
             el: '#demo',
             data: {
                 searchName: '',
-                orderType: 0, // 0代表原本，1代表升序，2代表降序
+                orderType: 0, // 0代表原本, 1代表升序, 2代表降序
                 persons: [
                     {name: 'Tom', age: 18},
                     {name: 'Jack', age: 25},
@@ -641,7 +641,7 @@
                     alert(msg)
                 },
                 /**
-                 * 没有指定参数，自动传递event
+                 * 没有指定参数, 自动传递event
                  *
                  * @param event
                  */
@@ -805,8 +805,8 @@
                 * beforeDestroy()
                 * destroyed()
         2. 常用的生命周期方法
-            mounted()：              发送ajax请求，启动定时器等异步任务
-            beforeDestroy()：        做收尾工作，如：清除定时器
+            mounted()：              发送ajax请求, 启动定时器等异步任务
+            beforeDestroy()：        做收尾工作, 如：清除定时器
     -->
 
     <div id="demo">
@@ -825,15 +825,15 @@
             // 1. 初始化阶段
             beforeCreate() {
                 console.log('---------------------------------------- 初始化阶段 ----------------------------------------')
-                // 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+                // 在实例初始化之后, 数据观测 (data observer) 和 event/watcher 事件配置之前被调用. 
                 console.log('beforeCreate()')
             },
             created() {
-                // 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。挂载阶段还未开始
+                // 在实例创建完成后被立即调用. 在这一步, 实例已完成以下的配置：数据观测 (data observer), 属性和方法的运算, watch/event 事件回调. 挂载阶段还未开始
                 console.log('created()')
             },
             beforeMount() {
-                // 在挂载开始之前被调用：相关的 render 函数首次被调用。
+                // 在挂载开始之前被调用：相关的 render 函数首次被调用. 
                 console.log('beforeMount()')
             },
             mounted() {
@@ -845,29 +845,29 @@
             // 2. 更新阶段
             beforeUpdate() {
                 console.log('---------------------------------------- 更新阶段 ----------------------------------------')
-                // 数据更新时调用，发生在虚拟 DOM 打补丁之前。
+                // 数据更新时调用, 发生在虚拟 DOM 打补丁之前. 
                 console.log('beforeUpdate()')
             },
             updated() {
-                // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+                // 由于数据更改导致的虚拟 DOM 重新渲染和打补丁, 在这之后会调用该钩子. 
                 console.log('updated()')
             },
 
             // 3. 死亡阶段
             beforeDestroy() {
                 console.log('---------------------------------------- 死亡阶段 ----------------------------------------')
-                // 实例销毁之前调用（1次）。
+                // 实例销毁之前调用（1次）. 
                 console.log('beforeDestroy()')
                 // 清除定时器
                 clearInterval(this.intervalId)
             },
             destroyed() {
-                // Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+                // Vue 实例销毁后调用. 调用后, Vue 实例指示的所有东西都会解绑定, 所有的事件监听器会被移除, 所有的子实例也会被销毁. 
                 console.log('destroyed()')
             },
             methods: {
                 destroyVm() {
-                    // 完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。
+                    // 完全销毁一个实例. 清理它与其它实例的连接, 解绑它的全部指令及事件监听器. 
                     this.$destroy()
                 }
             }
@@ -1081,16 +1081,16 @@
         常用内置指令
             v-text：     更新元素的 textContent
             v-html：     更新元素的 innerHTML
-            v-if：       如果为true，当前标签才会输出到页面
-            v-else：     如果为false，当前标签才会输出到页面
+            v-if：       如果为true, 当前标签才会输出到页面
+            v-else：     如果为false, 当前标签才会输出到页面
             v-show：     通过控制display样式来控制显示/隐藏
             v-for：      遍历数组/对象
-            v-on：       绑定事件监听，一般简写为@
-            v-bind：     强制绑定解析表达式，可以省略v-bind
+            v-on：       绑定事件监听, 一般简写为@
+            v-bind：     强制绑定解析表达式, 可以省略v-bind
             v-model：    双向数据绑定
-            ref：        为某个元素注册一个唯一标识，vue对象通过$els属性访问这个元素对象
-            v-cloak：    使用它防止闪现表达式，与css配合：[v-cloak] {display: none}
-            v-once：     只渲染元素和组件一次。随后的重新渲染，元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
+            ref：        为某个元素注册一个唯一标识, vue对象通过$els属性访问这个元素对象
+            v-cloak：    使用它防止闪现表达式, 与css配合：[v-cloak] {display: none}
+            v-once：     只渲染元素和组件一次. 随后的重新渲染, 元素/组件及其所有的子节点将被视为静态内容并跳过. 这可以用于优化更新性能. 
     -->
 
     <div id="demo">
@@ -1169,9 +1169,9 @@
         /**
          * 定义全局指令对象
          *
-         * @param {string} id 指令名，不包括 v- 前缀
+         * @param {string} id 指令名, 不包括 v- 前缀
          * @param {Function | Object} [definition]
-         *      el : 指令所绑定的元素，可以用来直接操作 DOM;
+         *      el : 指令所绑定的元素, 可以用来直接操作 DOM;
          *      binding : 一个对象(包含rawName指令名, value绑定的值)
          */
         Vue.directive('upper-text', (el, binding) => {
@@ -1306,10 +1306,10 @@
 <body>
     <!--
         选项合并
-            当组件和混入对象含有同名选项时，这些选项将以恰当的方式混合。
-                1. 数据对象在内部会进行浅合并 (一层属性深度)，在和组件的数据发生冲突时以组件数据优先。
-                2. 同名钩子函数将混合为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。
-                3. 值为对象的选项，例如 methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+            当组件和混入对象含有同名选项时, 这些选项将以恰当的方式混合. 
+                1. 数据对象在内部会进行浅合并 (一层属性深度), 在和组件的数据发生冲突时以组件数据优先. 
+                2. 同名钩子函数将混合为一个数组, 因此都将被调用. 另外, 混入对象的钩子将在组件自身钩子之前调用. 
+                3. 值为对象的选项, 例如 methods, components 和 directives, 将被混合为同一个对象. 两个对象键名冲突时, 取组件对象的键值对. 
     -->
     <div id="demo">
         <p>{{message}}</p>
@@ -1446,7 +1446,7 @@ serve dist
 
 访问：http://localhost:5000
 
-# 无法成功，原因不明
+# 无法成功, 原因不明
 ```
 
 #### 2.2.3. 发布2：使用动态web服务器（tomcat）
@@ -1472,7 +1472,7 @@ serve dist
 #### 2.3.1. 说明
 
 - ESLint是一个代码规范检查工具
-- 它定义了很多特定的规则，一旦你的代码违背了某一规则，ESLint会做出非常有用的提示
+- 它定义了很多特定的规则, 一旦你的代码违背了某一规则, ESLint会做出非常有用的提示
 - 官网：http://eslint.cn/
 - 基本已替代以前的JSLint
 
@@ -1486,17 +1486,17 @@ serve dist
 #### 2.3.3. ESLint提供以下几种校验
 
 - 语法错误校验
-- 不重要或丢失的标点符号，如分号
+- 不重要或丢失的标点符号, 如分号
 - 没法运行到的代码块
 - 未被使用的参数提醒
-- 确保样式的统一规则，如sass或者less
+- 确保样式的统一规则, 如sass或者less
 - 检查变量的命名
 
 #### 2.3.4. 规则的错误等级有三种
 
 - 0: 关闭规则
-- 1: 打开规则，并且作为一个警告（信息打印黄色字体）
-- 2: 打开规则，并且作为一个错误（信息打印红色字体）
+- 1: 打开规则, 并且作为一个警告（信息打印黄色字体）
+- 2: 打开规则, 并且作为一个错误（信息打印红色字体）
 
 #### 2.3.5. 相关配置文件
 
@@ -1509,7 +1509,7 @@ serve dist
     'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    // 缩进，0：表示不验证规则。
+    // 缩进, 0：表示不验证规则. 
     'indent': 0,
     'no-new': 0
   }
@@ -1610,18 +1610,18 @@ serve dist
 #### 2.4.3. 关于标签名与标签属性名书写问题
 
 - 写法一：一模一样
-- 写法二：大写变小写，并用-连接
+- 写法二：大写变小写, 并用-连接
 
 ### 2.5. 组件间通信
 
 #### 2.5.1. 组件间通信基本原则
 
 - 不要在子组件中直接修改父组件的状态数据
-- 数据在哪儿，更新数据的行为（函数）就应该定义在哪儿
+- 数据在哪儿, 更新数据的行为（函数）就应该定义在哪儿
 
 #### 2.5.2. vue组件间通信方式
 
-- props： 可以是数组或对象，用于接收来自父组件的数据。props 可以是简单的数组，或者使用对象。
+- props： 可以是数组或对象, 用于接收来自父组件的数据. props 可以是简单的数组, 或者使用对象. 
 - vue的自定义事件
 - 消息订阅与发布（如：pubsub库）
 - slot
@@ -1646,7 +1646,7 @@ serve dist
 
     ```ini
         /**
-         * 声明接收属性，这个属性就会成为组件对象的属性
+         * 声明接收属性, 这个属性就会成为组件对象的属性
          */
         props: ['comments', 'deleteComment'],
     ```
@@ -1681,10 +1681,10 @@ serve dist
 #### 2.6.3. 注意
 
 - 此方法用于父组件向子组件传递数据
-- 所有标签属性都会成为组件对象的属性，模版页面可以直接引用
+- 所有标签属性都会成为组件对象的属性, 模版页面可以直接引用
 - 问题：
   - 如果需要向非自后代传递数据必须多层逐层传递
-  - 兄弟组件间也不能直接props通信，必须借助父组件才可以
+  - 兄弟组件间也不能直接props通信, 必须借助父组件才可以
 
 ### 2.7. 组件间通信2：vue自定义事件
 
@@ -1737,7 +1737,7 @@ import PubSub from 'pubsub-js'
     mounted() {
       // 绑定事件监听    订阅消息
       PubSub.subscribe('deleteTodo', (msg, index) => {
-        // 箭头函数 没有自己的this，取外部函数的this
+        // 箭头函数 没有自己的this, 取外部函数的this
         this.deleteTodo(index)
       })
     },
@@ -1779,11 +1779,11 @@ import PubSub from 'pubsub-js'
 
 #### 3.1.1. vue-resource
 
-- vue插件，非官库，vue1.x使用广泛
+- vue插件, 非官库, vue1.x使用广泛
 
 #### 3.1.2. axios
 
-- 通用的ajax请求库，官方推荐，vue2.x使用广泛
+- 通用的ajax请求库, 官方推荐, vue2.x使用广泛
 
 ### 3.2. vue-resource的使用
 
@@ -1807,7 +1807,7 @@ import PubSub from 'pubsub-js'
     import VueResource from 'vue-resource'
     
     Vue.prototype.layer = layer(Vue)
-    // 声明使用插件，内部会给vm对象和组件对象添加一个属性：$http
+    // 声明使用插件, 内部会给vm对象和组件对象添加一个属性：$http
     Vue.use(VueResource)
     
     new Vue({
@@ -1965,11 +1965,11 @@ import PubSub from 'pubsub-js'
             score: item.score,
             login: item.login
           }))
-          // 成功，更新状态（成功）
+          // 成功, 更新状态（成功）
           this.loading = false
           this.users = users
         }).catch(response => {
-          // 失败，更新状态（失败）
+          // 失败, 更新状态（失败）
           this.loading = false
           this.errorMsg = response.message
         })
@@ -1994,7 +1994,7 @@ import PubSub from 'pubsub-js'
 1. npm 安装
 npm install mint-ui --save
 
-2. 借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+2. 借助 babel-plugin-component, 我们可以只引入需要的组件, 以达到减小项目体积的目的. 
 npm install babel-plugin-component --save-dev
 
 3. 修改 .babelrc 实现按需打包mint-ui
@@ -2162,7 +2162,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-new Vue({ // 配置对象的属性名都是一些固定的名称，不能随便修改
+new Vue({ // 配置对象的属性名都是一些固定的名称, 不能随便修改
   el: '#app',
   // 映射组件标签
   components: {App},
@@ -2322,7 +2322,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './filters'
 
 new Vue({
-  // 配置对象的属性名都是一些固定的名称，不能随便修改
+  // 配置对象的属性名都是一些固定的名称, 不能随便修改
   el: '#app',
   // 映射组件标签
   components: {App},
@@ -2435,9 +2435,9 @@ export default new VueRouter({
 ### 5.6. 编程式路由导航
 
 ```js
-// 这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
+// 这个方法会向 history 栈添加一个新的记录, 所以, 当用户点击浏览器后退按钮时, 则回到之前的 URL. 
 this.$router.push(`url`)
-// 跟 router.push 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
+// 跟 router.push 很像, 唯一的不同就是, 它不会向 history 添加新记录, 而是跟它的方法名一样 —— 替换掉当前的 history 记录. 
 this.$router.replace(`url`)
 ```
 
@@ -2546,9 +2546,9 @@ this.$router.replace(`url`)
 
 #### 6.1.2. 状态自管理应用
 
-- **state**，驱动应用的数据源；
-- **view**，以声明方式将 **state** 映射到视图；
-- **actions**，响应在 **view** 上的用户输入导致的状态变化(包含n个更新状态的方法)。
+- **state**, 驱动应用的数据源; 
+- **view**, 以声明方式将 **state** 映射到视图; 
+- **actions**, 响应在 **view** 上的用户输入导致的状态变化(包含n个更新状态的方法). 
 
 #### 6.1.3. 多组件共享状态的问题
 
@@ -2632,4 +2632,4 @@ this.$router.replace(`url`)
 - 分析vue作为一个MVVM框架的基本实现原理
 - 不直接看vue.js的源码
 - 剖析github上某基友仿vue实现的mvvm库
-- 剖析vue实现原理，自己动手实现*mvvm* https://github.com/DMQ/mvvm
+- 剖析vue实现原理, 自己动手实现*mvvm* https://github.com/DMQ/mvvm

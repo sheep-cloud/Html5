@@ -5,26 +5,26 @@
 <title>1.3.1_封装数据</title>
 </head>
 <body>
-    <script>
-        var myObject = (function () {
-            // 私有（private）变量
-            var _name = 'sven'
-            return {
-                // 公开（public）变量
-                age: 18,
-                // 公开（public）方法
-                getName: function () {
-                    return _name
-                }
-            }
-        })()
+  <script>
+    var myObject = (function () {
+      // 私有（private）变量
+      var _name = 'sven'
+      return {
+        // 公开（public）变量
+        age: 18,
+        // 公开（public）方法
+        getName: function () {
+          return _name
+        }
+      }
+    })()
 
-        console.log(myObject)
-        console.log(myObject._name) // undefined
-        console.log('----------------------------------------------------------------------------------------------------')
+    console.log(myObject)
+    console.log(myObject._name) // undefined
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        console.log(myObject.age) // 18
-        console.log(myObject.getName()) // sven
-    </script>
+    console.log(myObject.age) // 18
+    console.log(myObject.getName()) // sven
+  </script>
 </body>
 </html>

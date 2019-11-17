@@ -6,107 +6,107 @@
 <script type="text/javascript" src="../../../00_libs/echarts-4.1.0/echarts.js"></script>
 </head>
 <body>
-    <!--
-        标记线：markLine
-        - 标记线的添加
-        - 最大值，平均值，最小值的标记线 'min', 'max', 'average'
+  <!--
+    标记线：markLine
+      - 标记线的添加
+      - 最大值，平均值，最小值的标记线 'min', 'max', 'average'
 
-        标记点：markPoint
-        - 标记点的添加
-        - 最大值，平均值，最小值的标记点 'min', 'max', 'average'
-        - 任意位置的标记点
-    -->
-    <div id="main" style="width: 900px; height: 600px;"></div>
+    标记点：markPoint
+      - 标记点的添加
+      - 最大值，平均值，最小值的标记点 'min', 'max', 'average'
+      - 任意位置的标记点
+  -->
+  <div id="main" style="width: 900px; height: 600px;"></div>
 
-    <script>
-        // 基于准备好的dom，初始化echarts实例
-        const myChart = echarts.init(document.getElementById('main'))
+  <script>
+    // 基于准备好的dom，初始化eCharts实例
+    const myChart = echarts.init(document.getElementById('main'))
 
-        // 指定图表的配置项和数据
-        const option = {
-            // 标题
-            title: {
-                show: true,
-                // 副标题
-                text: 'Echarts 入门实例',
-                subtext: '学习Echarts',
-                left: 150,
-                borderColor: 'red',
-                borderWidth: 3,
-                // 标题样式
-                textStyle: {
-                    fontSize: 16
-                }
-            },
-            // 工具箱
-            toolbox: {
-                show: true,
-                // 各工具配置项。
-                feature: {
-                    // 保存为图片。
-                    saveAsImage: {
-                        show: true,
-                        type: 'png',
-                        // 保存的文件名称，默认使用 title.text 作为名称
-                        name: 'toolbox-工具栏组件'
-                    },
-                    // 还原
-                    restore: {
-                        show: true
-                    },
-                    // 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
-                    dataView: {
-                        show: true
-                    },
-                    // 动态类型切换
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    }
-                }
-            },
-            tooltip: {
-                show: true,
-                trigger: 'axis'
-            },
-            // 图例
-            legend: {
-                data: ['销量', '产量']
-            },
-            // x轴
-            xAxis: {
-                data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-            },
-            // y轴
-            yAxis: {},
-            // 数据
-            series: [
-                {
-                    name: '销量',
-                    type: 'bar',
-                    data: [120, 200, 150, 80, 70, 110],
-                    markLine: {
-                        data: [
-                            {type: 'average', name: '平均线'}
-                        ]
-                    },
-                    markPoint: {
-                        data: [
-                            {type: 'max', name: '最大值'},
-                            {type: 'min', name: '最小值', symbol: 'diamond'}
-                        ]
-                    }
-                },
-                {
-                    name: '产量',
-                    type: 'line',
-                    data: [200, 300, 200, 100, 100, 200]
-                }
-            ]
+    // 指定图表的配置项和数据
+    const option = {
+      // 标题
+      title: {
+        show: true,
+        // 副标题
+        text: 'eCharts 入门实例',
+        subtext: '学习eCharts',
+        left: 150,
+        borderColor: 'red',
+        borderWidth: 3,
+        // 标题样式
+        textStyle: {
+          fontSize: 16
         }
+      },
+      // 工具箱
+      toolbox: {
+        show: true,
+        // 各工具配置项。
+        feature: {
+          // 保存为图片。
+          saveAsImage: {
+            show: true,
+            type: 'png',
+            // 保存的文件名称，默认使用 title.text 作为名称
+            name: 'toolbox-工具栏组件'
+          },
+          // 还原
+          restore: {
+            show: true
+          },
+          // 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+          dataView: {
+            show: true
+          },
+          // 动态类型切换
+          magicType: {
+            show: true,
+            type: ['line', 'bar']
+          }
+        }
+      },
+      tooltip: {
+        show: true,
+        trigger: 'axis'
+      },
+      // 图例
+      legend: {
+        data: ['销量', '产量']
+      },
+      // x轴
+      xAxis: {
+        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+      },
+      // y轴
+      yAxis: {},
+      // 数据
+      series: [
+        {
+          name: '销量',
+          type: 'bar',
+          data: [120, 200, 150, 80, 70, 110],
+          markLine: {
+            data: [
+              {type: 'average', name: '平均线'}
+            ]
+          },
+          markPoint: {
+            data: [
+              {type: 'max', name: '最大值'},
+              {type: 'min', name: '最小值', symbol: 'diamond'}
+            ]
+          }
+        },
+        {
+          name: '产量',
+          type: 'line',
+          data: [200, 300, 200, 100, 100, 200]
+        }
+      ]
+    }
 
-        // 使用刚指定的配置项和数据显示图表
-        myChart.setOption(option)
-    </script>
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option)
+  </script>
 </body>
 </html>

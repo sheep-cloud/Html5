@@ -5,43 +5,43 @@
 <title>27_扩展插件</title>
 </head>
 <body>
-    <label><input type="checkbox" name="items" value="足球"/>足球</label>
-    <label><input type="checkbox" name="items" value="篮球"/>篮球</label>
-    <label><input type="checkbox" name="items" value="羽毛球"/>羽毛球</label>
-    <label><input type="checkbox" name="items" value="乒乓球"/>乒乓球</label>
-    <br/>
-    <input type="button" id="checkedAllBtn" value="全　选"/>
-    <input type="button" id="checkedNoBtn" value="全不选"/>
-    <input type="button" id="checkedRevBtn" value="反　选"/>
+  <label><input type="checkbox" name="items" value="足球"/>足球</label>
+  <label><input type="checkbox" name="items" value="篮球"/>篮球</label>
+  <label><input type="checkbox" name="items" value="羽毛球"/>羽毛球</label>
+  <label><input type="checkbox" name="items" value="乒乓球"/>乒乓球</label>
+  <br/>
+  <input type="button" id="checkedAllBtn" value="全　选"/>
+  <input type="button" id="checkedNoBtn" value="全不选"/>
+  <input type="button" id="checkedRevBtn" value="反　选"/>
 
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script src="js/my_jQuery-plugin.js"></script>
-    <script>
-        /*
-            扩展插件
-                $.extend(object)：扩展jQuery的工具方法
-                $.fn.extend(object)：扩展jQuery对象的方法
-         */
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script src="js/my_jQuery-plugin.js"></script>
+  <script>
+    /*
+      扩展插件
+        $.extend(object): 扩展jQuery的工具方法
+        $.fn.extend(object): 扩展jQuery对象的方法
+     */
 
-        // 1. 给 $ 添加4个工具方法
-        console.log($.min(1, 2), $.max(1, 2))
-        var str = '  colg  '
-        console.log('|' + $.leftTrim(str) + '|')
-        console.log('|' + $.rightTrim(str) + '|')
+    // 1. 给 $ 添加4个工具方法
+    console.log($.min(1, 2), $.max(1, 2))
+    var str = '  colg  '
+    console.log('|' + $.leftTrim(str) + '|')
+    console.log('|' + $.rightTrim(str) + '|')
 
-        // 2. 给jQuery对象 添加3个功能方法
-        var $items = $(':checkbox[name="items"]')
-        $('#checkedAllBtn').click(function () {
-            $items.checkAll()
-        })
+    // 2. 给jQuery对象 添加3个功能方法
+    var $items = $(':checkbox[name="items"]')
+    $('#checkedAllBtn').click(function () {
+      $items.checkAll()
+    })
 
-        $('#checkedNoBtn').click(function () {
-            $items.unCheckAll()
-        })
+    $('#checkedNoBtn').click(function () {
+      $items.unCheckAll()
+    })
 
-        $('#checkedRevBtn').click(function () {
-            $items.reverseCheck()
-        })
-    </script>
+    $('#checkedRevBtn').click(function () {
+      $items.reverseCheck()
+    })
+  </script>
 </body>
 </html>

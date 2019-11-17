@@ -19,5 +19,5 @@ var y = 20
 exports.x = '我是02.Module.js'
 exports.y = '我是y'
 exports.fn = function () {
-    console.log('我是02_module.js的函数')
+  console.log('我是02_module.js的函数')
 }

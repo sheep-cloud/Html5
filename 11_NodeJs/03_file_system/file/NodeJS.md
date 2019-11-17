@@ -134,17 +134,17 @@
 
 ### 5.1. NPM 使用介绍
 
-- NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：
+- NPM是随同NodeJS一起安装的包管理工具, 能解决NodeJS代码部署上的很多问题, 常见的使用场景有以下几种：
   - 允许用户从NPM服务器下载别人编写的第三方包到本地使用。
   - 允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。
   - 允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。
 
 ### 5.2. NPM 的具体思路
 
-1. 买个服务器作为代码仓库（registry），在里面放所有需要被共享的代码
-2. 发邮件通知 jQuery、Bootstrap、Underscore 作者使用 npm publish 把代码提交到 registry 上，分别取名 jquery、bootstrap 和 underscore（注意大小写）
-3. 社区里的其他人如果想使用这些代码，就把 jquery、bootstrap 和 underscore 写到 package.json 里，然后运行 npm install ，npm 就会帮他们下载代码
-4. 下载完的代码出现在 node_modules 目录里，可以随意使用了。这些可以被使用的代码被叫做「包」（package），这就是 NPM 名字的由来：Node Package(包) Manager(管理器)。
+1. 买个服务器作为代码仓库（registry）, 在里面放所有需要被共享的代码
+2. 发邮件通知 jQuery、Bootstrap、Underscore 作者使用 npm publish 把代码提交到 registry 上, 分别取名 jquery、bootstrap 和 underscore（注意大小写）
+3. 社区里的其他人如果想使用这些代码, 就把 jquery、bootstrap 和 underscore 写到 package.json 里, 然后运行 npm install , npm 就会帮他们下载代码
+4. 下载完的代码出现在 node_modules 目录里, 可以随意使用了。这些可以被使用的代码被叫做「包」（package）, 这就是 NPM 名字的由来：Node Package(包) Manager(管理器)。
 
 ### 5.3. NPM 的命令
 
@@ -220,7 +220,7 @@ npm install npm@<version> -g
 
   ```js
   /*
-      同步、异步、简单文件的写入都不适合大文件的写入，性能较差，容易导致内存溢出
+      同步、异步、简单文件的写入都不适合大文件的写入, 性能较差, 容易导致内存溢出
    */
   
   var fs = require('fs')
@@ -250,7 +250,7 @@ npm install npm@<version> -g
 
   ```js
   /*
-      流式文件读取也适用于一些比较大的文件，可以分多次将文件读取到内存中
+      流式文件读取也适用于一些比较大的文件, 可以分多次将文件读取到内存中
    */
   
   var fs = require('fs')
@@ -261,6 +261,6 @@ npm install npm@<version> -g
   // 创建一个可写流
   var ws = fs.createWriteStream('./file/README.png')
   
-  // 将可读流中的内容，直接输出到可写流中
+  // 将可读流中的内容, 直接输出到可写流中
   rs.pipe(ws)
   ```

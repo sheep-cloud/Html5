@@ -5,42 +5,42 @@
 <title>06_Set和Map容器</title>
 </head>
 <body>
-    <!--
-        1. Set容器：无序不可重复的多个value的集合体
-            Set()
-            Set(array)
-            add(value)
-            delete(value)
-            has(value)
-            clear()
-            size
-        2. Map容器：无序的key，不重复的多个key-value的集合体
-            Map()
-            Map(array)
-            set(key, value)
-            get(key)
-            delete(key)
-            has(key)
-            clear()
-            size
-    -->
-    <script>
-        let set = new Set([1, 2, 1])
-        console.log(set)
-        set.add(3)
-        console.log(set)
-        console.log(set.has(3))
-        console.log(set.size)
-        set.clear()
-        console.log(set)
-        console.log('----------------------------------------------------------------------------------------------------')
+  <!--
+    1. Set容器: 无序不可重复的多个value的集合体
+      Set()
+      Set(array)
+      add(value)
+      delete(value)
+      has(value)
+      clear()
+      size
+    2. Map容器: 无序的key，不重复的多个key-value的集合体
+      Map()
+      Map(array)
+      set(key, value)
+      get(key)
+      delete(key)
+      has(key)
+      clear()
+      size
+  -->
+  <script>
+    let set = new Set([1, 2, 1])
+    console.log(set)
+    set.add(3)
+    console.log(set)
+    console.log(set.has(3))
+    console.log(set.size)
+    set.clear()
+    console.log(set)
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        let map = new Map([['key', 'value'], ['jack', 39]])
-        console.log(map)
-        map.set(78, 'tom')
-        console.log(map)
-        map.delete('key')
-        console.log(map)
-    </script>
+    let map = new Map([['key', 'value'], ['jack', 39]])
+    console.log(map)
+    map.set(78, 'tom')
+    console.log(map)
+    map.delete('key')
+    console.log(map)
+  </script>
 </body>
 </html>

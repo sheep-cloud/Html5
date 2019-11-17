@@ -5,69 +5,69 @@
 <title>02_显示过滤_排序结果</title>
 </head>
 <body>
-    <!--
-        1. 列表过滤
-        2. 列表排序
-    -->
-    <div id="demo">
-        <label>
-            <input type="text" v-model.trim="searchName">
-        </label>
-        <ul>
-            <li v-for="(p, index) in filterPersons">
-                {{index}} ---- {{p.name}} --- {{p.age}}
-            </li>
-        </ul>
+  <!--
+    1. 列表过滤
+    2. 列表排序
+  -->
+  <div id="demo">
+    <label>
+      <input type="text" v-model.trim="searchName">
+    </label>
+    <ul>
+      <li v-for="(p, index) in filterPersons">
+        {{index}} ---- {{p.name}} --- {{p.age}}
+      </li>
+    </ul>
 
-        <button @click="setOrderType(1)">年龄升序</button>
-        <button @click="setOrderType(2)">年龄降序</button>
-        <button @click="setOrderType(0)">原本顺序</button>
-    </div>
+    <button @click="setOrderType(1)">年龄升序</button>
+    <button @click="setOrderType(2)">年龄降序</button>
+    <button @click="setOrderType(0)">原本顺序</button>
+  </div>
 
-    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
-    <script>
-        new Vue({
-            el: '#demo',
-            data: {
-                searchName: '',
-                orderType: 0, // 0代表原本，1代表升序，2代表降序
-                persons: [
-                    {name: 'Tom', age: 18},
-                    {name: 'Jack', age: 25},
-                    {name: 'Rose', age: 20},
-                    {name: 'Bob', age: 60}
-                ]
-            },
-            computed: {
-                filterPersons() {
-                    // 取出相关的数据
-                    const {searchName, persons, orderType} = this
-                    // 最终显示的数组
-                    let fPersons
-                    // 对persons进行过滤
-                    fPersons = persons.filter(p => p.name.indexOf(searchName) !== -1)
+  <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#demo',
+      data: {
+        searchName: '',
+        orderType: 0, // 0代表原本, 1代表升序, 2代表降序
+        persons: [
+          {name: 'Tom', age: 18},
+          {name: 'Jack', age: 25},
+          {name: 'Rose', age: 20},
+          {name: 'Bob', age: 60}
+        ]
+      },
+      computed: {
+        filterPersons() {
+          // 取出相关的数据
+          const {searchName, persons, orderType} = this
+          // 最终显示的数组
+          let fPersons
+          // 对persons进行过滤
+          fPersons = persons.filter(p => p.name.indexOf(searchName) !== -1)
 
-                    // 对persons进行排序
-                    if (orderType !== 0) {
-                        /*
-                            条件
-                                orderType === 1 升序; p2在前
-                                orderType === 2 降序; p1在前
-                         */
-                        // 返回负数, p1在前; 返回整数, p2在前
-                        fPersons.sort((p1, p2) => orderType === 1 ? p1.age - p2.age : p2.age - p1.age)
-                    }
+          // 对persons进行排序
+          if (orderType !== 0) {
+            /*
+              条件
+                orderType === 1 升序; p2在前
+                orderType === 2 降序; p1在前
+             */
+            // 返回负数, p1在前; 返回整数, p2在前
+            fPersons.sort((p1, p2) => orderType === 1 ? p1.age - p2.age : p2.age - p1.age)
+          }
 
-                    return fPersons
-                }
-            },
-            methods: {
-                setOrderType(orderType) {
-                    this.orderType = orderType
-                    console.log(this.orderType)
-                }
-            }
-        })
-    </script>
+          return fPersons
+        }
+      },
+      methods: {
+        setOrderType(orderType) {
+          this.orderType = orderType
+          console.log(this.orderType)
+        }
+      }
+    })
+  </script>
 </body>
 </html>

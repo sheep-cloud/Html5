@@ -6,23 +6,23 @@
 <link rel="stylesheet" href="../00_libs/bootstrap-3.3.7/dist/css/bootstrap.css">
 </head>
 <body>
-    <div class="container">
-        <div class="lead" id="test">
-            <p>{{name}}</p>
-        </div>
+  <div class="container">
+    <div class="lead" id="test">
+      <p>{{name}}</p>
     </div>
+  </div>
 
-    <script src="../00_libs/mvvm-master/js/compile.js"></script>
-    <script src="../00_libs/mvvm-master/js/observer.js"></script>
-    <script src="../00_libs/mvvm-master/js/watcher.js"></script>
-    <script src="../00_libs/mvvm-master/js/mvvm.js"></script>
-    <script>
-        new MVVM({
-            el: '#test',
-            data: {
-                name: '模版解析_表达式'
-            }
-        })
-    </script>
+  <script src="../00_libs/mvvm-master/js/compile.js"></script>
+  <script src="../00_libs/mvvm-master/js/observer.js"></script>
+  <script src="../00_libs/mvvm-master/js/watcher.js"></script>
+  <script src="../00_libs/mvvm-master/js/mvvm.js"></script>
+  <script>
+    new MVVM({
+      el: '#test',
+      data: {
+        name: '模版解析_表达式'
+      }
+    })
+  </script>
 </body>
 </html>

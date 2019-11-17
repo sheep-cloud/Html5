@@ -1,0 +1,71 @@
+[
+  {
+    "group": "Firefox",
+    "data": [
+      {
+        "value": "f20",
+        "text": "Firefox 2.0 or higher"
+      },
+      {
+        "value": "f15",
+        "text": "Firefox 1.5.x"
+      },
+      {
+        "value": "f10",
+        "text": "Firefox 1.0.x"
+      }
+    ]
+  },
+  {
+    "group": "Microsoft Internet Explorer",
+    "data": [
+      {
+        "value": "ie7",
+        "text": "Microsoft Internet Explorer 7.0 or higher"
+      },
+      {
+        "value": "ie6",
+        "text": "Microsoft Internet Explorer 6.x"
+      },
+      {
+        "value": "ie5",
+        "text": "Microsoft Internet Explorer 5.x"
+      },
+      {
+        "value": "ie4",
+        "text": "Microsoft Internet Explorer 4.x"
+      }
+    ]
+  },
+  {
+    "group": "Opera",
+    "data": [
+      {
+        "value": "op8",
+        "text": "Opera 8.x"
+      },
+      {
+        "value": "op7",
+        "text": "Opera 7.x"
+      }
+    ]
+  },
+  {
+    "group": "Safari",
+    "data": [
+      {
+        "value": "Safari",
+        "text": "Safari"
+      }
+    ]
+  },
+  {
+    "group": "Other",
+    "data": [
+      {
+        "value": "Other",
+        "text": "Other"
+      }
+    ]
+  }
+]

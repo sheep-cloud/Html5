@@ -5,65 +5,65 @@
 <title>09_$工具方法</title>
 </head>
 <body>
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            常用的工具方法
-                1. $.each()：遍历数组或对象中的数据
-                2. $.trim()：去除字符串两边的空格
-                3. $.type(obj)：得到数据的类型
-                4. $.isArray(obj)：判断是否是数组
-                5. $.isFunction(obj)：判断是否是函数
-                6. $.parseJSON(json)：解析json字符串转换为js对象/数组
-         */
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      常用的工具方法
+        1. $.each(): 遍历数组或对象中的数据
+        2. $.trim(): 去除字符串两边的空格
+        3. $.type(obj): 得到数据的类型
+        4. $.isArray(obj): 判断是否是数组
+        5. $.isFunction(obj): 判断是否是函数
+        6. $.parseJSON(json): 解析json字符串转换为js对象/数组
+     */
 
-        // 1. $.each()：遍历数组或对象中的数据
-        var obj = {
-            name: 'Tom',
-            setName() {
-                this.name = name
-            }
-        }
-        for (var key in obj) { // 原生
-            console.log(key, obj[key])
-        }
-        $.each(obj, function (key, value) {
-            console.log(key, value)
-        })
-        console.log('----------------------------------------------------------------------------------------------------')
+    // 1. $.each(): 遍历数组或对象中的数据
+    var obj = {
+      name: 'Tom',
+      setName() {
+        this.name = name
+      }
+    }
+    for (var key in obj) { // 原生
+      console.log(key, obj[key])
+    }
+    $.each(obj, function (key, value) {
+      console.log(key, value)
+    })
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 2. $.trim()：去除字符串两边的空格
-        var str = '  my colg  '
-        console.log(str.trim()) // 原生
-        console.log($.trim(str))
-        console.log('----------------------------------------------------------------------------------------------------')
+    // 2. $.trim(): 去除字符串两边的空格
+    var str = '  my colg  '
+    console.log(str.trim()) // 原生
+    console.log($.trim(str))
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 3. $.type(obj)：得到数据的类型
-        console.log(typeof obj) // 原生
-        console.log(typeof str) // 原生
-        console.log($.type(obj))
-        console.log($.type(str))
-        console.log('----------------------------------------------------------------------------------------------------')
+    // 3. $.type(obj): 得到数据的类型
+    console.log(typeof obj) // 原生
+    console.log(typeof str) // 原生
+    console.log($.type(obj))
+    console.log($.type(str))
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 4. $.isArray(obj)：判断是否是数组
-        console.log(Array.isArray([])) // 原生
-        console.log($.isArray([]))
-        console.log('----------------------------------------------------------------------------------------------------')
+    // 4. $.isArray(obj): 判断是否是数组
+    console.log(Array.isArray([])) // 原生
+    console.log($.isArray([]))
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 5. $.isFunction(obj)：判断是否是函数
-        console.log(typeof obj.setName === 'function') // 原生
-        console.log($.isFunction(obj.setName))
+    // 5. $.isFunction(obj): 判断是否是函数
+    console.log(typeof obj.setName === 'function') // 原生
+    console.log($.isFunction(obj.setName))
 
-        // 6. $.parseJSON(json)：解析json字符串转换为js对象/数组
-        var json = `
+    // 6. $.parseJSON(json): 解析json字符串转换为js对象/数组
+    var json = `
                     {
                       "name": "Tom",
                       "age": 12
                     }
                     `
-        console.log(json)
-        console.log(JSON.parse(json)) // 原生
-        console.log($.parseJSON(json))
-    </script>
+    console.log(json)
+    console.log(JSON.parse(json)) // 原生
+    console.log($.parseJSON(json))
+  </script>
 </body>
 </html>

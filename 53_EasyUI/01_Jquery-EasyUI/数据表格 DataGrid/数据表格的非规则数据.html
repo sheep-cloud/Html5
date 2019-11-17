@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>数据表格的非规则数据</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+<style>
+  h2 {
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <h2>Not Rile Data in DataGrid</h2>
+  <p>The summary informations can be displayed in footer rows.</p>
+
+  <table id="d" style="padding: 10px; width: 700px;"
+         data-options="title:'Footer Rows in DataGrid', height:'auto', rownumbers:true, singleSelect:true, showFooter:true">
+  </table>
+
+  <script>
+    $('#d').datagrid({
+      url: 'data1.json',
+      columns: [[
+        {field: 'itemId', title: 'Item ID', width: 80, styler: value => value === 'Average' || value === 'Total' ? 'color: red; font-weight: bold;' : ''},
+        {field: 'productId', title: 'Product', width: 100},
+        {field: 'listPrice', title: 'List Price', width: 80, align: 'right', formatter: value => value > 30 ? `<span style="color: red;">(${value.toFixed(2)})</span>` : value.toFixed(2)},
+        {field: 'unitCost', title: 'Unit Cost', width: 80, align: 'right'},
+        {field: 'attr1', title: 'Attribute', width: 250},
+        {field: 'status', title: 'Status', width: 60, align: 'center'}
+      ]],
+      /*
+        loadFilter: 返回要显示的过滤数据。该函数有一个参数 'data' ，表示原始数据。您可以把原始数据变成标准数据格式。
+                    该函数必须返回标准数据对象，含有 'total' 和 'rows' 属性
+       */
+      loadFilter: data => {
+        const total = data.length
+        const unitCostTotal = data.reduce((total, currentValue) => total + currentValue.unitCost, 0)
+        const listPriceTotal = data.reduce((total, currentValue) => total + currentValue.listPrice, 0)
+        let loadData = {
+          total: total,
+          rows: data,
+          footer: [
+            {
+              itemId: 'Total',
+              unitCost: unitCostTotal,
+              listPrice: listPriceTotal
+            },
+            {
+              itemId: 'Average',
+              unitCost: unitCostTotal / total,
+              listPrice: listPriceTotal / total
+            }
+          ]
+        }
+        console.log(loadData)
+        return loadData
+      }
+    })
+  </script>
+</body>
+</html>

@@ -5,39 +5,39 @@
 <title>1.2.6_多态在面向程序设计中的作用</title>
 </head>
 <body>
-    <script>
-        var googleMap = {
-            show: function () {
-                console.log('开始渲染谷歌地图')
-            }
-        }
+  <script>
+    var googleMap = {
+      show: function () {
+        console.log('开始渲染谷歌地图')
+      }
+    }
 
-        var baiduMap = {
-            show: function () {
-                console.log('开始渲染百度地图')
-            }
-        }
+    var baiduMap = {
+      show: function () {
+        console.log('开始渲染百度地图')
+      }
+    }
 
-        /**
-         * 渲染地图
-         * @param map 地图实例
-         */
-        var renderMap = function (map) {
-            if (map.show instanceof Function) {
-                map.show()
-            }
-        }
+    /**
+     * 渲染地图
+     * @param map 地图实例
+     */
+    var renderMap = function (map) {
+      if (map.show instanceof Function) {
+        map.show()
+      }
+    }
 
-        renderMap(googleMap)
-        renderMap(baiduMap)
-        console.log('----------------------------------------------------------------------------------------------------')
+    renderMap(googleMap)
+    renderMap(baiduMap)
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        var sosoMap = {
-            show: function () {
-                console.log('开始渲染搜搜地图')
-            }
-        }
-        renderMap(sosoMap)
-    </script>
+    var sosoMap = {
+      show: function () {
+        console.log('开始渲染搜搜地图')
+      }
+    }
+    renderMap(sosoMap)
+  </script>
 </body>
 </html>

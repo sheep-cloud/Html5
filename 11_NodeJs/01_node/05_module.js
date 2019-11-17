@@ -7,10 +7,10 @@ b = 20      // 全局变量
     在全局中创建的函数都会作为global的方法保存
 
   当node在执行模块中的代码时, 它会首先在代码的最顶部, 添加如下代码
-        function (exports, require, module, __filename, __dirname) {
+    function (exports, require, module, __filename, __dirname) {
 
-  在代码的最底部，添加如下代码
-        }
+  在代码的最底部, 添加如下代码
+    }
 
   实际上模块中的代码都是包装在一个函数中执行的, 并且在函数执行时, 同时传递进了5个实参
     exports

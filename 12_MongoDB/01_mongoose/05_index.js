@@ -7,9 +7,9 @@ Student.find(
     'name age -_id',
     {skip: 2, limit: 2},
     function (err, docs) {
-        if (!err) {
-            console.log(docs)
-            console.log(docs[0] instanceof Student)
-        }
+      if (!err) {
+        console.log(docs)
+        console.log(docs[0] instanceof Student)
+      }
     }
 )

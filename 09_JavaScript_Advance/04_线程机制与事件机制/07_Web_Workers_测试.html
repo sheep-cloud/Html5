@@ -5,41 +5,41 @@
 <title>07_Web_Workers_测试</title>
 </head>
 <body>
-    <input type="number" placeholder="数值" id="number">
-    <button id="btn">计算</button>
-    <p id="result"></p>
+  <input type="number" placeholder="数值" id="number">
+  <button id="btn">计算</button>
+  <p id="result"></p>
 
-    <!--
-        1. H5规范提供了js分线程的实现, 取名为: Web Workers
-        2. 相关API
-            * Worker: 构造函数, 加载分线程执行的js文件
-            * Worker.prototype.onmessage:   用于接收另一个线程的回调函数
-            * Worker.prototype.postMessage: 向另一个线程发送消息
-        3. 不足
-            * Worker内代码不能操作DOM(更新UI)
-            * 不能跨域加载JS
-            * 不是每个浏览器都支持这个新特性
-    -->
-    <script>
-        /**
-         * 计算得到裴波那契数列中第n个数的值; 递归
-         *
-         * @param n
-         * @return {number}
-         */
-        function fibonacci(n) {
-            return n <= 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2)
-        }
+  <!--
+    1. H5规范提供了js分线程的实现, 取名为: Web Workers
+    2. 相关API
+      * Worker: 构造函数, 加载分线程执行的js文件
+      * Worker.prototype.onmessage:   用于接收另一个线程的回调函数
+      * Worker.prototype.postMessage: 向另一个线程发送消息
+    3. 不足
+      * Worker内代码不能操作DOM(更新UI)
+      * 不能跨域加载JS
+      * 不是每个浏览器都支持这个新特性
+  -->
+  <script>
+    /**
+     * 计算得到裴波那契数列中第n个数的值; 递归
+     *
+     * @param n
+     * @return {number}
+     */
+    function fibonacci(n) {
+      return n <= 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2)
+    }
 
-        /*
-            计算得到裴波那契数列中第n个数的值, 当位数较大时, 会阻塞主线程, 导致界面卡死
-         */
-        var input = document.getElementById('number')
-        document.getElementById('btn').onclick = function () {
-            var number = input.value
-            var result =  document.getElementById('result')
-            result.innerHTML = fibonacci(number)
-        }
-    </script>
+    /*
+      计算得到裴波那契数列中第n个数的值, 当位数较大时, 会阻塞主线程, 导致界面卡死
+     */
+    var input = document.getElementById('number')
+    document.getElementById('btn').onclick = function () {
+      var number = input.value
+      var result = document.getElementById('result')
+      result.innerHTML = fibonacci(number)
+    }
+  </script>
 </body>
 </html>

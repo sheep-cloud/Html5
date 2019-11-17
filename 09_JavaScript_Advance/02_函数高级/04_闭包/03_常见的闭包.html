@@ -5,43 +5,43 @@
 <title>03_常见的闭包</title>
 </head>
 <body>
-    <!--
-        1. 将函数作为另一个函数的返回值
-        2. 将函数作为实参传递给另一个函数调用
-    -->
-    <script>
-        // 1. 将函数作为另一个函数的返回值
-        function fn1() {
-            var a = 2
+  <!--
+    1. 将函数作为另一个函数的返回值
+    2. 将函数作为实参传递给另一个函数调用
+  -->
+  <script>
+    // 1. 将函数作为另一个函数的返回值
+    function fn1() {
+      var a = 2
 
-            function fn2() {
-                a++
-                console.log(a)
-            }
+      function fn2() {
+        a++
+        console.log(a)
+      }
 
-            return fn2
-        }
+      return fn2
+    }
 
-        // 1个闭包对象
-        var f = fn1()
-        f() // 3
-        f() // 4
-        f() // 5
+    // 1个闭包对象
+    var f = fn1()
+    f() // 3
+    f() // 4
+    f() // 5
 
-        // 3个闭包对象
-        fn1()() // 3
-        fn1()() // 3
-        fn1()() // 3
-        console.log('----------------------------------------------------------------------------------------------------')
+    // 3个闭包对象
+    fn1()() // 3
+    fn1()() // 3
+    fn1()() // 3
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 2. 将函数作为实参传递给另一个函数调用
-        function showDelay(msg, time) {
-            setTimeout(function () {
-                console.log(msg)
-            }, time)
-        }
+    // 2. 将函数作为实参传递给另一个函数调用
+    function showDelay(msg, time) {
+      setTimeout(function () {
+        console.log(msg)
+      }, time)
+    }
 
-        showDelay('hello', 1000)
-    </script>
+    showDelay('hello', 1000)
+  </script>
 </body>
 </html>

@@ -5,61 +5,61 @@
 <title>05_深度克隆</title>
 </head>
 <body>
-    <!--
-          1、数据类型：
-            * 数据分为基本的数据类型(String, Number, boolean, Null, Undefined)和对象数据类型
-            - 基本数据类型：
-              特点： 存储的是该对象的实际数据
-            - 对象数据类型：
-              特点： 存储的是该对象在栈中引用，真实的数据存放在堆内存里
-          2、复制数据
-            - 基本数据类型存放的就是实际的数据，可直接复制
-              let number2 = 2;
-              let number1 = number2;
-            - 克隆数据：对象/数组
-              1、区别： 浅拷贝/深度拷贝
-                 判断： 拷贝是否产生了新的数据还是拷贝的是数据的引用
-                 知识点：对象数据存放的是对象在栈内存的引用，直接复制的是对象的引用
-                 let obj = {username: 'kobe'}
-                 let obj1 = obj; // obj1 复制了obj在栈内存的引用
-              2、常用的拷贝技术
-                1). arr.concat(): 数组浅拷贝
-                2). arr.slice(): 数组浅拷贝
-                3). JSON.parse(JSON.stringify(arr/obj)): 数组或对象深拷贝, 但不能处理函数数据
-                4). 浅拷贝包含函数数据的对象/数组
-                5). 深拷贝包含函数数据的对象/数组
-    -->
-    <script>
-        // 不会影响原数据
-        let str = 'hello'
-        let str2 = str
-        console.log(str2)
-        str2 = ''
-        console.log(str)
-        console.log('----------------------------------------------------------------------------------------------------')
+  <!--
+    1. 数据类型:
+      * 数据分为基本的数据类型(String, Number, boolean, Null, Undefined)和对象数据类型
+      - 基本数据类型:
+        特点:  存储的是该对象的实际数据
+      - 对象数据类型:
+        特点:  存储的是该对象在栈中引用，真实的数据存放在堆内存里
+    2. 复制数据
+      - 基本数据类型存放的就是实际的数据，可直接复制
+        let number2 = 2;
+        let number1 = number2;
+      - 克隆数据: 对象/数组
+        1. 区别:  浅拷贝/深度拷贝
+          判断:  拷贝是否产生了新的数据还是拷贝的是数据的引用
+          知识点: 对象数据存放的是对象在栈内存的引用，直接复制的是对象的引用
+          let obj = {username: 'kobe'}
+          let obj1 = obj; // obj1 复制了obj在栈内存的引用
+        2. 常用的拷贝技术
+          1). arr.concat(): 数组浅拷贝
+          2). arr.slice(): 数组浅拷贝
+          3). JSON.parse(JSON.stringify(arr/obj)): 数组或对象深拷贝, 但不能处理函数数据
+          4). 浅拷贝包含函数数据的对象/数组
+          5). 深拷贝包含函数数据的对象/数组
+  -->
+  <script>
+    // 不会影响原数据
+    let str = 'hello'
+    let str2 = str
+    console.log(str2)
+    str2 = ''
+    console.log(str)
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        let bool1 = true
-        let bool2 = bool1
-        console.log(bool2)
-        bool2 = false
-        console.log(bool1)
-        console.log('----------------------------------------------------------------------------------------------------')
+    let bool1 = true
+    let bool2 = bool1
+    console.log(bool2)
+    bool2 = false
+    console.log(bool1)
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        let obj = {username: 'jack', age: 39}
-        let obj1 = obj
-        console.log(obj1)
-        obj1.username = 'rose'
-        console.log(obj)
-        console.log('----------------------------------------------------------------------------------------------------')
+    let obj = {username: 'jack', age: 39}
+    let obj1 = obj
+    console.log(obj1)
+    obj1.username = 'rose'
+    console.log(obj)
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 拷贝数组/对象，没有生成新的数据而是复制了一份引用
-        let arr = [1, 4, {username: 'jack', age: 39}]
-        let arr2 = arr
-        console.log(arr2)
-        arr2[0] = 'abc'
-        console.log(arr)
+    // 拷贝数组/对象，没有生成新的数据而是复制了一份引用
+    let arr = [1, 4, {username: 'jack', age: 39}]
+    let arr2 = arr
+    console.log(arr2)
+    arr2[0] = 'abc'
+    console.log(arr)
 
-        // TODO: colg [深度克隆]
-    </script>
+    // TODO: colg [深度克隆]
+  </script>
 </body>
 </html>

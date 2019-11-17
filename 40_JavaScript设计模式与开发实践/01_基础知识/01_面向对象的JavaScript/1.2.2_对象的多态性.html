@@ -5,38 +5,38 @@
 <title>1.2.2_对象的多态性</title>
 </head>
 <body>
-    <script>
-        var makeSound = function (animal) {
-            animal.sound()
-        }
+  <script>
+    var makeSound = function (animal) {
+      animal.sound()
+    }
 
-        // 把可变的部分各自封装起来
-        var Duck = function () {
-        }
-        Duck.prototype.sound = function () {
-            console.log('嘎嘎嘎')
-        }
+    // 把可变的部分各自封装起来
+    var Duck = function () {
+    }
+    Duck.prototype.sound = function () {
+      console.log('嘎嘎嘎')
+    }
 
-        var Chicken = function () {
-        }
-        Chicken.prototype.sound = function () {
-            console.log('咯咯咯')
-        }
+    var Chicken = function () {
+    }
+    Chicken.prototype.sound = function () {
+      console.log('咯咯咯')
+    }
 
-        makeSound(new Duck())
-        makeSound(new Chicken())
-        console.log('----------------------------------------------------------------------------------------------------')
+    makeSound(new Duck())
+    makeSound(new Chicken())
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        /**
-         * 狗
-         * @constructor
-         */
-        var Dog = function () {
-        }
-        Dog.prototype.sound = function () {
-            console.log('汪汪汪')
-        }
-        makeSound(new Dog())
-    </script>
+    /**
+     * 狗
+     * @constructor
+     */
+    var Dog = function () {
+    }
+    Dog.prototype.sound = function () {
+      console.log('汪汪汪')
+    }
+    makeSound(new Dog())
+  </script>
 </body>
 </html>

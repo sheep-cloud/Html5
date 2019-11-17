@@ -5,66 +5,66 @@
 <title>14_class</title>
 </head>
 <body>
-    <!--
-        1. 通过class定义类/实现类的继承
-        2. 在类中通过constructor定义构造方法
-        3. 通过new来创建类的实例
-        4. 通过extends来实现类的继承
-        5. 通过super调用父类的构造方法
-        6. 重写从父类继承的一般方法
-    -->
-    <script>
-        function Person(name, age) {
-            this.name = name
-            this.age = age
-            this.showName = function () {
-                console.log(name)
-            }
-        }
+  <!--
+    1. 通过class定义类/实现类的继承
+    2. 在类中通过constructor定义构造方法
+    3. 通过new来创建类的实例
+    4. 通过extends来实现类的继承
+    5. 通过super调用父类的构造方法
+    6. 重写从父类继承的一般方法
+  -->
+  <script>
+    function Person(name, age) {
+      this.name = name
+      this.age = age
+      this.showName = function () {
+        console.log(name)
+      }
+    }
 
-        let person = new Person('jack', 39)
-        console.log(person)
-        person.showName()
-        console.log('----------------------------------------------------------------------------------------------------')
+    let person = new Person('jack', 39)
+    console.log(person)
+    person.showName()
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 定义一个人物的类
-        class Person2 {
-            // 类的构造方法
-            constructor(name, age) {
-                this.name = name
-                this.age = age
-            }
+    // 定义一个人物的类
+    class Person2 {
+      // 类的构造方法
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+      }
 
-            // 类的一般方法，方法在原型上
-            showName() {
-                console.log('调用父类的方法')
-                console.log(this.name, this.age)
-            }
-        }
+      // 类的一般方法，方法在原型上
+      showName() {
+        console.log('调用父类的方法')
+        console.log(this.name, this.age)
+      }
+    }
 
-        let person2 = new Person2('jack', 39)
-        console.log(person2)
-        person2.showName()
-        console.log('----------------------------------------------------------------------------------------------------')
+    let person2 = new Person2('jack', 39)
+    console.log(person2)
+    person2.showName()
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        // 子类
-        class StarPerson extends Person2 {
-            constructor(name, age, salary) {
-                // 通过super调用父类的构造方法
-                super(name, age)
-                this.salary = salary
-            }
+    // 子类
+    class StarPerson extends Person2 {
+      constructor(name, age, salary) {
+        // 通过super调用父类的构造方法
+        super(name, age)
+        this.salary = salary
+      }
 
-            // 重写从父类继承的一般方法
-            showName() {
-                console.log('调用子类的方法')
-                console.log(this.name, this.age, this.salary)
-            }
-        }
+      // 重写从父类继承的一般方法
+      showName() {
+        console.log('调用子类的方法')
+        console.log(this.name, this.age, this.salary)
+      }
+    }
 
-        let p1 = new StarPerson('rose', 36, 9000)
-        console.log(p1)
-        p1.showName()
-    </script>
+    let p1 = new StarPerson('rose', 36, 9000)
+    console.log(p1)
+    p1.showName()
+  </script>
 </body>
 </html>

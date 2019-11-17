@@ -51,10 +51,12 @@
   },
   {
     "value": "Safari",
-    "text": "Safari"
+    "text": "Safari",
+    "group": "Safari"
   },
   {
     "value": "Other",
-    "text": "Other"
+    "text": "Other",
+    "group": "Other"
   }
 ]

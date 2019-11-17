@@ -1,7 +1,7 @@
 /*
-  功能说明：
+  功能说明:
     1. 鼠标移入显示,移出隐藏
-        目标: 手机京东, 客户服务, 网站导航, 我的京东, 去购物车结算, 全部商品
+      目标: 手机京东, 客户服务, 网站导航, 我的京东, 去购物车结算, 全部商品
     2. 鼠标移动切换二级导航菜单的切换显示和隐藏
     3. 输入搜索关键字, 列表显示匹配的结果
     4. 点击显示或者隐藏更多的分享图标
@@ -35,23 +35,23 @@ $(function () {
    * 11. 当鼠标在中图上移动时, 显示对应大图的附近部分区域
    */
   function bigImg() {
-    var $medimImg = $('#mediumImg')
-    var $mask = $('#mask') // 小黄块
-    var $maskTop = $('#maskTop')
-    var $largeImgContainer = $('#largeImgContainer')
-    var $loading = $('#loading')
-    var $largeImg = $('#largeImg')
-    var maskWidth = $mask.width()
-    var maskHeight = $mask.height()
-    var maskTopWidth = $maskTop.width()
-    var maskTopHeight = $maskTop.height()
+    var $mediumImg = $('#mediumImg'),
+        $mask = $('#mask'), // 小黄块
+        $maskTop = $('#maskTop'),
+        $largeImgContainer = $('#largeImgContainer'),
+        $loading = $('#loading'),
+        $largeImg = $('#largeImg'),
+        maskWidth = $mask.width(),
+        maskHeight = $mask.height(),
+        maskTopWidth = $maskTop.width(),
+        maskTopHeight = $maskTop.height()
 
     $maskTop.hover(function () {
       // 显示小黄块
       $mask.show()
 
       // 动态加载对应的大图
-      var src = $medimImg.attr('src').replace('-m.', '-l.')
+      var src = $mediumImg.attr('src').replace('-m.', '-l.')
       $largeImg.attr('src', src)
       $largeImgContainer.show()
 
@@ -138,23 +138,24 @@ $(function () {
    * 9. 点击向右/左, 移动当前展示商品的小图片
    */
   function moveMinImg() {
-    var $as = $('#preview > h1 > a')
-    var $backward = $as.first()
-    var $forward = $as.last()
-    var $ul = $('#icon_list')
-    const SHOW_COUNT = 5 // 显示的图片总数
-    var imgCount = $ul.children('li').length
-    var moveCount = 0 // 移动的次数（点击向右为正，向左为负）
-    var liWidth = $ul.children(':first').width() // 图片宽度
+    var $as = $('#preview > h1 > a'),
+        $backward = $as.first(),
+        $forward = $as.last(),
+        $ul = $('#icon_list'),
+        imgCount = $ul.children('li').length,
+        moveCount = 0, // 移动的次数（点击向右为正, 向左为负）
+        liWidth = $ul.children(':first').width() // 图片宽度
 
-    // 初始化更新，向右按钮
+    const SHOW_COUNT = 5 // 显示的图片总数
+
+    // 初始化更新, 向右按钮
     if (imgCount > SHOW_COUNT) {
       $forward.attr('class', 'forward')
     }
 
     // 给向右按钮绑定监听
     $forward.click(function () {
-      // 判断是否需要移动，如果不需要直接结束
+      // 判断是否需要移动, 如果不需要直接结束
       if (moveCount === imgCount - SHOW_COUNT) {
         return
       }
@@ -174,7 +175,7 @@ $(function () {
 
     // 给向左按钮绑定监听
     $backward.click(function () {
-      // 判断是否需要移动，如果不需要直接结束
+      // 判断是否需要移动, 如果不需要直接结束
       if (moveCount === 0) {
         return
       }
@@ -197,9 +198,10 @@ $(function () {
    * 8. 点击切换产品选项 (商品详情等显示出来)
    */
   function productTabs() {
-    var $lis = $('#product_detail > ul > li')
-    var $contents = $('#product_detail > div:gt(0)')
-    var currIndex = 0
+    var $lis = $('#product_detail > ul > li'),
+        $contents = $('#product_detail > div:gt(0)'),
+        currIndex = 0
+
     $lis.click(function () {
       // 隐藏当前已显示内容的contents
       $lis[currIndex].className = ''
@@ -231,8 +233,9 @@ $(function () {
    * 6. 点击切换地址tab
    */
   function addressTabs() {
-    var $lis = $('#store_tabs > li')
-    var currIndex = 0
+    var $lis = $('#store_tabs > li'),
+        currIndex = 0
+
     $lis.click(function () {
       $lis[currIndex].removeAttribute('class')
       var index = $(this).index()
@@ -264,11 +267,11 @@ $(function () {
    * 4. 点击显示或者隐藏更多的分享图标
    */
   function share() {
-    var isOpen = false // 标识当前是否显示更多（默认不显示）
-    var $shareMore = $('#shareMore')
-    var $parent = $shareMore.parent() // div标签
-    var $as = $shareMore.prevAll('a:lt(2)') // 查找之前的标签（倒着找）
-    var $b = $shareMore.children()
+    var isOpen = false, // 标识当前是否显示更多（默认不显示）
+        $shareMore = $('#shareMore'),
+        $parent = $shareMore.parent(), // div标签
+        $as = $shareMore.prevAll('a:lt(2)'), // 查找之前的标签（倒着找）
+        $b = $shareMore.children()
 
     $shareMore.click(function () {
       if (isOpen) {
@@ -316,7 +319,7 @@ $(function () {
   }
 
   /**
-   * 1. 鼠标移入显示，移出隐藏
+   * 1. 鼠标移入显示, 移出隐藏
    *  目标: 手机京东, 客户服务, 网站导航, 我的京东, 去购物车结算, 全部商品
    */
   function showHide() {

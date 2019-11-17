@@ -197,7 +197,6 @@ p#medimImgContainer {
   border: 1px solid #ddd;
   display: none;
 
-
   /*效果演示*/
   /*overflow: visible;
   display: block;
@@ -217,7 +216,6 @@ p#medimImgContainer {
   display: none;
   position: absolute;
 }
-
 
 /*产品图片下方的分享等*/
 #short_share {
@@ -315,7 +313,7 @@ p#medimImgContainer {
   background: url("../images/iconlist_1.png") -263px -258px no-repeat;
 }
 
-/*产品介绍右侧：name*/
+/*产品介绍右侧: name*/
 #product_intro > h1 {
   width: 840px;
   font: 700 16px/1.5em Arial, Verdana, "microsoft yahei";
@@ -329,7 +327,7 @@ p#medimImgContainer {
   font-size: 16px;
 }
 
-/*产品介绍右侧：summary*/
+/*产品介绍右侧: summary*/
 #summary {
   width: 600px;
   padding: 10px 0;

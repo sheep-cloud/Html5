@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Combobox 组合框</title>
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/default/easyui.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/themes/icon.css">
+<link rel="stylesheet" href="../../../00_libs/jquery-easyui-1.7.0/demo/demo.css">
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+<script src="../../../00_libs/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+  <h2>Group ComboBox Detail</h2>
+  <p>This example shows how to display combobox items in groups.</p>
+
+  <input id="cbb" name="browser" style="width: 280px;">
+
+
+  <script>
+    const $cbb = $('#cbb')
+    $cbb.combobox({
+      // 属性
+      url: 'combobox_data2.json',                                                                 // 从远程加载列表数据的 URL
+      valueField: 'value',                                                                        // 绑定到该组合框（ComboBox）的 value 上的基础数据的名称
+      textField: 'text',                                                                          // 绑定到该组合框（ComboBox）的 text 上的基础数据的名称
+      groupField: 'group',                                                                        // 指示要被分组的字段
+      groupFormatter: group => {                                                                  // 返回要显示在分组项目上的分组文本
+        return `<span style="color: red;">${group}</span>`
+      },
+      formatter: row => {                                                                         // 定义如何呈现行
+        const text = row['text']
+        return `<span style="color: green;">${text}</span>`
+      },
+      loadFilter: data => {                                                                       // 返回要显示的过滤数据
+        return data
+      },
+      // 事件
+      onBeforeLoad: params => {                                                                   // 在请求加载数据之前触发，返回 false 则取消加载动作
+        return params
+      },
+      onLoadSuccess: () => {                                                                      // 当远程数据加载成功时触发
+        console.log('加载成功')
+      },
+      // 当远程数据加载失败时触发
+      onLoadError: () => {
+        $.messager.alert('消息', '加载失败', 'info')
+      },
+      // 当用户选择一个列表项时触发
+      onSelect: record => {
+        console.log(record)
+      },
+      // 当用户取消选择一个列表项时触发
+      onUnselect: record => {
+        console.log(record)
+      }
+    })
+
+    // 方法
+    $cbb.combobox('select', 'f20')                                                                // 选择指定的选项
+  </script>
+</body>
+</html>

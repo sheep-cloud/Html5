@@ -4,70 +4,70 @@
 <meta charset="UTF-8">
 <title>01_class与style绑定</title>
 <style type="text/css">
-    .aClass {
-        color: red;
-    }
-    .bClass {
-        color: blue;
-    }
-    .cClass {
-        font-size: 30px;
-    }
+  .aClass {
+    color: red;
+  }
+  .bClass {
+    color: blue;
+  }
+  .cClass {
+    font-size: 30px;
+  }
 </style>
 </head>
 <body>
-    <!--
-        1. 理解
-            在应用界面中，某个（些）元素的样式是变化的
-            class/sytle绑定就是专门用来实现动态样式效果的技术
-        2. class绑定： :class='xxx'
-            xxx 是字符串
-            xxx 是对象
-            xxx 是数组
-        3. style绑定
-            :style="{color: activeColor, fontSize: fontSize + 'px'}"
-            其中activeColor/fontSize 是 data 属性
-    -->
-    <div id="demo">
-        <h2>1. class绑定: :class='xxx'</h2>
-        <p class="cClass" :class="a">xxx是字符串</p>
-        <p :class="{cClass : true, aClass: isA, bClass: isB}">xxx是对象</p>
-        <p :class="['cClass', a]">xxx是数组</p>
+  <!--
+    1. 理解
+      在应用界面中, 某个（些）元素的样式是变化的
+      class/sytle绑定就是专门用来实现动态样式效果的技术
+    2. class绑定： :class='xxx'
+      xxx 是字符串
+      xxx 是对象
+      xxx 是数组
+    3. style绑定
+      :style="{color: activeColor, fontSize: fontSize + 'px'}"
+      其中activeColor/fontSize 是 data 属性
+  -->
+  <div id="demo">
+    <h2>1. class绑定: :class='xxx'</h2>
+    <p class="cClass" :class="a">xxx是字符串</p>
+    <p :class="{cClass : true, aClass: isA, bClass: isB}">xxx是对象</p>
+    <p :class="['cClass', a]">xxx是数组</p>
 
-        <h2>2. style绑定</h2>
-        <button @click="updateToBlue">更新为蓝色</button>
-        <button @click="updateToRed">更新为红色</button>
-        <p :style="{color: activeColor, fontSize: fontSize + 'px'}">:style="{color: {{activeColor}}, fontSize: {{fontSize}} + 'px'}"</p>
-    </div>
+    <h2>2. style绑定</h2>
+    <button @click="updateToBlue">更新为蓝色</button>
+    <button @click="updateToRed">更新为红色</button>
+    <p :style="{color: activeColor, fontSize: fontSize + 'px'}">:style="{color: {{activeColor}}, fontSize: {{fontSize}} + 'px'}"</p>
+  </div>
 
-    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
-    <script>
-        new Vue({
-            el: '#demo',
-            data: {
-                a: 'aClass',
-                isA: true,
-                isB: false,
-                activeColor: 'red',
-                fontSize: 20
-            },
-            methods: {
-                updateToBlue() {
-                    this.a = 'bClass'
-                    this.isA = false
-                    this.isB = true
-                    this.activeColor = 'blue'
-                    this.fontSize = 26
-                },
-                updateToRed() {
-                    this.a = 'aClass'
-                    this.isA = true
-                    this.isB = false
-                    this.activeColor = 'red'
-                    this.fontSize = 20
-                }
-            }
-        })
-    </script>
+  <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#demo',
+      data: {
+        a: 'aClass',
+        isA: true,
+        isB: false,
+        activeColor: 'red',
+        fontSize: 20
+      },
+      methods: {
+        updateToBlue() {
+          this.a = 'bClass'
+          this.isA = false
+          this.isB = true
+          this.activeColor = 'blue'
+          this.fontSize = 26
+        },
+        updateToRed() {
+          this.a = 'aClass'
+          this.isA = true
+          this.isB = false
+          this.activeColor = 'red'
+          this.fontSize = 20
+        }
+      }
+    })
+  </script>
 </body>
 </html>

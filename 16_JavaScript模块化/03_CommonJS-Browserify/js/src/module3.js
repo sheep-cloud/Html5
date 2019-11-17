@@ -1,7 +1,7 @@
 exports.foo = function () {
-    console.log('module3 foo()')
+  console.log('module3 foo()')
 }
 
 exports.bar = () => {
-    console.log('module3 bar()')
+  console.log('module3 bar()')
 }

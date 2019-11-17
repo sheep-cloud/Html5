@@ -5,66 +5,66 @@
 <title>01_模版语法</title>
 </head>
 <body>
-    <!--
-        1. 模版的理解：
-            动态的html页面
-            包含了一些JS语法代码
-                双大括号表达式
-                指令（以v-开头的自定义标签属性）
-        2. 双大括号表达式
-            语法：{{exp}}
-            功能：向页面输出数据，可以调用对象的方法
-        3. 指令一：强制数据绑定
-            功能：指定变化的属性值
-            完整写法：v-bind:xxx='yyy'   yyy会作为表达式解析执行
-            简洁写法：:xxx='yyy'
-        4. 指令二：绑定事件监听
-            功能：绑定指定事件名的回调函数
-            完整写法：v-on:click='xxx'
-            简洁写法：@click='xxx'
-    -->
+  <!--
+    1. 模版的理解：
+      动态的html页面
+      包含了一些JS语法代码
+        双大括号表达式
+        指令（以v-开头的自定义标签属性）
+    2. 双大括号表达式
+      语法：{{exp}}
+      功能：向页面输出数据, 可以调用对象的方法
+    3. 指令一：强制数据绑定
+      功能：指定变化的属性值
+      完整写法：v-bind:xxx='yyy'   yyy会作为表达式解析执行
+      简洁写法：:xxx='yyy'
+    4. 指令二：绑定事件监听
+      功能：绑定指定事件名的回调函数
+      完整写法：v-on:click='xxx'
+      简洁写法：@click='xxx'
+  -->
 
-    <div id="app">
-        <h2>1. 双大括号表达式</h2>
-        <p>{{msg}}</p>
-        <p>{{msg.toUpperCase()}}</p>
-        <p v-html="msg2"></p>
-        <p v-text="msg2"></p>
+  <div id="app">
+    <h2>1. 双大括号表达式</h2>
+    <p>{{msg}}</p>
+    <p>{{msg.toUpperCase()}}</p>
+    <p v-html="msg2"></p>
+    <p v-text="msg2"></p>
 
-        <h2>2. 指令一：强制数据绑定</h2>
-        <!--<p><img v-bind:src="imgUrl" alt=""></p>-->
-        <p><img :src="imgUrl" alt=""></p>
+    <h2>2. 指令一：强制数据绑定</h2>
+    <!--<p><img v-bind:src="imgUrl" alt=""></p>-->
+    <p><img :src="imgUrl" alt=""></p>
 
-        <h2>3. 指令三：绑定事件监听</h2>
-        <p>
-            <button v-on:click="test">test</button>
-        </p>
-        <p>
-            <button @click="test">test1</button>
-        </p>
-        <p>
-            <button @click="test2(msg)">test2</button>
-        </p>
-    </div>
+    <h2>3. 指令三：绑定事件监听</h2>
+    <p>
+      <button v-on:click="test">test</button>
+    </p>
+    <p>
+      <button @click="test">test1</button>
+    </p>
+    <p>
+      <button @click="test2(msg)">test2</button>
+    </p>
+  </div>
 
-    <script src="../../00_libs/vue-2.5.2/vue.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                msg: 'I Will Back',
-                msg2: '<a href="https://cn.vuejs.org/v2/guide/syntax.html">Vue.js</a>',
-                imgUrl: 'http://ww1.sinaimg.cn/large/005PjuVtgy1frsr3aaeydj30f1076t99.jpg'
-            },
-            methods: {
-                test() {
-                    alert('test!')
-                },
-                test2(content) {
-                    alert(content)
-                }
-            }
-        })
-    </script>
+  <script src="../../00_libs/vue-2.5.2/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'I Will Back',
+        msg2: '<a href="https://cn.vuejs.org/v2/guide/syntax.html">Vue.js</a>',
+        imgUrl: 'http://ww1.sinaimg.cn/large/005PjuVtgy1frsr3aaeydj30f1076t99.jpg'
+      },
+      methods: {
+        test() {
+          alert('test!')
+        },
+        test2(content) {
+          alert(content)
+        }
+      }
+    })
+  </script>
 </body>
 </html>

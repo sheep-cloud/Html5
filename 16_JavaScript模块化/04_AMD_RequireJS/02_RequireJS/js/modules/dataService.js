@@ -1,11 +1,11 @@
 // 定义没有依赖的模块
 define(function () {
-    let name = 'dataService.js'
+  let name = 'dataService.js'
 
-    function getName() {
-        return name
-    }
+  function getName() {
+    return name
+  }
 
-    // 暴露模块
-    return {getName}
+  // 暴露模块
+  return {getName}
 })

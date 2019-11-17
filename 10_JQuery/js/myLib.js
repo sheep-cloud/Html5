@@ -1,5 +1,5 @@
 ;(function () {
-    window.$ = function () {
-        console.log('myLib $() ...')
-    }
+  window.$ = function () {
+    console.log('myLib $() ...')
+  }
 })()

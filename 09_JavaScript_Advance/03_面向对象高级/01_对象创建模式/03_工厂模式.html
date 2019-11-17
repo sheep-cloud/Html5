@@ -5,52 +5,52 @@
 <title>03_工厂模式</title>
 </head>
 <body>
-    <!--
-        方式三: 工厂模式
-            * 套路: 通过工厂函数动态创建对象并返回
-            * 适用场景: 需要创建多个对象
-            * 问题: 对象没有一个具体的类型, 都是Object类型
-    -->
-    <script>
-        /**
-         * 返回一个对象的函数 => 工厂函数
-         *
-         * @param name
-         * @param age
-         * @return {{name: *, age: *, setName: setName, getName: (function(): *)}}
-         */
-        function createPerson(name, age) {
-            return {
-                name: name,
-                age: age,
-                setName: function (name) {
-                    this.name = name
-                },
-                getName: function () {
-                    return this.name
-                }
-            }
+  <!--
+    方式三: 工厂模式
+      * 套路: 通过工厂函数动态创建对象并返回
+      * 适用场景: 需要创建多个对象
+      * 问题: 对象没有一个具体的类型, 都是Object类型
+  -->
+  <script>
+    /**
+     * 返回一个对象的函数 => 工厂函数
+     *
+     * @param name
+     * @param age
+     * @return {{name: *, age: *, setName: setName, getName: (function(): *)}}
+     */
+    function createPerson(name, age) {
+      return {
+        name: name,
+        age: age,
+        setName: function (name) {
+          this.name = name
+        },
+        getName: function () {
+          return this.name
         }
+      }
+    }
 
-        // 创建2个人
-        var p1 = createPerson('Tom', 12)
-        var p2 = createPerson('Jack', 18)
+    // 创建2个人
+    var p1 = createPerson('Tom', 12)
+    var p2 = createPerson('Jack', 18)
 
-        console.log(p1) // {name: "Tom", age: 12, setName: ƒ, getName: ƒ}
-        console.log(p2) // {name: "Jack", age: 18, setName: ƒ, getName: ƒ}
-        console.log(typeof p1) // object
-        console.log('----------------------------------------------------------------------------------------------------')
+    console.log(p1) // {name: "Tom", age: 12, setName: ƒ, getName: ƒ}
+    console.log(p2) // {name: "Jack", age: 18, setName: ƒ, getName: ƒ}
+    console.log(typeof p1) // object
+    console.log('----------------------------------------------------------------------------------------------------')
 
-        function createStudent(name, price) {
-            return {
-                name: name,
-                price: price
-            }
-        }
+    function createStudent(name, price) {
+      return {
+        name: name,
+        price: price
+      }
+    }
 
-        var s1 = createStudent('jax', 12000)
-        console.log(s1) // {name: "jax", price: 12000}
-        console.log(typeof s1) // object
-    </script>
+    var s1 = createStudent('jax', 12000)
+    console.log(s1) // {name: "jax", price: 12000}
+    console.log(typeof s1) // object
+  </script>
 </body>
 </html>

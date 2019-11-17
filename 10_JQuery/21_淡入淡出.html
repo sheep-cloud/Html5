@@ -4,63 +4,63 @@
 <meta charset="UTF-8">
 <title>21_淡入淡出</title>
 <style>
-    * {
-        margin: 0;
-    }
-    .div1 {
-        position: absolute;
-        width: 200px;
-        height: 200px;
-        top: 50px;
-        left: 10px;
-        background: red;
-    }
+  * {
+    margin: 0;
+  }
+  .div1 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50px;
+    left: 10px;
+    background: red;
+  }
 </style>
 </head>
 <body>
-    <button id="btn1">慢慢淡出</button>
-    <button id="btn2">慢慢淡入</button>
-    <button id="btn3">淡出/淡入切换</button>
+  <button id="btn1">慢慢淡出</button>
+  <button id="btn2">慢慢淡入</button>
+  <button id="btn3">淡出/淡入切换</button>
 
-    <div class="div1"></div>
+  <div class="div1"></div>
 
-    <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
-    <script>
-        /*
-            淡入淡出：不断改变元素的透明度（opacity）来实现的
-                1. fadeIn()：带动画的显示
-                2. fadeOut()：带动画隐藏
-                3. fadeToggle()：带动画切换显示/隐藏
-         */
+  <script src="../00_libs/jquery-1.10.1/jquery.js"></script>
+  <script>
+    /*
+      淡入淡出: 不断改变元素的透明度（opacity）来实现的
+        1. fadeIn(): 带动画的显示
+        2. fadeOut(): 带动画隐藏
+        3. fadeToggle(): 带动画切换显示/隐藏
+     */
 
-        /*
-            需求：
-                1. 点击btn1，慢慢淡出
-                    无参
-                    有参
-                        字符串参数
-                        数字参数
-                2. 点击btn2，慢慢淡入
-                3. 点击btn3，淡出/淡入切换，动画结束时提示"动画结束了"
-         */
+    /*
+      需求:
+        1. 点击btn1, 慢慢淡出
+          无参
+          有参
+            字符串参数
+            数字参数
+        2. 点击btn2, 慢慢淡入
+        3. 点击btn3, 淡出/淡入切换, 动画结束时提示"动画结束了"
+     */
 
-        var $div1 = $('.div1')
-        // 1. 点击btn1，慢慢淡出
-        $('#btn1').click(function () {
-            $div1.fadeIn()
-        })
+    var $div1 = $('.div1')
+    // 1. 点击btn1, 慢慢淡出
+    $('#btn1').click(function () {
+      $div1.fadeIn()
+    })
 
-        // 2. 点击btn2，慢慢淡入
-        $('#btn2').click(function () {
-            $div1.fadeOut()
-        })
+    // 2. 点击btn2, 慢慢淡入
+    $('#btn2').click(function () {
+      $div1.fadeOut()
+    })
 
-        // 3. 点击btn3，淡出/淡入切换，动画结束时提示"动画结束了"
-        $('#btn3').click(function () {
-            $div1.fadeToggle('slow', function () {
-                alert('动画结束了')
-            })
-        })
-    </script>
+    // 3. 点击btn3, 淡出/淡入切换, 动画结束时提示"动画结束了"
+    $('#btn3').click(function () {
+      $div1.fadeToggle('slow', function () {
+        alert('动画结束了')
+      })
+    })
+  </script>
 </body>
 </html>

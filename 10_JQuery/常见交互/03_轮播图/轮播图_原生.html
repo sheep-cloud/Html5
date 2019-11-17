@@ -6,210 +6,210 @@
 <link rel="stylesheet" href="css.css">
 </head>
 <body>
-    <div id="container">
-        <div id="list" style="left: -600px;">
-            <img src="img/5.jpg" alt="1"/>
-            <img src="img/1.jpg" alt="1"/>
-            <img src="img/2.jpg" alt="2"/>
-            <img src="img/3.jpg" alt="3"/>
-            <img src="img/4.jpg" alt="4"/>
-            <img src="img/5.jpg" alt="5"/>
-            <img src="img/1.jpg" alt="5"/>
-        </div>
-        <div id="pointsDiv">
-            <span index="1" class="on"></span>
-            <span index="2"></span>
-            <span index="3"></span>
-            <span index="4"></span>
-            <span index="5"></span>
-        </div>
-        <a href="javascript:" id="prev" class="arrow">&lt;</a>
-        <a href="javascript:" id="next" class="arrow">&gt;</a>
+  <div id="container">
+    <div id="list" style="left: -600px;">
+      <img src="img/5.jpg" alt="1"/>
+      <img src="img/1.jpg" alt="1"/>
+      <img src="img/2.jpg" alt="2"/>
+      <img src="img/3.jpg" alt="3"/>
+      <img src="img/4.jpg" alt="4"/>
+      <img src="img/5.jpg" alt="5"/>
+      <img src="img/1.jpg" alt="5"/>
     </div>
+    <div id="pointsDiv">
+      <span index="1" class="on"></span>
+      <span index="2"></span>
+      <span index="3"></span>
+      <span index="4"></span>
+      <span index="5"></span>
+    </div>
+    <a href="javascript:" id="prev" class="arrow">&lt;</a>
+    <a href="javascript:" id="next" class="arrow">&gt;</a>
+  </div>
 
-    <script>
-        /*
-            功能说明：
-                1. 点击向右/左的图标，平滑切换到上/下一页
-                2. 无限循环切换：第一页的上一页为最后页，最后一页的下一页为第一页
-                3. 每间隔2s自动滑动到下一页
-                4. 当鼠标进入图片区域时，自动切换停止，当鼠标离开后，又开始自动切换
-                5. 切换页面时，下面的圆点也同步更新
-                6. 点击圆点图标切换到对应页
+  <script>
+    /*
+      功能说明:
+        1. 点击向右/左的图标, 平滑切换到上/下一页
+        2. 无限循环切换: 第一页的上一页为最后页, 最后一页的下一页为第一页
+        3. 每间隔2s自动滑动到下一页
+        4. 当鼠标进入图片区域时, 自动切换停止, 当鼠标离开后, 又开始自动切换
+        5. 切换页面时, 下面的圆点也同步更新
+        6. 点击圆点图标切换到对应页
 
-                bug：快速点击时，翻页不正常
-         */
+        bug: 快速点击时, 翻页不正常
+     */
 
-        /**
-         * 根据id得到对应的标签对象
-         * @param {Object} id
-         */
-        function $(id) {
-            return document.getElementById(id)
+    /**
+     * 根据id得到对应的标签对象
+     * @param {Object} id
+     */
+    function $(id) {
+      return document.getElementById(id)
+    }
+
+    /**
+     * 给指定id对应的元素绑定点击监听
+     * @param {Object} id
+     * @param {Object} callback
+     */
+    function click(id, callback) {
+      $(id).onclick = callback
+    }
+
+    window.onload = function () {
+      var listDiv = $('list'),
+          totalTime = 400,//换页的总时间
+          intervalTime = 20,//移动的间隔时间
+          intervalId,//循环定时器的id(翻页中的不移动)
+          imgCount = 5, //图片的个数
+          moving = false, //是否正在移动中
+          index = 0,//当前显示图片的下标(从0开始到imgCount-1)
+          pointsDivPans = $('pointsDiv').children, //所有标识圆点标签的集合
+          containerDiv = $('container'),
+          intervalId2 //循环定时器的id(自动翻页)
+
+      //给下一页绑定点击监听
+      click('next', function () {
+        //切换到下一页
+        nextPage(true)
+      })
+
+      //给上一页绑定点击监听
+      click('prev', function () {
+        //切换到上一页
+        nextPage(false)
+      })
+
+      //给所有的提示圆点绑定点击监听
+      clickPointsDiv()
+
+      //启动定时自动翻页
+      autoNextPage()
+      //给容器div绑定鼠标移入的监听: 停止自动翻页
+      containerDiv.onmouseover = function () {
+        clearInterval(intervalId2)
+      }
+      //给容器div绑定鼠标移出的监听: 启动自动翻页
+      containerDiv.onmouseout = function () {
+        autoNextPage()
+      }
+
+      /**
+       * 启动定时自动翻页
+       */
+      function autoNextPage() {
+        intervalId2 = setInterval(function () {
+          nextPage(true)
+        }, 3000)
+      }
+
+      /**
+       * 切换到下一页/上一页
+       * true 下
+       * false 上
+       * index 目标页
+       * @param {Object} isNext true
+       */
+      function nextPage(isNext) {
+
+        //如果正在移动, 直接结束
+        if (moving) {
+          return
         }
+        //标识正在移动
+        moving = true
 
-        /**
-         * 给指定id对应的元素绑定点击监听
-         * @param {Object} id
-         * @param {Object} callback
-         */
-        function click(id, callback) {
-            $(id).onclick = callback
+        //需要进行的总偏移量
+        var offset
+        if (typeof isNext === 'boolean') {
+          offset = isNext ? -600 : 600
+        } else {
+          offset = -600 * (isNext - index)
         }
+        //var offset = isNext ? -600 : 600;
+        //每个小移动需要做的偏移量
+        var itemOffset = offset / (totalTime / intervalTime)
+        //切换完成时div的left的坐标
+        var targetLeft = listDiv.offsetLeft + offset
+        //循环定时器
+        intervalId = setInterval(function () {
+          //var currentLeft = listDiv.offsetLeft;
+          //得到当前这次偏移的样式left坐标
+          var left = listDiv.offsetLeft + itemOffset
+          //如果已经到达目标位置
+          if (left === targetLeft) {
+            //移除定时器
+            clearInterval(intervalId)
 
-        window.onload = function () {
-            var listDiv = $('list')
-            var totalTime = 400//换页的总时间
-            var intervalTime = 20//移动的间隔时间
-            var intervalId//循环定时器的id(翻页中的不移动)
-            var imgCount = 5 //图片的个数
-            var moveing = false //是否正在移动中
-            var index = 0//当前显示图片的下标(从0开始到imgCount-1)
-            var pointsDivpans = $('pointsDiv').children //所有标识圆点标签的集合
-            var containerDiv = $('container')
-            var intervalId2 //循环定时器的id(自动翻页)
-
-            //给下一页绑定点击监听
-            click('next', function () {
-                //切换到下一页
-                nextPage(true)
-            })
-
-            //给上一页绑定点击监听
-            click('prev', function () {
-                //切换到上一页
-                nextPage(false)
-            })
-
-            //给所有的提示圆点绑定点击监听
-            clickpointsDiv()
-
-            //启动定时自动翻页
-            autoNextPage()
-            //给容器div绑定鼠标移入的监听: 停止自动翻页
-            containerDiv.onmouseover = function () {
-                clearInterval(intervalId2)
+            //如果当前到达的是最左边的图片, 跳转到右边第二张图片的位置
+            if (left === 0) {
+              left = -imgCount * 600
+            } else if (left === -600 * (imgCount + 1)) {//如果当前到达的是最右边的图片, 跳转到左边第二张图片的位置
+              left = -600
             }
-            //给容器div绑定鼠标移出的监听: 启动自动翻页
-            containerDiv.onmouseout = function () {
-                autoNextPage()
+            //标识没有移动了
+            moving = false
+          }
+          //指定div新的left坐标
+          listDiv.style.left = left + 'px'
+        }, intervalTime)
+
+        //更新标识圆点
+        updatePointsDiv(isNext)
+      }
+
+      /**
+       * 更新标识圆点
+       * @param {Object} isNext
+       */
+      function updatePointsDiv(isNext) {
+        //将当前的圆点更新为一般圆点
+        pointsDivPans[index].removeAttribute('class')
+        //计算出目标圆点的下标
+        var targetIndex
+        if (typeof isNext === 'boolean') {
+          if (isNext) {
+            targetIndex = index + 1
+            if (targetIndex === imgCount) {
+              targetIndex = 0
             }
-
-            /**
-             * 启动定时自动翻页
-             */
-            function autoNextPage() {
-                intervalId2 = setInterval(function () {
-                    nextPage(true)
-                }, 3000)
+          } else {
+            targetIndex = index - 1
+            if (targetIndex === -1) {
+              targetIndex = imgCount - 1
             }
-
-            /**
-             * 切换到下一页/上一页
-             * true 下
-             * false 上
-             * index 目标页
-             * @param {Object} isNext true
-             */
-            function nextPage(isNext) {
-
-                //如果正在移动, 直接结束
-                if (moveing) {
-                    return
-                }
-                //标识正在移动
-                moveing = true
-
-                //需要进行的总偏移量
-                var offset
-                if (typeof isNext === 'boolean') {
-                    offset = isNext ? -600 : 600
-                } else {
-                    offset = -600 * (isNext - index)
-                }
-                //var offset = isNext ? -600 : 600;
-                //每个小移动需要做的偏移量
-                var itemOffset = offset / (totalTime / intervalTime)
-                //切换完成时div的left的坐标
-                var targetLeft = listDiv.offsetLeft + offset
-                //循环定时器
-                intervalId = setInterval(function () {
-                    //var currentLeft = listDiv.offsetLeft;
-                    //得到当前这次偏移的样式left坐标
-                    var left = listDiv.offsetLeft + itemOffset
-                    //如果已经到达目标位置
-                    if (left === targetLeft) {
-                        //移除定时器
-                        clearInterval(intervalId)
-
-                        //如果当前到达的是最左边的图片, 跳转到右边第二张图片的位置
-                        if (left === 0) {
-                            left = -imgCount * 600
-                        } else if (left === -600 * (imgCount + 1)) {//如果当前到达的是最右边的图片, 跳转到左边第二张图片的位置
-                            left = -600
-                        }
-                        //标识没有移动了
-                        moveing = false
-                    }
-                    //指定div新的left坐标
-                    listDiv.style.left = left + 'px'
-                }, intervalTime)
-
-                //更新标识圆点
-                updatepointsDiv(isNext)
-            }
-
-            /**
-             * 更新标识圆点
-             * @param {Object} isNext
-             */
-            function updatepointsDiv(isNext) {
-                //将当前的圆点更新为一般圆点
-                pointsDivpans[index].removeAttribute('class')
-                //计算出目标圆点的下标
-                var targetIndex
-                if (typeof isNext === 'boolean') {
-                    if (isNext) {
-                        targetIndex = index + 1
-                        if (targetIndex === imgCount) {
-                            targetIndex = 0
-                        }
-                    } else {
-                        targetIndex = index - 1
-                        if (targetIndex === -1) {
-                            targetIndex = imgCount - 1
-                        }
-                    }
-                } else {
-                    targetIndex = isNext
-                }
-                //将标圆点的下标更新为当前下标
-                index = targetIndex
-                //将目标圆点设置为当前圆点
-                pointsDivpans[index].className = 'on'
-            }
-
-            /**
-             * 给所有的圆点设置点击监听
-             */
-            function clickpointsDiv() {
-                for (var i = 0, length = pointsDivpans.length; i < length; i++) {
-
-                    pointsDivpans[i].index = i
-                    pointsDivpans[i].onclick = function () {
-                        nextPage(this.index)
-                    }
-
-                    /*
-                     (function (index) {
-                     pointsDivpans[index].onclick = function () {
-                     nextPage(index);
-                     };
-                     })(i);
-                     */
-                }
-            }
+          }
+        } else {
+          targetIndex = isNext
         }
-    </script>
+        //将标圆点的下标更新为当前下标
+        index = targetIndex
+        //将目标圆点设置为当前圆点
+        pointsDivPans[index].className = 'on'
+      }
+
+      /**
+       * 给所有的圆点设置点击监听
+       */
+      function clickPointsDiv() {
+        for (var i = 0, length = pointsDivPans.length; i < length; i++) {
+
+          pointsDivPans[i].index = i
+          pointsDivPans[i].onclick = function () {
+            nextPage(this.index)
+          }
+
+          /*
+           (function (index) {
+           pointsDivPans[index].onclick = function () {
+           nextPage(index);
+           };
+           })(i);
+           */
+        }
+      }
+    }
+  </script>
 </body>
 </html>

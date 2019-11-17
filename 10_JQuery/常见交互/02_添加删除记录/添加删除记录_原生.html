@@ -6,146 +6,146 @@
 <link rel="stylesheet" href="css.css">
 </head>
 <body>
-    <table id="employeeTable" style="border-collapse: collapse">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Salary</th>
-            <th>Operate</th>
-        </tr>
-        <tr>
-            <td>Tom</td>
-            <td>tom@tom.com</td>
-            <td>5000</td>
-            <td><a href="deleteEmp?name=Tom">Delete</a></td>
-        </tr>
-        <tr>
-            <td>Jerry</td>
-            <td>jerry@sohu.com</td>
-            <td>8000</td>
-            <td><a href="deleteEmp?name=Jerry">Delete</a></td>
-        </tr>
-        <tr>
-            <td>Bob</td>
-            <td>bob@tom.com</td>
-            <td>10000</td>
-            <td><a href="deleteEmp?name=Bob">Delete</a></td>
-        </tr>
+  <table id="employeeTable" style="border-collapse: collapse">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+      <th>Operate</th>
+    </tr>
+    <tr>
+      <td>Tom</td>
+      <td>tom@tom.com</td>
+      <td>5000</td>
+      <td><a href="deleteEmp?name=Tom">Delete</a></td>
+    </tr>
+    <tr>
+      <td>Jerry</td>
+      <td>jerry@sohu.com</td>
+      <td>8000</td>
+      <td><a href="deleteEmp?name=Jerry">Delete</a></td>
+    </tr>
+    <tr>
+      <td>Bob</td>
+      <td>bob@tom.com</td>
+      <td>10000</td>
+      <td><a href="deleteEmp?name=Bob">Delete</a></td>
+    </tr>
+  </table>
+
+  <div id="formDiv">
+    <h4>Add Employee</h4>
+    <table>
+      <tr>
+        <td class="word">name:</td>
+        <td class="inp">
+          <input type="text" name="empName" title=""/>
+        </td>
+      </tr>
+      <tr>
+        <td class="word">email:</td>
+        <td class="inp">
+          <input type="text" name="email" title=""/>
+        </td>
+      </tr>
+      <tr>
+        <td class="word">salary:</td>
+        <td class="inp">
+          <input type="text" name="salary" title=""/>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button id="addEmpButton" value="abc">
+            Submit
+          </button>
+        </td>
+      </tr>
     </table>
+  </div>
 
-    <div id="formDiv">
-        <h4>Add Employee</h4>
-        <table>
-            <tr>
-                <td class="word">name:</td>
-                <td class="inp">
-                    <input type="text" name="empName" title=""/>
-                </td>
-            </tr>
-            <tr>
-                <td class="word">email:</td>
-                <td class="inp">
-                    <input type="text" name="email" title=""/>
-                </td>
-            </tr>
-            <tr>
-                <td class="word">salary:</td>
-                <td class="inp">
-                    <input type="text" name="salary" title=""/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <button id="addEmpButton" value="abc">
-                        Submit
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
+  <script>
+    /*
+      功能说明:
+        1. 点击'Submit', 根据输入的信息在表单中生成一行员工信息
+        2. 点击Delete链接, 提示删除当前行信息, 点击确定后删除信息
+     */
 
-    <script>
-        /*
-            功能说明：
-                1. 点击'Submit', 根据输入的信息在表单中生成一行员工信息
-                2. 点击Delete链接, 提示删除当前行信息, 点击确定后删除信息
-         */
+    /*
+      技术要点:
+        1. dom查询
+        2. 绑定监听事件
+        3. dom增删改
+        4. 取消事件的默认行为
+     */
 
-        /*
-            技术要点：
-                1. dom查询
-                2. 绑定监听事件
-                3. dom增删改
-                4. 取消事件的默认行为
-         */
+    window.onload = function () {
+      // 添加
+      document.getElementById('addEmpButton').onclick = function () {
+        // 1. 收集输入的数据
+        var empNameNode = document.getElementsByName('empName')[0],
+            emailNode = document.getElementsByName('email')[0],
+            salaryNode = document.getElementsByName('salary')[0]
 
-        window.onload = function () {
-            // 添加
-            document.getElementById('addEmpButton').onclick = function () {
-                // 1. 收集输入的数据
-                var empNameNode = document.getElementsByName('empName')[0],
-                    emailNode = document.getElementsByName('email')[0],
-                    salaryNode = document.getElementsByName('salary')[0]
+        var empName = empNameNode.value,
+            email = emailNode.value,
+            salary = salaryNode.value
 
-                var empName = empNameNode.value,
-                    email = emailNode.value,
-                    salary = salaryNode.value
+        // 2. 生成对应的<tr>标签结构, 并插入到#employeeTable的tbody中
+        if (empName && email && salary) {
+          // 组装节点
+          var nameTd = document.createElement('td')
+          nameTd.appendChild(document.createTextNode(empName))
+          var emailTd = document.createElement('td')
+          emailTd.appendChild(document.createTextNode(email))
+          var salaryTd = document.createElement('td')
+          salaryTd.appendChild(document.createTextNode(salary))
+          var aTd = document.createElement('td')
+          var aNewEle = document.createElement('a')
+          aNewEle.href = `deleteEmp?name=${empName}`
+          aNewEle.appendChild(document.createTextNode('Delete'))
+          // 新添加的链接绑定监听
+          aNewEle.onclick = clickDelete
+          aTd.appendChild(aNewEle)
 
-                // 2. 生成对应的<tr>标签结构，并插入到#employeeTable的tbody中
-                if (empName && email && salary) {
-                    // 组装节点
-                    var nameTd = document.createElement('td')
-                    nameTd.appendChild(document.createTextNode(empName))
-                    var emailTd = document.createElement('td')
-                    emailTd.appendChild(document.createTextNode(email))
-                    var salaryTd = document.createElement('td')
-                    salaryTd.appendChild(document.createTextNode(salary))
-                    var aTd = document.createElement('td')
-                    var aNewEle = document.createElement('a')
-                    aNewEle.href = `deleteEmp?name=${empName}`
-                    aNewEle.appendChild(document.createTextNode('Delete'))
-                    // 新添加的链接绑定监听
-                    aNewEle.onclick = clickDelete
-                    aTd.appendChild(aNewEle)
+          var trNode = document.createElement('tr')
+          trNode.appendChild(nameTd)
+          trNode.appendChild(emailTd)
+          trNode.appendChild(salaryTd)
+          trNode.appendChild(aTd)
 
-                    var trNode = document.createElement('tr')
-                    trNode.appendChild(nameTd)
-                    trNode.appendChild(emailTd)
-                    trNode.appendChild(salaryTd)
-                    trNode.appendChild(aTd)
-
-                    var empTable = document.getElementById('employeeTable')
-                    empTable.appendChild(trNode)
-                } else {
-                    alert('您输入的信息不完整')
-                    return
-                }
-
-                // 3. 清除输入
-                empNameNode.value = ''
-                emailNode.value = ''
-                salaryNode.value = ''
-            }
-
-            // 删除
-            var aEles = document.getElementsByTagName('a')
-            for (var key in aEles) {
-                aEles[key].onclick = clickDelete
-            }
-
-            /**
-             * 点击删除的回调函数
-             */
-            function clickDelete() {
-                var trNode = this.parentNode.parentNode
-                var name = trNode.getElementsByTagName('td')[0].firstChild.nodeValue
-                if (confirm(`确定删除${name}吗？`)) {
-                    trNode.parentNode.removeChild(trNode)
-                }
-                // 阻止事件默认行为
-                return false
-            }
+          var empTable = document.getElementById('employeeTable')
+          empTable.appendChild(trNode)
+        } else {
+          alert('您输入的信息不完整')
+          return
         }
-    </script>
+
+        // 3. 清除输入
+        empNameNode.value = ''
+        emailNode.value = ''
+        salaryNode.value = ''
+      }
+
+      // 删除
+      var aEles = document.getElementsByTagName('a')
+      for (var key in aEles) {
+        aEles[key].onclick = clickDelete
+      }
+
+      /**
+       * 点击删除的回调函数
+       */
+      function clickDelete() {
+        var trNode = this.parentNode.parentNode
+        var name = trNode.getElementsByTagName('td')[0].firstChild.nodeValue
+        if (confirm(`确定删除${name}吗?`)) {
+          trNode.parentNode.removeChild(trNode)
+        }
+        // 阻止事件默认行为
+        return false
+      }
+    }
+  </script>
 </body>
 </html>
